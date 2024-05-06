@@ -19,7 +19,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $guraded = [
+    protected $guarded = [
         'id',
         'created_at',
         'updated_at',
@@ -52,12 +52,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Cart::class)->where('type', 0);
     }
-   
+
     public function favourite()
     {
         return $this->hasOne(Cart::class)->where('type', 1);
     }
-   
+
     public function addresses()
     {
         return $this->hasMany(UserAddress::class);

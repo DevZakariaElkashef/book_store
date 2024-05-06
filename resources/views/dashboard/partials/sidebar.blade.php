@@ -97,27 +97,13 @@
             <span class="menu-header-text">User Management</span>
         </li>
 
-        <li
-            class="menu-item {{ isActiveRoute(['users.index', 'users.create']) }} {{ isActiveRoute(['users.index', 'users.create']) ? 'open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <li class="menu-item {{ isActiveRoute('users.index') }}">
+            <a href="{{ route('users.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
-                <div data-i18n="Users">Users</div>
-                {{-- <div class="badge bg-primary rounded-pill ms-auto">5</div> --}}
+                <div data-i18n="Clients">Clients</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ isActiveRoute('users.index') }}">
-                    <a href="{{ route('users.index') }}" class="menu-link">
-                        <div data-i18n="List">List</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ isActiveRoute('users.create') }}">
-                    <a href="{{ route('users.create') }}" class="menu-link">
-                        <div data-i18n="Create">Create</div>
-                    </a>
-                </li>
-
-            </ul>
         </li>
+
 
         <li class="menu-item {{ isActiveRoute('roles.index') }}">
             <a href="{{ route('roles.index') }}" class="menu-link">

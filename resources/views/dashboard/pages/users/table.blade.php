@@ -12,8 +12,13 @@
         <tbody>
             @foreach ($users as $user)
                 <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>
+                        @if($user->avatar)
+                        <img class="w-px-40 h-auto rounded-circle" src="{{ asset($user->avatar) }}" alt="">
+                        @endif
+                        {{ $user->name }}
+                    </td>
                     <td>{{ $user->email }}</td>
                     <td></td>
                 </tr>

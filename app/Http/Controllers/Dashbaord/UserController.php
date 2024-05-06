@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashbaord;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashbord\StoreUserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,16 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::latest()->paginate(10);
         return view('dashboard.pages.users.index', compact('users'));
-    }
-
-    public function pagination(Request $request)
-    {
-        if ($request->ajax()) {
-            $users = User::paginate(10);
-            return view('dashboard.pages.users.table', compact('users'))->render();
-        }
     }
 
     /**
@@ -30,15 +24,33 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pages.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $data = $request->except('avatar', 'password');
+
+        $data['password'] = Hash::make('password');
+        
+        
+        if($request->has('avatar')) {
+
+            $data['avatar'] = uploadeImage($request->avatar, "Users");
+        }
+
+        User::create($data);
+
+        // retun with toaster message
+        $message = [
+            'status' => true,
+            'content' => __('User created successfully')
+        ];
+
+        return to_route('users.index')->with('message', $message);
     }
 
     /**

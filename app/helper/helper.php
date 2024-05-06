@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,4 +29,28 @@ if (!function_exists('isActiveRoute')) {
 
         return '';
     }
+}
+
+
+
+
+
+function uploadeImage($file, $path, $oldPath = null)
+{
+    if ($oldPath && File::exists($oldPath)) {
+        File::delete($oldPath);
+    }
+
+    // Get the file extension
+    $fileExtension = $file->getClientOriginalExtension();
+
+    // Generate a unique filename for the image
+    $filename = 'image_' . time() . '.' . $fileExtension;
+
+
+    $directory = 'uploads/' . $path;
+
+    $file->move(public_path($directory), $filename);
+
+    return $directory . '/'. $filename;
 }

@@ -15,7 +15,7 @@ class OrderStatus extends Model
      *
      * @var array<int, string>
     */
-    protected $guraded = [
+    protected $guarded = [
         'id',
         'created_at',
         'updated_at',
