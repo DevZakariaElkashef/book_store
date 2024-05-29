@@ -10,5 +10,8 @@
     "Not Active" : "Not Active",
     "Active" : "Active",
     "Submit" : "Submit",
-    "User created successfully" : "User created successfully"
+    "User created successfully" : "User created successfully",
+    "Are You Sure!!" : "Are You Sure!!",
+    "Close" : "Close",
+    "Delete" : "Delete"
 }
