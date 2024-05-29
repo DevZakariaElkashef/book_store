@@ -4,21 +4,23 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h5 class="card-title">{{ __('Create') }}</h5>
+                <h5 class="card-title">{{ __('Update') }}</h5>
 
                 <a href="{{ route('users.index') }}" class="btn btn-primary">{{ __('Back') }}</a>
 
             </div>
 
             <div class="card-body">
-                <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('users.update', $user->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id" value="{{ $user->id }}">
                     <div class="row">
                         <div class="col-md-6 mb-2">
                             <div class="form-group">
                                 <label for="nameInput">{{ __('Name') }}</label>
                                 <input type="text" class="form-control" name="name" id="nameInput"
-                                    value="{{ old('name') }}">
+                                    value="{{ old('name') ?? $user->name }}">
                                 @error('name')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -29,7 +31,7 @@
                             <div class="form-group">
                                 <label for="emailInput">{{ __('Email') }}</label>
                                 <input type="email" class="form-control" name="email" id="emailInput"
-                                    value="{{ old('email') }}">
+                                    value="{{ old('email') ?? $user->email }}">
                                 @error('email')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -40,7 +42,7 @@
                             <div class="form-group">
                                 <label for="phoneInput">{{ __('Phone') }}</label>
                                 <input type="text" class="form-control" name="phone" id="phoneInput"
-                                    value="{{ old('phone') }}">
+                                    value="{{ old('phone') ?? $user->phone }}">
                                 @error('phone')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -62,6 +64,9 @@
                                 <label for="avatarInput">{{ __('Avatar') }}</label>
                                 <input type="file" accept=".jpg,.png" class="form-control" name="avatar"
                                     id="avatarInput">
+                                    @if($user && $user->avatar)
+                                <img src="{{ asset($user->avatar) }}" alt="" style="max-width: 200px;" class="mt-3">
+                                @endif
                                 @error('avatar')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -73,9 +78,9 @@
                                 <label for="avatarInput">{{ __('Status') }}</label>
                                 <select type="file" accept=".jpg,.png" class="form-control" name="is_active"
                                     id="avatarInput" value="{{ old('avatar') }}">
-                                    <option value="0" @if (old('is_active') == 0) selected @endif>
+                                    <option value="0" @if (old('is_active') == 0 || $user->is_active == 0) selected @endif>
                                         {{ __('Not Active') }}</option>
-                                    <option value="1" @if (old('is_active') == 1) selected @endif>
+                                    <option value="1" @if (old('is_active') == 1 || $user->is_active == 1) selected @endif>
                                         {{ __('Active') }}</option>
                                 </select>
                                 @error('avatar')

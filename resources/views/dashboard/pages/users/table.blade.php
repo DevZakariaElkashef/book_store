@@ -6,6 +6,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,14 +22,25 @@
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <a href="{{ route('users.edit', $user) }}" class="text-dark">
-                            <span class="mdi mdi-pen"></span>
-                        </a>
-
-                        <a href="#" data-url="{{ route('users.destroy', $user->id) }}" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal">
-                            <span class="mdi mdi-trash-can"></span>
-                        </a>
+                        @if($user->is_active)
+                        <span class="badge bg-label-primary">{{ __("Active") }}</span>
+                        @else
+                        <span class="badge bg-label-dark">{{ __("Not Active") }}</span>
+                        @endif
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item waves-effect" href="{{ route('users.edit', $user->id) }}"><i
+                                        class="mdi mdi-pencil-outline me-1"></i> Edit</a>
+                                <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);" data-url="{{ route('users.destroy', $user->id) }}" data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                        class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -40,23 +52,4 @@
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteModalLabel">{{ __("Delete") }}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="post">
-                <div class="modal-body">
-                    {{ __("Are You Sure!!") }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __("Close") }}</button>
-                    <button type="button" class="btn btn-primary">{{ __("Delete") }}</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+

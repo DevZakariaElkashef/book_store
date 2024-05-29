@@ -13,5 +13,9 @@
     "User created successfully" : "User created successfully",
     "Are You Sure!!" : "Are You Sure!!",
     "Close" : "Close",
-    "Delete" : "Delete"
+    "Delete" : "Delete",
+    "deleted successfully" : "Deleted Successfully",
+    "updated successfully" : "Updated Successfully",
+    "Create" : "Create",
+    "Update" : "Update"
 }

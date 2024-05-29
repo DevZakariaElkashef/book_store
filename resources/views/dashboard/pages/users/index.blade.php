@@ -115,11 +115,11 @@
                         <div id="DataTables_Table_1_filter" class="dataTables_filter">
                             <label>
                                 Search:
-                                <input type="search" class="form-control" placeholder=""
-                                    aria-controls="DataTables_Table_1">
+                                <input type="search" class="form-control search-in-db"
+                                    data-url="{{ route('users.search') }}" aria-controls="DataTables_Table_1">
                             </label>
                             {{-- add user btn --}}
-                            <a class="dt-button add-new btn btn-primary"  href="{{ route('users.create') }}">
+                            <a class="dt-button add-new btn btn-primary" href="{{ route('users.create') }}">
                                 <span>
                                     <i class="mdi mdi-plus me-0 me-sm-1"></i>
                                     <span class="d-none d-sm-inline-block">Add User</span>
@@ -131,7 +131,35 @@
                 </div>
             </div>
 
-            @include('dashboard.pages.users.table')
+            <div id="searchTable">
+                @include('dashboard.pages.users.table')
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="deleteModalLabel">{{ __('Delete') }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" id="deleteForm">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-body">
+                            {{ __('Are You Sure!!') }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Delete') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <!-- / Content -->
@@ -148,4 +176,10 @@
     <script src="{{ asset('dashboard/assets/vendor/libs/cleavejs/cleave.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/app-user-list.js') }}"></script>
+
+    <script>
+        $(document).on('click', '.delete-btn', function() {
+            $('#deleteForm').attr('action', $(this).data('url'));
+        });
+    </script>
 @endsection

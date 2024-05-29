@@ -36,6 +36,7 @@ Route::middleware('admin_auth')->group(function () {
 
     // users
     Route::get('/users/pagination', [UserController::class, 'pagination'])->name('users.pagination');
+    Route::get('users-search', [UserController::class, 'search'])->name('users.search');
     Route::resource('users', UserController::class);
 
     // notifications

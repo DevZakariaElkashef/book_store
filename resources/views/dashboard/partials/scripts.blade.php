@@ -36,14 +36,14 @@
 </script>
 
 <script>
-    $(document).on('click', '.show-notifications-btn', function(){
+    $(document).on('click', '.show-notifications-btn', function() {
         $.ajax({
             type: "PUT",
             url: "{{ route('notifications.update', 0) }}",
             data: {
                 _token: "{{ csrf_token() }}"
             },
-            success: function (response) {
+            success: function(response) {
                 $('.notification-alarm').html(response.alarm);
                 $('.notification-counter').html(response.counter);
             }
@@ -51,3 +51,22 @@
     });
 </script>
 
+
+<script>
+    $(document).on('input', '.search-in-db', function() {
+        let val = $(this).val();
+        let url = $(this).data('url');
+
+
+        $.ajax({
+            type: "get",
+            url: url,
+            data: {
+                val: val,
+            },
+            success: function(response) {
+                $('#searchTable').html(response);
+            }
+        });
+    });
+</script>
