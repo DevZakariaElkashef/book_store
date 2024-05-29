@@ -16,17 +16,17 @@
     <div class="container-xxl flex-grow-1 container-p-y">
 
         <div class="row g-4 mb-4">
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Session</p>
+                                <p class="text-heading mb-2">Total Users</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">21,459</h4>
-                                    <p class="text-success mb-2">(+29%)</p>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalUsersCount }}</h4>
+                                    <p class="text-success mb-2">(+{{ $thisMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">Total Users</p>
+                                <p class="mb-0">Last month analytics</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-primary rounded">
@@ -37,15 +37,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Paid Users</p>
+                                <p class="text-heading mb-2">Active Users</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">4,567</h4>
-                                    <p class="text-success mb-2">(+18%)</p>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalActiveUsersCount }}</h4>
+                                    <p class="text-success mb-2">(+{{ $thisActiveMonthPercentage }}%)</p>
                                 </div>
                                 <p class="mb-0">Last week analytics</p>
                             </div>
@@ -58,38 +58,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="me-1">
-                                <p class="text-heading mb-2">Active Users</p>
-                                <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">19,860</h4>
-                                    <p class="text-danger mb-2">(-14%)</p>
-                                </div>
-                                <p class="mb-0">Last week analytics</p>
-                            </div>
-                            <div class="avatar">
-                                <div class="avatar-initial bg-label-success rounded">
-                                    <div class="mdi mdi-account-check-outline mdi-24px"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
                                 <p class="text-heading mb-2">Pending Users</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">237</h4>
-                                    <p class="text-success mb-2">(+42%)</p>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveUsersCount }}</h4>
+                                    <p class="text-success mb-2">(+{{ $thisNotActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">Last week analytics</p>
+                                <p class="mb-0">Last month analytics</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-warning rounded">
@@ -118,6 +97,15 @@
                                 <input type="search" class="form-control search-in-db"
                                     data-url="{{ route('users.search') }}" aria-controls="DataTables_Table_1">
                             </label>
+                            {{-- export --}}
+                            <a class="dt-button add-new btn bg-label-primary" href="{{ route('users.export') }}">
+                                <span class="d-none d-sm-inline-block">Export</span>
+                            </a>
+                            {{-- filter --}}
+                            <a class="dt-button add-new btn bg-label-primary" href="javascript:void(0);"
+                                data-bs-toggle="modal" data-bs-target="#filterModal">
+                                <span class="d-none d-sm-inline-block">Filter</span>
+                            </a>
                             {{-- add user btn --}}
                             <a class="dt-button add-new btn btn-primary" href="{{ route('users.create') }}">
                                 <span>
@@ -156,6 +144,52 @@
                             <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">{{ __('Close') }}</button>
                             <button type="submit" class="btn btn-primary">{{ __('Delete') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="filterModalLabel">{{ __('Filter') }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="get" action="{{ route('users.index') }}">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="from">From</label>
+                                <input type="date" class="form-control" name="from" id="from"
+                                    value="{{ request()->has('from') ? request()->from : '' }}">
+                                @error('from')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="to">To</label>
+                                <input type="date" class="form-control" name="to" id="to"
+                                    value="{{ request()->has('to') ? request()->to : '' }}">
+                                @error('to')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Filter') }}</button>
                         </div>
                     </form>
                 </div>

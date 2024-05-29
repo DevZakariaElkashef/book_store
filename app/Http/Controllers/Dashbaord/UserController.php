@@ -3,33 +3,80 @@
 namespace App\Http\Controllers\Dashbaord;
 
 use App\Models\User;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\Dashboard\StoreUserRequest;
 use App\Http\Requests\Dashboard\UpdateUserReqeust;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->paginate(10);
-        return view('dashboard.pages.users.index', compact('users'));
+        $usersQuery = User::query();
+        $usersQuery->latest()->where('id', '!=', auth()->user()->id);
+
+        // Clone the query to calculate counts without date range filtering
+        $countQuery = clone $usersQuery;
+
+        if ($request->filled('from')) {
+            $usersQuery->whereDate('created_at', '>', $request->from);
+        }
+
+        if ($request->filled('to')) {
+            $usersQuery->whereDate('created_at', '<', $request->to);
+        }
+
+        $users = $usersQuery->paginate(10);
+
+        // Get counts without date range filtering
+        $totalUsersCount = $countQuery->count();
+        $totalThisMonth = $countQuery->whereMonth('created_at', '=', date('m'))->count();
+        $thisMonthPercentage = $totalUsersCount ? ceil(($totalThisMonth / $totalUsersCount) * 100) : 0;
+
+        // Get counts with date range filtering
+        $totalActiveUsersCount = $usersQuery->where('is_active', 1)->count();
+        $totalActiveThisMonth = $usersQuery->where('is_active', 1)->whereMonth('created_at', '=', date('m'))->count();
+        $thisActiveMonthPercentage = $totalActiveUsersCount ? ceil(($totalActiveThisMonth / $totalActiveUsersCount) * 100) : 0;
+
+        $totalNotActiveUsersCount = $totalUsersCount - $totalActiveUsersCount;
+        $totalNotActiveThisMonth = $totalThisMonth - $totalActiveThisMonth;
+        $thisNotActiveMonthPercentage = $totalNotActiveUsersCount ? ceil(($totalNotActiveThisMonth / $totalNotActiveUsersCount) * 100) : 0;
+
+        return view('dashboard.pages.users.index', compact('users', 'totalUsersCount', 'thisMonthPercentage', 'totalActiveUsersCount', 'thisActiveMonthPercentage', 'totalNotActiveUsersCount', 'thisNotActiveMonthPercentage'));
     }
+
+
 
 
 
     public function search(Request $request)
     {
-        $users = User::where('name', 'like', '%' . $request->val . '%')
-            ->orWhere('name', 'like', '%' . $request->val . '%')
-            ->orWhere('email', 'like', '%' . $request->val . '%')
-            ->orWhere('phone', 'like', '%' . $request->val . '%')
-            ->paginate(10);
+        $query = User::query();
+
+        if ($request->has('val')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->val . '%')
+                    ->orWhere('email', 'like', '%' . $request->val . '%')
+                    ->orWhere('phone', 'like', '%' . $request->val . '%');
+            });
+        }
+
+        $users = $query->where('id', '!=', auth()->user()->id)->paginate(10);
+
         return view('dashboard.pages.users.table', compact('users'))->render();
+    }
+
+
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     /**
@@ -80,6 +127,8 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
+
+        abort_if(auth()->user()->id == $id, 404);
 
         return view('dashboard.pages.users.edit', compact('user'));
     }
