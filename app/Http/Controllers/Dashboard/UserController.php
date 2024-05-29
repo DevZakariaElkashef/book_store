@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashbaord;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Models\User;
 use App\Exports\UsersExport;

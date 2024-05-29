@@ -1,14 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashbaord\RoleController;
-use App\Http\Controllers\Dashbaord\UserController;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\NotificationController;
-
-
-
 
 
 // auth
@@ -39,6 +37,14 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('users-search', [UserController::class, 'search'])->name('users.search');
     Route::get('users-export', [UserController::class, 'export'])->name('users.export');
     Route::resource('users', UserController::class);
+
+
+
+    // universities
+    Route::get('/universities/pagination', [UniversityController::class, 'pagination'])->name('universities.pagination');
+    Route::get('universities-search', [UniversityController::class, 'search'])->name('universities.search');
+    Route::get('universities-export', [UniversityController::class, 'export'])->name('universities.export');
+    Route::resource('universities', UniversityController::class);
 
     // notifications
     Route::resource('notifications', NotificationController::class)->only(['update']);
