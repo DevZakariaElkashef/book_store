@@ -18,5 +18,14 @@
     "updated successfully" : "Updated Successfully",
     "Create" : "Create",
     "Update" : "Update",
-    "Filter" : "Filter"
+    "Filter" : "Filter",
+    "Users" : "Users",
+    "search..." : "search...",
+    "Export" : "Export",
+    "Edit" : "Edit",
+    "Actions" : "Actions",
+    "Description" : "Description",
+    "Image" : "Image",
+    "Date" : "Date"
+
 }

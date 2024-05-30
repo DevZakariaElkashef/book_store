@@ -21,6 +21,17 @@ class University extends Model
         'updated_at',
     ];
 
+    public function getNameAttribute()
+    {
+        return $this->attributes['name_' . app()->getLocale()];
+    }
+
+
+    public function getDescriptionAttribute()
+    {
+        return $this->attributes['description_' . app()->getLocale()];
+    }
+
     public function colleges()
     {
         return $this->hasMany(College::class);

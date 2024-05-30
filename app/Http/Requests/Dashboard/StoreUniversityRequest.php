@@ -11,7 +11,7 @@ class StoreUniversityRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreUniversityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name_ar' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
+            'description_ar' => 'required|string|max:60000',
+            'description_en' => 'required|string|max:60000',
+            'is_active' => 'required|boolean',
+            'image' =>'nullable|image|mimes:jpeg,png,jpg|max:20480',
         ];
     }
 }

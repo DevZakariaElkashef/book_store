@@ -21,6 +21,8 @@ class UniversityFactory extends Factory
             'name_en' => fake()->word(),
             'description_ar' => fake()->sentence(),
             'description_en' => fake()->sentence(),
+            'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
+            'is_active' => rand(0, 1)
         ];
     }
 }

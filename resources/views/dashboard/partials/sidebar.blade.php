@@ -105,12 +105,29 @@
         </li>
 
 
+
         <li class="menu-item {{ isActiveRoute('roles.index') }}">
             <a href="{{ route('roles.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-shield-outline"></i>
                 <div data-i18n="Roles & Permissions">Roles & Permissions</div>
             </a>
         </li>
+
+
+        <!-- resources -->
+        <li class="menu-header fw-medium mt-4">
+            <span class="menu-header-text">Resources</span>
+        </li>
+
+
+        <li class="menu-item {{ isActiveRoute('universities.index') }}">
+            <a href="{{ route('universities.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-town-hall"></i>
+                <div data-i18n="Universities">Universities</div>
+            </a>
+
+        </li>
+
 
     </ul>
 </aside>

@@ -47,18 +47,16 @@ class UniversityController extends Controller
     }
 
 
-
-
-
     public function search(Request $request)
     {
         $query = University::query();
 
         if ($request->has('val')) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->val . '%')
-                    ->orWhere('email', 'like', '%' . $request->val . '%')
-                    ->orWhere('phone', 'like', '%' . $request->val . '%');
+                $q->where('name_ar', 'like', '%' . $request->val . '%')
+                    ->orWhere('name_en', 'like', '%' . $request->val . '%')
+                    ->orWhere('description_ar', 'like', '%' . $request->val . '%')
+                    ->orWhere('description_en', 'like', '%' . $request->val . '%');
             });
         }
 
@@ -87,14 +85,11 @@ class UniversityController extends Controller
      */
     public function store(StoreUniversityRequest $request)
     {
-        $data = $request->except('avatar', 'password');
+        $data = $request->except('image');
 
+        if ($request->has('image')) {
 
-
-
-        if ($request->has('avatar')) {
-
-            $data['avatar'] = uploadeImage($request->avatar, "Universities");
+            $data['image'] = uploadeImage($request->image, "Universities");
         }
 
         University::create($data);
@@ -123,27 +118,21 @@ class UniversityController extends Controller
     {
         $university = University::findOrFail($id);
 
-        abort_if(auth()->university()->id == $id, 404);
-
         return view('dashboard.pages.universities.edit', compact('university'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUniversityReqeust $request, string $id)
+    public function update(StoreUniversityRequest $request, string $id)
     {
         $university = University::findOrFail($id);
 
-        $data = $request->except('avatar', 'password');
+        $data = $request->except('image');
 
-        if ($request->has('avatar')) {
+        if ($request->has('image')) {
 
-            $data['avatar'] = uploadeImage($request->avatar, "Universities");
-        }
-
-        if ($request->has('password')) {
-            $data['password'] = Hash::make($request->password);
+            $data['image'] = uploadeImage($request->image, "Universities", $university->image);
         }
 
         $university->update($data);
