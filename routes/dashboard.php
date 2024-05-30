@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\NotificationController;
 
@@ -45,6 +46,14 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('universities-search', [UniversityController::class, 'search'])->name('universities.search');
     Route::get('universities-export', [UniversityController::class, 'export'])->name('universities.export');
     Route::resource('universities', UniversityController::class);
+
+
+
+    // colleges
+    Route::get('/colleges/pagination', [CollegeController::class, 'pagination'])->name('colleges.pagination');
+    Route::get('colleges-search', [CollegeController::class, 'search'])->name('colleges.search');
+    Route::get('colleges-export', [CollegeController::class, 'export'])->name('colleges.export');
+    Route::resource('colleges', CollegeController::class);
 
     // notifications
     Route::resource('notifications', NotificationController::class)->only(['update']);

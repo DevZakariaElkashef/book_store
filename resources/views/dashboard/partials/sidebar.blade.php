@@ -125,7 +125,14 @@
                 <i class="menu-icon tf-icons mdi mdi-town-hall"></i>
                 <div data-i18n="Universities">Universities</div>
             </a>
+        </li>
 
+
+        <li class="menu-item {{ isActiveRoute('colleges.index') }}">
+            <a href="{{ route('colleges.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-town-hall"></i>
+                <div data-i18n="colleges">collages</div>
+            </a>
         </li>
 
 
