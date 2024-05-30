@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,7 +26,9 @@ class BookFactory extends Factory
             'author_ar' => fake()->name(),
             'author_en' => fake()->name(),
             'price' => rand(100, 1000),
-            'is_new' => rand(0, 1)
+            'is_new' => rand(0, 1),
+            'created_at' => Carbon::parse(fake()->dateTimeBetween('-3 months', 'now'))->format('Y-m-d H:i:s'),
+            'is_active' => rand(0, 1)
         ];
     }
 }

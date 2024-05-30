@@ -16,10 +16,12 @@
             @foreach ($colleges as $college)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $college->University->name }}</td>
+                    <td>{{ $college->university->name }}</td>
                     <td>
                         @if ($college->image)
+                        <a href="{{ asset($college->image) }}" download>
                             <img class="w-px-40 h-auto rounded-circle" src="{{ asset($college->image) }}" alt="">
+                        </a>
                         @endif
                         {{ $college->name }}
                     </td>

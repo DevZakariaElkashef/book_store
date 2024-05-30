@@ -21,6 +21,22 @@ class Book extends Model
         'updated_at',
     ];
 
+    public function getNameAttribute()
+    {
+        return $this->attributes['name_' . app()->getLocale()];
+    }
+
+
+    public function getDescriptionAttribute()
+    {
+        return $this->attributes['description_' . app()->getLocale()];
+    }
+
+    public function getAuthorAttribute()
+    {
+        return $this->attributes['author_' . app()->getLocale()];
+    }
+
     public function college()
     {
         return $this->belongsTo(College::class);

@@ -54,6 +54,16 @@ class CollegeController extends Controller
     }
 
 
+    public function getCollegesByUniversityId(Request $request)
+    {
+        $colleges = College::active()->where('university_id', $request->univirsityId)->get();
+        $oldCollege = $request->collegeId;
+        
+
+        return view('dashboard.partials.__college_options', compact('colleges', 'oldCollege'))->render();
+    }
+
+
     public function search(Request $request)
     {
         $query = College::query();

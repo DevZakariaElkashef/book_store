@@ -17,7 +17,9 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         @if ($university->image)
+                        <a href="{{ asset($university->image) }}" download>
                             <img class="w-px-40 h-auto rounded-circle" src="{{ asset($university->image) }}" alt="">
+                        </a>
                         @endif
                         {{ $university->name }}
                     </td>

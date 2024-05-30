@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
-            $table->string('description_ar')->nullable();
-            $table->string('description_en')->nullable();
+            $table->text('description_ar')->nullable();
+            $table->text('description_en')->nullable();
             $table->string('author_ar')->nullable();
             $table->string('author_en')->nullable();
             $table->foreignId('college_id')->constrained()->onUpdate('cascade')->onDelete('cascade');

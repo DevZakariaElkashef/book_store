@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +23,7 @@ class CollegeFactory extends Factory
             'name_en' => fake()->word(),
             'description_ar' => fake()->sentence(),
             'description_en' => fake()->sentence(),
-            'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
+            'created_at' => Carbon::parse(fake()->dateTimeBetween('-3 months', 'now'))->format('Y-m-d H:i:s'),
             'is_active' => rand(0, 1)
         ];
     }

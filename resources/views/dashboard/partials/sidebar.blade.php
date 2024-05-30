@@ -130,8 +130,15 @@
 
         <li class="menu-item {{ isActiveRoute('colleges.index') }}">
             <a href="{{ route('colleges.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-town-hall"></i>
+                <i class="menu-icon tf-icons mdi mdi-school"></i>
                 <div data-i18n="colleges">collages</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ isActiveRoute('books.index') }}">
+            <a href="{{ route('books.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-bookshelf"></i>
+                <div data-i18n="books">Books</div>
             </a>
         </li>
 

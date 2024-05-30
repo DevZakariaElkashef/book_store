@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\BookController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -54,6 +55,18 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('colleges-search', [CollegeController::class, 'search'])->name('colleges.search');
     Route::get('colleges-export', [CollegeController::class, 'export'])->name('colleges.export');
     Route::resource('colleges', CollegeController::class);
+    Route::get('college-by-university-id', [CollegeController::class, 'getCollegesByUniversityId'])->name('colleges.getColleges');
+
+
+
+    // books
+    Route::get('/books/pagination', [BookController::class, 'pagination'])->name('books.pagination');
+    Route::get('books-search', [BookController::class, 'search'])->name('books.search');
+    Route::get('books-export', [BookController::class, 'export'])->name('books.export');
+    Route::resource('books', BookController::class);
+
+
+
 
     // notifications
     Route::resource('notifications', NotificationController::class)->only(['update']);
