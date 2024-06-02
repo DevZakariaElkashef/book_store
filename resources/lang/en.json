@@ -30,5 +30,12 @@
     "University": "University",
     "Select University First": "Select University First",
     "No College at this university": "No College at this university",
-    "Price" : "Price"
+    "Price": "Price",
+    "created successfully": "created successfully",
+    "Code" : "Code",
+    "Discount" : "Discount",
+    "Start At" : "Start At",
+    "End At" : "End At",
+    "Max Times" : "Max Times",
+    "Used Times" : "Used Times"
 }

@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\ActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Coupon extends Model
+class UserCoupon extends Model
 {
-    use HasFactory, SoftDeletes, ActiveScope;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -23,8 +22,14 @@ class Coupon extends Model
     ];
 
 
-    public function couponUsages()
+
+    public function user()
     {
-        return $this->hasMany(UserCoupon::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
     }
 }

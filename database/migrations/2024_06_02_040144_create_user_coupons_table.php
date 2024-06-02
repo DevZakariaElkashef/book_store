@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coupons', function (Blueprint $table) {
+        Schema::create('user_coupons', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('discount');
-            $table->date('start_at')->nullable();
-            $table->date('end_at')->nullable();
-            $table->integer('max_times')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('coupon_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-            $table->boolean('is_active')->default(1);
             $table->softDeletes();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coupons');
+        Schema::dropIfExists('user_coupons');
     }
 };

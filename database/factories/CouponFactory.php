@@ -19,7 +19,9 @@ class CouponFactory extends Factory
         return [
             'code' => fake()->word(),
             'discount' => rand(1, 20),
-            'max_times' => rand(100, 1000)
+            'max_times' => rand(100, 1000),
+            'start_at' => fake()->date(),
+            'end_at' => fake()->date(),
         ];
     }
 }

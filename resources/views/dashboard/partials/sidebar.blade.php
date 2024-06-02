@@ -85,13 +85,6 @@
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="app-calendar.html" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-calendar-blank-outline"></i>
-                <div data-i18n="Calendar">Calendar</div>
-            </a>
-        </li>
-
         <!-- resources -->
         <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">User Management</span>
@@ -139,6 +132,13 @@
             <a href="{{ route('books.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-bookshelf"></i>
                 <div data-i18n="books">Books</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ isActiveRoute('coupons.index') }}">
+            <a href="{{ route('coupons.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-sale"></i>
+                <div data-i18n="coupons">Coupons</div>
             </a>
         </li>
 

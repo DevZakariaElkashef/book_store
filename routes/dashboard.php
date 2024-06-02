@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\BookController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\NotificationController;
@@ -64,6 +65,14 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('books-search', [BookController::class, 'search'])->name('books.search');
     Route::get('books-export', [BookController::class, 'export'])->name('books.export');
     Route::resource('books', BookController::class);
+
+
+
+    // coupons
+    Route::get('/coupons/pagination', [CouponController::class, 'pagination'])->name('coupons.pagination');
+    Route::get('coupons-search', [CouponController::class, 'search'])->name('coupons.search');
+    Route::get('coupons-export', [CouponController::class, 'export'])->name('coupons.export');
+    Route::resource('coupons', CouponController::class);
 
 
 
