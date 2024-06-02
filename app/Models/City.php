@@ -20,4 +20,9 @@ class City extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function getNameAttribute()
+    {
+        return $this->attributes['name_' . app()->getLocale()];
+    }
 }

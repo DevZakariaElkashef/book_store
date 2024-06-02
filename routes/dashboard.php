@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BookController;
+use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -78,6 +79,15 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('coupons-export', [CouponController::class, 'export'])->name('coupons.export');
     Route::delete('coupons-delete', [CouponController::class, 'delete'])->name('coupons.delete');
     Route::resource('coupons', CouponController::class);
+
+
+
+    // cities
+    Route::get('/cities/pagination', [CityController::class, 'pagination'])->name('cities.pagination');
+    Route::get('cities-search', [CityController::class, 'search'])->name('cities.search');
+    Route::get('cities-export', [CityController::class, 'export'])->name('cities.export');
+    Route::delete('cities-delete', [CityController::class, 'delete'])->name('cities.delete');
+    Route::resource('cities', CityController::class);
 
 
 

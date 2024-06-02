@@ -142,6 +142,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{ isActiveRoute('cities.index') }}">
+            <a href="{{ route('cities.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-city"></i>
+                <div data-i18n="cities">Cities</div>
+            </a>
+        </li>
+
 
     </ul>
 </aside>
