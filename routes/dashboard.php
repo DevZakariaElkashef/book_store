@@ -39,6 +39,7 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('/users/pagination', [UserController::class, 'pagination'])->name('users.pagination');
     Route::get('users-search', [UserController::class, 'search'])->name('users.search');
     Route::get('users-export', [UserController::class, 'export'])->name('users.export');
+    Route::delete('users-delete', [UserController::class, 'delete'])->name('users.delete');
     Route::resource('users', UserController::class);
 
 
@@ -47,6 +48,7 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('/universities/pagination', [UniversityController::class, 'pagination'])->name('universities.pagination');
     Route::get('universities-search', [UniversityController::class, 'search'])->name('universities.search');
     Route::get('universities-export', [UniversityController::class, 'export'])->name('universities.export');
+    Route::delete('universities-delete', [UniversityController::class, 'delete'])->name('universities.delete');
     Route::resource('universities', UniversityController::class);
 
 
@@ -56,6 +58,7 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('colleges-search', [CollegeController::class, 'search'])->name('colleges.search');
     Route::get('colleges-export', [CollegeController::class, 'export'])->name('colleges.export');
     Route::resource('colleges', CollegeController::class);
+    Route::delete('colleges-delete', [CollegeController::class, 'delete'])->name('colleges.delete');
     Route::get('college-by-university-id', [CollegeController::class, 'getCollegesByUniversityId'])->name('colleges.getColleges');
 
 
@@ -64,6 +67,7 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('/books/pagination', [BookController::class, 'pagination'])->name('books.pagination');
     Route::get('books-search', [BookController::class, 'search'])->name('books.search');
     Route::get('books-export', [BookController::class, 'export'])->name('books.export');
+    Route::delete('books-delete', [BookController::class, 'delete'])->name('books.delete');
     Route::resource('books', BookController::class);
 
 
@@ -72,6 +76,7 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('/coupons/pagination', [CouponController::class, 'pagination'])->name('coupons.pagination');
     Route::get('coupons-search', [CouponController::class, 'search'])->name('coupons.search');
     Route::get('coupons-export', [CouponController::class, 'export'])->name('coupons.export');
+    Route::delete('coupons-delete', [CouponController::class, 'delete'])->name('coupons.delete');
     Route::resource('coupons', CouponController::class);
 
 

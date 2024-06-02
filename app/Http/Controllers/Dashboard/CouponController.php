@@ -151,4 +151,26 @@ class CouponController extends Controller
 
         return to_route('coupons.index')->with('message', $message);
     }
+
+
+    public function delete(Request $request)
+    {
+        if (!$request->filled('ids')) {
+            $message = [
+                'status' => false,
+                'content' => __('select some items')
+            ];
+
+            return back()->with('message', $message);
+        }
+
+
+        $ids = explode(',', $request->ids);
+        Coupon::whereIn('id', $ids)->delete();
+        $message = [
+           'status' => true,
+            'content' => __('deleted successfully')
+        ];
+        return back()->with('message', $message);
+    }
 }

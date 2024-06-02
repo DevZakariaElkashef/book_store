@@ -3,6 +3,9 @@
     <table class="table">
         <thead class="table-light">
             <tr>
+                <th>
+                    <input class="form-check-input select-all" type="checkbox">
+                </th>
                 <th>ID</th>
                 <th>{{ __('University') }}</th>
                 <th>{{ __('College') }}</th>
@@ -16,9 +19,12 @@
         <tbody>
             @foreach ($books as $book)
                 <tr>
+                    <td>
+                        <input class="form-check-input item" value="{{ $book->id }}" type="checkbox">
+                    </td>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $book->college->university->name }}</td>
-                    <td>{{ $book->college->name }}</td>
+                    <td>{{ $book->college->university->name ?? 'N/A' }}</td>
+                    <td>{{ $book->college->name ?? 'N/A' }}</td>
 
                     <td>
                         @if ($book->image)

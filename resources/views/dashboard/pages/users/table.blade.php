@@ -1,8 +1,11 @@
 <div class="card-datatable table-responsive" id="user-list">
 
-    <table class="table">
+    <table class="table borded">
         <thead class="table-light">
             <tr>
+                <th>
+                    <input class="form-check-input select-all" type="checkbox">
+                </th>
                 <th>ID</th>
                 <th>{{ __("Name") }}</th>
                 <th>{{ __("Email") }}</th>
@@ -13,6 +16,9 @@
         <tbody>
             @foreach ($users as $user)
                 <tr>
+                    <td>
+                        <input class="form-check-input item" value="{{ $user->id }}" type="checkbox">
+                    </td>
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         @if ($user->avatar)

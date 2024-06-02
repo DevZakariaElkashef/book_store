@@ -70,3 +70,23 @@
         });
     });
 </script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.select-all').change(function() {
+            $('.item').prop('checked', this.checked);
+        });
+
+
+        $('.delete-selection').click(function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            let selectedIds = [];
+            $('.item:checked').each(function() {
+                selectedIds.push($(this).val());
+            });
+            $('#ids').val(selectedIds.join(','));
+            $('#deleteForm').attr('action', $(this).data('url'));
+        });
+    });
+</script>

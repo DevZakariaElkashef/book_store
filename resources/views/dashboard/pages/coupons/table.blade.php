@@ -3,6 +3,9 @@
     <table class="table">
         <thead class="table-light">
             <tr>
+                <th>
+                    <input class="form-check-input select-all" type="checkbox">
+                </th>
                 <th>ID</th>
                 <th>{{ __('Code') }}</th>
                 <th>{{ __('Discount') }}</th>
@@ -17,6 +20,9 @@
         <tbody>
             @foreach ($coupons as $coupon)
                 <tr>
+                    <td>
+                        <input class="form-check-input item" value="{{ $coupon->id }}" type="checkbox">
+                    </td>
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         {{ $coupon->code }}

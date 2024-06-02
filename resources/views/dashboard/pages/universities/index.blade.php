@@ -113,6 +113,17 @@
                                 </span>
                             </a>
                         </div>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item waves-effect delete-selection" data-url="{{ route('universities.delete') }}" href="javascript:void(0);"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                        class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -136,6 +147,7 @@
                     <form method="post" id="deleteForm">
                         @csrf
                         @method('DELETE')
+                        <input type="hidden" name="ids" id="ids">
                         <div class="modal-body">
                             {{ __('Are You Sure!!') }}
                         </div>

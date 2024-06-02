@@ -84,7 +84,7 @@
         <!-- Coupons List Table -->
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">{{ __("Coupons") }}</h5>
+                <h5 class="card-title">{{ __('Coupons') }}</h5>
 
                 <div class="row align-items-end">
                     <div class="col-sm-12 col-md-6">
@@ -94,24 +94,38 @@
                         <div id="DataTables_Table_1_filter" class="dataTables_filter">
                             <label>
                                 <input type="search" class="form-control search-in-db"
-                                    data-url="{{ route('coupons.search') }}" placeholder="{{ __('search...') }}" aria-controls="DataTables_Table_1">
+                                    data-url="{{ route('coupons.search') }}" placeholder="{{ __('search...') }}"
+                                    aria-controls="DataTables_Table_1">
                             </label>
                             {{-- export --}}
                             <a class="dt-button add-new btn bg-label-primary" href="{{ route('coupons.export') }}">
-                                <span class="d-none d-sm-inline-block">{{ __("Export") }}</span>
+                                <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
                             </a>
                             {{-- filter --}}
                             <a class="dt-button add-new btn bg-label-primary" href="javascript:void(0);"
                                 data-bs-toggle="modal" data-bs-target="#filterModal">
-                                <span class="d-none d-sm-inline-block">{{ __("Filter") }}</span>
+                                <span class="d-none d-sm-inline-block">{{ __('Filter') }}</span>
                             </a>
                             {{-- add coupon btn --}}
                             <a class="dt-button add-new btn btn-primary" href="{{ route('coupons.create') }}">
                                 <span>
                                     <i class="mdi mdi-plus me-0 me-sm-1"></i>
-                                    <span class="d-none d-sm-inline-block">{{ __("Create") }}</span>
+                                    <span class="d-none d-sm-inline-block">{{ __('Create') }}</span>
                                 </span>
                             </a>
+                        </div>
+
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item waves-effect delete-selection"
+                                    data-url="{{ route('coupons.delete') }}" href="javascript:void(0);"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                        class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
+                            </div>
                         </div>
 
                     </div>
@@ -136,6 +150,8 @@
                     <form method="post" id="deleteForm">
                         @csrf
                         @method('DELETE')
+                        <input type="hidden" name="ids" id="ids">
+
                         <div class="modal-body">
                             {{ __('Are You Sure!!') }}
                         </div>
