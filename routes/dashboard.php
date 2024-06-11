@@ -1,20 +1,20 @@
 <?php
 
-use App\Http\Controllers\Dashboard\ContactTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BookController;
 use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\PageController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CouponController;
+use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\UniversityController;
+use App\Http\Controllers\Dashboard\ContactTypeController;
 use App\Http\Controllers\Dashboard\NotificationController;
-use App\Http\Controllers\Dashboard\PageController;
-use App\Http\Controllers\Dashboard\SliderController;
 
 // auth
 Route::get('login', [AuthController::class, 'loginPage'])->name('dashboard.login_page');
@@ -126,7 +126,9 @@ Route::middleware('admin_auth')->group(function () {
 
 
     // notifications
-    Route::resource('notifications', NotificationController::class)->only(['update']);
+    Route::get('notifications-search', [NotificationController::class, 'search'])->name('notifications.search');
+    Route::delete('notifications-delete', [NotificationController::class, 'delete'])->name('notifications.delete');
+    Route::resource('notifications', NotificationController::class);
 
 
 
