@@ -13,7 +13,7 @@ use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\NotificationController;
-
+use App\Http\Controllers\Dashboard\SliderController;
 
 // auth
 Route::get('login', [AuthController::class, 'loginPage'])->name('dashboard.login_page');
@@ -110,6 +110,16 @@ Route::middleware('admin_auth')->group(function () {
     Route::resource('contacts', ContactController::class);
 
 
+
+    // sliders
+    Route::delete('sliders-delete', [SliderController::class, 'delete'])->name('sliders.delete');
+    Route::resource('sliders', SliderController::class);
+
+
+
+
+    // settings
+    Route::resource('settings', SliderController::class);
 
 
     // notifications

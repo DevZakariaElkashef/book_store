@@ -156,6 +156,40 @@
         </li>
 
 
+
+
+        <!-- resources -->
+        <li class="menu-header fw-medium mt-4">
+            <span class="menu-header-text">Settings</span>
+        </li>
+
+
+
+        <!-- Settings -->
+        <li
+            class="menu-item {{ isActiveRoute(['settings.index', 'sliders.index']) }} {{ isActiveRoute(['settings.index', 'sliders.index']) ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
+                <div data-i18n="Settings">Settings</div>
+
+            </a>
+            <ul class="menu-sub">
+
+                <li class="menu-item {{ isActiveRoute('settings.index') }}">
+                    <a href="{{ route('settings.index') }}" class="menu-link">
+                        <div data-i18n="Settings">Settings</div>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ isActiveRoute('sliders.index') }}">
+                    <a href="{{ route('sliders.index') }}" class="menu-link">
+                        <div data-i18n="Sliders">Sliders</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
     </ul>
 </aside>
 <!-- / Menu -->
