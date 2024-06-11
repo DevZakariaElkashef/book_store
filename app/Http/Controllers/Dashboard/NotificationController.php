@@ -54,16 +54,13 @@ class NotificationController extends Controller
 
         if ($request->has('val')) {
             $query->where(function ($q) use ($request) {
-                $q->where('name_ar', 'like', '%' . $request->val . '%')
-                    ->orWhere('name_en', 'like', '%' . $request->val . '%')
-                    ->orWhere('description_ar', 'like', '%' . $request->val . '%')
-                    ->orWhere('description_en', 'like', '%' . $request->val . '%');
+                $q->where('data', 'like', '%' . $request->val . '%');
             });
         }
 
-        $colleges = $query->paginate(10);
+        $notifications = $query->paginate(10);
 
-        return view('dashboard.pages.colleges.table', compact('colleges'))->render();
+        return view('dashboard.pages.notifications.table', compact('notifications'))->render();
     }
 
 

@@ -7,12 +7,12 @@
                     <input class="form-check-input select-all" type="checkbox">
                 </th>
                 <th>ID</th>
-                <th>{{ __("University") }}</th>
-                <th>{{ __("Name") }}</th>
-                <th>{{ __("Description") }}</th>
-                <th>{{ __("Status") }}</th>
-                <th>{{ __("Date") }}</th>
-                <th>{{ __("Actions") }}</th>
+                <th>{{ __('University') }}</th>
+                <th>{{ __('Name') }}</th>
+                <th>{{ __('Description') }}</th>
+                <th>{{ __('Status') }}</th>
+                <th>{{ __('Date') }}</th>
+                <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -25,18 +25,19 @@
                     <td>{{ $college->university->name ?? 'N/A' }}</td>
                     <td>
                         @if ($college->image)
-                        <a href="{{ asset($college->image) }}" download>
-                            <img class="w-px-40 h-auto rounded-circle" src="{{ asset($college->image) }}" alt="">
-                        </a>
+                            <a href="{{ asset($college->image) }}" download>
+                                <img class="w-px-40 h-auto rounded-circle" src="{{ asset($college->image) }}"
+                                    alt="">
+                            </a>
                         @endif
                         {{ $college->name }}
                     </td>
                     <td>{{ Str::limit($college->description, 50) }}</td>
                     <td>
-                        @if($college->is_active)
-                        <span class="badge bg-label-primary">{{ __("Active") }}</span>
+                        @if ($college->is_active)
+                            <span class="badge bg-label-primary">{{ __('Active') }}</span>
                         @else
-                        <span class="badge bg-label-dark">{{ __("Not Active") }}</span>
+                            <span class="badge bg-label-dark">{{ __('Not Active') }}</span>
                         @endif
                     </td>
                     <td>{{ $college->created_at }}</td>
@@ -47,10 +48,13 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect" href="{{ route('colleges.edit', $college->id) }}"><i
-                                        class="mdi mdi-pencil-outline me-1"></i> {{ __("Edit") }}</a>
-                                <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);" data-url="{{ route('colleges.destroy', $college->id) }}" data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                        class="mdi mdi-trash-can-outline me-1"></i> {{ __("Delete") }}</a>
+                                <a class="dropdown-item waves-effect"
+                                    href="{{ route('colleges.edit', $college->id) }}"><i
+                                        class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
+                                <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
+                                    data-url="{{ route('colleges.destroy', $college->id) }}" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
+                                    {{ __('Delete') }}</a>
                             </div>
                         </div>
                     </td>
@@ -62,6 +66,3 @@
         {{ $colleges->links() }}
     </div>
 </div>
-
-
-
