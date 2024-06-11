@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\NotificationController;
+use App\Http\Controllers\Dashboard\PageController;
 use App\Http\Controllers\Dashboard\SliderController;
 
 // auth
@@ -116,6 +117,8 @@ Route::middleware('admin_auth')->group(function () {
     Route::resource('sliders', SliderController::class);
 
 
+    // settings
+    Route::resource('pages', PageController::class);
 
 
     // settings

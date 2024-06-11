@@ -20,4 +20,15 @@ class Page extends Model
         'created_at',
         'updated_at',
     ];
+
+
+    public function getKeyAttribute()
+    {
+        return $this->attributes['key_' . app()->getLocale()];
+    }
+
+    public function getValueAttribute()
+    {
+        return $this->attributes['key_' . app()->getLocale()];
+    }
 }
