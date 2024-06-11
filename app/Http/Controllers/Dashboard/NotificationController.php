@@ -48,6 +48,29 @@ class NotificationController extends Controller
 
 
 
+    public function search(Request $request)
+    {
+        $query = Notification::query();
+
+        if ($request->has('val')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name_ar', 'like', '%' . $request->val . '%')
+                    ->orWhere('name_en', 'like', '%' . $request->val . '%')
+                    ->orWhere('description_ar', 'like', '%' . $request->val . '%')
+                    ->orWhere('description_en', 'like', '%' . $request->val . '%');
+            });
+        }
+
+        $colleges = $query->paginate(10);
+
+        return view('dashboard.pages.colleges.table', compact('colleges'))->render();
+    }
+
+
+
+
+
+
     public function store(Request $request)
     {
         $notification = Notification::where('id', $request->id)->firstOrFail();
@@ -66,5 +89,40 @@ class NotificationController extends Controller
         ];
 
         return to_route('notifications.index')->with('message', $message);
+    }
+
+
+    public function destroy(string $id)
+    {
+        Notification::where('id', $id)->delete();
+
+        // retun with toaster message
+        $message = [
+            'status' => true,
+            'content' => __('deleted successfully')
+        ];
+
+        return to_route('notifications.index')->with('message', $message);
+    }
+
+    public function delete(Request $request)
+    {
+        if (!$request->filled('ids')) {
+            $message = [
+                'status' => false,
+                'content' => __('select some items')
+            ];
+
+            return back()->with('message', $message);
+        }
+
+
+        $ids = explode(',', $request->ids);
+        Notification::whereIn('id', $ids)->delete();
+        $message = [
+            'status' => true,
+            'content' => __('deleted successfully')
+        ];
+        return back()->with('message', $message);
     }
 }

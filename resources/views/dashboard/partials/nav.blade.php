@@ -215,7 +215,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-menu-footer border-top p-2">
-                        <a href="javascript:void(0);" class="btn btn-primary d-flex justify-content-center">
+                        <a href="{{ route('notifications.index') }}" class="btn btn-primary d-flex justify-content-center">
                             View all notifications
                         </a>
                     </li>
