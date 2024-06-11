@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\ContactTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BookController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\CollegeController;
+use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\NotificationController;
 
@@ -88,6 +90,24 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('cities-export', [CityController::class, 'export'])->name('cities.export');
     Route::delete('cities-delete', [CityController::class, 'delete'])->name('cities.delete');
     Route::resource('cities', CityController::class);
+
+
+
+    // contact_types
+    Route::get('/contact_types/pagination', [ContactTypeController::class, 'pagination'])->name('contact_types.pagination');
+    Route::get('contact_types-search', [ContactTypeController::class, 'search'])->name('contact_types.search');
+    Route::get('contact_types-export', [ContactTypeController::class, 'export'])->name('contact_types.export');
+    Route::delete('contact_types-delete', [ContactTypeController::class, 'delete'])->name('contact_types.delete');
+    Route::resource('contact_types', ContactTypeController::class);
+
+
+
+    // contacts
+    Route::get('/contacts/pagination', [ContactController::class, 'pagination'])->name('contacts.pagination');
+    Route::get('contacts-search', [ContactController::class, 'search'])->name('contacts.search');
+    Route::get('contacts-export', [ContactController::class, 'export'])->name('contacts.export');
+    Route::delete('contacts-delete', [ContactController::class, 'delete'])->name('contacts.delete');
+    Route::resource('contacts', ContactController::class);
 
 
 

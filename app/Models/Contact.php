@@ -20,4 +20,10 @@ class Contact extends Model
         'created_at',
         'updated_at',
     ];
+
+
+    public function contactType()
+    {
+        return $this->belongsTo(ContactType::class);
+    }
 }

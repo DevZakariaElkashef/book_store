@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->text('message')->nullable();
+            $table->boolean('status')->default(0)->comment('0 => not solved, 1 => solved');
             $table->timestamps();
-            $table->boolean('is_active')->default(1);
             $table->softDeletes();
         });
     }

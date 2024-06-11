@@ -79,9 +79,15 @@
             <span class="menu-header-text">Apps &amp; Pages</span>
         </li>
         <li class="menu-item">
-            <a href="app-email.html" class="menu-link">
+            <a href="{{ route('contact_types.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
-                <div data-i18n="Email">Email</div>
+                <div data-i18n="Contact Types">Contact Types</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('contacts.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
+                <div data-i18n="Contacts">Contacts</div>
             </a>
         </li>
 
