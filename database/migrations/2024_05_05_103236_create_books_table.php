@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description_en')->nullable();
             $table->string('author_ar')->nullable();
             $table->string('author_en')->nullable();
-            $table->foreignId('college_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('subject_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('price');
             $table->string('offer')->nullable();
             $table->date('offer_start_at')->nullable();

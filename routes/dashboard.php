@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\ContactTypeController;
 use App\Http\Controllers\Dashboard\NotificationController;
@@ -64,6 +65,16 @@ Route::middleware('admin_auth')->group(function () {
     Route::resource('colleges', CollegeController::class);
     Route::delete('colleges-delete', [CollegeController::class, 'delete'])->name('colleges.delete');
     Route::get('college-by-university-id', [CollegeController::class, 'getCollegesByUniversityId'])->name('colleges.getColleges');
+
+
+
+    // subjects
+    Route::get('/subjects/pagination', [SubjectController::class, 'pagination'])->name('subjects.pagination');
+    Route::get('subjects-search', [SubjectController::class, 'search'])->name('subjects.search');
+    Route::get('subjects-export', [SubjectController::class, 'export'])->name('subjects.export');
+    Route::resource('subjects', SubjectController::class);
+    Route::delete('subjects-delete', [SubjectController::class, 'delete'])->name('subjects.delete');
+    Route::get('subject-by-college-id', [SubjectController::class, 'getSubjectsByCollegeId'])->name('subjects.getSubjects');
 
 
 

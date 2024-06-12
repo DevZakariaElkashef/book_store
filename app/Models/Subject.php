@@ -2,26 +2,24 @@
 
 namespace App\Models;
 
-use App\Traits\ActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class College extends Model
+class Subject extends Model
 {
-    use HasFactory, SoftDeletes, ActiveScope;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
-    */
+     */
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
     ];
-
 
     public function getNameAttribute()
     {
@@ -29,22 +27,13 @@ class College extends Model
     }
 
 
-    public function getDescriptionAttribute()
+    public function college()
     {
-        return $this->attributes['description_' . app()->getLocale()];
+        return $this->belongsTo(College::class);
     }
 
-
-    public function university()
+    public function books()
     {
-        return $this->belongsTo(University::class);
-    }
-
-    public function subjects()
-    {
-        return $this->hasMany(Subject::class);
+        return $this->hasMany(Book::class);
     }
 }
-
-
-

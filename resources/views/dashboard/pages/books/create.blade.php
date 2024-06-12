@@ -74,6 +74,19 @@
                         </div>
 
 
+                        <div class="col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="subjectSelect">{{ __('Subject') }}</label>
+                                <select type="text" class="form-control" name="subject_id" id="subjectSelect">
+                                    <option disabled selected>{{ __('Select University First') }}</option>
+                                </select>
+                                @error('subject_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+
 
                         <div class="col-md-6 mb-2">
                             <div class="form-group">
@@ -323,6 +336,20 @@
                 },
                 success: function(data) {
                     $('#collegeSelect').html(data);
+                }
+            });
+        });
+
+        $(document).on('change', '#collegeSelect', function() {
+            var collegeId = $(this).val();
+            $.ajax({
+                url: "{{ route('subjects.getSubjects') }}",
+                type: "GET",
+                data: {
+                    collegeId: collegeId
+                },
+                success: function(data) {
+                    $('#subjectselect').html(data);
                 }
             });
         });

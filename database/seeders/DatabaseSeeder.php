@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             UniversitySeeder::class,
             CollegeSeeder::class,
+            SubjectSeeder::class,
             BookSeeder::class,
             CouponSeeder::class,
             CartSeeder::class,

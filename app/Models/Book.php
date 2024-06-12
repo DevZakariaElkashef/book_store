@@ -38,9 +38,9 @@ class Book extends Model
         return $this->attributes['author_' . app()->getLocale()];
     }
 
-    public function college()
+    public function subject()
     {
-        return $this->belongsTo(College::class);
+        return $this->belongsTo(Subject::class);
     }
 
 
