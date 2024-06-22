@@ -21,9 +21,9 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Total Books</p>
+                                <p class="text-heading mb-2">Total Subjects</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">{{ $totalBooksCount }}</h4>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalSubjectsCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisMonthPercentage }}%)</p>
                                 </div>
                                 <p class="mb-0">Last month analytics</p>
@@ -42,9 +42,9 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Active Books</p>
+                                <p class="text-heading mb-2">Active Subjects</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">{{ $totalActiveBooksCount }}</h4>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalActiveSubjectsCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisActiveMonthPercentage }}%)</p>
                                 </div>
                                 <p class="mb-0">Last week analytics</p>
@@ -63,9 +63,9 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Pending Books</p>
+                                <p class="text-heading mb-2">Pending Subjects</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveBooksCount }}</h4>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveSubjectsCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisNotActiveMonthPercentage }}%)</p>
                                 </div>
                                 <p class="mb-0">Last month analytics</p>
@@ -81,10 +81,10 @@
             </div>
         </div>
 
-        <!-- Books List Table -->
+        <!-- Subjects List Table -->
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">{{ __('Books') }}</h5>
+                <h5 class="card-title">{{ __('Subjects') }}</h5>
 
                 <div class="row align-items-end">
                     <div class="col-sm-12 col-md-6">
@@ -94,11 +94,11 @@
                         <div id="DataTables_Table_1_filter" class="dataTables_filter">
                             <label>
                                 <input type="search" class="form-control search-in-db"
-                                    data-url="{{ route('books.search') }}" placeholder="{{ __('search...') }}"
+                                    data-url="{{ route('subjects.search') }}" placeholder="{{ __('search...') }}"
                                     aria-controls="DataTables_Table_1">
                             </label>
                             {{-- export --}}
-                            <a class="dt-button add-new btn bg-label-primary" href="{{ route('books.export') }}">
+                            <a class="dt-button add-new btn bg-label-primary" href="{{ route('subjects.export') }}">
                                 <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
                             </a>
                             {{-- filter --}}
@@ -106,8 +106,8 @@
                                 data-bs-toggle="modal" data-bs-target="#filterModal">
                                 <span class="d-none d-sm-inline-block">{{ __('Filter') }}</span>
                             </a>
-                            {{-- add book btn --}}
-                            <a class="dt-button add-new btn btn-primary" href="{{ route('books.create') }}">
+                            {{-- add subject btn --}}
+                            <a class="dt-button add-new btn btn-primary" href="{{ route('subjects.create') }}">
                                 <span>
                                     <i class="mdi mdi-plus me-0 me-sm-1"></i>
                                     <span class="d-none d-sm-inline-block">{{ __('Create') }}</span>
@@ -121,7 +121,7 @@
                             </button>
                             <div class="dropdown-menu" style="">
                                 <a class="dropdown-item waves-effect delete-selection"
-                                    data-url="{{ route('books.delete') }}" href="javascript:void(0);"
+                                    data-url="{{ route('subjects.delete') }}" href="javascript:void(0);"
                                     data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                         class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
                             </div>
@@ -132,7 +132,7 @@
             </div>
 
             <div id="searchTable">
-                @include('dashboard.pages.books.table')
+                @include('dashboard.pages.subjects.table')
             </div>
         </div>
 
@@ -174,7 +174,7 @@
                         <h1 class="modal-title fs-5" id="filterModalLabel">{{ __('Filter') }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="get" action="{{ route('books.index') }}">
+                    <form method="get" action="{{ route('subjects.index') }}">
                         <div class="modal-body">
 
                             <div class="form-group">
@@ -193,25 +193,12 @@
                                 @enderror
                             </div>
 
-
-
-
                             <div class="form-group">
                                 <label for="collegeSelect">{{ __('College') }}</label>
                                 <select type="text" class="form-control" name="college_id" id="collegeSelect">
                                     <option disabled selected>{{ __('Select University First') }}</option>
                                 </select>
                                 @error('college_id')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="subjectSelect">{{ __('Subject') }}</label>
-                                <select type="text" class="form-control" name="subject_id" id="subjectSelect">
-                                    <option disabled selected>{{ __('Select University First') }}</option>
-                                </select>
-                                @error('subject_id')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -262,13 +249,14 @@
     <script src="{{ asset('dashboard/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendor/libs/cleavejs/cleave.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/js/app-book-list.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/js/app-subject-list.js') }}"></script>
 
     <script>
         $(document).on('click', '.delete-btn', function() {
             $('#deleteForm').attr('action', $(this).data('url'));
         });
     </script>
+
 
     <script>
         $(document).on('change', '.univirsitySelect', function() {
@@ -282,21 +270,6 @@
                 },
                 success: function(data) {
                     $('#collegeSelect').html(data);
-                }
-            });
-        });
-
-
-        $(document).on('change', '#collegeSelect', function() {
-            var collegeId = $(this).val();
-            $.ajax({
-                url: "{{ route('subjects.getSubjects') }}",
-                type: "GET",
-                data: {
-                    collegeId: collegeId
-                },
-                success: function(data) {
-                    $('#subjectSelect').html(data);
                 }
             });
         });

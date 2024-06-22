@@ -29,11 +29,26 @@ class BookController extends Controller
             $booksQuery->whereDate('created_at', '<', $request->to);
         }
 
-        // if ($request->filled('college_id')) {
-        //     $booksQuery->where('college_id', $request->college_id);
-        // }
+        if ($request->filled('subject_id')) {
+            $booksQuery->where('subject_id', $request->subject_id);
+        }
 
-        $books = $booksQuery->with('college')->paginate(10);
+        if ($request->filled('college_id') || $request->filled('university_id')) {
+            $booksQuery->whereHas('subject.college.university', function ($university) use ($request) {
+                if ($request->filled('university_id')) {
+                    $university->where('id', $request->university_id);
+                }
+
+                if ($request->filled('college_id')) {
+                    $university->whereHas('colleges', function ($college) use ($request) {
+                        $college->where('id', $request->college_id);
+                    });
+                }
+            });
+        }
+
+
+        $books = $booksQuery->with('subject.college.university')->paginate(10);
 
         // Get counts without date range filtering
         $totalBooksCount = $countQuery->count();
@@ -195,7 +210,7 @@ class BookController extends Controller
         $ids = explode(',', $request->ids);
         Book::whereIn('id', $ids)->delete();
         $message = [
-           'status' => true,
+            'status' => true,
             'content' => __('deleted successfully')
         ];
         return back()->with('message', $message);

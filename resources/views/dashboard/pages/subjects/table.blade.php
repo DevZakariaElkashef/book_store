@@ -1,4 +1,4 @@
-<div class="card-datatable table-responsive" id="book-list">
+<div class="card-datatable table-responsive" id="subject-list">
 
     <table class="table">
         <thead class="table-light">
@@ -9,37 +9,24 @@
                 <th>ID</th>
                 <th>{{ __('University') }}</th>
                 <th>{{ __('College') }}</th>
-                <th>{{ __('Subject') }}</th>
                 <th>{{ __('Name') }}</th>
-                <th>{{ __('Author') }}</th>
-                <th>{{ __('Description') }}</th>
                 <th>{{ __('Status') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($books as $book)
+            @foreach ($subjects as $subject)
                 <tr>
                     <td>
-                        <input class="form-check-input item" value="{{ $book->id }}" type="checkbox">
+                        <input class="form-check-input item" value="{{ $subject->id }}" type="checkbox">
                     </td>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $book->subject->college->university->name ?? 'N/A' }}</td>
-                    <td>{{ $book->subject->college->name ?? 'N/A' }}</td>
-                    <td>{{ $book->subject->name ?? 'N/A' }}</td>
+                    <td>{{ $subject->college->university->name ?? 'N/A' }}</td>
+                    <td>{{ $subject->college->name ?? 'N/A' }}</td>
 
+                    <td>{{ $subject->name }}</td>
                     <td>
-                        @if ($book->image)
-                            <a href="{{ asset($book->image) }}" download="">
-                                <img class="w-px-40 h-auto rounded-circle" src="{{ asset($book->image) }}" alt="">
-                            </a>
-                        @endif
-                        {{ $book->name }}
-                    </td>
-                    <td>{{ $book->author }}</td>
-                    <td>{{ Str::limit($book->description, 50) }}</td>
-                    <td>
-                        @if ($book->is_active)
+                        @if ($subject->is_active)
                             <span class="badge bg-label-primary">{{ __('Active') }}</span>
                         @else
                             <span class="badge bg-label-dark">{{ __('Not Active') }}</span>
@@ -52,10 +39,10 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect" href="{{ route('books.edit', $book->id) }}"><i
+                                <a class="dropdown-item waves-effect" href="{{ route('subjects.edit', $subject->id) }}"><i
                                         class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
                                 <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
-                                    data-url="{{ route('books.destroy', $book->id) }}" data-bs-toggle="modal"
+                                    data-url="{{ route('subjects.destroy', $subject->id) }}" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
                                     {{ __('Delete') }}</a>
                             </div>
@@ -66,6 +53,6 @@
         </tbody>
     </table>
     <div class="mt-3 px-3">
-        {{ $books->links() }}
+        {{ $subjects->links() }}
     </div>
 </div>

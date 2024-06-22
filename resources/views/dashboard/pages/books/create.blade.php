@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label for="subjectSelect">{{ __('Subject') }}</label>
                                 <select type="text" class="form-control" name="subject_id" id="subjectSelect">
-                                    <option disabled selected>{{ __('Select University First') }}</option>
+                                    <option disabled selected>{{ __('Select College First') }}</option>
                                 </select>
                                 @error('subject_id')
                                     <div class="text-danger">{{ $message }}</div>
@@ -349,7 +349,8 @@
                     collegeId: collegeId
                 },
                 success: function(data) {
-                    $('#subjectselect').html(data);
+                    console.log(data);
+                    $('#subjectSelect').html(data);
                 }
             });
         });

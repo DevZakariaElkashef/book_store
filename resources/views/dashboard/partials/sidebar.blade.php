@@ -134,6 +134,14 @@
             </a>
         </li>
 
+
+        <li class="menu-item {{ isActiveRoute('subjects.index') }}">
+            <a href="{{ route('subjects.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-book"></i>
+                <div data-i18n="Subjects">Subjects</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ isActiveRoute('books.index') }}">
             <a href="{{ route('books.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-bookshelf"></i>

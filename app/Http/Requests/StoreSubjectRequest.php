@@ -22,8 +22,11 @@ class StoreSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'college_id' => 'required|exists:colleges,id',
+            'university_id' => 'required|exists:universities,id',
             'name_ar' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
+            'is_active' => 'required|in:0,1'
         ];
     }
 }

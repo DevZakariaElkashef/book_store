@@ -22,7 +22,7 @@ class StoreBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'college_id' => 'required|exists:colleges,id',
+            'subject_id' => 'required|exists:subjects,id',
             'name_ar' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
             'author_ar' => 'required|string|max:255',

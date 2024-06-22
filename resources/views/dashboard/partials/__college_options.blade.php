@@ -1,3 +1,4 @@
+<option disabled selected>{{ __('Choose College') }}</option>
 @forelse ($colleges as $college)
     <option value="{{ $college->id }}" @if (isset($oldCollege) && $oldCollege == $college->id) selected @endif>{{ $college->name }}</option>
 @empty

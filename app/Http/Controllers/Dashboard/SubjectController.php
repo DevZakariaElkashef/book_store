@@ -28,8 +28,18 @@ class SubjectController extends Controller
             $subjectsQuery->whereDate('created_at', '<', $request->to);
         }
 
+        if ($request->filled('college_id')) {
+            $subjectsQuery->whereHas('college', function ($college) use ($request) {
+                $college->where("id", $request->college_id);
+            });
+        }
+
         if ($request->filled('university_id')) {
-            $subjectsQuery->where('university_id', $request->university_id);
+            $subjectsQuery->whereHas('college', function ($college) use ($request) {
+                $college->whereHas('university', function ($university) use ($request) {
+                    $university->where("id", $request->university_id);
+                });
+            });
         }
 
         $subjects = $subjectsQuery->paginate(10);
@@ -56,8 +66,8 @@ class SubjectController extends Controller
 
     public function getSubjectsByCollegeId(Request $request)
     {
-        $subjects = Subject::active()->where('university_id', $request->univirsityId)->get();
-        $oldSubject = $request->subjectId;
+        $subjects = Subject::where('is_active', 1)->where('college_id', $request->collegeId)->get();
+        $oldSubject = $request->collegeId;
 
 
         return view('dashboard.partials.__subject_options', compact('subjects', 'oldSubject'))->render();
@@ -69,9 +79,17 @@ class SubjectController extends Controller
         $query = Subject::query();
 
         if ($request->has('val')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name_ar', 'like', '%' . $request->val . '%')
-                    ->orWhere('name_en', 'like', '%' . $request->val . '%');
+            $searchTerm = '%' . $request->val . '%';
+
+            $query->where(function ($q) use ($searchTerm) {
+                $q->whereHas('college', function ($college) use ($searchTerm) {
+                    $college->whereHas('university', function ($university) use ($searchTerm) {
+                        $university->where('name_ar', 'like', $searchTerm)
+                            ->orWhere('name_en', 'like', $searchTerm);
+                    })->orWhere('name_ar', 'like', $searchTerm)
+                        ->orWhere('name_en', 'like', $searchTerm);
+                })->orWhere('name_ar', 'like', $searchTerm)
+                    ->orWhere('name_en', 'like', $searchTerm);
             });
         }
 
@@ -101,7 +119,6 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-
         Subject::create($request->all());
 
         // retun with toaster message
@@ -182,7 +199,7 @@ class SubjectController extends Controller
         $ids = explode(',', $request->ids);
         Subject::whereIn('id', $ids)->delete();
         $message = [
-           'status' => true,
+            'status' => true,
             'content' => __('deleted successfully')
         ];
         return back()->with('message', $message);
