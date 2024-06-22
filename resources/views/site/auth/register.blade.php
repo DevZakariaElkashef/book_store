@@ -1,4 +1,4 @@
-@extends('site.auth.layout')
+@extends('site.layout.app')
 
 @section('title')
     {{ __('Register Page') }}

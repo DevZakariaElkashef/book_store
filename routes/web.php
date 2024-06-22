@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Site\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Site\AuthController;
+use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('site.logout');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('site.home');
+Route::get('/', [HomeController::class, 'index'])->name('site.home');
+
+
+
+// contact
+Route::post('contact-us', [ContactController::class, 'index'])->name('site.contacts.index');
+Route::post('contact-us-stote', [ContactController::class, 'store'])->name('site.contacts.store');

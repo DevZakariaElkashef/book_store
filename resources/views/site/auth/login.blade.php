@@ -1,10 +1,11 @@
-@extends('site.auth.layout')
+@extends('site.layout.app')
 
 @section('title')
     {{ __('Login Page') }}
 @endsection
 
 @section('content')
+
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
