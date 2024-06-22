@@ -66,6 +66,9 @@
                                 <label for="collegeSelect">{{ __('College') }}</label>
                                 <select type="text" class="form-control" name="college_id" id="collegeSelect">
                                     <option disabled selected>{{ __('Select University First') }}</option>
+                                    @if(old('college_id'))
+                                        <option selected value="{{ old('college_id') }}">{{ \App\Models\College::find(old('college_id'))->name }}</option>
+                                    @endif
                                 </select>
                                 @error('college_id')
                                     <div class="text-danger">{{ $message }}</div>

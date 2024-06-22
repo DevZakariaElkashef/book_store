@@ -66,6 +66,10 @@
                                 <label for="collegeSelect">{{ __('College') }}</label>
                                 <select type="text" class="form-control" name="college_id" id="collegeSelect">
                                     <option disabled selected>{{ __('Select University First') }}</option>
+                                    @if (old('college_id'))
+                                        <option selected value="{{ old('college_id') }}">
+                                            {{ \App\Models\College::find(old('college_id'))->name }}</option>
+                                    @endif
                                 </select>
                                 @error('college_id')
                                     <div class="text-danger">{{ $message }}</div>
@@ -79,6 +83,10 @@
                                 <label for="subjectSelect">{{ __('Subject') }}</label>
                                 <select type="text" class="form-control" name="subject_id" id="subjectSelect">
                                     <option disabled selected>{{ __('Select College First') }}</option>
+                                    @if (old('subject_id'))
+                                        <option selected value="{{ old('subject_id') }}">
+                                            {{ \App\Models\Subject::find(old('subject_id'))->name }}</option>
+                                    @endif
                                 </select>
                                 @error('subject_id')
                                     <div class="text-danger">{{ $message }}</div>
