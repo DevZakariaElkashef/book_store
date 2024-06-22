@@ -35,7 +35,7 @@ class StoreBookRequest extends FormRequest
             'description_en' => 'required|string|max:60000',
             'is_active' => 'required|boolean',
             'is_new' => 'required|boolean',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:20480',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:20480',
         ];
     }
 }

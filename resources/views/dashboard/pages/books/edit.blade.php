@@ -44,6 +44,7 @@
             <div class="card-body">
                 <form action="{{ route('books.update', $book->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-6 mb-2">
                             <div class="form-group">
@@ -51,7 +52,7 @@
                                 <select type="text" class="form-control" name="university_id" id="univirsitySelect">
                                     @foreach ($universities as $university)
                                         <option value="{{ $university->id }}"
-                                            @if (old('university_id') == $university->id || $book->college->university_id == $university->id) selected @endif> {{ $university->name }}
+                                            @if (old('university_id') == $university->id || $book->subject->college->university_id == $university->id) selected @endif> {{ $university->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -66,8 +67,29 @@
                                 <label for="collegeSelect">{{ __('College') }}</label>
                                 <select type="text" class="form-control" name="college_id" id="collegeSelect">
                                     <option disabled selected>{{ __('Select University First') }}</option>
+                                    @foreach ($book->subject->college->university->colleges->where('is_active', 1) as $college)
+                                        <option value="{{ $college->id }}"
+                                            @if ($book->subject->college_id == $college->id) selected @endif>{{ $college->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('college_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="subjectSelect">{{ __('Subject') }}</label>
+                                <select type="text" class="form-control" name="subject_id" id="subjectSelect">
+                                    <option disabled selected>{{ __('Select College First') }}</option>
+                                    @foreach ($book->subject->college->subjects->where('is_active', 1) as $subject)
+                                        <option value="{{ $subject->id }}"
+                                            @if ($book->subject_id == $subject->id) selected @endif>{{ $subject->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('subject_id')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -174,7 +196,8 @@
                             <div class="form-group">
                                 <label for="offerStartDateInput">{{ __('Offer Start At') }}</label>
                                 <input type="date" class="form-control" name="offer_start_at"
-                                    id="offerStartDateInput" value="{{ old('offer_start_at') ?? $book->offer_start_at }}">
+                                    id="offerStartDateInput"
+                                    value="{{ old('offer_start_at') ?? $book->offer_start_at }}">
                                 @error('offer_start_at')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -254,7 +277,7 @@
 
 
                         <div class="preview-images" id="previewImages">
-                            @foreach($book->images as $image)
+                            @foreach ($book->images as $image)
                                 <img src="{{ asset($image->path) }}" alt="">
                                 <a href="#" class="text-danger" onclick="">Delete</a>
                             @endforeach
@@ -318,19 +341,19 @@
 
 
     <script>
-        $(document).ready(function() {
-            $.ajax({
-                url: "{{ route('colleges.getColleges') }}",
-                type: "GET",
-                data: {
-                    univirsityId: '{{ $book->college->university_id }}',
-                    collegeId: '{{ $book->college_id }}',
-                },
-                success: function(data) {
-                    $('#collegeSelect').html(data);
-                }
-            });
-        });
+        // $(document).ready(function() {
+        //     $.ajax({
+        //         url: "{{ route('colleges.getColleges') }}",
+        //         type: "GET",
+        //         data: {
+        //             univirsityId: '{{ $book->subject->college->university_id }}',
+        //             collegeId: '{{ $book->college_id }}',
+        //         },
+        //         success: function(data) {
+        //             $('#collegeSelect').html(data);
+        //         }
+        //     });
+        // });
 
 
         $(document).on('change', '#univirsitySelect', function() {
@@ -343,6 +366,21 @@
                 },
                 success: function(data) {
                     $('#collegeSelect').html(data);
+                }
+            });
+        });
+
+        $(document).on('change', '#collegeSelect', function() {
+            var collegeId = $(this).val();
+            $.ajax({
+                url: "{{ route('subjects.getSubjects') }}",
+                type: "GET",
+                data: {
+                    collegeId: collegeId
+                },
+                success: function(data) {
+                    console.log(data);
+                    $('#subjectSelect').html(data);
                 }
             });
         });
