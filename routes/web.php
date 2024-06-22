@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Site\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::get('login', [AuthController::class, 'loginPage'])->name('site.login_page');
+Route::get('register', [AuthController::class, 'registerPage'])->name('site.register_page');
+Route::post('login-store', [AuthController::class, 'login'])->name('site.login');
+Route::post('register-store', [AuthController::class, 'register'])->name('site.register');
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('logout', [AuthController::class, 'logout'])->name('site.logout');
+});
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('site.home');
