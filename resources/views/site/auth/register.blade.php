@@ -1,7 +1,7 @@
 @extends('site.auth.layout')
 
 @section('title')
-    {{ __('Login Page') }}
+    {{ __('Register Page') }}
 @endsection
 
 @section('content')
@@ -103,7 +103,8 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="dont-hava-account">
-                                            <a href=""><span>بالفعل لدي حساب</span>تسجيل الدخول</a>
+                                            <a href="{{ route('site.login_page') }}"><span>بالفعل لدي حساب</span>تسجيل
+                                                الدخول</a>
                                         </div>
                                     </div>
                                 </div>
