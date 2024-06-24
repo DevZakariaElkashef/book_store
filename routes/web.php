@@ -1,9 +1,14 @@
 <?php
 
+use App\Models\College;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\AuthController;
+use App\Http\Controllers\Site\BookController;
+use App\Http\Controllers\Site\CartController;
+use App\Http\Controllers\Site\CollegeController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\ContactController;
+use App\Http\Controllers\Site\UniversityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +30,18 @@ Route::post('register-store', [AuthController::class, 'register'])->name('site.r
 
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['authenticated'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('site.logout');
+
+    Route::post('add-to-cart', [CartController::class, 'store'])->name('carts.store');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('site.home');
+Route::get('books', [BookController::class, 'index'])->name('site.books.index');
+Route::get('offers', [BookController::class, 'offers'])->name('site.books.offers');
+Route::get('universities', [UniversityController::class, 'index'])->name('site.universites.index');
+Route::get('universities/{id}/colleges/', [UniversityController::class,'show'])->name('site.universites.show');
+Route::get("colleges/{id}/books", [CollegeController::class, 'show'])->name('site.colleges.show');
 
 
 

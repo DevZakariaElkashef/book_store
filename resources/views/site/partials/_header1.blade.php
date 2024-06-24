@@ -45,7 +45,7 @@
                             <ul class="list-unstyled d-flex align-items-center">
                                 <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
                                 <li><a href="">من نحن </a></li>
-                                <li><a href="">الجامعات</a></li>
+                                <li><a href="{{ route('site.universites.index') }}">الجامعات</a></li>
                                 <li><a href="">الكتب المستعملة </a></li>
                                 <li><a href="">العروض والخصومات</a></li>
                                 <li><a href="">اتصل بنا</a></li>

@@ -71,4 +71,36 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+
+    public function getOrCreateCart()
+    {
+        $cart = $this->cart()->first();
+
+        if (!$cart) {
+            $cart = $this->cart()->create([
+                'user_id' => $this->id,
+                'type' => 0,
+            ]);
+        }
+
+        return $cart;
+    }
+
+
+    public function addItemToCart(Book $book)
+    {
+        $cart = $this->getOrCreateCart();
+        $item = $cart->items()->where('book_id', $book->id)->first();
+
+        if (!$item) {
+            $cart->items()->create([
+                "book_id" => $book->id,
+                "qty" => 1
+            ]);
+            return __("Book added to cart successfully");
+        } else {
+            $item->increment('qty');
+            return __("Book's quantity increased successfully");
+        }
+    }
 }

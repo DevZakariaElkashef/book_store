@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cart_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('book_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('qty')->default(1);
             $table->timestamps();
             $table->boolean('is_active')->default(1);
             $table->softDeletes();

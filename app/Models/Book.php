@@ -15,7 +15,7 @@ class Book extends Model
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
-    */
+     */
     protected $guarded = [
         'id',
         'created_at',
@@ -37,6 +37,16 @@ class Book extends Model
     {
         return $this->attributes['author_' . app()->getLocale()];
     }
+
+    public function scopeOffers($query)
+    {
+        $query->whereNotNull('offer')
+            ->whereNotNull('offer_start_at')
+            ->whereNotNull('offer_end_at')
+            ->whereDate('offer_start_at', '<=', now())  // Changed >= to <=
+            ->whereDate('offer_end_at', '>=', now());   // Changed <= to >=
+    }
+
 
     public function subject()
     {

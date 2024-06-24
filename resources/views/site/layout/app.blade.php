@@ -63,8 +63,8 @@
 
     @if (session('message'))
     <div id="notification" class="p-3 rounded text-light"
-        style="width: 300px; position: fixed; top: 20px; right: 20px; z-index: 1000; @if (session('message')['status']) background: #037720; @else background: #be0808; @endif">
-        {{ session('message')['content'] }}sdfsd
+        style="position: fixed; top: 20px; right: 20px; z-index: 1000; @if (session('message')['status']) background: #037720; @else background: #be0808; @endif">
+        {{ session('message')['content'] }}
     </div>
     @endif
 
@@ -158,6 +158,8 @@
             notification.style.display = 'none';
         }, 5000); // Adjust the time as per your requirement
     </script>
+
+    @yield('js')
 </body>
 
 </html>
