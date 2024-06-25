@@ -12,9 +12,9 @@
             </div>
             <div class="container-fluid pd-50">
                 <div class="breadcrumb_content">
-                    <h5>كلاس بوك</h5>
+                    <h5>{{ $app->name }}</h5>
                     <p class="col-lg-6 mx-auto">
-                        “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+                        {{ $app->short_description }}
                     </p>
                 </div>
                 <div class="search_wrapper">
@@ -76,7 +76,7 @@
                             <p>
                                 “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
                             </p>
-                            <a href="">
+                            <a href="{{ route("site.universites.index") }}">
                                 تسوق الان
                             </a>
                         </div>
@@ -88,11 +88,11 @@
                             <img src="site/assets/images/type-2.svg" alt="">
                         </div>
                         <div class="card-body">
-                            <h5>الجامعات</h5>
+                            <h5>{{ __("used books") }}</h5>
                             <p>
                                 “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
                             </p>
-                            <a href="">
+                            <a href="{{ route("site.usedbooks.index") }}">
                                 تسوق الان
                             </a>
                         </div>

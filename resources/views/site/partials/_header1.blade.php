@@ -6,21 +6,39 @@
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div class="top_header_contact">
                             <ul class="list-unstyled d-flex align-items-center justify-content-start">
-                                <li><a href="mailto:salasleldwagn@gmail.com"><i
-                                            class="fas fa-envelope"></i><span>salasleldwagn@gmail.com</span></a>
+                                <li><a href="mailto:{{ $app->email }}"><i
+                                            class="fas fa-envelope"></i><span>{{ $app->email }}</span></a>
                                 </li>
-                                <li><a href="tel:96605777216"><i class="fas fa-phone-alt"></i><span>966
-                                            05777216</span></a></li>
+                                <li><a href="tel:{{ $app->phone }}"><i class="fas fa-phone-alt"></i><span>{{ $app->phone }}</span></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div class="top_header_social">
                             <ul class="list-unstyled d-flex align-items-center justify-content-end">
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                                <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                                @if ($app && $app->facebook)
+                                    <li>
+                                        <a href="{{ $app->facebook }}" target="_blank"><i
+                                                class="fab fa-facebook-f"></i></a>
+                                    </li>
+                                @endif
+                                @if ($app && $app->instagram)
+                                    <li>
+                                        <a href="{{ $app->instagram }}" target="_blank"><i
+                                                class="fab fa-instagram"></i></a>
+                                    </li>
+                                @endif
+                                @if ($app && $app->twitter)
+                                    <li>
+                                        <a href="{{ $app->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                                    </li>
+                                @endif
+                                @if ($app && $app->google)
+                                    <li>
+                                        <a href="{{ $app->google }}" target="_blank"><i
+                                                class="fab fa-google-plus-g"></i></a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -38,8 +56,8 @@
                         <a class="menu" href="#menu">
                             <i class="fas fa-bars"></i>
                         </a>
-                        <a href="./index.html" class="logo">
-                            <img src="site/assets/images/logo.svg" alt="">
+                        <a href="{{ route("site.home") }}" class="logo">
+                            <img src="{{ asset('site/assets/images/logo.svg') }}" alt="">
                         </a>
                         <div class="links">
                             <ul class="list-unstyled d-flex align-items-center">
@@ -48,7 +66,7 @@
                                 <li><a href="{{ route('site.universites.index') }}">الجامعات</a></li>
                                 <li><a href="{{ route('site.usedbooks.index') }}">الكتب المستعملة </a></li>
                                 <li><a href="{{ route('site.books.offers') }}">العروض والخصومات</a></li>
-                                <li><a href="">اتصل بنا</a></li>
+                                <li><a href="{{ route('site.contacts.index') }}">اتصل بنا</a></li>
                             </ul>
                         </div>
                     </div>
@@ -56,9 +74,8 @@
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <div class="options">
                         <ul class="list-unstyled d-flex align-items-center justify-content-end">
-                            <li><a href=""><img src="site/assets/images/comment.svg" alt=""></a>
-                            </li>
-                            <li><a href=""><img src="site/assets/images/bill.svg" alt=""></a></li>
+
+                            <li><a href="{{ route("site.notifications.index") }}"><img src="site/assets/images/bill.svg" alt=""></a></li>
                             <li>
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -78,7 +95,8 @@
                                         @else
                                             <li><a class="dropdown-item" href="{{ route('site.login_page') }}">تسجيل
                                                     الدخول</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('site.register_page') }}">انشاء حساب
+                                            <li><a class="dropdown-item" href="{{ route('site.register_page') }}">انشاء
+                                                    حساب
                                                     جديد</a></li>
                                         @endauth
                                     </ul>

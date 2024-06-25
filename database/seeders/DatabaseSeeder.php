@@ -37,7 +37,8 @@ class DatabaseSeeder extends Seeder
             OrderItemSeeder::class,
             ContactTypeSeeder::class,
             ContactSeeder::class,
-            PageSeeder::class
+            PageSeeder::class,
+            SettingSeeder::class
         ]);
     }
 }

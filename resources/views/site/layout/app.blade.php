@@ -62,10 +62,10 @@
 
 
     @if (session('message'))
-    <div id="notification" class="p-3 rounded text-light"
-        style="position: fixed; top: 20px; right: 20px; z-index: 1000; @if (session('message')['status']) background: #037720; @else background: #be0808; @endif">
-        {{ session('message')['content'] }}
-    </div>
+        <div id="notification" class="p-3 rounded text-light"
+            style="position: fixed; top: 20px; right: 20px; z-index: 1000; @if (session('message')['status']) background: #037720; @else background: #be0808; @endif">
+            {{ session('message')['content'] }}
+        </div>
     @endif
 
 
@@ -78,13 +78,12 @@
                 <div class="col-sm-12 col-md-12 col-lg-5">
                     <div class="footer_logo_content">
                         <div class="footer_logo">
-                            <img src="site/assets/images/logo.svg" alt="">
+                            <img style="max-width: 100px;"
+                                src="{{ $app && $app->logo ? asset($app->logo) : asset('site/assets/images/logo.svg') }}"
+                                alt="">
                         </div>
                         <div class="footer_conten">
-                            <p>“لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
-                                أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
-                                أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
-                            </p>
+                            {{ $app && $app->slogan ? $app->slogan : '' }}
                         </div>
                     </div>
                 </div>
@@ -92,9 +91,10 @@
                     <div class="footer_links">
                         <h5>لينكات سريعة</h5>
                         <ul class="list-unstyled mb-0">
-                            <li><a href="">الرئيسية</a></li>
-                            <li><a href="">الأقسام الرئيسية</a></li>
-                            <li><a href="">اتصل بنا</a></li>
+                            <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
+                            <li><a href="{{ route('site.aboutus.index') }}">من نحن </a></li>
+                            <li><a href="{{ route('site.universites.index') }}">الجامعات</a></li>
+                            <li><a href="{{ route('site.usedbooks.index') }}">الكتب المستعملة </a></li>
                         </ul>
                     </div>
                 </div>
@@ -102,9 +102,8 @@
                     <div class="footer_links">
                         <h5>الدعم</h5>
                         <ul class="list-unstyled mb-0">
-                            <li><a href="">الشروط و الاحكام</a></li>
-                            <li><a href="">الاسئلة الشائعة</a></li>
-                            <li><a href="">عن الموقع</a></li>
+                            <li><a href="{{ route('site.terms.index') }}">الشروط و الاحكام</a></li>
+                            <li><a href="{{ route('site.contacts.index') }}">اتصل بنا </a></li>
                         </ul>
                     </div>
                 </div>
@@ -112,19 +111,29 @@
                     <div class="footer_follow">
                         <h5 class="text-center">تابعنا عبر وسائل التواصل الاجتماعي</h5>
                         <ul class="list-unstyled d-flex align-items-center text-center justify-content-center">
-                            <li>
-                                <a href="" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="" target="_blank"><i class="fab fa-google-plus-g"></i></a>
-                            </li>
-
+                            @if ($app && $app->facebook)
+                                <li>
+                                    <a href="{{ $app->facebook }}" target="_blank"><i
+                                            class="fab fa-facebook-f"></i></a>
+                                </li>
+                            @endif
+                            @if ($app && $app->instagram)
+                                <li>
+                                    <a href="{{ $app->instagram }}" target="_blank"><i
+                                            class="fab fa-instagram"></i></a>
+                                </li>
+                            @endif
+                            @if ($app && $app->twitter)
+                                <li>
+                                    <a href="{{ $app->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                                </li>
+                            @endif
+                            @if ($app && $app->google)
+                                <li>
+                                    <a href="{{ $app->google }}" target="_blank"><i
+                                            class="fab fa-google-plus-g"></i></a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

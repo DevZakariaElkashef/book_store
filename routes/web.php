@@ -6,11 +6,13 @@ use App\Http\Controllers\Site\AuthController;
 use App\Http\Controllers\Site\BookController;
 use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\TermController;
 use App\Http\Controllers\Site\AboutController;
 use App\Http\Controllers\Site\CollegeController;
 use App\Http\Controllers\Site\ContactController;
-use App\Http\Controllers\Site\UniversityController;
 use App\Http\Controllers\Site\UsedBookController;
+use App\Http\Controllers\Site\UniversityController;
+use App\Http\Controllers\Site\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,7 @@ Route::middleware(['authenticated'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('site.logout');
 
     Route::post('add-to-cart', [CartController::class, 'store'])->name('carts.store');
+    Route::get('notifications', [NotificationController::class, 'index'])->name('site.notifications.index');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('site.home');
@@ -52,3 +55,6 @@ Route::get("colleges/{id}/books", [CollegeController::class, 'show'])->name('sit
 // contact
 Route::get('contact-us', [ContactController::class, 'index'])->name('site.contacts.index');
 Route::post('contact-us-stote', [ContactController::class, 'store'])->name('site.contacts.store');
+
+Route::get('term-and-conditions', [TermController::class, 'index'])->name('site.terms.index');
+

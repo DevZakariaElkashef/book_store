@@ -17,6 +17,7 @@ use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\ContactTypeController;
 use App\Http\Controllers\Dashboard\NotificationController;
+use App\Http\Controllers\Dashboard\SettingController;
 
 // auth
 Route::get('login', [AuthController::class, 'loginPage'])->name('dashboard.login_page');
@@ -143,7 +144,8 @@ Route::middleware('admin_auth')->group(function () {
 
 
     // settings
-    Route::resource('settings', SliderController::class);
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::Post('settings-udpate', [SettingController::class, 'update'])->name('settings.update');
 
 
     // notifications

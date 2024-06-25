@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Exceptions\FallbackHandler;
+use App\Models\Setting;
 use App\Observers\RoleNotifyObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -26,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
 
         Role::observe(RoleNotifyObserver::class);
+
+        view()->share('app', Setting::first());
     }
 }
