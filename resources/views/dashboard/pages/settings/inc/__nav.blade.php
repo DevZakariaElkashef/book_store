@@ -11,6 +11,9 @@
             <li class="nav-item">
                 <a href="{{ route('pages.index') }}" class="nav-link {{ isActiveRoute('pages.index') }}">Pages</a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('aboutus.index') }}" class="nav-link {{ isActiveRoute('aboutus.index') }}">About US</a>
+            </li>
         </ul>
     </div>
 </div>

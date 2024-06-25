@@ -38,6 +38,11 @@ class Book extends Model
         return $this->attributes['author_' . app()->getLocale()];
     }
 
+    public function scopeUsed($query)
+    {
+        return $query->where('is_new', 0);
+    }
+
     public function scopeOffers($query)
     {
         $query->whereNotNull('offer')

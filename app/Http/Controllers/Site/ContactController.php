@@ -6,11 +6,14 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\ContactRequest;
+use App\Models\ContactType;
 
 class ContactController extends Controller
 {
     public function index()
     {
+        $contactTypes = ContactType::active()->get();
+        return view('site.contactus.index', compact('contactTypes'));
     }
 
 
@@ -22,7 +25,7 @@ class ContactController extends Controller
             'status' => true,
             'content' => __("message sent success")
         ]);
-        
+
         return redirect()->back();
     }
 }

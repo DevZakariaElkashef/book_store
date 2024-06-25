@@ -19,13 +19,5 @@ class PageSeeder extends Seeder
             'value_ar' => 'الشروط والأحكام',
             'value_en' => 'Terms and Conditions',
         ]);
-        
-        
-        Page::create([
-            'key_ar' => 'نبذه عنا',
-            'key_en' => 'About US',
-            'value_ar' => 'نبذه عنا',
-            'value_en' => 'About US',
-        ]);
     }
 }

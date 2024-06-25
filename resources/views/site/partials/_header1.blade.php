@@ -44,10 +44,10 @@
                         <div class="links">
                             <ul class="list-unstyled d-flex align-items-center">
                                 <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
-                                <li><a href="">من نحن </a></li>
+                                <li><a href="{{ route('site.aboutus.index') }}">من نحن </a></li>
                                 <li><a href="{{ route('site.universites.index') }}">الجامعات</a></li>
-                                <li><a href="">الكتب المستعملة </a></li>
-                                <li><a href="">العروض والخصومات</a></li>
+                                <li><a href="{{ route('site.usedbooks.index') }}">الكتب المستعملة </a></li>
+                                <li><a href="{{ route('site.books.offers') }}">العروض والخصومات</a></li>
                                 <li><a href="">اتصل بنا</a></li>
                             </ul>
                         </div>
@@ -76,14 +76,24 @@
 
                                             </form>
                                         @else
-                                            <li><a class="dropdown-item" href="{{ route('site.login_page') }}">تسجيل الدخول</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('site.register_page') }}">انشاء حساب جديد</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('site.login_page') }}">تسجيل
+                                                    الدخول</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('site.register_page') }}">انشاء حساب
+                                                    جديد</a></li>
                                         @endauth
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href=""><span class="number">9</span><img src="site/assets/images/cart.svg"
-                                        alt=""></a></li>
+                            <li>
+                                <a href="">
+                                    @if (auth()->check() && auth()->user()->cart)
+                                        <span class="number">
+                                            {{ auth()->user()->cart->items->count() }}
+                                        </span>
+                                    @endif
+                                    <img src="site/assets/images/cart.svg" alt="">
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

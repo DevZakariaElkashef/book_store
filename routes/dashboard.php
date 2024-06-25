@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\SliderController;
+use App\Http\Controllers\Dashboard\AboutusController;
 use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\SubjectController;
@@ -120,6 +121,15 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('contacts-export', [ContactController::class, 'export'])->name('contacts.export');
     Route::delete('contacts-delete', [ContactController::class, 'delete'])->name('contacts.delete');
     Route::resource('contacts', ContactController::class);
+
+
+
+    // aboutus
+    Route::get('/aboutus/pagination', [AboutusController::class, 'pagination'])->name('aboutus.pagination');
+    Route::get('aboutus-search', [AboutusController::class, 'search'])->name('aboutus.search');
+    Route::get('aboutus-export', [AboutusController::class, 'export'])->name('aboutus.export');
+    Route::delete('aboutus-delete', [AboutusController::class, 'delete'])->name('aboutus.delete');
+    Route::resource('aboutus', AboutusController::class);
 
 
 

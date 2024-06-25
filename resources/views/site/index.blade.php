@@ -472,7 +472,7 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-5">
                     <div class="contact_img text-center mt-4">
-                        <img src="site/assets/images/contact-img.png" alt="">
+                        <img src="{{ asset('site/assets/images/contact-img.png') }}" alt="">
                     </div>
                 </div>
             </div>
