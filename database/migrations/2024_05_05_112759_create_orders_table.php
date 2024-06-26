@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
             $table->foreignId('coupon_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
-            $table->foreignId('user_address_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
             $table->foreignId('order_status_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
             $table->string('shipping')->nullable();
             $table->string('sub_total')->nullable();

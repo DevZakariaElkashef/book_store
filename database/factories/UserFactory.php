@@ -31,7 +31,9 @@ class UserFactory extends Factory
             'password' => 'password',
             'remember_token' => Str::random(10),
             'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
-            'is_active' => rand(0, 1)
+            'is_active' => rand(0, 1),
+            'address' => fake()->address(),
+            'city_id' => rand(1, 100)
         ];
     }
 

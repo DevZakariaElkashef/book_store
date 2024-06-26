@@ -76,7 +76,7 @@
                             <p>
                                 “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
                             </p>
-                            <a href="{{ route("site.universites.index") }}">
+                            <a href="{{ route('site.universites.index') }}">
                                 تسوق الان
                             </a>
                         </div>
@@ -88,11 +88,11 @@
                             <img src="site/assets/images/type-2.svg" alt="">
                         </div>
                         <div class="card-body">
-                            <h5>{{ __("used books") }}</h5>
+                            <h5>{{ __('used books') }}</h5>
                             <p>
                                 “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
                             </p>
-                            <a href="{{ route("site.usedbooks.index") }}">
+                            <a href="{{ route('site.usedbooks.index') }}">
                                 تسوق الان
                             </a>
                         </div>
@@ -111,7 +111,7 @@
                         <img src="site/assets/images/book2.svg" alt="">
                         <h5 class="ms-2 mt-1">أحدث المنتجات</h5>
                     </div>
-                    <a href="{{ route("site.books.index", ['sort' => 'latest']) }}">مشاهدة المزيد</a>
+                    <a href="{{ route('site.books.index', ['sort' => 'latest']) }}">مشاهدة المزيد</a>
                 </div>
                 <div class="row">
                     @foreach ($latestBooks as $book)
@@ -119,8 +119,9 @@
                             <div class="product_card d-flex align-items-start">
                                 <div class="card-img">
                                     <div class="like active_like">
-                                        <i class="fas fa-heart"></i>
-                                        <i class="far fa-heart"></i>
+                                        <a href="{{ route('site.favourite.toggle', ['book_id' => $book->id]) }}">
+                                            <i class="fas fa-heart"></i>
+                                        </a>
                                     </div>
                                     <div class="img-parent">
                                         <img src="{{ asset($book->image) }}" alt="">
@@ -345,7 +346,7 @@
                         <img src="site/assets/images/book2.svg" alt="">
                         <h5 class="ms-2 mt-1">العروض</h5>
                     </div>
-                    <a href="{{ route("site.books.offers") }}">مشاهدة المزيد</a>
+                    <a href="{{ route('site.books.offers') }}">مشاهدة المزيد</a>
                 </div>
                 <div class="row">
                     @foreach ($offerBooks as $book)

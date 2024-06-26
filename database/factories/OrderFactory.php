@@ -19,7 +19,6 @@ class OrderFactory extends Factory
         return [
             'user_id' => rand(1, 100),
             'coupon_id' => rand(1, 100),
-            'user_address_id'=> rand(1, 100),
             'shipping' => rand(100, 1000),
             'sub_total' => rand(1000, 2000),
             'total' => rand(900, 2000),

@@ -61,11 +61,6 @@ class User extends Authenticatable
         return $this->hasOne(Cart::class)->where('type', 1);
     }
 
-    public function addresses()
-    {
-        return $this->hasMany(UserAddress::class);
-    }
-
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
@@ -84,6 +79,37 @@ class User extends Authenticatable
         }
 
         return $cart;
+    }
+
+    public function getOrCreateFavourite()
+    {
+        $favourite = $this->favourite()->first();
+
+        if (!$favourite) {
+            $favourite = $this->favourite()->create([
+                'user_id' => $this->id,
+                'type' => 1,
+            ]);
+        }
+
+        return $favourite;
+    }
+
+
+    public function addItemToFavourite(Book $book)
+    {
+        $favourite = $this->getOrCreateFavourite();
+        $item = $favourite->items()->where('book_id', $book->id)->first();
+
+        if (!$item) {
+            $favourite->items()->create([
+                "book_id" => $book->id,
+            ]);
+            return __("Book added to favourite successfully");
+        } else {
+            $item->delete();
+            return __("Book removed from favourite successfully");
+        }
     }
 
 

@@ -84,7 +84,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         @auth
-                                            <li><a class="dropdown-item" href="#">حسابي</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('site.profile.index') }}">حسابي</a></li>
                                             <li><a class="dropdown-item" href="#"
                                                     onclick="$('#logoutForm').submit()">تسجيل الخروج</a></li>
                                             <form id="logoutForm" class="d-none" action="{{ route('site.logout') }}"

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\City;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,16 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $city = City::factory()->create();
 
         \App\Models\User::factory()->create([
             'name' => 'Zakaria Elkashef',
             'email' => 'z@z.com',
+            'city_id' => $city->id,
         ]);
 
-        \App\Models\User::factory(100)->create();
+
 
 
         $this->call([
+            CitySeeder::class,
+            UserSeeder::class,
             PermissionSeeder::class,
             UniversitySeeder::class,
             CollegeSeeder::class,
@@ -29,8 +35,6 @@ class DatabaseSeeder extends Seeder
             BookSeeder::class,
             CouponSeeder::class,
             CartSeeder::class,
-            CitySeeder::class,
-            UserAddressSeeder::class,
             BookReviewSeeder::class,
             OrderStatusSeeder::class,
             OrderSeeder::class,

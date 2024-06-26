@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('otp')->nullable();
             $table->string('device_token')->nullable();
             $table->string('avatar')->nullable();
+            $table->text('address')->nullable();
+            $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
             $table->boolean('is_active')->default(1);
