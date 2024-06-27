@@ -56,5 +56,9 @@ class SliderSeeder extends Seeder
         Slider::factory()->create([
             'key' => 'offers-section',
         ]);
+
+        Slider::factory()->create([
+            'key' => 'otp-section',
+        ]);
     }
 }

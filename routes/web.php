@@ -38,6 +38,8 @@ Route::middleware('lang')->group(function () {
     Route::post('register-store', [AuthController::class, 'register'])->name('site.register');
     Route::get('forget-password', [AuthController::class, 'forgetPassword'])->name('site.forget_password');
     Route::post('send-code', [AuthController::class, 'sendCode'])->name('site.send_code');
+    Route::get('check-code', [AuthController::class, 'checkCode'])->name('site.check_code.index');
+    Route::post('confirm-code', [AuthController::class, 'confirmCode'])->name('site.check_code.store');
 
 
     Route::middleware(['authenticated'])->group(function () {

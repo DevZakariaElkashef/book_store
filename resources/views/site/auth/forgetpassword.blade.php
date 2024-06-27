@@ -24,7 +24,8 @@
                             <img src="{{ asset('site/assets/images/login-1.png') }}" alt="">
                         </div>
                         <div class="box-form p-0">
-                            <form action="{{ route('site.send_code') }}" class="p-0">
+                            <form action="{{ route('site.send_code') }}" class="p-0" method="POST">
+                                @csrf
 
                                 <div class="row">
                                     <div class="col-lg-12">
