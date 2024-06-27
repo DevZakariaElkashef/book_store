@@ -90,14 +90,12 @@ class AuthController extends Controller
 
     public function confirmCode(ConfirmCodeRequest $request)
     {
-        // check if otp for email 
+        // check if otp for email
     }
 
     public function logout(Request $request)
     {
-        $user = $request->user();
-
-        Auth::logout($user);
+        Auth::logout();
 
         return to_route("site.home");
     }
