@@ -37,7 +37,7 @@ class PermissionSeeder extends Seeder
         foreach ($permissoins as $permisson) {
             foreach ($actions as $action) {
                 $name = $permisson . '.' . $action;
-                $item = \Spatie\Permission\Models\Permission::create(['name' => $name]);
+                $item = Permission::create(['name' => $name]);
             }
         }
 
