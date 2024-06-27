@@ -5,7 +5,7 @@
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
                 <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
-                <li><a href="{{ route("site.forget_password") }}">{{ __("Forget Passwrod") }}</a></li>
+                <li><a href="{{ route('site.forget_password') }}">{{ __('Forget Passwrod') }}</a></li>
             </ul>
         </div>
     </div>
@@ -24,8 +24,8 @@
                             <img src="{{ asset('site/assets/images/login-1.png') }}" alt="">
                         </div>
                         <div class="box-form p-0">
-                            <form action="{{ route("site.send_code") }}" class="p-0">
-                                
+                            <form action="{{ route('site.send_code') }}" class="p-0">
+
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group w-100 mb-5">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-sm-12 col-lg-6 p-0 login-strip_container">
                     <div class="login-strip">
-                        <img src="./assets/images/login-img.png" alt="">
+                        <img src="{{ asset($forgetPasswordImg) }}" alt="">
                     </div>
                 </div>
             </div>

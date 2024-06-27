@@ -57,7 +57,7 @@
                             <i class="fas fa-bars"></i>
                         </a>
                         <a href="{{ route("site.home") }}" class="logo">
-                            <img src="{{ asset('site/assets/images/logo.svg') }}" alt="">
+                            <img style="max-width: 70px;" src="{{ $app && $app->logo ? asset($app->logo) : asset('site/assets/images/logo.svg') }}" alt="">
                         </a>
                         <div class="links">
                             <ul class="list-unstyled d-flex align-items-center">

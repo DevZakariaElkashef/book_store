@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-sm-12 col-lg-6 p-0 login-strip_container">
                     <div class="login-strip">
-                        <img src="site/assets/images/login-img.png" alt="">
+                        <img src="{{ $loginImg }}" alt="">
                     </div>
                 </div>
             </div>

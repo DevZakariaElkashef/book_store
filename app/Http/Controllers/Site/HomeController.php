@@ -8,6 +8,7 @@ use App\Models\ContactType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Slider;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,9 @@ class HomeController extends Controller
 
         $strLimit = 30;
 
-        return view("site.index", compact("contactTypes", "latestBooks", "offerBooks", "strLimit"));
+        $heroImg = Slider::where("key", 'home-hero')->first()->image;
+        $contactUsImg = Slider::where("key", 'contact_us-section')->first()->image;
+
+        return view("site.index", compact("contactTypes", "latestBooks", "offerBooks", "strLimit", 'heroImg', 'contactUsImg'));
     }
 }

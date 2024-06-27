@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\ContactRequest;
 use App\Models\ContactType;
+use App\Models\Slider;
 
 class ContactController extends Controller
 {
     public function index()
     {
         $contactTypes = ContactType::active()->get();
-        return view('site.contactus.index', compact('contactTypes'));
+        $heroImg = Slider::where("key", 'contact_us-section')->first()->image;
+        return view('site.contactus.index', compact('contactTypes', 'heroImg'));
     }
 
 

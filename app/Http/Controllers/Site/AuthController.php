@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\User;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +14,14 @@ class AuthController extends Controller
 {
     public function loginPage()
     {
-        return view('site.auth.login');
+         $loginImg = Slider::where('key', 'login-section')->first()->image;
+        return view('site.auth.login', compact('loginImg'));
     }
 
     public function registerPage()
     {
-        return view('site.auth.register');
+        $registerImg = Slider::where('key', 'register-section')->first()->image;
+        return view('site.auth.register', compact('registerImg'));
     }
 
     public function login(LoginRequest $request)
@@ -33,7 +36,8 @@ class AuthController extends Controller
 
     public function forgetPassword()
     {
-        return view('site.auth.forgetpassword');
+        $forgetPasswordImg = Slider::where('key', 'forget_password-section')->first()->image;
+        return view('site.auth.forgetpassword', compact('forgetPasswordImg'));
     }
 
     public function register(RegisterRequest $request)

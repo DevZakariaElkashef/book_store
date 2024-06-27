@@ -89,7 +89,10 @@
                                         <div class="mt-3 w-100">
                                             <input type="checkbox" name="term" id="approvecondition" class="text-black"
                                                 placeholder="***114">
-                                            <label for="approvecondition" class="text-black"> قبول الشروط و الاحاكم
+                                            <label for="approvecondition" class="text-black">
+                                                <a href="{{ route('site.terms.index') }}">
+                                                    قبول الشروط و الاحاكم
+                                                </a>
                                             </label>
                                         </div>
                                         @error('term')
@@ -114,7 +117,7 @@
                 </div>
                 <div class="col-sm-12 col-lg-6 p-0 login-strip_container">
                     <div class="login-strip">
-                        <img src="{{ asset('site/assets/images/signup-img.png') }}" alt="">
+                        <img src="{{ asset($registerImg) }}" alt="">
                     </div>
                 </div>
             </div>

@@ -4,13 +4,13 @@
     <div class="bredcrumb_inner_page">
         <div class="card-img">
             <div class="img-parent">
-                <img src="{{ asset('site/assets/images/bredcrumb.png') }}" alt="">
+                <img src="{{ asset($heroImg) }}" alt="">
             </div>
             <div class="container-fluid pd-50">
                 <div class="breadcrumb_content">
                     <h5>الجامعات</h5>
                     <p class="col-lg-6 mx-auto">
-                        “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+                        {{ $app->short_description }}
                     </p>
                 </div>
             </div>

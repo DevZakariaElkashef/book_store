@@ -6,6 +6,7 @@ use App\Models\University;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\College;
+use App\Models\Slider;
 
 class UniversityController extends Controller
 {
@@ -13,7 +14,9 @@ class UniversityController extends Controller
     {
         $universities = University::active()->latest()->get();
 
-        return view("site.universites.index", compact("universities"));
+        $heroImg = Slider::where("key", 'universities-section')->first()->image;
+
+        return view("site.universites.index", compact("universities", "heroImg"));
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\Book;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,6 +32,8 @@ class BookController extends Controller
 
         $strLimit = 30;
 
-        return view("site.books.offers", compact("books", "strLimit"));
+        $heroImg = Slider::where('key', 'offers-section')->first()->image;
+
+        return view("site.books.offers", compact("books", "strLimit", 'heroImg'));
     }
 }

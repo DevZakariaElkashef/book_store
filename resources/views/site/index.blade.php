@@ -8,7 +8,7 @@
     <div class="bredcrumb_inner_page home_bredcrumb_inner_page">
         <div class="card-img">
             <div class="img-parent">
-                <img src="site/assets/images/bredcrumb.png" alt="">
+                <img src="{{ asset($heroImg) }}" alt="">
             </div>
             <div class="container-fluid pd-50">
                 <div class="breadcrumb_content">
@@ -391,14 +391,16 @@
     @endif
 
 
-    <div class="contact_us home_contact_us" style="background-image: url(site/assets/images/contact-bg.png);">
+    <div class="contact_us home_contact_us"
+        style="background-image: url({{ asset('site/assets/images/contact-bg.png') }});">
         <div class="container-fluid pd-50">
             <div class="row align-items-center">
                 <div class="col-sm-12 col-md-12 col-lg-7">
                     <div class="contact_us_conent">
                         <h5 class="head">اتصل بنا</h5>
-                        <p class="col-lg-6">“لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو
-                            أيوسمود تيمبور</p>
+                        <p class="col-lg-6">
+                            {{ $app->short_description }}
+                        </p>
                         <div class="contact_icons">
                             <ul class="list-unstyled d-flex">
                                 <li>
@@ -406,7 +408,7 @@
                                         <div class="wrp">
                                             <i class="fas fa-phone-alt"></i>
                                         </div>
-                                        <span href="">+962796660000</span>
+                                        <span href="">{{ $app->phone }}</span>
                                     </a>
                                 </li>
                                 <li>
@@ -414,7 +416,7 @@
                                         <div class="wrp">
                                             <i class="fas fa-envelope"></i>
                                         </div>
-                                        <span href="">QUEENRZ@info.com</span>
+                                        <span href="">{{ $app->email }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -478,7 +480,7 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-5">
                     <div class="contact_img text-center mt-4">
-                        <img src="{{ asset('site/assets/images/contact-img.png') }}" alt="">
+                        <img src="{{ asset($contactUsImg) }}" alt="">
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ use App\Models\Subject;
 use App\Models\University;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Slider;
 
 class UsedBookController extends Controller
 {
@@ -19,11 +20,11 @@ class UsedBookController extends Controller
         $colleges = College::active()->get();
         $subjects = Subject::active()->latest()->get();
 
-
+        $heroImg = Slider::where('key', 'used_books-section')->first()->image;
 
         $strLimit = 30;
 
 
-        return view('site.books.used', compact('books', 'universities', 'strLimit', 'colleges', 'subjects'));
+        return view('site.books.used', compact('books', 'universities', 'strLimit', 'colleges', 'subjects', 'heroImg'));
     }
 }
