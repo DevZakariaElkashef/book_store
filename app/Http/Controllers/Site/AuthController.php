@@ -17,7 +17,7 @@ class AuthController extends Controller
 {
     public function loginPage()
     {
-         $loginImg = Slider::where('key', 'login-section')->first()->image;
+        $loginImg = Slider::where('key', 'login-section')->first()->image;
         return view('site.auth.login', compact('loginImg'));
     }
 
@@ -91,6 +91,19 @@ class AuthController extends Controller
     public function confirmCode(ConfirmCodeRequest $request)
     {
         // check if otp for email
+        $user = User::where("email", $request->email)->firstOrFail();
+        if ($user->otp != implode('', $request->otp)) {
+            session()->flash("message", [
+                'status' => true,
+                'content' => __("Wrong Otp")
+            ]);
+
+            return redirect()->back();
+        }
+
+
+
+        return view('site.auth.new_password');
     }
 
     public function logout(Request $request)

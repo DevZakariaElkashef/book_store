@@ -40,6 +40,7 @@ Route::middleware('lang')->group(function () {
     Route::post('send-code', [AuthController::class, 'sendCode'])->name('site.send_code');
     Route::get('check-code', [AuthController::class, 'checkCode'])->name('site.check_code.index');
     Route::post('confirm-code', [AuthController::class, 'confirmCode'])->name('site.check_code.store');
+    Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('site.password.reset');
 
 
     Route::middleware(['authenticated'])->group(function () {
