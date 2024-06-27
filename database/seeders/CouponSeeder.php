@@ -13,6 +13,6 @@ class CouponSeeder extends Seeder
      */
     public function run(): void
     {
-        Coupon::factory(100)->create();
+        Coupon::factory(20)->create();
     }
 }

@@ -36,6 +36,8 @@ Route::middleware('lang')->group(function () {
     Route::get('register', [AuthController::class, 'registerPage'])->name('site.register_page');
     Route::post('login-store', [AuthController::class, 'login'])->name('site.login');
     Route::post('register-store', [AuthController::class, 'register'])->name('site.register');
+    Route::get('forget-password', [AuthController::class, 'forgetPassword'])->name('site.forget_password');
+    Route::post('send-code', [AuthController::class, 'sendCode'])->name('site.send_code');
 
 
     Route::middleware(['authenticated'])->group(function () {
@@ -51,7 +53,8 @@ Route::middleware('lang')->group(function () {
         Route::get('notifications', [NotificationController::class, 'index'])->name('site.notifications.index');
 
 
-        Route::get("add-to-favourte", [FavouriteController::class, 'toggle'])->name('site.favourite.toggle');
+        Route::get("favourites", [FavouriteController::class, 'index'])->name('site.favourite.index');
+        Route::get("add-to-favourite", [FavouriteController::class, 'toggle'])->name('site.favourite.toggle');
     });
 
     Route::get('/', [HomeController::class, 'index'])->name('site.home');

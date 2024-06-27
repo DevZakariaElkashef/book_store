@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
@@ -52,5 +53,22 @@ function uploadeImage($file, $path, $oldPath = null)
 
     $file->move(public_path($directory), $filename);
 
-    return $directory . '/'. $filename;
+    return $directory . '/' . $filename;
+}
+
+
+
+
+function hasFavourite($user, int $bookId): bool
+{
+    if ($user) {
+        // Retrieve or create the user's favourite list
+        $favouriteList = $user->getOrCreateFavourite();
+
+        // Check if the book is in the user's favourite list
+        $bookExists = $favouriteList->items()->where('book_id', $bookId)->exists();
+        return $bookExists;
+    }
+
+    return false;
 }

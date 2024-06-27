@@ -17,8 +17,8 @@ class BookReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => rand(1, 100),
-            'book_id' => rand(1, 100),
+            'user_id' => rand(1, 20),
+            'book_id' => rand(1, 20),
             'star' => rand(1, 5),
             'comment' => fake()->sentence()
         ];

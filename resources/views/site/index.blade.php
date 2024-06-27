@@ -119,8 +119,13 @@
                             <div class="product_card d-flex align-items-start">
                                 <div class="card-img">
                                     <div class="like active_like">
+
                                         <a href="{{ route('site.favourite.toggle', ['book_id' => $book->id]) }}">
-                                            <i class="fas fa-heart"></i>
+                                            @if (hasFavourite(auth()->user(), $book->id))
+                                                <i class="fa-solid fa-heart"></i>
+                                            @else
+                                                <i class="fa-regular fa-heart"></i>
+                                            @endif
                                         </a>
                                     </div>
                                     <div class="img-parent">

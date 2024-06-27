@@ -33,7 +33,8 @@ class UserFactory extends Factory
             'created_at' => fake()->dateTimeBetween('-3 months', 'now'),
             'is_active' => rand(0, 1),
             'address' => fake()->address(),
-            'city_id' => rand(1, 100)
+            'city_id' => rand(1, 20),
+            'avatar' => str_replace('public/', '', fake()->image('public/uploads/Users'))
         ];
     }
 

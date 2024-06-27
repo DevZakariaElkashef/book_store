@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="forget-password">
-                                            <a href="">نسيت الرقم السري ؟</a>
+                                            <a href="{{ route("site.forget_password") }}">نسيت الرقم السري ؟</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">

@@ -19,7 +19,7 @@ class SubjectFactory extends Factory
         return [
             'name_ar' => fake()->word(),
             'name_en' => fake()->word(),
-            'college_id' => rand(1, 100)
+            'college_id' => rand(1, 20)
         ];
     }
 }

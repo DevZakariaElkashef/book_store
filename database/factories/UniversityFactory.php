@@ -23,7 +23,8 @@ class UniversityFactory extends Factory
             'description_ar' => fake()->sentence(),
             'description_en' => fake()->sentence(),
             'created_at' => Carbon::parse(fake()->dateTimeBetween('-3 months', 'now'))->format('Y-m-d H:i:s'),
-            'is_active' => rand(0, 1)
+            'is_active' => rand(0, 1),
+            'image' => str_replace('public', '', fake()->image('public/uploads/Universities')),
         ];
     }
 }

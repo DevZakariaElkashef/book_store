@@ -30,6 +30,12 @@ class AuthController extends Controller
         return to_route('site.home');
     }
 
+
+    public function forgetPassword()
+    {
+        return view('site.auth.forgetpassword');
+    }
+
     public function register(RegisterRequest $request)
     {
         $data = $request->except('avatar');
@@ -43,6 +49,11 @@ class AuthController extends Controller
         Auth::login($user);
 
         return to_route("site.home");
+    }
+
+    public function sendCode(Request $request)
+    {
+
     }
 
     public function logout(Request $request)

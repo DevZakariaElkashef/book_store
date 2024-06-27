@@ -19,6 +19,12 @@ class FavouriteController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+
+        $favourites = $user->getOrCreateFavourite();
+
+        $strLimit = 30;
+
+        return view("site.profile.favourites", compact('user', 'favourites', 'strLimit'));
     }
 
 

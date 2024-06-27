@@ -6,7 +6,7 @@
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
                 <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
-                <li><a href="{{ route("site.books.index") }}">{{ __('Books') }}</a></li>
+                <li><a href="{{ route('site.books.index') }}">{{ __('Books') }}</a></li>
             </ul>
         </div>
     </div>
@@ -46,8 +46,12 @@
                                             @csrf
                                             <input type="hidden" name="book_id" value="{{ $book->id }}">
                                         </form>
-                                        <a href="">
-                                            <i class="far fa-eye"> </i>
+                                        <a href="{{ route('site.favourite.toggle', ['book_id' => $book->id]) }}">
+                                            @if (hasFavourite(auth()->user(), $book->id))
+                                            <i class="fa-solid fa-heart"></i>
+                                        @else
+                                            <i class="fa-regular fa-heart"></i>
+                                        @endif
                                         </a>
 
                                     </div>

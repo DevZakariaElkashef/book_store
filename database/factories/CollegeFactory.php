@@ -18,13 +18,14 @@ class CollegeFactory extends Factory
     public function definition(): array
     {
         return [
-            'university_id' => rand(1, 100),
+            'university_id' => rand(1, 20),
             'name_ar' => fake()->word(),
             'name_en' => fake()->word(),
             'description_ar' => fake()->sentence(),
             'description_en' => fake()->sentence(),
             'created_at' => Carbon::parse(fake()->dateTimeBetween('-3 months', 'now'))->format('Y-m-d H:i:s'),
-            'is_active' => rand(0, 1)
+            'is_active' => rand(0, 1),
+            'image' => str_replace('public', '', fake()->image('public/uploads/Colleges')),
         ];
     }
 }

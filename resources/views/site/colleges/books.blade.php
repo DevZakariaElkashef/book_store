@@ -23,8 +23,12 @@
                             <span>إضافة للسلة</span>
                         </a>
 
-                        <a href="">
-                            <i class="far fa-eye"> </i>
+                        <a href="{{ route('site.favourite.toggle', ['book_id' => $book->id]) }}">
+                            @if (hasFavourite(auth()->user(), $book->id))
+                                <i class="fa-solid fa-heart"></i>
+                            @else
+                                <i class="fa-regular fa-heart"></i>
+                            @endif
                         </a>
                     </div>
                 </div>

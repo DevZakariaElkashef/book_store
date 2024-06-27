@@ -42,7 +42,9 @@ class DatabaseSeeder extends Seeder
             ContactTypeSeeder::class,
             ContactSeeder::class,
             PageSeeder::class,
-            SettingSeeder::class
+            SettingSeeder::class,
+            AboutUsSeeder::class,
+            SliderSeeder::class
         ]);
     }
 }

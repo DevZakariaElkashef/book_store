@@ -17,8 +17,8 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => rand(1, 100),
-            'coupon_id' => rand(1, 100),
+            'user_id' => rand(1, 20),
+            'coupon_id' => rand(1, 20),
             'shipping' => rand(100, 1000),
             'sub_total' => rand(1000, 2000),
             'total' => rand(900, 2000),

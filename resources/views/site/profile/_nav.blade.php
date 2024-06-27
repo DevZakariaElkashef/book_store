@@ -12,13 +12,16 @@
             </div>
         </div>
         <ul class="side-list list-unstyled">
-            <li><a class="{{ isActiveRoute('site.profile.index') }}" href="{{ route('site.profile.index') }}"><i
-                        class="fas fa-user-circle"></i><span>البروفايل الشخصي</span></a>
+            <li>
+                <a class="{{ isActiveRoute('site.profile.index') }}" href="{{ route('site.profile.index') }}">
+                    <i class="fas fa-user-circle"></i>
+                    <span>البروفايل الشخصي</span>
+                </a>
             </li>
-            </li>
-            <li><a href=""><i class="fas fas fa-shopping-cart"></i><span>قائمة الشراء
-                        لاحقا</span></a></li>
-            <li><a class="{{ isActiveRoute('site.settings.index') }}" href="{{ route("site.settings.index") }}"><i class="fas fas fa-cog"></i><span>الاعدادات</span></a>
+            <li><a class="{{ isActiveRoute('site.favourite.index') }}" href="{{ route('site.favourite.index') }}"><i
+                        class="fas fas fa-shopping-cart"></i><span>{{ __('Favourites') }}</span></a></li>
+            <li><a class="{{ isActiveRoute('site.settings.index') }}" href="{{ route('site.settings.index') }}"><i
+                        class="fas fas fa-cog"></i><span>الاعدادات</span></a>
             </li>
         </ul>
     </div>
