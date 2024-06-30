@@ -17,22 +17,6 @@ class SliderController extends Controller
     }
 
 
-    public function store(StoreSliderRequest $request)
-    {
-        $data = $request->except('image');
-        $data['image'] = uploadeImage($request->image, "Sliders");
-
-
-        Slider::create($data);
-
-        // retun with toaster message
-        $message = [
-            'status' => true,
-            'content' => __('created successfully')
-        ];
-
-        return to_route('sliders.index')->with('message', $message);
-    }
 
 
     public function update(StoreSliderRequest $request, $id)

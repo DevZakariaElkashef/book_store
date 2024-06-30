@@ -16,6 +16,7 @@ use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\ContactTypeController;
+use App\Http\Controllers\Dashboard\HeaderImageController;
 use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\SettingController;
 
@@ -133,7 +134,6 @@ Route::middleware('admin_auth')->group(function () {
     Route::resource('aboutus', AboutusController::class);
 
 
-
     // sliders
     Route::delete('sliders-delete', [SliderController::class, 'delete'])->name('sliders.delete');
     Route::resource('sliders', SliderController::class);
@@ -152,7 +152,4 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('notifications-search', [NotificationController::class, 'search'])->name('notifications.search');
     Route::delete('notifications-delete', [NotificationController::class, 'delete'])->name('notifications.delete');
     Route::resource('notifications', NotificationController::class);
-
-
-
 });

@@ -21,13 +21,4 @@ class Slider extends Model
         'updated_at',
     ];
 
-    public function getTitleAttribute()
-    {
-        return $this->attributes['title_' . app()->getLocale()];
-    }
-
-    public function getContentAttribute()
-    {
-        return $this->attributes['content_' . app()->getLocale()];
-    }
 }

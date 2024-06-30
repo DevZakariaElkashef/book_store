@@ -195,7 +195,7 @@
 
                 <li class="menu-item {{ isActiveRoute('sliders.index') }}">
                     <a href="{{ route('sliders.index') }}" class="menu-link">
-                        <div data-i18n="Sliders">Sliders</div>
+                        <div data-i18n="Header Images">Header Images</div>
                     </a>
                 </li>
 
