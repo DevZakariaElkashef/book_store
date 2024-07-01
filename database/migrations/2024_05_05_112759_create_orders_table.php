@@ -22,6 +22,10 @@ return new class extends Migration
             $table->integer('payment_method')->nullable()->comment('0 => online payment method, 1 => bank transfer method');
             $table->integer('payment_status')->nullable()->comment('0 => pending, 1 => paid, 2 => failed, 3 => Refunded');
             $table->string('transaction_id')->nullable();
+            $table->string('transaction_image')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->boolean('is_active')->default(1);
             $table->softDeletes();

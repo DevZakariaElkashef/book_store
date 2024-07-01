@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->text('slogan_ar')->nullable();
             $table->text('slogan_en')->nullable();
+
+            
             $table->timestamps();
             $table->softDeletes();
         });

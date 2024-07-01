@@ -11,9 +11,11 @@ use App\Http\Controllers\Site\TermController;
 use App\Http\Controllers\Site\AboutController;
 use App\Http\Controllers\Site\CollegeController;
 use App\Http\Controllers\Site\ContactController;
+use App\Http\Controllers\Site\CouponController;
 use App\Http\Controllers\Site\UsedBookController;
 use App\Http\Controllers\Site\UniversityController;
 use App\Http\Controllers\Site\NotificationController;
+use App\Http\Controllers\Site\OrderController;
 use App\Http\Controllers\Site\ProfileController;
 
 /*
@@ -54,7 +56,15 @@ Route::middleware('lang')->group(function () {
 
         Route::get('cart', [CartController::class, 'index'])->name('carts.index');
         Route::post('add-to-cart', [CartController::class, 'store'])->name('carts.store');
+        Route::post('remove-from-cart/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
         Route::get('notifications', [NotificationController::class, 'index'])->name('site.notifications.index');
+
+
+        Route::post('check-coupon', [CouponController::class, 'check'])->name('coupons.check');
+        Route::get('checkout', [OrderController::class, 'index'])->name('orders.checkout');
+        Route::post('pay-order', [OrderController::class, 'store'])->name('orders.store');
+        Route::get("success-order", [OrderController::class, 'success'])->name('order.success');
+        Route::get("error-order", [OrderController::class, 'error'])->name('order.error');
 
 
         Route::get("favourites", [FavouriteController::class, 'index'])->name('site.favourite.index');

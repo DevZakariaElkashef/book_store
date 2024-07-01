@@ -21,6 +21,7 @@
         integrity="sha512-nNatP1G6CEh43irXY/GN4cDcLRX/R0jAYAV/ulFZcotSXcuIQE5Do4TuDOYNAD2SCIpmIbaYSllyjTysSCkpEw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('site/assets/css/style.css') }}">
+    @yield('css')
     <title>@yield('title')</title>
 </head>
 

@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
             PageSeeder::class,
             SettingSeeder::class,
             AboutUsSeeder::class,
-            SliderSeeder::class
+            SliderSeeder::class,
+            BankSeeder::class,
         ]);
     }
 }

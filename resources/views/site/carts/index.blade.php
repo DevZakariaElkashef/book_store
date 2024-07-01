@@ -1,5 +1,9 @@
 @extends('site.layout.app')
 
+@php
+    $totalCart = optional(auth()->user()->cart)->totalCart(auth()->id());
+@endphp
+
 @section('content')
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
@@ -17,11 +21,16 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <div class="cart_page_info">
-
                         @foreach ($cart->items as $item)
                             <div class="product_card_wide d-flex">
                                 <div class="add_to_card">
-                                    <img src="{{ asset('site/assets/images/delete.svg') }}" alt="">
+                                    <a href="#" onclick="$('#deleteItemForm{{ $item->id }}').submit()">
+                                        <img src="{{ asset('site/assets/images/delete.svg') }}" alt="">
+                                    </a>
+                                    <form id="deleteItemForm{{ $item->id }}" class="d-none"
+                                        action="{{ route('carts.destroy', $item->id) }}" method="POST">
+                                        @csrf
+                                    </form>
                                 </div>
                                 <div class="card-img">
                                     <div class="img-parent">
@@ -29,27 +38,32 @@
                                     </div>
                                 </div>
                                 <div class="card_body">
-                                    <h5>{{ $book->name }}</h5>
-                                    @if(in)
-                                    <span class="price">100 ر.س</span> <span class="discount">120 ر.س</span>
+                                    <h5>{{ $item->book->name }}</h5>
+                                    @if (in_array($item->book_id, \App\Models\Book::offers()->pluck('id')->toArray()))
+                                        <span class="price">100 ر.س</span> <span class="discount">120 ر.س</span>
+                                    @else
+                                        <span class="price">{{ $item->book->price }} ر.س</span>
+                                    @endif
                                     <div class="buy_basket">
-                                        <form>
+                                        <form id="cartForm{{ $item->book_id }}" action="{{ route('carts.store') }}"
+                                            method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $item->book_id }}">
                                             <div class="form-group">
-                                                <span class="numbutton input-number-increment"
-                                                    data-bind="click: increment">+</span>
-                                                <input type="number" class="form-control numinput" id="num1"
-                                                    value="1" min="0">
-                                                <span class="numbutton input-number-decrement"
-                                                    data-bind="click: decrement">-</span>
+                                                <span class="custom-increment" style="cursor: pointer;"
+                                                    data-id="{{ $item->book_id }}">+</span>
+                                                <input type="number" class="form-control numinput"
+                                                    id="num{{ $item->book_id }}" value="{{ $item->qty }}"
+                                                    min="0" name="count">
+                                                <span class="custom-decrement" style="cursor: pointer;"
+                                                    data-id="{{ $item->book_id }}">-</span>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-
                             <hr>
                         @endforeach
-
                     </div>
 
                 </div>
@@ -58,44 +72,78 @@
                         <div class="card_header">
                             <h5>سلة المشتريات</h5>
                         </div>
+                        <form action="{{ route('coupons.check') }}" method="post">
+                            @csrf
+                            <div class="row justify-content-center">
+                                <div class="col-md-8 ">
+                                    <input type="text" class="coupon form-control ms-2" name="code">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary">Add Coupon</button>
+                                </div>
+                            </div>
+                        </form>
                         <div class="card_info">
                             <ul class="list-unstyled">
 
                                 <li>
                                     <span> عدد المنتجات</span>
                                     <div class="price d-flex align-items-center">
-                                        <span>3</span>
+                                        <span>
+                                            @if (auth()->user() && auth()->user()->cart && auth()->user()->cart->items->count())
+                                                {{ auth()->user()->cart->items->count() }}
+                                            @else
+                                                0
+                                            @endif
+                                        </span>
                                     </div>
                                 </li>
 
                                 <li>
                                     <span> تكلفة المنتجات</span>
                                     <div class="price d-flex align-items-center">
-                                        <span>800 000 ر.س</span>
+                                        <span>{{ $totalCart }}
+
+                                            ر.س</span>
                                     </div>
                                 </li>
 
 
-                                <li class="discount">
-                                    <span> الخصم</span>
-                                    <div class="price d-flex align-items-center">
-                                        <span>800 000 ر.س</span>
-                                    </div>
-                                </li>
+
+                                @if ($cart->coupon)
+                                    <li class="discount">
+                                        <span> الخصم</span>
+                                        <div class="price d-flex align-items-center">
+                                            <span>
+                                                {{ $totalCart * ($cart->coupon->discount / 100) }} ر.س
+                                            </span>
+                                        </div>
+                                    </li>
+                                @endif
+
 
 
                                 <li>
                                     <span> التكلفة الاجمالية</span>
                                     <div class="price d-flex align-items-center">
-                                        <span>800 000 ر.س</span>
+                                        <span>
+                                            @if ($cart->coupon)
+                                                {{ $totalCart - $totalCart * ($cart->coupon->discount / 100) }}
+                                            @else
+                                                {{ $totalCart }}
+                                            @endif
+                                            ر.س
+                                        </span>
                                     </div>
                                 </li>
 
                             </ul>
 
+                            @if($cart->items->count())
                             <div class="byu_btn">
-                                <a href="">إتمام الطلب</a>
+                                <a href="{{ route("orders.checkout") }}">إتمام الطلب</a>
                             </div>
+                            @endif
                         </div>
                     </div>
 
@@ -103,4 +151,30 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.custom-increment').forEach(function(incrementButton) {
+                incrementButton.addEventListener('click', function() {
+                    let bookId = this.getAttribute('data-id');
+                    let inputField = document.getElementById(`num${bookId}`);
+                    inputField.value = parseInt(inputField.value) + 1;
+                    document.getElementById(`cartForm${bookId}`).submit();
+                });
+            });
+
+            document.querySelectorAll('.custom-decrement').forEach(function(decrementButton) {
+                decrementButton.addEventListener('click', function() {
+                    let bookId = this.getAttribute('data-id');
+                    let inputField = document.getElementById(`num${bookId}`);
+                    if (parseInt(inputField.value) > 0) {
+                        inputField.value = parseInt(inputField.value) - 1;
+                        document.getElementById(`cartForm${bookId}`).submit();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

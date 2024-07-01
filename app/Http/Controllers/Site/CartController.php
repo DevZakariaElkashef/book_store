@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\StoreCartRequest;
 use App\Models\Cart;
+use App\Models\CartItem;
 use App\Services\CartService;
 
 class CartController extends Controller
@@ -22,7 +23,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $cart = $request->user()->getOrCreateCart();
-        
+
         return view('site.carts.index', compact('cart'));
     }
 
@@ -36,6 +37,20 @@ class CartController extends Controller
         session()->flash("message", [
             'status' => true,
             'content' => $message
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function destroy($item)
+    {
+        $item = CartItem::findOrFail($item);
+
+        $item->delete();
+
+        session()->flash("message", [
+            'status' => true,
+            'content' => __("deleted successfully")
         ]);
 
         return redirect()->back();

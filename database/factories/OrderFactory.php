@@ -26,6 +26,7 @@ class OrderFactory extends Factory
             'payment_status' => rand(0, 3),
             'order_status_id' => rand(1, 5),
             'transaction_id' => rand(111111, 555555),
+            'note' => fake()->sentence()
         ];
     }
 }

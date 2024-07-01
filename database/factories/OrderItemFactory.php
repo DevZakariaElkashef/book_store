@@ -19,7 +19,7 @@ class OrderItemFactory extends Factory
         return [
             'order_id' => rand(1, 20),
             'book_id' => rand(1, 20),
-            'tax' => rand(100, 500)
+            'qty' => rand(100, 500)
         ];
     }
 }
