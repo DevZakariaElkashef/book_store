@@ -137,13 +137,11 @@
                                     <p>{{ Str::limit($book->description, $strLimit) }}</p>
                                     <span class="price">{{ $book->price }} <span> {{ __('SAR') }}</span></span>
                                     <div class="options">
-                                        <a href="#" onclick="$('#addToCartForm{{ $book->id }}').submit()"
-                                            class="d-inline-flex align-items-center">
-                                            <form id="addToCartForm{{ $book->id }}" class="d-none"
-                                                action="{{ route('carts.store') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="book_id" value="{{ $book->id }}">
-                                            </form>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modaAddAdress"
+                                            data-id="{{ $book->id }}" data-count="{{ bookCartCount($book->id) }}"
+                                            data-image="{{ asset($book->image) }}"
+                                            class="d-inline-flex align-items-center add-to-cart-btn">
+
                                             <i class="fa-solid fa-cart-shopping"></i>
                                             <span>إضافة للسلة</span>
                                         </a>
@@ -375,7 +373,7 @@
                                             <i class="fa-solid fa-cart-shopping"></i>
                                             <span>إضافة للسلة</span>
                                         </a>
-                                        <a href="">
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#modaAddAdress">
                                             <i class="far fa-eye"> </i>
                                         </a>
                                     </div>
@@ -486,4 +484,72 @@
             </div>
         </div>
     </div>
+
+
+    <div class="adress_modal">
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade moda_map" id="modaAddAdress" tabindex="-1" aria-labelledby="modaAddAdressLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+
+                        <div class="close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+
+                        <div class="section_header text-center">
+                            <h5>إضافة المنتج للسلة</h5>
+                        </div>
+                        <div class=" col-lg-6 mx-auto">
+                            <div class="">
+                                <form action="{{ route("carts.store") }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" class="inputId">
+                                    <div class="product_card">
+                                        <div class="card-img">
+                                            <div class="img-parent">
+                                                <img class="image-cart-modal" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="buy_basket">
+                                        <div class="form-group">
+                                            <span class="numbutton input-number-increment"
+                                                data-bind="click: increment">+</span>
+                                            <input type="number" class="form-control numinput" id="num1"
+                                                value="1" min="0" name="count">
+                                            <span class="numbutton input-number-decrement"
+                                                data-bind="click: decrement">-</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="options mt-5">
+                                        <button type="submit" class="confirm-add-to-cart">تأكيد</button>
+                                        <a href="">الغاء</a>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+
+@section('js')
+    <script>
+        $(document).on('click', '.add-to-cart-btn', function() {
+            $('.image-cart-modal').attr('src', $(this).data('image'));
+            $('.numinput').val($(this).data('count'));
+            $('.inputId').val($(this).data('id'));
+        });
+    </script>
 @endsection

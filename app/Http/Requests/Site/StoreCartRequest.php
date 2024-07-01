@@ -24,7 +24,8 @@ class StoreCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'book_id' => 'required|exists:books,id'
+            'id' => 'required|exists:books,id',
+            'count' => 'required|integer|gt:0'
         ];
     }
 

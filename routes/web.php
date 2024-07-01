@@ -52,6 +52,7 @@ Route::middleware('lang')->group(function () {
         Route::post("update-password", [ProfileController::class, 'updatePassword'])->name('site.password.update');
         Route::post("profile-update", [ProfileController::class, 'update'])->name('site.profile.update');
 
+        Route::get('cart', [CartController::class, 'index'])->name('carts.index');
         Route::post('add-to-cart', [CartController::class, 'store'])->name('carts.store');
         Route::get('notifications', [NotificationController::class, 'index'])->name('site.notifications.index');
 

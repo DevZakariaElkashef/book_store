@@ -19,16 +19,19 @@ class CartController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
+        $cart = $request->user()->getOrCreateCart();
+        
+        return view('site.carts.index', compact('cart'));
     }
 
     public function store(StoreCartRequest $request)
     {
-        $book = Book::findOrFail($request->book_id);
+        $book = Book::findOrFail($request->id);
         $user = $request->user();
 
-        $message = $this->cartService->addBookToCart($user, $book);
+        $message = $this->cartService->addBookToCart($user, $book, $request->count);
 
         session()->flash("message", [
             'status' => true,

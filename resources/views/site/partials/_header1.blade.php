@@ -103,7 +103,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{ route('carts.index') }}">
                                     @if (auth()->check() && auth()->user()->cart)
                                         <span class="number">
                                             {{ auth()->user()->cart->items->count() }}

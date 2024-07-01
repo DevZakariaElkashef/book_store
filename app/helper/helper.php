@@ -72,3 +72,23 @@ function hasFavourite($user, int $bookId): bool
 
     return false;
 }
+
+function bookCartCount(int $bookId): int
+{
+    $user = auth()->user();
+
+    if ($user) {
+        // Retrieve or create the user's favourite list
+        $favouriteList = $user->getOrCreateCart();
+
+        // Check if the book is in the user's favourite list
+        $bookExists = $favouriteList->items()->where('book_id', $bookId)->first();
+        if ($bookExists) {
+            return $bookExists->qty;
+        } else {
+            return 0;
+        }
+    }
+
+    return 0;
+}

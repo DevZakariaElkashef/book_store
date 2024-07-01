@@ -8,9 +8,9 @@ use App\Models\Book;
 
 class CartService
 {
-    public function addBookToCart(User $user, Book $book)
+    public function addBookToCart(User $user, Book $book, $count)
     {
-        $message = $user->addItemToCart($book);
+        $message = $user->addItemToCart($book, $count);
         return $message;
     }
 }

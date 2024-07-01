@@ -113,7 +113,7 @@ class User extends Authenticatable
     }
 
 
-    public function addItemToCart(Book $book)
+    public function addItemToCart(Book $book, $count)
     {
         $cart = $this->getOrCreateCart();
         $item = $cart->items()->where('book_id', $book->id)->first();
@@ -121,12 +121,12 @@ class User extends Authenticatable
         if (!$item) {
             $cart->items()->create([
                 "book_id" => $book->id,
-                "qty" => 1
+                "qty" => $count
             ]);
             return __("Book added to cart successfully");
         } else {
-            $item->increment('qty');
-            return __("Book's quantity increased successfully");
+            $item->update(['qty' => $count]);
+            return __("Book's quantity updated successfully");
         }
     }
 }
