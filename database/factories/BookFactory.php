@@ -27,7 +27,7 @@ class BookFactory extends Factory
             'author_en' => fake()->name(),
             'price' => rand(100, 1000),
             'is_new' => rand(0, 1),
-            'image' => str_replace('public/', '', fake()->image('public/uploads/Books')),
+            'image' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Books')),
             'created_at' => Carbon::parse(fake()->dateTimeBetween('-3 months', 'now'))->format('Y-m-d H:i:s'),
             'is_active' => rand(0, 1)
         ];

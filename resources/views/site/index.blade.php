@@ -170,173 +170,47 @@
                 <a href="">مشاهدة المزيد</a>
             </div>
             <div class="row">
-                <div class="col-6 col-md-6 col-lg-6 col-xl-4">
-                    <div class="product_card d-flex align-items-start">
-                        <div class="card-img">
-                            <div class="like active_like">
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="img-parent">
-                                <img src="site/assets/images/book-1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="card-body ms-3">
-                            <h5>أسم الكتاب</h5>
-                            <p> دولار سيت أميت ,كونسيكتيتور أدايبا دولار سيت أميت ,كونسيكتيتور أدايبا </p>
-                            <span class="price">100 <span> ر.س</span></span>
-                            <div class="options">
-                                <a href="" class="d-inline-flex align-items-center">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span>إضافة للسلة</span>
-                                </a>
-                                <a href="">
-                                    <i class="far fa-eye"> </i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-6 col-md-6 col-lg-6 col-xl-4">
-                    <div class="product_card d-flex align-items-start">
-                        <div class="card-img">
-                            <div class="like active_like">
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="img-parent">
-                                <img src="site/assets/images/book-1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="card-body ms-3">
-                            <h5>أسم الكتاب</h5>
-                            <p> دولار سيت أميت ,كونسيكتيتور أدايبا دولار سيت أميت ,كونسيكتيتور أدايبا </p>
-                            <span class="price">100 <span> ر.س</span></span>
-                            <div class="options">
-                                <a href="" class="d-inline-flex align-items-center">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span>إضافة للسلة</span>
-                                </a>
-                                <a href="">
-                                    <i class="far fa-eye"> </i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @foreach ($mostSaledBooks as $book)
+                    <div class="col-6 col-md-6 col-lg-6 col-xl-4">
+                        <div class="product_card d-flex align-items-start">
+                            <div class="card-img">
+                                <div class="like active_like">
 
-                <div class="col-6 col-md-6 col-lg-6 col-xl-4">
-                    <div class="product_card d-flex align-items-start">
-                        <div class="card-img">
-                            <div class="like active_like">
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
+                                    <a href="{{ route('site.favourite.toggle', ['book_id' => $book->id]) }}">
+                                        @if (hasFavourite(auth()->user(), $book->id))
+                                            <i class="fa-solid fa-heart"></i>
+                                        @else
+                                            <i class="fa-regular fa-heart"></i>
+                                        @endif
+                                    </a>
+                                </div>
+                                <div class="img-parent">
+                                    <img src="{{ asset($book->image) }}" alt="">
+                                </div>
                             </div>
-                            <div class="img-parent">
-                                <img src="site/assets/images/book-1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="card-body ms-3">
-                            <h5>أسم الكتاب</h5>
-                            <p> دولار سيت أميت ,كونسيكتيتور أدايبا دولار سيت أميت ,كونسيكتيتور أدايبا </p>
-                            <span class="price">100 <span> ر.س</span></span>
-                            <div class="options">
-                                <a href="" class="d-inline-flex align-items-center">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span>إضافة للسلة</span>
-                                </a>
-                                <a href="">
-                                    <i class="far fa-eye"> </i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="card-body ms-3">
+                                <h5>{{ $book->name }}</h5>
+                                <p>{{ Str::limit($book->description, $strLimit) }}</p>
+                                <span class="price">{{ $book->price }} <span> {{ __('SAR') }}</span></span>
+                                <div class="options">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modaAddAdress"
+                                        data-id="{{ $book->id }}" data-count="{{ bookCartCount($book->id) }}"
+                                        data-image="{{ asset($book->image) }}"
+                                        class="d-inline-flex align-items-center add-to-cart-btn">
 
-                <div class="col-6 col-md-6 col-lg-6 col-xl-4">
-                    <div class="product_card d-flex align-items-start">
-                        <div class="card-img">
-                            <div class="like active_like">
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="img-parent">
-                                <img src="site/assets/images/book-1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="card-body ms-3">
-                            <h5>أسم الكتاب</h5>
-                            <p> دولار سيت أميت ,كونسيكتيتور أدايبا دولار سيت أميت ,كونسيكتيتور أدايبا </p>
-                            <span class="price">100 <span> ر.س</span></span>
-                            <div class="options">
-                                <a href="" class="d-inline-flex align-items-center">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span>إضافة للسلة</span>
-                                </a>
-                                <a href="">
-                                    <i class="far fa-eye"> </i>
-                                </a>
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                        <span>إضافة للسلة</span>
+                                    </a>
+                                    <a href="#">
+                                        <i class="far fa-eye"> </i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
-                <div class="col-6 col-md-6 col-lg-6 col-xl-4">
-                    <div class="product_card d-flex align-items-start">
-                        <div class="card-img">
-                            <div class="like active_like">
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="img-parent">
-                                <img src="site/assets/images/book-1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="card-body ms-3">
-                            <h5>أسم الكتاب</h5>
-                            <p> دولار سيت أميت ,كونسيكتيتور أدايبا دولار سيت أميت ,كونسيكتيتور أدايبا </p>
-                            <span class="price">100 <span> ر.س</span></span>
-                            <div class="options">
-                                <a href="" class="d-inline-flex align-items-center">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span>إضافة للسلة</span>
-                                </a>
-                                <a href="">
-                                    <i class="far fa-eye"> </i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-6 col-lg-6 col-xl-4">
-                    <div class="product_card d-flex align-items-start">
-                        <div class="card-img">
-                            <div class="like active_like">
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="img-parent">
-                                <img src="site/assets/images/book-1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="card-body ms-3">
-                            <h5>أسم الكتاب</h5>
-                            <p> دولار سيت أميت ,كونسيكتيتور أدايبا دولار سيت أميت ,كونسيكتيتور أدايبا </p>
-                            <span class="price">100 <span> ر.س</span></span>
-                            <div class="options">
-                                <a href="" class="d-inline-flex align-items-center">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span>إضافة للسلة</span>
-                                </a>
-                                <a href="">
-                                    <i class="far fa-eye"> </i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -504,7 +378,7 @@
                         </div>
                         <div class=" col-lg-6 mx-auto">
                             <div class="">
-                                <form action="{{ route("carts.store") }}" method="POST">
+                                <form action="{{ route('carts.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" class="inputId">
                                     <div class="product_card">

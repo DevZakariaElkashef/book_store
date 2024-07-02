@@ -50,6 +50,18 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="address">{{ __('Address') }}</label>
+                                        <input id="address" class="form-control" type="address" name="address"
+                                            value="{{ $setting->address }}">
+                                        @error('address')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label for="phone">{{ __('Phone') }}</label>
@@ -145,7 +157,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label for="logo">{{ __('Logo') }}</label>
                                         <input id="logo" class="form-control" type="file" name="logo">

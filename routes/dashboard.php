@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\BookController;
@@ -105,6 +106,15 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('cities-export', [CityController::class, 'export'])->name('cities.export');
     Route::delete('cities-delete', [CityController::class, 'delete'])->name('cities.delete');
     Route::resource('cities', CityController::class);
+
+
+
+    // orders
+    Route::get('/orders/pagination', [OrderController::class, 'pagination'])->name('orders.pagination');
+    Route::get('orders-search', [OrderController::class, 'search'])->name('orders.search');
+    Route::get('orders-export', [OrderController::class, 'export'])->name('orders.export');
+    Route::delete('orders-delete', [OrderController::class, 'delete'])->name('orders.delete');
+    Route::resource('orders', OrderController::class);
 
 
 

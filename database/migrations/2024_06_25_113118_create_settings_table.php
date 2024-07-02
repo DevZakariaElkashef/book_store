@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('short_description_en')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->text('slogan_ar')->nullable();
             $table->text('slogan_en')->nullable();
 
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

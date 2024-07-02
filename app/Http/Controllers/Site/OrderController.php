@@ -4,11 +4,14 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\City;
+use App\Models\Order;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Site\PayOrderRequest;
 use App\Services\OrderService;
 use App\Services\PaymentService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\CancleOrderRequest;
+use App\Http\Requests\Site\PayOrderRequest;
+use App\Http\Requests\Site\ReviewOrderRequest;
 
 class OrderController extends Controller
 {
@@ -54,8 +57,56 @@ class OrderController extends Controller
             return redirect()->away($paymentResponse);
         }
 
-        return redirect()->route('order.success');
+        foreach ($request->user()->cart->items as $item) {
+            $item->delete();
+        }
+
+        return redirect()->route('orders.success');
     }
+
+
+    public function callBack(Request $request)
+    {
+        $this->paymentService->getStatus($request);
+
+        foreach ($request->user()->cart->items as $item) {
+            $item->delete();
+        }
+
+        return redirect()->route('orders.success');
+    }
+
+
+    public function cancle(CancleOrderRequest $request)
+    {
+        $order = Order::findOrFail($request->order_id);
+        $user = $request->user();
+
+        if (!in_array($order->order_status_id, [1, 2, 3])) {
+            session()->flash("message", [
+                'status' => false,
+                'content' => __('you can\'t cancle the order now')
+            ]);
+
+            return redirect()->back();
+        }
+
+
+        $order->update([
+            'order_status_id' => 5,
+            'payment_status' => 3
+        ]);
+
+        $user->update(['wallet' => $user->wallet + $order->total]);
+
+        session()->flash("message", [
+            'status' => true,
+            'content' => __('order cancled success')
+        ]);
+
+        return redirect()->back();
+    }
+
 
 
     public function success()
@@ -77,4 +128,5 @@ class OrderController extends Controller
 
         return to_route('site.home');
     }
+
 }

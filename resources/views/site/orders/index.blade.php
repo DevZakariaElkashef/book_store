@@ -40,7 +40,7 @@
                         <h5>الدفع الالكتروني</h5>
                         <p>من فضلك اختر طريقة الدفع</p>
 
-                        <form action="{{ route('orders.store') }}" class="mt-5" method="POST"
+                        <form action="{{ route('site.orders.store') }}" class="mt-5" method="POST"
                             enctype="multipart/form-data">
                             @csrf
 

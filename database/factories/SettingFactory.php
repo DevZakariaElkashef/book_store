@@ -23,13 +23,14 @@ class SettingFactory extends Factory
             'short_description_en' => fake()->sentence(),
             'email' => fake()->safeEmail(),
             'phone' => fake()->phoneNumber,
+            'address' => fake()->address(),
             'facebook' => fake()->url,
             'twitter' => fake()->url(),
             'instagram' => fake()->url(),
             'google' => fake()->url(),
             'slogan_ar' => fake()->sentence(),
             'slogan_en' => fake()->sentence(),
-            'logo' => str_replace('public', '', fake()->image('public/uploads/Setting')),
+            'logo' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Setting')),
         ];
     }
 }

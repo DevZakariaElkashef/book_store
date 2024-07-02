@@ -168,6 +168,19 @@
         </li>
 
 
+        <!-- Apps & Pages -->
+        <li class="menu-header fw-medium mt-4">
+            <span class="menu-header-text">Sales</span>
+        </li>
+
+
+        <li class="menu-item {{ isActiveRoute('orders.index') }}">
+            <a href="{{ route('orders.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-cart-arrow-right"></i>
+                <div data-i18n="Orders">Orders</div>
+            </a>
+        </li>
+
 
 
         <!-- resources -->

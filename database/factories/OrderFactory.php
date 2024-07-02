@@ -19,6 +19,7 @@ class OrderFactory extends Factory
         return [
             'user_id' => rand(1, 20),
             'coupon_id' => rand(1, 20),
+            'city_id' => rand(1, 20),
             'shipping' => rand(100, 1000),
             'sub_total' => rand(1000, 2000),
             'total' => rand(900, 2000),
@@ -26,7 +27,8 @@ class OrderFactory extends Factory
             'payment_status' => rand(0, 3),
             'order_status_id' => rand(1, 5),
             'transaction_id' => rand(111111, 555555),
-            'note' => fake()->sentence()
+            'note' => fake()->sentence(),
+            'address' => fake()->address()
         ];
     }
 }

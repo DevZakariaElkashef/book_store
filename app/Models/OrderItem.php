@@ -20,4 +20,14 @@ class OrderItem extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
+
+    public function review()
+    {
+        return $this->hasOne(BookReview::class, 'order_item_id');
+    }
 }

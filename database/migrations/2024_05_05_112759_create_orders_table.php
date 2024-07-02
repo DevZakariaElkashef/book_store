@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(1000);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
             $table->foreignId('coupon_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
             $table->foreignId('order_status_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
+            $table->foreignId('city_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
             $table->string('shipping')->nullable();
             $table->string('sub_total')->nullable();
             $table->string('total')->nullable();
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->string('transaction_image')->nullable();
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
+            $table->text('address')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
             $table->boolean('is_active')->default(1);

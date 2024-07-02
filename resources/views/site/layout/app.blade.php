@@ -73,7 +73,7 @@
     @yield('content')
 
 
-    <div class="footer">
+    <div class="footer" style="background-image: url('{{ asset($footerImage) }}');">
         <div class="container-fluid pd-50">
             <div class="row align-items-center">
                 <div class="col-sm-12 col-md-12 col-lg-5">

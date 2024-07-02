@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Models\Order;
 use App\Services\FatoorahService;
 
 class PaymentService
@@ -21,8 +22,8 @@ class PaymentService
             "NotificationOption" => 'LNK',
             "InvoiceValue" => $total,
             "CustomerEmail" => $user->email,
-            "CallBackUrl" => route("order.success"),
-            "ErrorUrl" => route("order.error"),
+            "CallBackUrl" => url("order-callback"),
+            "ErrorUrl" => route("orders.error"),
             "Language" => app()->getLocale(),
             "DisplayCurrencyIso" => 'SAR',
             'CustomerReference'  => $order->id,
@@ -30,5 +31,23 @@ class PaymentService
 
         $response = $this->fatoorahService->sendPayment($data);
         return str_replace('\\', '', $response['Data']['InvoiceURL']);
+    }
+
+    public function getStatus($request)
+    {
+        $data['Key'] = $request->paymentId;
+        $data['KeyType'] = 'paymentId';
+
+        $response =  $this->fatoorahService->GetPaymentStatus($data);
+
+        if ($response['Data']['CustomerReference']) {
+            $order = Order::find($response['Data']['CustomerReference']);
+            $order->transaction_id = $response['Data']['InvoiceId'];
+            $order->payment_status = 1;
+            $order->save();
+        }
+
+
+        return true;
     }
 }

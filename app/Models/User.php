@@ -61,6 +61,12 @@ class User extends Authenticatable
         return $this->hasOne(Cart::class)->where('type', 1);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Site\FavouriteController;
+use App\Http\Controllers\Site\ReviewController;
 use App\Models\College;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\AuthController;
@@ -52,6 +53,8 @@ Route::middleware('lang')->group(function () {
         Route::get("profile-settings", [ProfileController::class, 'settings'])->name('site.settings.index');
         Route::get("edit-password", [ProfileController::class, 'editPassword'])->name('site.password.edit');
         Route::post("update-password", [ProfileController::class, 'updatePassword'])->name('site.password.update');
+        Route::get("my-orders", [ProfileController::class, 'orders'])->name('site.orders.index');
+        Route::get("my-orders/{id}", [ProfileController::class, 'showOrder'])->name('site.orders.show');
         Route::post("profile-update", [ProfileController::class, 'update'])->name('site.profile.update');
 
         Route::get('cart', [CartController::class, 'index'])->name('carts.index');
@@ -62,13 +65,18 @@ Route::middleware('lang')->group(function () {
 
         Route::post('check-coupon', [CouponController::class, 'check'])->name('coupons.check');
         Route::get('checkout', [OrderController::class, 'index'])->name('orders.checkout');
-        Route::post('pay-order', [OrderController::class, 'store'])->name('orders.store');
-        Route::get("success-order", [OrderController::class, 'success'])->name('order.success');
-        Route::get("error-order", [OrderController::class, 'error'])->name('order.error');
+        Route::post('pay-order', [OrderController::class, 'store'])->name('site.orders.store');
+        Route::get("order-callback", [OrderController::class, 'callback'])->name('orders.callback');
+        Route::get("success-order", [OrderController::class, 'success'])->name('orders.success');
+        Route::get("error-order", [OrderController::class, 'error'])->name('orders.error');
+        Route::post('cancle-orders', [OrderController::class, 'cancle'])->name('orders.cancle');
+
 
 
         Route::get("favourites", [FavouriteController::class, 'index'])->name('site.favourite.index');
         Route::get("add-to-favourite", [FavouriteController::class, 'toggle'])->name('site.favourite.toggle');
+
+        Route::post('reivew-book', [ReviewController::class, 'store'])->name('site.books.review');
     });
 
     Route::get('/', [HomeController::class, 'index'])->name('site.home');

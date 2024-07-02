@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Exceptions\FallbackHandler;
 use App\Models\Setting;
+use App\Models\Slider;
 use App\Observers\RoleNotifyObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -29,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
         Role::observe(RoleNotifyObserver::class);
 
         view()->share('app', Setting::first());
+        view()->share('footerImage', Slider::where('key', 'footer-section')->first()->image);
     }
 }

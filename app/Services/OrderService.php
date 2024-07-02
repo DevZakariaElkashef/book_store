@@ -21,16 +21,18 @@ class OrderService
         $order = Order::create([
             'user_id' => $user->id,
             'coupon_id' => $cart->coupon_id,
+            'city_id' => $request->city_id,
             'order_status_id' => 1,
             'shipping' => 0,
             'sub_total' => $subTotal,
             'total' => $total,
-            'payment_method' => $isBankTransfer ? 1 : 2,
-            'payment_status' => 0,
+            'payment_method' => $isBankTransfer,
+            'payment_status' => $isBankTransfer ? 0 : 2,
             'transaction_id' => rand(1111111, 9999999),
             'lat' => $request->lat,
             'lng' => $request->lng,
-            'transaction_image' => $request->hasFile('transfer_image') ? uploadeImage($request->transfer_image, 'Orders') : null
+            'transaction_image' => $request->hasFile('transfer_image') ? uploadeImage($request->transfer_image, 'Orders') : null,
+            'address' => $request->address,
         ]);
 
         foreach ($cart->items as $item) {
@@ -39,7 +41,6 @@ class OrderService
                 'user_id' => $user->id,
                 'qty' => $item->qty,
             ]);
-            $item->delete();
         }
 
         return ['order' => $order, 'total' => $total];

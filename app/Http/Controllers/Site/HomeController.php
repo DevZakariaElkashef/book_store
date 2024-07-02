@@ -22,9 +22,18 @@ class HomeController extends Controller
 
         $strLimit = 30;
 
+        // Get the IDs of the most sold books
+        $mostSaledBooksIDs = OrderItem::select('book_id', DB::raw('count(book_id) as book_count'))
+            ->groupBy('book_id')
+            ->orderByDesc('book_count')
+            ->distinct('book_id')
+            ->pluck('book_id')->toArray();
+
+        $mostSaledBooks = Book::active()->whereIn('id', $mostSaledBooksIDs)->get();
+
         $heroImg = Slider::where("key", 'home-hero')->first()->image;
         $contactUsImg = Slider::where("key", 'contact_us-section')->first()->image;
 
-        return view("site.index", compact("contactTypes", "latestBooks", "offerBooks", "strLimit", 'heroImg', 'contactUsImg'));
+        return view("site.index", compact("contactTypes", "latestBooks", "mostSaledBooks", "offerBooks", "strLimit", 'heroImg', 'contactUsImg'));
     }
 }

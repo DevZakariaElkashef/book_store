@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\City;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -29,6 +30,25 @@ class ProfileController extends Controller
 
         return view('site.profile.settings', compact('user'));
     }
+
+    public function orders(Request $request)
+    {
+        $user = $request->user();
+        $orders = Order::where('user_id', $user->id)->success()->latest()->paginate(3);
+
+        return view('site.profile.orders', compact('user', 'orders'));
+    }
+
+
+    public function showOrder (Request $request, $id)
+    {
+        $user = $request->user();
+        $order = Order::findOrFail($id);
+
+        return view('site.profile.order', compact('user', 'order'));
+    }
+
+
 
     public function editPassword(Request $request)
     {

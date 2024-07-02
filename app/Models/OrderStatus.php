@@ -14,10 +14,16 @@ class OrderStatus extends Model
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
-    */
+     */
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
     ];
+
+
+    public function getNameAttribute()
+    {
+        return $this->attributes['name_' . app()->getLocale()];
+    }
 }
