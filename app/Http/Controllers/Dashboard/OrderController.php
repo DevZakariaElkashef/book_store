@@ -11,6 +11,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Models\Bank;
 use App\Models\Book;
 use App\Models\City;
+use App\Models\OrderStatus;
 use App\Models\User;
 
 class OrderController extends Controller
@@ -19,9 +20,6 @@ class OrderController extends Controller
     {
         $ordersQuery = Order::query();
         $ordersQuery->latest();
-
-        // Clone the query to calculate counts without date range filtering
-        $countQuery = clone $ordersQuery;
 
         if ($request->filled('from')) {
             $ordersQuery->whereDate('created_at', '>', $request->from);
@@ -33,21 +31,9 @@ class OrderController extends Controller
 
         $orders = $ordersQuery->paginate(10);
 
-        // Get counts without date range filtering
-        $totalOrdersCount = $countQuery->count();
-        $totalThisMonth = $countQuery->whereMonth('created_at', '=', date('m'))->count();
-        $thisMonthPercentage = $totalOrdersCount ? ceil(($totalThisMonth / $totalOrdersCount) * 100) : 0;
+        $orderStatus = OrderStatus::all();
 
-        // Get counts with date range filtering
-        $totalActiveOrdersCount = $ordersQuery->where('is_active', 1)->count();
-        $totalActiveThisMonth = $ordersQuery->where('is_active', 1)->whereMonth('created_at', '=', date('m'))->count();
-        $thisActiveMonthPercentage = $totalActiveOrdersCount ? ceil(($totalActiveThisMonth / $totalActiveOrdersCount) * 100) : 0;
-
-        $totalNotActiveOrdersCount = $totalOrdersCount - $totalActiveOrdersCount;
-        $totalNotActiveThisMonth = $totalThisMonth - $totalActiveThisMonth;
-        $thisNotActiveMonthPercentage = $totalNotActiveOrdersCount ? ceil(($totalNotActiveThisMonth / $totalNotActiveOrdersCount) * 100) : 0;
-
-        return view('dashboard.pages.orders.index', compact('orders', 'totalOrdersCount', 'thisMonthPercentage', 'totalActiveOrdersCount', 'thisActiveMonthPercentage', 'totalNotActiveOrdersCount', 'thisNotActiveMonthPercentage'));
+        return view('dashboard.pages.orders.index', compact('orders', 'orderStatus'));
     }
 
 

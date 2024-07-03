@@ -13,6 +13,6 @@ class UniversitySeeder extends Seeder
      */
     public function run(): void
     {
-        University::factory(20)->create();
+        University::factory(2)->create();
     }
 }

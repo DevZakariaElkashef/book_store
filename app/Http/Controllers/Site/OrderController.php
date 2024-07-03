@@ -61,6 +61,8 @@ class OrderController extends Controller
             $item->delete();
         }
 
+        $request->user()->cart->updated(['coupon_id' => null]);
+
         return redirect()->route('orders.success');
     }
 
@@ -72,6 +74,8 @@ class OrderController extends Controller
         foreach ($request->user()->cart->items as $item) {
             $item->delete();
         }
+
+        $request->user()->cart->updated(['coupon_id' => null]);
 
         return redirect()->route('orders.success');
     }

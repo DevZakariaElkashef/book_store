@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
+use App\Models\Coupon;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +20,9 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => rand(1, 20),
-            'coupon_id' => rand(1, 20),
-            'city_id' => rand(1, 20),
+            'user_id' => User::factory(),
+            'coupon_id' => Coupon::factory(),
+            'city_id' => City::factory(),
             'shipping' => rand(100, 1000),
             'sub_total' => rand(1000, 2000),
             'total' => rand(900, 2000),

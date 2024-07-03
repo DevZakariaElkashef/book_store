@@ -17,9 +17,11 @@ return new class extends Migration
             $table->foreignId('coupon_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
             $table->foreignId('order_status_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
             $table->foreignId('city_id')->nullable()->constrained()->onDelete('set null')->onUpdate('set null');
-            $table->string('shipping')->nullable();
-            $table->string('sub_total')->nullable();
-            $table->string('total')->nullable();
+            $table->decimal('sub_total')->nullable();
+            $table->decimal('tax')->nullable();
+            $table->decimal('shipping')->nullable();
+            $table->decimal('discount')->nullable();
+            $table->decimal('total')->nullable();
             $table->integer('payment_method')->nullable()->comment('0 => online payment method, 1 => bank transfer method');
             $table->integer('payment_status')->nullable()->comment('0 => pending, 1 => paid, 2 => failed, 3 => Refunded');
             $table->string('transaction_id')->nullable();

@@ -41,10 +41,27 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function timelines()
+    {
+        return $this->hasMany(OrderTimeLine::class, 'order_id');
+    }
+
     public function scopeSuccess($query)
     {
         return $query->where('payment_status', '!=', '2');
     }
+
+    public function subTotalWithTax()
+    {
+        $taxRate = Setting::first()->tax / 100;
+        return $this->sub_total * (1 + $taxRate);
+    }
+
+    // public function totalWithDiscount()
+    // {
+    //     $subWithTotal = $this->subTotalWithTax();
+    //     $coupon
+    // }
 
     public function getPaymentMethodAttribute(): string
     {

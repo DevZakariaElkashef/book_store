@@ -27,7 +27,14 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->text('slogan_ar')->nullable();
             $table->text('slogan_en')->nullable();
-
+            $table->string('tax')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
+            $table->boolean('use_shiping')->default(1);
+            $table->integer('free_distance')->nullable()->comment('Distance within which shipping is free (in km)');
+            $table->decimal('cost_per_km', 8, 2)->nullable()->comment('Cost of shipping per km after the free distance');
+            $table->integer('non_operational_distance')->nullable()->comment('Distance beyond which the service does not operate (in km)');
+            $table->integer('expected_order_delivered')->nullable()->comment('Expected the deliverd in -- days');
 
             $table->timestamps();
             $table->softDeletes();

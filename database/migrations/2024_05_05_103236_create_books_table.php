@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('author_ar')->nullable();
             $table->string('author_en')->nullable();
             $table->foreignId('subject_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('price');
-            $table->string('offer')->nullable();
+            $table->decimal('price');
+            $table->decimal('offer')->nullable();
             $table->date('offer_start_at')->nullable();
             $table->date('offer_end_at')->nullable();
             $table->boolean('is_new')->default(1);

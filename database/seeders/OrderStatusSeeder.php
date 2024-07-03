@@ -14,17 +14,18 @@ class OrderStatusSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
-            ['ar' => 'فى الإنتظار', 'en' => 'Pending'],
-            ['ar' => 'قيد التنفيذ', 'en' => 'In progress'],
-            ['ar' => 'قيد التوصيل', 'en' => 'In delivery'],
-            ['ar' => 'تم التوصيل', 'en' => 'Delivered'],
-            ['ar' => 'تم الإلغاء', 'en' => 'Cancelled'],
+            ['ar' => 'فى الإنتظار', 'en' => 'Pending', 'color' => '#FDB528'],
+            ['ar' => 'قيد التنفيذ', 'en' => 'In progress', 'color' => '#68D8FB'],
+            ['ar' => 'قيد التوصيل', 'en' => 'In delivery', 'color' => '#666CFF'],
+            ['ar' => 'تم التوصيل', 'en' => 'Delivered', 'color' => '#75E22B'],
+            ['ar' => 'تم الإلغاء', 'en' => 'Cancelled', 'color' => '#FF4D49'],
         ];
 
         foreach ($statuses as $status) {
             OrderStatus::create([
                 'name_ar' => $status['ar'],
                 'name_en' => $status['en'],
+                'color'=> $status['color'],
             ]);
         }
     }

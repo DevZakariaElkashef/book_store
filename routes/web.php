@@ -31,6 +31,7 @@ use App\Http\Controllers\Site\ProfileController;
 */
 
 Route::post('change-lang', [ProfileController::class, 'lang'])->name('site.lang.update');
+Route::get('calc-shipping', [CartController::class, 'calcShipping']);
 
 
 Route::middleware('lang')->group(function () {

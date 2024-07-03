@@ -31,6 +31,13 @@ class SettingFactory extends Factory
             'slogan_ar' => fake()->sentence(),
             'slogan_en' => fake()->sentence(),
             'logo' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Setting')),
+            'tax' => 15,
+            'lat' => fake()->latitude(),
+            'lng' => fake()->longitude(),
+            'free_distance' => fake()->numberBetween(100, 200),
+            'cost_per_km' => fake()->numberBetween(20, 50),
+            'non_operational_distance' => fake()->numberBetween(1000, 20000),
+            'expected_order_delivered' => fake()->numberBetween(1, 5)
         ];
     }
 }

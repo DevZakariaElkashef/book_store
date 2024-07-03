@@ -92,3 +92,24 @@ function bookCartCount(int $bookId): int
 
     return 0;
 }
+
+
+function distance($lat1, $lng1, $lat2, $lng2, $earthRadius = 6371)
+{
+    // Convert from degrees to radians
+    $lat1 = deg2rad($lat1);
+    $lng1 = deg2rad($lng1);
+    $lat2 = deg2rad($lat2);
+    $lng2 = deg2rad($lng2);
+
+    // Haversine formula
+    $dlat = $lat2 - $lat1;
+    $dlng = $lng2 - $lng1;
+    $a = sin($dlat / 2) * sin($dlat / 2) +
+        cos($lat1) * cos($lat2) *
+        sin($dlng / 2) * sin($dlng / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+    $distance = $earthRadius * $c;
+
+    return $distance;
+}

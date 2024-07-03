@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\University;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,7 @@ class CollegeFactory extends Factory
     public function definition(): array
     {
         return [
-            'university_id' => rand(1, 20),
+            'university_id' => University::factory(),
             'name_ar' => fake()->word(),
             'name_en' => fake()->word(),
             'description_ar' => fake()->sentence(),

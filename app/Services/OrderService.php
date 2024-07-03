@@ -3,8 +3,9 @@
 
 namespace App\Services;
 
-use App\Models\Order;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Setting;
 
 class OrderService
 {
@@ -12,19 +13,32 @@ class OrderService
     {
         $cart = $user->cart;
         $subTotal = Cart::totalCart($user->id);
-        $discount = 0;
+        $discountAmount = 0;
+
         if ($cart->coupon) {
-            $discount = $cart->coupon->discount / 100;
+            $discountRate = $cart->coupon->discount / 100;
+        } else {
+            $discountRate = 0;
         }
 
-        $total = $subTotal - ($subTotal * $discount);
+        $shipping = $request->shipping ?? 0;
+        $taxRate = Setting::first()->tax / 100;
+        $taxAmount = $subTotal * $taxRate;
+
+        $totalBeforeDiscount = $subTotal + $shipping + $taxAmount;
+        $discountAmount = $totalBeforeDiscount * $discountRate;
+
+        $total = $totalBeforeDiscount - $discountAmount;
+
         $order = Order::create([
             'user_id' => $user->id,
             'coupon_id' => $cart->coupon_id,
             'city_id' => $request->city_id,
             'order_status_id' => 1,
-            'shipping' => 0,
+            'shipping' => $shipping,
             'sub_total' => $subTotal,
+            'tax' => $taxAmount,
+            'discount' => $discountAmount,
             'total' => $total,
             'payment_method' => $isBankTransfer,
             'payment_status' => $isBankTransfer ? 0 : 2,

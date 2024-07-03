@@ -2,6 +2,7 @@
 
 @php
     $totalCart = optional(auth()->user()->cart)->totalCart(auth()->id());
+    $taxCost = $totalCart * ($app->tax / 100);
 @endphp
 
 @section('content')
@@ -76,7 +77,7 @@
                             @csrf
                             <div class="row justify-content-center">
                                 <div class="col-md-8 ">
-                                    <input type="text" class="coupon form-control ms-2" name="code">
+                                    <input type="text" class="coupon form-control ms-2" name="code" value="{{ $cart->coupon->code ?? '' }}">
                                 </div>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary">Add Coupon</button>
@@ -108,6 +109,16 @@
                                     </div>
                                 </li>
 
+                                @if ($taxCost)
+                                    <li class="tax">
+                                        <span> الضريبة</span>
+                                        <div class="price d-flex align-items-center">
+                                            <span>
+                                                {{ $taxCost }} ر.س
+                                            </span>
+                                        </div>
+                                    </li>
+                                @endif
 
 
                                 @if ($cart->coupon)
@@ -115,11 +126,13 @@
                                         <span> الخصم</span>
                                         <div class="price d-flex align-items-center">
                                             <span>
-                                                {{ $totalCart * ($cart->coupon->discount / 100) }} ر.س
+                                                {{ ($totalCart + $taxCost) * ($cart->coupon->discount / 100) }} ر.س
                                             </span>
                                         </div>
                                     </li>
                                 @endif
+
+
 
 
 
@@ -128,9 +141,9 @@
                                     <div class="price d-flex align-items-center">
                                         <span>
                                             @if ($cart->coupon)
-                                                {{ $totalCart - $totalCart * ($cart->coupon->discount / 100) }}
+                                                {{ ($totalCart + $taxCost) - ($totalCart + $taxCost) * ($cart->coupon->discount / 100) }}
                                             @else
-                                                {{ $totalCart }}
+                                                {{ ($totalCart + $taxCost) }}
                                             @endif
                                             ر.س
                                         </span>
@@ -139,10 +152,10 @@
 
                             </ul>
 
-                            @if($cart->items->count())
-                            <div class="byu_btn">
-                                <a href="{{ route("orders.checkout") }}">إتمام الطلب</a>
-                            </div>
+                            @if ($cart->items->count())
+                                <div class="byu_btn">
+                                    <a href="{{ route('orders.checkout') }}">إتمام الطلب</a>
+                                </div>
                             @endif
                         </div>
                     </div>

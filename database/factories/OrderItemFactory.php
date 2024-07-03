@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Book;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +19,8 @@ class OrderItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_id' => rand(1, 20),
-            'book_id' => rand(1, 20),
+            'order_id' => Order::factory(),
+            'book_id' => Book::factory(),
             'qty' => rand(100, 500)
         ];
     }

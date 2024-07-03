@@ -1,325 +1,515 @@
 @extends('dashboard.layouts.app')
 
+
+@php
+    switch ($order->paymentStatus) {
+        case 'pending':
+            $paymentStatusColor = 'text-warning';
+            break;
+        case 'paid':
+            $paymentStatusColor = 'text-success';
+            break;
+        case 'failed':
+            $paymentStatusColor = 'text-danger';
+            break;
+        case 'Refunded':
+            $paymentStatusColor = 'text-secondary';
+            break;
+        default:
+            $paymentStatusColor = 'text-muted';
+            break;
+    }
+@endphp
+
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row invoice-preview">
-            <!-- Invoice -->
-            <div class="col-xl-9 col-md-8 col-12 mb-md-0 mb-4">
-                <div class="card invoice-preview-card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column">
-                            <div class="mb-xl-0 pb-3">
-                                <div class="d-flex svg-illustration align-items-center gap-2 mb-4">
-                                    <span class="app-brand-logo demo">
-                                        <span style="color: var(--bs-primary)">
-                                            <svg width="268" height="150" viewBox="0 0 38 20" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M30.0944 2.22569C29.0511 0.444187 26.7508 -0.172113 24.9566 0.849138C23.1623 1.87039 22.5536 4.14247 23.5969 5.92397L30.5368 17.7743C31.5801 19.5558 33.8804 20.1721 35.6746 19.1509C37.4689 18.1296 38.0776 15.8575 37.0343 14.076L30.0944 2.22569Z"
-                                                    fill="currentColor" />
-                                                <path
-                                                    d="M30.171 2.22569C29.1277 0.444187 26.8274 -0.172113 25.0332 0.849138C23.2389 1.87039 22.6302 4.14247 23.6735 5.92397L30.6134 17.7743C31.6567 19.5558 33.957 20.1721 35.7512 19.1509C37.5455 18.1296 38.1542 15.8575 37.1109 14.076L30.171 2.22569Z"
-                                                    fill="url(#paint0_linear_2989_100980)" fill-opacity="0.4" />
-                                                <path
-                                                    d="M22.9676 2.22569C24.0109 0.444187 26.3112 -0.172113 28.1054 0.849138C29.8996 1.87039 30.5084 4.14247 29.4651 5.92397L22.5251 17.7743C21.4818 19.5558 19.1816 20.1721 17.3873 19.1509C15.5931 18.1296 14.9843 15.8575 16.0276 14.076L22.9676 2.22569Z"
-                                                    fill="currentColor" />
-                                                <path
-                                                    d="M14.9558 2.22569C13.9125 0.444187 11.6122 -0.172113 9.818 0.849138C8.02377 1.87039 7.41502 4.14247 8.45833 5.92397L15.3983 17.7743C16.4416 19.5558 18.7418 20.1721 20.5361 19.1509C22.3303 18.1296 22.9391 15.8575 21.8958 14.076L14.9558 2.22569Z"
-                                                    fill="currentColor" />
-                                                <path
-                                                    d="M14.9558 2.22569C13.9125 0.444187 11.6122 -0.172113 9.818 0.849138C8.02377 1.87039 7.41502 4.14247 8.45833 5.92397L15.3983 17.7743C16.4416 19.5558 18.7418 20.1721 20.5361 19.1509C22.3303 18.1296 22.9391 15.8575 21.8958 14.076L14.9558 2.22569Z"
-                                                    fill="url(#paint1_linear_2989_100980)" fill-opacity="0.4" />
-                                                <path
-                                                    d="M7.82901 2.22569C8.87231 0.444187 11.1726 -0.172113 12.9668 0.849138C14.7611 1.87039 15.3698 4.14247 14.3265 5.92397L7.38656 17.7743C6.34325 19.5558 4.04298 20.1721 2.24875 19.1509C0.454514 18.1296 -0.154233 15.8575 0.88907 14.076L7.82901 2.22569Z"
-                                                    fill="currentColor" />
-                                                <defs>
-                                                    <linearGradient id="paint0_linear_2989_100980" x1="5.36642"
-                                                        y1="0.849138" x2="10.532" y2="24.104"
-                                                        gradientUnits="userSpaceOnUse">
-                                                        <stop offset="0" stop-opacity="1" />
-                                                        <stop offset="1" stop-opacity="0" />
-                                                    </linearGradient>
-                                                    <linearGradient id="paint1_linear_2989_100980" x1="5.19475"
-                                                        y1="0.849139" x2="10.3357" y2="24.1155"
-                                                        gradientUnits="userSpaceOnUse">
-                                                        <stop offset="0" stop-opacity="1" />
-                                                        <stop offset="1" stop-opacity="0" />
-                                                    </linearGradient>
-                                                </defs>
-                                            </svg>
-                                        </span>
-                                    </span>
-                                    <span class="h4 mb-0 app-brand-text fw-bold">Materialize</span>
-                                </div>
-                                <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
-                                <p class="mb-1">San Diego County, CA 91905, USA</p>
-                                <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
-                            </div>
-                            <div>
-                                <h5>INVOICE #86423</h5>
-                                <div class="mb-1">
-                                    <span>Date Issues:</span>
-                                    <span>April 25, 2021</span>
-                                </div>
-                                <div>
-                                    <span>Date Due:</span>
-                                    <span>May 25, 2021</span>
-                                </div>
-                            </div>
-                        </div>
+
+
+        <div
+            class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 gap-6">
+
+            <div class="d-flex flex-column justify-content-center">
+                <div class="d-flex align-items-center mb-1">
+                    <h5 class="mb-0">Order #{{ $order->id }}</h5>
+                    <span class="badge bg-label-success me-2 ms-2 rounded-pill">{{ $order->paymentStatus }}</span>
+                    <span style="color: {{ $order->status->color }};" class="rounded-pill">{{ $order->status->name }}</span>
+                </div>
+                <p class="mb-0">{{ $order->created_at->format('Y-m-d') }}, <span
+                        id="orderYear"></span>{{ $order->created_at->format('H:i') }}</p>
+            </div>
+            <div class="d-flex align-content-center flex-wrap gap-2">
+                <button class="btn btn-outline-danger delete-order">Delete Order</button>
+            </div>
+        </div>
+
+        <!-- Order Details Table -->
+
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="card mb-6">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title m-0">Order details</h5>
+                        <h6 class="m-0"><a href=" javascript:void(0)">Edit</a></h6>
                     </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="my-3">
-                                <h6 class="pb-2">Invoice To:</h6>
-                                <p class="mb-1">Thomas shelby</p>
-                                <p class="mb-1">Shelby Company Limited</p>
-                                <p class="mb-1">Small Heath, B10 0HF, UK</p>
-                                <p class="mb-1">718-986-6062</p>
-                                <p class="mb-0">peakyFBlinders@gmail.com</p>
-                            </div>
-                            <div class="my-3">
-                                <h6 class="pb-2">Bill To:</h6>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="pe-3 fw-medium">Total Due:</td>
-                                            <td>$12,110.55</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pe-3 fw-medium">Bank name:</td>
-                                            <td>American Bank</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pe-3 fw-medium">Country:</td>
-                                            <td>United States</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pe-3 fw-medium">IBAN:</td>
-                                            <td>ETD95476213874685</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pe-3 fw-medium">SWIFT code:</td>
-                                            <td>BR91905</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table m-0">
-                            <thead class="table-light border-top">
+                    <div class="card-datatable table-responsive pb-5">
+                        <table class="datatables-order-details table">
+                            <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Description</th>
-                                    <th>Cost</th>
-                                    <th>Qty</th>
-                                    <th>Price</th>
+                                    <th>#</th>
+                                    <th class="w-50">Books</th>
+                                    <th>price</th>
+                                    <th>qty</th>
+                                    <th>total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-nowrap">Vuexy Admin Template</td>
-                                    <td class="text-nowrap">HTML Admin Template</td>
-                                    <td>$32</td>
-                                    <td>1</td>
-                                    <td>$32.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-nowrap">Frest Admin Template</td>
-                                    <td class="text-nowrap">Angular Admin Template</td>
-                                    <td>$22</td>
-                                    <td>1</td>
-                                    <td>$22.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-nowrap">Apex Admin Template</td>
-                                    <td class="text-nowrap">HTML Admin Template</td>
-                                    <td>$17</td>
-                                    <td>2</td>
-                                    <td>$34.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-nowrap">Robust Admin Template</td>
-                                    <td class="text-nowrap">React Admin Template</td>
-                                    <td>$66</td>
-                                    <td>1</td>
-                                    <td>$66.00</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" class="align-top px-4 py-5">
-                                        <p class="mb-2">
-                                            <span class="me-1 fw-semibold">Salesperson:</span>
-                                            <span>Alfie Solomons</span>
-                                        </p>
-                                        <span>Thanks for your business</span>
-                                    </td>
-                                    <td class="text-end px-4 py-5">
-                                        <p class="mb-2">Subtotal:</p>
-                                        <p class="mb-2">Discount:</p>
-                                        <p class="mb-2">Tax:</p>
-                                        <p class="mb-0">Total:</p>
-                                    </td>
-                                    <td class="px-4 py-5">
-                                        <p class="fw-semibold mb-2 text-end">$154.25</p>
-                                        <p class="fw-semibold mb-2 text-end">$00.00</p>
-                                        <p class="fw-semibold mb-2 text-end">$50.00</p>
-                                        <p class="fw-semibold mb-0 text-end">$204.25</p>
-                                    </td>
-                                </tr>
+                                @foreach ($order->items as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            @if ($item->book->image)
+                                                <a download href="{{ asset($item->book->image) }}">
+                                                    <img width="50" class="rounded-circle" src="{{ asset($item->book->image) }}" alt="">
+                                                </a>
+                                            @endif
+                                            {{ $item->book->name }}
+                                        </td>
+                                        <td>{{ $item->book->price }}</td>
+                                        <td>{{ $item->qty }}</td>
+                                        <td>{{ $item->qty * $item->book->price }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                    </div>
+                        <div class="d-flex justify-content-end align-items-center m-4 p-1 mb-0 pb-0">
+                            <div class="order-calculations">
+                                <div class="d-flex justify-content-start gap-4">
+                                    <span class="w-px-100 text-heading">Subtotal:</span>
+                                    <h6 class="mb-0">{{ $order->sub_total }}</h6>
+                                </div>
+                                <div class="d-flex justify-content-start gap-4">
+                                    <span class="w-px-100 text-heading">Tax:</span>
+                                    <h6 class="mb-0">{{ $order->subTotalWithTax() }}</h6>
+                                </div>
+                                <div class="d-flex justify-content-start gap-4">
+                                    <span class="w-px-100 text-heading">Discount:</span>
+                                    <h6 class="mb-0"></h6>
+                                </div>
 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <span class="fw-bold">Note:</span>
-                                <span>It was a pleasure working with you and your team. We hope you will keep us in mind for
-                                    future freelance projects. Thank You!</span>
+                                <div class="d-flex justify-content-start gap-4">
+                                    <h6 class="w-px-100 mb-0">Total:</h6>
+                                    <h6 class="mb-0">$5100.25</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- /Invoice -->
-
-            <!-- Invoice Actions -->
-            <div class="col-xl-3 col-md-4 col-12 invoice-actions">
-                <div class="card">
-                    <div class="card-body">
-                        <button class="btn btn-primary d-grid w-100 mb-3" data-bs-toggle="offcanvas"
-                            data-bs-target="#sendInvoiceOffcanvas">
-                            <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                    class="mdi mdi-send-outline scaleX-n1-rtl me-1"></i>Send Invoice</span>
-                        </button>
-                        <button class="btn btn-outline-secondary d-grid w-100 mb-3">Download</button>
-                        <a class="btn btn-outline-secondary d-grid w-100 mb-3" target="_blank"
-                            href="./app-invoice-print.html">
-                            Print
-                        </a>
-                        <a href="./app-invoice-edit.html" class="btn btn-outline-secondary d-grid w-100 mb-3">
-                            Edit Invoice
-                        </a>
-                        <button class="btn btn-success d-grid w-100" data-bs-toggle="offcanvas"
-                            data-bs-target="#addPaymentOffcanvas">
-                            <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                    class="mdi mdi-currency-usd me-1"></i>Add Payment</span>
-                        </button>
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h5 class="card-title m-0">Shipping activity</h5>
+                    </div>
+                    <div class="card-body mt-3">
+                        <ul class="timeline pb-0 mb-0">
+                            <li class="timeline-item timeline-item-transparent border-primary">
+                                <span class="timeline-point timeline-point-primary"></span>
+                                <div class="timeline-event">
+                                    <div class="timeline-header mb-2">
+                                        <h6 class="mb-0">Order was placed (Order ID: #32543)</h6>
+                                        <small class="text-muted">Tuesday 11:29 AM</small>
+                                    </div>
+                                    <p class="mt-1 mb-2">Your order has been placed successfully</p>
+                                </div>
+                            </li>
+                            <li class="timeline-item timeline-item-transparent border-primary">
+                                <span class="timeline-point timeline-point-primary"></span>
+                                <div class="timeline-event">
+                                    <div class="timeline-header mb-2">
+                                        <h6 class="mb-0">Pick-up</h6>
+                                        <small class="text-muted">Wednesday 11:29 AM</small>
+                                    </div>
+                                    <p class="mt-1 mb-2">Pick-up scheduled with courier</p>
+                                </div>
+                            </li>
+                            <li class="timeline-item timeline-item-transparent border-primary">
+                                <span class="timeline-point timeline-point-primary"></span>
+                                <div class="timeline-event">
+                                    <div class="timeline-header mb-2">
+                                        <h6 class="mb-0">Dispatched</h6>
+                                        <small class="text-muted">Thursday 11:29 AM</small>
+                                    </div>
+                                    <p class="mt-1 mb-2">Item has been picked up by courier</p>
+                                </div>
+                            </li>
+                            <li class="timeline-item timeline-item-transparent border-primary">
+                                <span class="timeline-point timeline-point-primary"></span>
+                                <div class="timeline-event">
+                                    <div class="timeline-header mb-2">
+                                        <h6 class="mb-0">Package arrived</h6>
+                                        <small class="text-muted">Saturday 15:20 AM</small>
+                                    </div>
+                                    <p class="mt-1 mb-2">Package arrived at an Amazon facility, NY</p>
+                                </div>
+                            </li>
+                            <li class="timeline-item timeline-item-transparent border-left-dashed">
+                                <span class="timeline-point timeline-point-primary"></span>
+                                <div class="timeline-event">
+                                    <div class="timeline-header mb-2">
+                                        <h6 class="mb-0">Dispatched for delivery</h6>
+                                        <small class="text-muted">Today 14:12 PM</small>
+                                    </div>
+                                    <p class="mt-1 mb-2">Package has left an Amazon facility, NY</p>
+                                </div>
+                            </li>
+                            <li class="timeline-item timeline-item-transparent border-transparent pb-0">
+                                <span class="timeline-point timeline-point-primary"></span>
+                                <div class="timeline-event pb-0">
+                                    <div class="timeline-header mb-2">
+                                        <h6 class="mb-0">Delivery</h6>
+                                    </div>
+                                    <p class="mt-1 mb-2">Package will be delivered by tomorrow</p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <!-- /Invoice Actions -->
-        </div>
+            <div class="col-12 col-lg-4">
+                <div class="card mb-6">
+                    <div class="card-body">
+                        <h5 class="card-title mb-6">Customer details</h5>
+                        <div class="d-flex justify-content-start align-items-center mb-6">
+                            <div class="avatar me-3">
+                                <img src="../../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle">
+                            </div>
+                            <div class="d-flex flex-column">
+                                <a href="app-user-view-account.html">
+                                    <h6 class="mb-0">Shamus Tuttle</h6>
+                                </a>
+                                <span>Customer ID: #58909</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start align-items-center mb-6">
+                            <span
+                                class="avatar rounded-circle bg-label-success me-3 d-flex align-items-center justify-content-center"><i
+                                    class='ri-shopping-cart-line ri-24px'></i></span>
+                            <h6 class="text-nowrap mb-0">12 Orders</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-1">Contact info</h6>
+                            <h6 class="mb-1"><a href=" javascript:;" data-bs-toggle="modal"
+                                    data-bs-target="#editUser">Edit</a></h6>
+                        </div>
+                        <p class="mb-1">Email: Shamus889@yahoo.com</p>
+                        <p class="mb-0">Mobile: +1 (609) 972-22-22</p>
+                    </div>
+                </div>
 
-        <!-- Offcanvas -->
-        <!-- Send Invoice Sidebar -->
-        <div class="offcanvas offcanvas-end" id="sendInvoiceOffcanvas" aria-hidden="true">
-            <div class="offcanvas-header mb-3">
-                <h5 class="offcanvas-title">Send Invoice</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body flex-grow-1">
-                <form>
-                    <div class="form-floating form-floating-outline mb-4">
-                        <input type="text" class="form-control" id="invoice-from" value="shelbyComapny@email.com"
-                            placeholder="company@email.com" />
-                        <label for="invoice-from">From</label>
-                    </div>
-                    <div class="form-floating form-floating-outline mb-4">
-                        <input type="text" class="form-control" id="invoice-to" value="qConsolidated@email.com"
-                            placeholder="company@email.com" />
-                        <label for="invoice-to">To</label>
-                    </div>
-                    <div class="form-floating form-floating-outline mb-4">
-                        <input type="text" class="form-control" id="invoice-subject"
-                            value="Invoice of purchased Admin Templates" placeholder="Invoice regarding goods" />
-                        <label for="invoice-subject">Subject</label>
-                    </div>
-                    <div class="form-floating form-floating-outline mb-4">
-                        <textarea class="form-control" name="invoice-message" id="invoice-message" style="height: 190px">
-Dear Queen Consolidated,
-Thank you for your business, always a pleasure to work with you!
-We have generated a new invoice in the amount of $95.59
-We would appreciate payment of this invoice by 05/11/2021</textarea
-            >
-            <label for="invoice-message">Message</label>
-          </div>
-          <div class="mb-4">
-            <span class="badge bg-label-primary">
-              <i class="mdi mdi-link-variant mdi-14px me-1"></i>
-              <span class="align-middle">Invoice Attached</span>
-            </span>
-          </div>
-          <div class="mb-3 d-flex flex-wrap">
-            <button type="button" class="btn btn-primary me-3" data-bs-dismiss="offcanvas">Send</button>
-            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- /Send Invoice Sidebar -->
+                <div class="card mb-6">
 
-    <!-- Add Payment Sidebar -->
-    <div class="offcanvas offcanvas-end" id="addPaymentOffcanvas" aria-hidden="true">
-      <div class="offcanvas-header mb-3">
-        <h5 class="offcanvas-title">Add Payment</h5>
-        <button
-          type="button"
-          class="btn-close text-reset"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body flex-grow-1">
-        <div class="d-flex justify-content-between bg-lighter p-2 mb-3">
-          <p class="mb-0">Invoice Balance:</p>
-          <p class="fw-bold mb-0">$5000.00</p>
-        </div>
-        <form>
-          <div class="input-group input-group-merge mb-4">
-            <span class="input-group-text">$</span>
-            <div class="form-floating form-floating-outline">
-              <input
-                type="text"
-                id="invoiceAmount"
-                name="invoiceAmount"
-                class="form-control invoice-amount"
-                placeholder="100" />
-              <label for="invoiceAmount">Payment Amount</label>
-            </div>
-          </div>
-          <div class="form-floating form-floating-outline mb-4">
-            <input id="payment-date" class="form-control invoice-date" type="text" />
-            <label for="payment-date">Payment Date</label>
-          </div>
-          <div class="form-floating form-floating-outline mb-4">
-            <select class="form-select" id="payment-method">
-              <option value="" selected disabled>Select payment method</option>
-              <option value="Cash">Cash</option>
-              <option value="Bank Transfer">Bank Transfer</option>
-              <option value="Debit Card">Debit Card</option>
-              <option value="Credit Card">Credit Card</option>
-              <option value="Paypal">Paypal</option>
-            </select>
-            <label for="payment-method">Payment Method</label>
-          </div>
-          <div class="form-floating form-floating-outline mb-4">
-            <textarea class="form-control" id="payment-note" style="height: 62px"></textarea>
-                        <label for="payment-note">Internal Payment Note</label>
+                    <div class="card-header d-flex justify-content-between">
+                        <h5 class="card-title mb-1">Shipping address</h5>
+                        <h6 class="m-0"><a href=" javascript:void(0)" data-bs-toggle="modal"
+                                data-bs-target="#addNewAddress">Edit</a></h6>
                     </div>
-                    <div class="mb-3 d-flex flex-wrap">
-                        <button type="button" class="btn btn-primary me-3" data-bs-dismiss="offcanvas">Send</button>
-                        <button type="button" class="btn btn-label-secondary"
-                            data-bs-dismiss="offcanvas">Cancel</button>
+                    <div class="card-body">
+                        <p class="mb-0">45 Roker Terrace <br>Latheronwheel <br>KW5 8NW,London <br>UK</p>
                     </div>
-                </form>
+
+                </div>
+                <div class="card mb-6">
+                    <div class="card-header d-flex justify-content-between pb-0">
+                        <h5 class="card-title mb-1">Billing address</h5>
+                        <h6 class="m-0"><a href=" javascript:void(0)" data-bs-toggle="modal"
+                                data-bs-target="#addNewAddress">Edit</a></h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-6">45 Roker Terrace <br>Latheronwheel <br>KW5 8NW,London <br>UK</p>
+                        <h5 class="mb-1">Mastercard</h5>
+                        <p class="mb-0">Card Number: ******4291</p>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <!-- /Add Payment Sidebar -->
 
-        <!-- /Offcanvas -->
+        <!-- Edit User Modal -->
+        <div class="modal fade" id="editUser" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+                <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body p-0">
+                        <div class="text-center mb-6">
+                            <h4 class="mb-2">Edit User Information</h4>
+                            <p class="mb-6">Updating user details will receive a privacy audit.</p>
+                        </div>
+                        <form id="editUserForm" class="row g-5" onsubmit="return false">
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalEditUserFirstName" name="modalEditUserFirstName"
+                                        class="form-control" value="Oliver" placeholder="Oliver" />
+                                    <label for="modalEditUserFirstName">First Name</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalEditUserLastName" name="modalEditUserLastName"
+                                        class="form-control" value="Queen" placeholder="Queen" />
+                                    <label for="modalEditUserLastName">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalEditUserName" name="modalEditUserName"
+                                        class="form-control" value="oliver.queen" placeholder="oliver.queen" />
+                                    <label for="modalEditUserName">Username</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalEditUserEmail" name="modalEditUserEmail"
+                                        class="form-control" value="oliverqueen@gmail.com"
+                                        placeholder="oliverqueen@gmail.com" />
+                                    <label for="modalEditUserEmail">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <select id="modalEditUserStatus" name="modalEditUserStatus" class="form-select"
+                                        aria-label="Default select example">
+                                        <option value="1" selected>Active</option>
+                                        <option value="2">Inactive</option>
+                                        <option value="3">Suspended</option>
+                                    </select>
+                                    <label for="modalEditUserStatus">Status</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalEditTaxID" name="modalEditTaxID"
+                                        class="form-control modal-edit-tax-id" placeholder="123 456 7890" />
+                                    <label for="modalEditTaxID">Tax ID</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text">US (+1)</span>
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" id="modalEditUserPhone" name="modalEditUserPhone"
+                                            class="form-control phone-number-mask" value="+1 609 933 4422"
+                                            placeholder="+1 609 933 4422" />
+                                        <label for="modalEditUserPhone">Phone Number</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input id="TagifyLanguageSuggestion" name="TagifyLanguageSuggestion"
+                                        class="form-control h-auto" placeholder="select language" value="English">
+                                    <label for="TagifyLanguageSuggestion">Language</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <select id="modalEditUserCountry" name="modalEditUserCountry"
+                                        class="select2 form-select" data-allow-clear="true">
+                                        <option value="">Select</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="Belarus">Belarus</option>
+                                        <option value="Brazil">Brazil</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="China">China</option>
+                                        <option value="France">France</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="India" selected>India</option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="Israel">Israel</option>
+                                        <option value="Italy">Italy</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="Korea">Korea, Republic of</option>
+                                        <option value="Mexico">Mexico</option>
+                                        <option value="Philippines">Philippines</option>
+                                        <option value="Russia">Russian Federation</option>
+                                        <option value="South Africa">South Africa</option>
+                                        <option value="Thailand">Thailand</option>
+                                        <option value="Turkey">Turkey</option>
+                                        <option value="Ukraine">Ukraine</option>
+                                        <option value="United Arab Emirates">United Arab Emirates</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="United States">United States</option>
+                                    </select>
+                                    <label for="modalEditUserCountry">Country</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" id="editBillingAddress" />
+                                    <label for="editBillingAddress" class="text-heading">Use as a billing address?</label>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center d-flex flex-wrap justify-content-center gap-4 row-gap-4">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                                    aria-label="Close">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Edit User Modal -->
+
+        <!-- Add New Address Modal -->
+        <div class="modal fade" id="addNewAddress" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-simple modal-add-new-address">
+                <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body p-0">
+                        <div class="text-center mb-6">
+                            <h4 class="address-title mb-2">Add New Address</h4>
+                            <p class="address-subtitle">Add new address for express delivery</p>
+                        </div>
+                        <form id="addNewAddressForm" class="row g-5" onsubmit="return false">
+
+                            <div class="col-12">
+                                <div class="row g-5">
+                                    <div class="col-md mb-md-0">
+                                        <div class="form-check custom-option custom-option-basic">
+                                            <label class="form-check-label custom-option-content" for="customRadioHome">
+                                                <input name="customRadioTemp" class="form-check-input" type="radio"
+                                                    value="" id="customRadioHome" checked />
+                                                <span class="custom-option-header">
+                                                    <span class="h6 mb-0 d-flex align-items-center"><i
+                                                            class="ri-home-smile-2-line ri-20px me-1"></i>Home</span>
+                                                </span>
+                                                <span class="custom-option-body">
+                                                    <small>Delivery time (9am – 9pm)</small>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md mb-md-0">
+                                        <div class="form-check custom-option custom-option-basic">
+                                            <label class="form-check-label custom-option-content" for="customRadioOffice">
+                                                <input name="customRadioTemp" class="form-check-input" type="radio"
+                                                    value="" id="customRadioOffice" />
+                                                <span class="custom-option-header">
+                                                    <span class="h6 mb-0 d-flex align-items-center"><i
+                                                            class="ri-building-line ri-20px me-1"></i>Office</span>
+                                                </span>
+                                                <span class="custom-option-body">
+                                                    <small>Delivery time (9am – 5pm) </small>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalAddressFirstName" name="modalAddressFirstName"
+                                        class="form-control" placeholder="John" />
+                                    <label for="modalAddressFirstName">First Name</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalAddressLastName" name="modalAddressLastName"
+                                        class="form-control" placeholder="Doe" />
+                                    <label for="modalAddressLastName">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating form-floating-outline">
+                                    <select id="modalAddressCountry" name="modalAddressCountry"
+                                        class="select2 form-select" data-allow-clear="true">
+                                        <option value="">Select</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="Belarus">Belarus</option>
+                                        <option value="Brazil">Brazil</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="China">China</option>
+                                        <option value="France">France</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="India">India</option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="Israel">Israel</option>
+                                        <option value="Italy">Italy</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="Korea">Korea, Republic of</option>
+                                        <option value="Mexico">Mexico</option>
+                                        <option value="Philippines">Philippines</option>
+                                        <option value="Russia">Russian Federation</option>
+                                        <option value="South Africa">South Africa</option>
+                                        <option value="Thailand">Thailand</option>
+                                        <option value="Turkey">Turkey</option>
+                                        <option value="Ukraine">Ukraine</option>
+                                        <option value="United Arab Emirates">United Arab Emirates</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="United States">United States</option>
+                                    </select>
+                                    <label for="modalAddressCountry">Country</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalAddressAddress1" name="modalAddressAddress1"
+                                        class="form-control" placeholder="12, Business Park" />
+                                    <label for="modalAddressAddress1">Address Line 1</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalAddressAddress2" name="modalAddressAddress2"
+                                        class="form-control" placeholder="Mall Road" />
+                                    <label for="modalAddressAddress2">Address Line 2</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalAddressLandmark" name="modalAddressLandmark"
+                                        class="form-control" placeholder="Nr. Hard Rock Cafe" />
+                                    <label for="modalAddressLandmark">Landmark</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalAddressCity" name="modalAddressCity"
+                                        class="form-control" placeholder="Los Angeles" />
+                                    <label for="modalAddressCity">City</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalAddressState" name="modalAddressState"
+                                        class="form-control" placeholder="California" />
+                                    <label for="modalAddressLandmark">State</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating form-floating-outline">
+                                    <input type="text" id="modalAddressZipCode" name="modalAddressZipCode"
+                                        class="form-control" placeholder="99950" />
+                                    <label for="modalAddressZipCode">Zip Code</label>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-6">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" id="billingAddress" />
+                                    <label for="billingAddress">Use as a billing address?</label>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-6 d-flex flex-wrap justify-content-center gap-4 row-gap-4">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                                    aria-label="Close">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Add New Address Modal -->
     </div>
 @endsection

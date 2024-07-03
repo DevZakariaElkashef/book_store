@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\College;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,7 @@ class SubjectFactory extends Factory
         return [
             'name_ar' => fake()->word(),
             'name_en' => fake()->word(),
-            'college_id' => rand(1, 20)
+            'college_id' => College::factory()
         ];
     }
 }

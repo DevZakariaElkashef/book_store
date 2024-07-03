@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Subject;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,7 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject_id' => rand(1, 20),
+            'subject_id' => Subject::factory(),
             'name_ar' => fake()->word(),
             'name_en' => fake()->word(),
             'description_ar' => fake()->sentence(),

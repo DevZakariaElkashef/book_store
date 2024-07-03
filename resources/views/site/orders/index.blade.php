@@ -2,6 +2,7 @@
 
 @php
     $totalCart = optional(auth()->user()->cart)->totalCart(auth()->id());
+    $taxCost = $totalCart * ($app->tax / 100);
 @endphp
 
 @section('css')
@@ -43,6 +44,8 @@
                         <form action="{{ route('site.orders.store') }}" class="mt-5" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+
+                            <input type="hidden" name="shipping" id="shippingInput">
 
                             <div class="form_group">
                                 <div class="bank_account">
@@ -100,7 +103,8 @@
                                 <label for="city_id">City</label>
                                 <select name="city_id" id="city_id" class="form-control">
                                     @foreach ($cities as $city)
-                                        <option value="{{ $city->id }}" @if($city->id == auth()->user()->city_id) selected @endif>{{ $city->name }}</option>
+                                        <option value="{{ $city->id }}"
+                                            @if ($city->id == auth()->user()->city_id) selected @endif>{{ $city->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -111,6 +115,8 @@
                                 <label for="address">Address</label>
                                 <textarea type="text" required name="address" class="form-control">{{ auth()->user()->address }}</textarea>
                             </div>
+
+
 
 
                             <div class="my-2">
@@ -166,6 +172,25 @@
                                     </div>
                                 </li>
 
+                                @if ($taxCost)
+                                    <li class="tax">
+                                        <span> الضريبة</span>
+                                        <div class="price d-flex align-items-center">
+                                            <span>
+                                                {{ $taxCost }} ر.س
+                                            </span>
+                                        </div>
+                                    </li>
+                                @endif
+
+
+                                <li class="shippingDiv d-none">
+                                    <span> الشحن </span>
+                                    <div class="price d-flex align-items-center">
+                                        <span id="shippingVal"></span>
+                                        <span>ر.س</span>
+                                    </div>
+                                </li>
 
 
                                 @if ($cart->coupon)
@@ -173,22 +198,20 @@
                                         <span> الخصم</span>
                                         <div class="price d-flex align-items-center">
                                             <span>
-                                                {{ $totalCart * ($cart->coupon->discount / 100) }} ر.س
+                                                {{ ($totalCart + $taxCost) * ($cart->coupon->discount / 100) }} ر.س
                                             </span>
                                         </div>
                                     </li>
                                 @endif
-
-
 
                                 <li>
                                     <span> التكلفة الاجمالية</span>
                                     <div class="price d-flex align-items-center">
                                         <span>
                                             @if ($cart->coupon)
-                                                {{ $totalCart - $totalCart * ($cart->coupon->discount / 100) }}
+                                                {{ $totalCart + $taxCost - ($totalCart + $taxCost) * ($cart->coupon->discount / 100) }}
                                             @else
-                                                {{ $totalCart }}
+                                                {{ $totalCart + $taxCost }}
                                             @endif
                                             ر.س
                                         </span>
@@ -240,6 +263,54 @@
                 marker.setPosition(event.latLng);
                 document.getElementById('latInput').value = event.latLng.lat();
                 document.getElementById('lngInput').value = event.latLng.lng();
+
+                updateShipping(event.latLng.lat(), event.latLng.lng());
+            });
+        }
+
+
+        function updateShipping(lat, lng) {
+            $.ajax({
+                type: "get",
+                url: "/calc-shipping",
+                data: {
+                    lat: lat,
+                    lng: lng
+                },
+                success: function(response) {
+                    if (response.status) {
+                        if (response.shipping > 0) {
+                            $('.shippingDiv').removeClass('d-none');
+                            $('#shippingInput').val(response.shipping);
+                        } else {
+                            $('.shippingDiv').addClass('d-none');
+                        }
+
+                        // Recalculate total and discount
+                        const totalCart = parseFloat('{{ $totalCart }}');
+                        const taxCost = parseFloat('{{ $taxCost }}');
+                        const shippingCost = response.shipping;
+
+                        let discount = 0;
+                        let grandTotal = totalCart + taxCost + shippingCost;
+
+                        @if ($cart->coupon)
+                            discount = grandTotal * (parseFloat('{{ $cart->coupon->discount }}') / 100);
+                            grandTotal -= discount;
+                        @endif
+
+                        // Update discount and total in the DOM
+                        if (discount > 0) {
+                            $('.discount span:last-child').text(discount.toFixed(2) + ' ر.س');
+                        }
+
+                        $('.tax span:last-child').text(taxCost.toFixed(2) + ' ر.س');
+                        $('.shippingDiv span:last-child').text(shippingCost.toFixed(2) + ' ر.س');
+                        $('.card_info .price span:last-child').last().text(grandTotal.toFixed(2) + ' ر.س');
+                    } else {
+                        alert(response.message);
+                    }
+                }
             });
         }
     </script>

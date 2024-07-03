@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ContactType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,7 @@ class ContactFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'email' =>fake()->email(),
             'message' => fake()->sentence(),
-            'contact_type_id' => rand(1, 100)
+            'contact_type_id' => ContactType::factory()
         ];
     }
 }
