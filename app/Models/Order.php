@@ -51,26 +51,14 @@ class Order extends Model
         return $query->where('payment_status', '!=', '2');
     }
 
-    public function subTotalWithTax()
-    {
-        $taxRate = Setting::first()->tax / 100;
-        return $this->sub_total * (1 + $taxRate);
-    }
-
-    // public function totalWithDiscount()
-    // {
-    //     $subWithTotal = $this->subTotalWithTax();
-    //     $coupon
-    // }
-
     public function getPaymentMethodAttribute(): string
     {
         switch ($this->attributes['payment_method']) {
             case '0':
-                return __("online payment method");
+                return "online payment method";
 
             case '1':
-                return __("bank transfer method	");
+                return "bank transfer method";
 
 
             default:

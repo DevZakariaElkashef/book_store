@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Order;
-use App\Exports\OrderExport;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Requests\StoreOrderRequest;
 use App\Models\Bank;
 use App\Models\Book;
 use App\Models\City;
-use App\Models\OrderStatus;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderStatus;
+use App\Exports\OrderExport;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\OrderUpdateService;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\StoreOrderRequest;
 
 class OrderController extends Controller
 {
+    protected $orderUpdateService;
+
+    public function __construct(OrderUpdateService $orderUpdateService)
+    {
+        $this->orderUpdateService = $orderUpdateService;
+    }
     public function index(Request $request)
     {
         $ordersQuery = Order::query();
@@ -103,8 +110,10 @@ class OrderController extends Controller
     public function show(string $id)
     {
         $order = Order::findOrFail($id);
+        $orderStatuses = OrderStatus::all();
+        $users = User::active()->get();
 
-        return view('dashboard.pages.orders.show', compact('order'));
+        return view('dashboard.pages.orders.show', compact('order', 'orderStatuses', 'users'));
     }
 
     /**
@@ -112,30 +121,28 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        $order = Order::findOrFail($id);
-
-        return view('dashboard.pages.orders.edit', compact('order'));
+        return to_route('orders.show', $id);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreOrderRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         $order = Order::findOrFail($id);
-
         $data = $request->all();
 
-        $order->update($data);
+        $this->orderUpdateService->updateOrder($order, $data);
 
-        // retun with toaster message
+        // Return with toaster message
         $message = [
             'status' => true,
             'content' => __('updated successfully')
         ];
 
-        return to_route('orders.index')->with('message', $message);
+        return to_route('orders.show', $order->id)->with('message', $message);
     }
+
 
     /**
      * Remove the specified resource from storage.
