@@ -5,7 +5,7 @@
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
                 <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
-                <li><a href="{{ route('site.profile.index') }}">{{ __('Profile') }}</a></li>
+                <li><a href="{{ route('site.profile.index') }}">{{ __('Personal profile') }}</a></li>
             </ul>
         </div>
     </div>

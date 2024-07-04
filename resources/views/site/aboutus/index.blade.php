@@ -32,7 +32,7 @@
         <div class="container-fluid pd-50">
             <div class="section_header d-flex align-items-center">
                 <img src="{{ asset('site/assets/images/book2.svg') }}" alt="">
-                <h2>{{ __("about_us") }}</h2>
+                <h2>{{ __("About Us") }}</h2>
             </div>
             @foreach ($abouts as $about)
                 <div class="row align-items-center mt-3">
