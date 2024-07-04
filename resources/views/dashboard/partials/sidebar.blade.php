@@ -206,6 +206,12 @@
                     </a>
                 </li>
 
+                <li class="menu-item {{ isActiveRoute('banks.index') }}">
+                    <a href="{{ route('banks.index') }}" class="menu-link">
+                        <div data-i18n="Bank Settings">Bank Settings</div>
+                    </a>
+                </li>
+
                 <li class="menu-item {{ isActiveRoute('sliders.index') }}">
                     <a href="{{ route('sliders.index') }}" class="menu-link">
                         <div data-i18n="Header Images">Header Images</div>

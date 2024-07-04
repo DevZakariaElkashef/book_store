@@ -215,4 +215,20 @@ class BookController extends Controller
         ];
         return back()->with('message', $message);
     }
+
+
+
+
+    public function getPrice(Request $request)
+    {
+
+        $book = Book::where('id', $request->book_id)->first();
+
+        if ($book) {
+            return response()->json([
+                'success' => true,
+                'price' => $book->price
+            ]);
+        }
+    }
 }

@@ -61,7 +61,7 @@ class OrderController extends Controller
             $item->delete();
         }
 
-        $request->user()->cart->updated(['coupon_id' => null]);
+        $request->user()->cart->update(['coupon_id' => null]);
 
         return redirect()->route('orders.success');
     }
@@ -75,7 +75,7 @@ class OrderController extends Controller
             $item->delete();
         }
 
-        $request->user()->cart->updated(['coupon_id' => null]);
+        $request->user()->cart->update(['coupon_id' => null]);
 
         return redirect()->route('orders.success');
     }

@@ -1,25 +1,26 @@
 <?php
 
-use App\Http\Controllers\Dashboard\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\BankController;
 use App\Http\Controllers\Dashboard\BookController;
 use App\Http\Controllers\Dashboard\CityController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\PageController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\CouponController;
 use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\AboutusController;
 use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\ContactTypeController;
 use App\Http\Controllers\Dashboard\HeaderImageController;
 use App\Http\Controllers\Dashboard\NotificationController;
-use App\Http\Controllers\Dashboard\SettingController;
 
 // auth
 Route::get('login', [AuthController::class, 'loginPage'])->name('dashboard.login_page');
@@ -83,6 +84,7 @@ Route::middleware('admin_auth')->group(function () {
 
 
     // books
+    Route::get('get-book-price', [BookController::class, 'getPrice'])->name('books.price');
     Route::get('/books/pagination', [BookController::class, 'pagination'])->name('books.pagination');
     Route::get('books-search', [BookController::class, 'search'])->name('books.search');
     Route::get('books-export', [BookController::class, 'export'])->name('books.export');
@@ -97,6 +99,15 @@ Route::middleware('admin_auth')->group(function () {
     Route::get('coupons-export', [CouponController::class, 'export'])->name('coupons.export');
     Route::delete('coupons-delete', [CouponController::class, 'delete'])->name('coupons.delete');
     Route::resource('coupons', CouponController::class);
+
+
+
+    // banks
+    Route::get('/banks/pagination', [BankController::class, 'pagination'])->name('banks.pagination');
+    Route::get('banks-search', [BankController::class, 'search'])->name('banks.search');
+    Route::get('banks-export', [BankController::class, 'export'])->name('banks.export');
+    Route::delete('banks-delete', [BankController::class, 'delete'])->name('banks.delete');
+    Route::resource('banks', BankController::class);
 
 
 

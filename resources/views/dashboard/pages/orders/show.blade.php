@@ -49,7 +49,8 @@
                 <div class="card mb-6 mt-2">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="card-title m-0">Order details</h5>
-                        <h6 class="m-0"><a href=" javascript:void(0)">Edit</a></h6>
+                        <h6 class="m-0"><a href=" javascript:void(0)" data-bs-toggle="modal"
+                                data-bs-target="#orderItemModal">Edit</a></h6>
                     </div>
                     <div class="card-datatable table-responsive pb-5">
                         <table class="datatables-order-details table">
@@ -75,9 +76,9 @@
                                             @endif
                                             {{ $item->book->name }}
                                         </td>
-                                        <td>{{ $item->book->price }}</td>
+                                        <td>{{ $item->price }}</td>
                                         <td>{{ $item->qty }}</td>
-                                        <td>{{ $item->qty * $item->book->price }}</td>
+                                        <td>{{ $item->qty * $item->price }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -352,7 +353,8 @@
                                         class="form-control">
                                     <label for="transaction_image">Bank Transfer Image</label>
                                 </div>
-                                <img width="100" height="100" src="{{ asset($order->transaction_image) }}" alt="">
+                                <img width="100" height="100" src="{{ asset($order->transaction_image) }}"
+                                    alt="">
                             </div>
 
 
@@ -389,5 +391,224 @@
             </div>
         </div>
         <!--/ Add New Address Modal -->
+
+        <!-- Add New Address Modal -->
+        <div class="modal fade" id="orderItemModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-simple modal-add-new-address">
+                <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body p-0">
+                        <div class="text-center mb-6">
+                            <h4 class="address-title mb-2">Payment Details</h4>
+                            <p class="address-subtitle">change payment details</p>
+                        </div>
+                        <form id="orderItemModalForm" class="row g-5" action="{{ route('orders.update', $order->id) }}"
+                            method="POST">
+                            @csrf
+                            @method('PUT')
+
+
+                            <div class="books">
+                                @foreach ($order->items as $item)
+                                    <div class="row justify-content-center align-items-end book mb-2">
+                                        <div class="col-md-2">
+                                            <label for="books">Books</label>
+                                            <select class="form-control book-select" name="book[]">
+                                                <option disabled selected>Select Book</option>
+                                                @foreach ($books as $book)
+                                                    <option value="{{ $book->id }}"
+                                                        @if ($book->id == $item->book_id) selected @endif>
+                                                        {{ $book->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="price">Price</label>
+                                            <input type="number" class="form-control price-input" name="price[]"
+                                                placeholder="Price" value="{{ $item->price }}" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="count">Count</label>
+                                            <input type="number" class="form-control count-input" name="count[]"
+                                                placeholder="Count" min="1" value="{{ $item->qty }}">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="total">Total</label>
+                                            <input type="number" class="form-control total-input" name="total[]"
+                                                placeholder="Total" value="{{ $item->qty * $item->price }}"
+                                                readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-danger removeBookButton">Delete</button>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div class="text-end">
+                                <button type="button" class="btn btn-primary mb-2" id="addBookButton">Add Book</button>
+                            </div>
+
+                            <div class="totals row mt-4">
+                                <div class="form-group col-md-6">
+                                    <label for="subtotal">Sub total</label>
+                                    <input type="number" name="sub_total" id="subtotal"
+                                        value="{{ $order->sub_total }}" class="form-control" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="tax">Tax</label>
+                                    <input type="number" name="tax" id="tax" value="{{ $order->tax }}"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="discount">Discount</label>
+                                    <input type="number" name="discount" id="discount" value="{{ $order->discount }}"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="shipping">Shipping</label>
+                                    <input type="number" name="shipping" id="shipping" value="{{ $order->shipping }}"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="total">Total</label>
+                                    <input type="number" name="total" id="total" value="{{ $order->total }}"
+                                        class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-6 d-flex flex-wrap justify-content-center gap-4 row-gap-4">
+
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                                    aria-label="Close">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Add New Address Modal -->
     </div>
+@endsection
+
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            function updateTotals() {
+                let subtotal = 0;
+                $('.total-input').each(function() {
+                    subtotal += parseFloat($(this).val());
+                });
+
+                $('#subtotal').val(subtotal);
+                const tax = parseFloat($('#tax').val());
+                const discount = parseFloat($('#discount').val());
+                const shipping = parseFloat($('#shipping').val());
+                const total = subtotal + tax + shipping - discount;
+
+                $('#total').val(total);
+            }
+
+            function fetchBookPrice(bookId, callback) {
+                $.ajax({
+                    url: '{{ route('books.price') }}',
+                    method: 'GET',
+                    data: {
+                        book_id: bookId
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            callback(response.price);
+                        } else {
+                            alert('Failed to fetch book price.');
+                        }
+                    },
+                    error: function() {
+                        alert('Error fetching book price.');
+                    }
+                });
+            }
+
+            function addBookRow() {
+                const bookRow = `
+                <div class="row justify-content-center align-items-end book mb-2">
+                    <div class="col-md-2">
+                        <label for="books">Books</label>
+                        <select class="form-control book-select" name="book[]">
+                            <option disabled selected>Select Book</option>
+                            @foreach ($books as $book)
+                                <option value="{{ $book->id }}">{{ $book->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control price-input" name="price[]" placeholder="Price" readonly>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="count">Count</label>
+                        <input type="number" class="form-control count-input" name="count[]" placeholder="Count" min="1">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="total">Total</label>
+                        <input type="number" class="form-control total-input" name="total[]" placeholder="Total" readonly>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger removeBookButton">Delete</button>
+                    </div>
+                </div>
+            `;
+                $('.books').append(bookRow);
+            }
+
+            $('#addBookButton').click(function() {
+                addBookRow();
+            });
+
+            $('.books').on('click', '.removeBookButton', function() {
+                $(this).closest('.row.book').remove();
+                updateTotals();
+            });
+
+            $('.books').on('change', '.book-select', function() {
+                const $row = $(this).closest('.row.book');
+                const bookId = $(this).val();
+                const $priceInput = $row.find('.price-input');
+                const $countInput = $row.find('.count-input');
+                const $totalInput = $row.find('.total-input');
+
+                if (bookId) {
+                    fetchBookPrice(bookId, function(price) {
+                        $priceInput.val(price);
+                        const count = $countInput.val() || 0;
+                        $totalInput.val(count * price);
+                        updateTotals();
+                    });
+                } else {
+                    $priceInput.val('');
+                    $totalInput.val('');
+                    updateTotals();
+                }
+            });
+
+            $('.books').on('input', '.count-input', function() {
+                const $row = $(this).closest('.row.book');
+                const count = $(this).val();
+                const price = $row.find('.price-input').val();
+                const $totalInput = $row.find('.total-input');
+
+                if (price) {
+                    $totalInput.val(count * price);
+                    updateTotals();
+                }
+            });
+
+            $('#tax, #discount, #shipping').on('input', function() {
+                updateTotals();
+            });
+        });
+    </script>
 @endsection

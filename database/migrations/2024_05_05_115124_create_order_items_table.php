@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('book_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->integer('qty')->nullable();
+            $table->decimal('price')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

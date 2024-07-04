@@ -112,8 +112,9 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $orderStatuses = OrderStatus::all();
         $users = User::active()->get();
+        $books = Book::active()->get();
 
-        return view('dashboard.pages.orders.show', compact('order', 'orderStatuses', 'users'));
+        return view('dashboard.pages.orders.show', compact('order', 'orderStatuses', 'users', 'books'));
     }
 
     /**

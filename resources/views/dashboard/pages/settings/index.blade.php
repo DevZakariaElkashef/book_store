@@ -4,7 +4,6 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Help Center /</span> Article</h4>
 
         <div class="row">
             <!-- Categories -->
@@ -17,6 +16,7 @@
                     <div class="card-body">
                         <form action="{{ route('settings.update') }}" method="post" enctype="multipart/form-data">
                             @csrf
+
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
