@@ -25,7 +25,7 @@ class ReviewBookRequest extends FormRequest
     {
         return [
             'order_item_id' => 'required|exists:order_items,id',
-            'star' => 'required|integer|lt:5|gt:0',
+            'star' => 'required|integer|lt:6|gt:0',
             'comment' => 'required|string'
         ];
     }

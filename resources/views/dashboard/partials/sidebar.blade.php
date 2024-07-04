@@ -182,6 +182,14 @@
         </li>
 
 
+        <li class="menu-item {{ isActiveRoute('reviews.index') }}">
+            <a href="{{ route('reviews.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-star-box"></i>
+                <div data-i18n="Reviews">Reviews</div>
+            </a>
+        </li>
+
+
 
         <!-- resources -->
         <li class="menu-header fw-medium mt-4">
@@ -209,6 +217,12 @@
                 <li class="menu-item {{ isActiveRoute('banks.index') }}">
                     <a href="{{ route('banks.index') }}" class="menu-link">
                         <div data-i18n="Bank Settings">Bank Settings</div>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ isActiveRoute('shippings.index') }}">
+                    <a href="{{ route('shippings.index') }}" class="menu-link">
+                        <div data-i18n="Delivery Settings">Delivery Settings</div>
                     </a>
                 </li>
 

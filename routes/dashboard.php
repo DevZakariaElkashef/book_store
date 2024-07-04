@@ -21,6 +21,8 @@ use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\ContactTypeController;
 use App\Http\Controllers\Dashboard\HeaderImageController;
 use App\Http\Controllers\Dashboard\NotificationController;
+use App\Http\Controllers\Dashboard\ReviewController;
+use App\Http\Controllers\Dashboard\ShippingController;
 
 // auth
 Route::get('login', [AuthController::class, 'loginPage'])->name('dashboard.login_page');
@@ -120,6 +122,15 @@ Route::middleware('admin_auth')->group(function () {
 
 
 
+    // reviews
+    Route::get('/reviews/pagination', [ReviewController::class, 'pagination'])->name('reviews.pagination');
+    Route::get('reviews-search', [ReviewController::class, 'search'])->name('reviews.search');
+    Route::get('reviews-export', [ReviewController::class, 'export'])->name('reviews.export');
+    Route::delete('reviews-delete', [ReviewController::class, 'delete'])->name('reviews.delete');
+    Route::resource('reviews', ReviewController::class);
+
+
+
     // orders
     Route::get('/orders/pagination', [OrderController::class, 'pagination'])->name('orders.pagination');
     Route::get('orders-search', [OrderController::class, 'search'])->name('orders.search');
@@ -167,6 +178,10 @@ Route::middleware('admin_auth')->group(function () {
     // settings
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::Post('settings-udpate', [SettingController::class, 'update'])->name('settings.update');
+
+    // settings
+    Route::get('shippings', [ShippingController::class, 'index'])->name('shippings.index');
+    Route::Post('shippings-udpate', [ShippingController::class, 'update'])->name('shippings.update');
 
 
     // notifications

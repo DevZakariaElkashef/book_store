@@ -9,6 +9,9 @@
                 <a href="{{ route('banks.index') }}" class="nav-link {{ isActiveRoute('banks.index') }}">Bank Settings</a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('shippings.index') }}" class="nav-link {{ isActiveRoute('shippings.index') }}">Delivery Settings</a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('sliders.index') }}" class="nav-link {{ isActiveRoute('sliders.index') }}">Header Images</a>
             </li>
             <li class="nav-item">

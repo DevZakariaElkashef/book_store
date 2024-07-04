@@ -40,7 +40,7 @@
 
                                         @foreach ($orders as $order)
                                             <div class="order_card">
-                                                <div class="status">{{ $order->status->name ?? '' }}</div>
+                                                <div class="status" style="background-color: {{ $order->status->color }} !important; color: #FFFFFF;">{{ $order->status->name ?? '' }}</div>
                                                 <div class="card_header"
                                                     data-url="{{ route('site.orders.show', $order->id) }}">
                                                     <h5>رقم الطلب <span>#{{ $order->id }}</span> </h5>
