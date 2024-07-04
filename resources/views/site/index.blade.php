@@ -22,32 +22,32 @@
                         <div class="row align-items-end">
                             <div class="col-sm-12 col-md-6 col-lg-3">
                                 <div class="form-group">
-                                    <label for="">أسم الكتاب</label>
+                                    <label for="">{{ __('Book name') }}</label>
                                     <input type="text" class="form-control" placeholder="العلم و الايمان">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-2">
                                 <div class="form-group">
-                                    <label for="">قسم الكتاب</label>
+                                    <label for="">{{ __('Subject') }}</label>
                                     <input type="text" class="form-control" placeholder="العلوم الاسلامية">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-2">
                                 <div class="form-group">
-                                    <label for="">أسم المؤلف</label>
+                                    <label for="">{{ __('Author') }}</label>
                                     <input type="text" class="form-control" placeholder="مصطفي محمود">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-2">
                                 <div class="form-group">
-                                    <label for="">أسم الجامعة</label>
+                                    <label for="">{{ __('University') }}</label>
                                     <input type="text" class="form-control" placeholder=" جامعة الملك فهد">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-2">
                                 <button>
                                     <i class="fa fa-search"></i>
-                                    <span>بحث</span>
+                                    <span>{{ __('Search') }}</span>
                                 </button>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
         <div class="container-fluid pd-50">
             <div class="section_header d-flex align-items-center justify-content-center">
                 <img src="site/assets/images/book2.svg" alt="">
-                <h5 class="ms-2 mt-1">أختر نوع الكتب </h5>
+                <h5 class="ms-2 mt-1">{{ __('Choose the type of books') }} </h5>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
@@ -72,12 +72,12 @@
                             <img src="site/assets/images/type-1.svg" alt="">
                         </div>
                         <div class="card-body">
-                            <h5>الجامعات</h5>
+                            <h5>{{ __('Universities') }}</h5>
                             <p>
-                                “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+                                {{ $app->short_description }}
                             </p>
                             <a href="{{ route('site.universites.index') }}">
-                                تسوق الان
+                                {{ __('Shop now') }}
                             </a>
                         </div>
                     </div>
@@ -90,10 +90,10 @@
                         <div class="card-body">
                             <h5>{{ __('used books') }}</h5>
                             <p>
-                                “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+                                {{ $app->short_description }}
                             </p>
                             <a href="{{ route('site.usedbooks.index') }}">
-                                تسوق الان
+                                {{ __('Shop now') }}
                             </a>
                         </div>
                     </div>
@@ -109,9 +109,9 @@
                 <div class="section_header d-flex align-items-center justify-content-between">
                     <div class="wrap d-flex align-items-center">
                         <img src="site/assets/images/book2.svg" alt="">
-                        <h5 class="ms-2 mt-1">أحدث المنتجات</h5>
+                        <h5 class="ms-2 mt-1">{{ __('Latest products') }}</h5>
                     </div>
-                    <a href="{{ route('site.books.index', ['sort' => 'latest']) }}">مشاهدة المزيد</a>
+                    <a href="{{ route('site.books.index', ['sort' => 'latest']) }}">{{ __('see more') }}</a>
                 </div>
                 <div class="row">
                     @foreach ($latestBooks as $book)
@@ -135,7 +135,7 @@
                                 <div class="card-body ms-3">
                                     <h5>{{ $book->name }}</h5>
                                     <p>{{ Str::limit($book->description, $strLimit) }}</p>
-                                    <span class="price">{{ $book->price }} <span> {{ __('SAR') }}</span></span>
+                                    <span class="price">{{ $book->price }} <span> {{ __('sar') }}</span></span>
                                     <div class="options">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modaAddAdress"
                                             data-id="{{ $book->id }}" data-count="{{ bookCartCount($book->id) }}"
@@ -143,7 +143,7 @@
                                             class="d-inline-flex align-items-center add-to-cart-btn">
 
                                             <i class="fa-solid fa-cart-shopping"></i>
-                                            <span>إضافة للسلة</span>
+                                            <span>{{ __('Add to cart') }}</span>
                                         </a>
                                         <a href="#">
                                             <i class="far fa-eye"> </i>
@@ -165,9 +165,9 @@
             <div class="section_header d-flex align-items-center justify-content-between">
                 <div class="wrap d-flex align-items-center">
                     <img src="site/assets/images/book2.svg" alt="">
-                    <h5 class="ms-2 mt-1">الأكثر مبيعا</h5>
+                    <h5 class="ms-2 mt-1">{{ __('best seller') }}</h5>
                 </div>
-                <a href="">مشاهدة المزيد</a>
+                <a href="">{{ __('see more') }}</a>
             </div>
             <div class="row">
 
@@ -200,7 +200,7 @@
                                         class="d-inline-flex align-items-center add-to-cart-btn">
 
                                         <i class="fa-solid fa-cart-shopping"></i>
-                                        <span>إضافة للسلة</span>
+                                        <span>{{ __('Add to cart') }}</span>
                                     </a>
                                     <a href="#">
                                         <i class="far fa-eye"> </i>
@@ -221,9 +221,9 @@
                 <div class="section_header d-flex align-items-center justify-content-between">
                     <div class="wrap d-flex align-items-center">
                         <img src="site/assets/images/book2.svg" alt="">
-                        <h5 class="ms-2 mt-1">العروض</h5>
+                        <h5 class="ms-2 mt-1">{{ __('Offers and discounts') }}</h5>
                     </div>
-                    <a href="{{ route('site.books.offers') }}">مشاهدة المزيد</a>
+                    <a href="{{ route('site.books.offers') }}">{{ __('see more') }}</a>
                 </div>
                 <div class="row">
                     @foreach ($offerBooks as $book)
@@ -245,7 +245,7 @@
                                     <div class="options">
                                         <a href="" class="d-inline-flex align-items-center">
                                             <i class="fa-solid fa-cart-shopping"></i>
-                                            <span>إضافة للسلة</span>
+                                            <span>{{ __('Add to cart') }}</span>
                                         </a>
                                         <a href="" data-bs-toggle="modal" data-bs-target="#modaAddAdress">
                                             <i class="far fa-eye"> </i>
@@ -269,7 +269,7 @@
             <div class="row align-items-center">
                 <div class="col-sm-12 col-md-12 col-lg-7">
                     <div class="contact_us_conent">
-                        <h5 class="head">اتصل بنا</h5>
+                        <h5 class="head">{{ __('Connect with us') }}</h5>
                         <p class="col-lg-6">
                             {{ $app->short_description }}
                         </p>
@@ -299,7 +299,7 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
-                                            <label for="name">أسم المستخدم</label>
+                                            <label for="name">{{ __('user name') }}</label>
                                             <input type="text" class="form-control" name="name" id="name"
                                                 placeholder="مروان ابراهيم">
                                             @error('name')
@@ -322,7 +322,7 @@
 
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
-                                            <label for="contact_type_id">الموضوع</label>
+                                            <label for="contact_type_id">{{ __('Subject') }}</label>
                                             <select name="contact_type_id" id="contact_type_id" class="form-control">
                                                 @foreach ($contactTypes as $type)
                                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
@@ -342,7 +342,7 @@
 
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="btn_submit">
-                                            <button class="btn" type="submit">ارسال</button>
+                                            <button class="btn" type="submit">{{ __('Send') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -374,7 +374,7 @@
                         </div>
 
                         <div class="section_header text-center">
-                            <h5>إضافة المنتج للسلة</h5>
+                            <h5>{{ __('Add product to cart') }}</h5>
                         </div>
                         <div class=" col-lg-6 mx-auto">
                             <div class="">
@@ -402,8 +402,8 @@
 
 
                                     <div class="options mt-5">
-                                        <button type="submit" class="confirm-add-to-cart">تأكيد</button>
-                                        <a href="">الغاء</a>
+                                        <button type="submit" class="confirm-add-to-cart">{{ __('confirm') }}</button>
+                                        <a href="">{{ __('Cancle') }}</a>
                                     </div>
                                 </form>
                             </div>

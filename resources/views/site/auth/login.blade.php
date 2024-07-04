@@ -5,13 +5,10 @@
 @endsection
 
 @section('content')
-
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="">الرئيسية</a></li>
-                <li><a href="">الجامعات</a></li>
-                <li><a href="">جامعة الملك عبد العزيز</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __('Home') }}</a></li>
             </ul>
         </div>
     </div>
@@ -23,8 +20,8 @@
                 <div class="col-sm-12 col-lg-6 p-0">
                     <div class="login-form">
                         <div class="login-form-head text-center">
-                            <h4>تسجيل الدخول</h4>
-                            <p>ادخل بياناتك حتي تتمكن من الدخول</p>
+                            <h4>{{ __('Login') }}</h4>
+                            <p>{{ __('Enter your data to be able to log in') }}</p>
                         </div>
                         <div class="form_img_1">
                             <img src="{{ asset('site/assets/images/login-1.png') }}" alt="">
@@ -37,7 +34,7 @@
                                         <div class="form-group w-100">
                                             <i class="fas fa-envelope"></i>
                                             <input type="email" name="email" id="email" class="form-control"
-                                                placeholder="البريد الالكترويي">
+                                                placeholder="{{ __("Email") }}">
                                             @error('email')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -47,7 +44,7 @@
                                         <div class="form-group w-100">
                                             <i class="fas fa-lock"></i>
                                             <input type="password" name="password" id="password" class="form-control"
-                                                placeholder="كلمة المرور">
+                                                placeholder="{{ __("Password") }}">
                                             @error('password')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -55,18 +52,17 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="forget-password">
-                                            <a href="{{ route("site.forget_password") }}">نسيت الرقم السري ؟</a>
+                                            <a href="{{ route('site.forget_password') }}">{{ __("forgot the secret number ?") }}</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="btn-more">
-                                            <button type="submit" class="btn-style text-white">تسجيل الدخول</button>
+                                            <button type="submit" class="btn-style text-white">{{ __("Login") }}</button>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="dont-hava-account">
-                                            <a href="{{ route('site.register_page') }}"><span>ليس لدي حساب</span> إنشاء حساب
-                                                جديد</a>
+                                            <a href="{{ route('site.register_page') }}"><span>{{ __("I dont have an account") }}</span> {{ __("Create new account") }} </a>
                                         </div>
                                     </div>
                                 </div>

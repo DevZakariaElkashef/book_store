@@ -13,7 +13,7 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
                 <li><a href="{{ route('site.profile.index') }}">{{ __('Profile') }}</a></li>
             </ul>
         </div>
@@ -43,10 +43,10 @@
                                                 <div class="status" style="background-color: {{ $order->status->color }} !important; color: #FFFFFF;">{{ $order->status->name ?? '' }}</div>
                                                 <div class="card_header"
                                                     data-url="{{ route('site.orders.show', $order->id) }}">
-                                                    <h5>رقم الطلب <span>#{{ $order->id }}</span> </h5>
-                                                    <p> تاريخ الطلب <span>{{ $order->created_at->format('Y-m-d') }}</span>
+                                                    <h5>{{ __("order number") }} <span>#{{ $order->id }}</span> </h5>
+                                                    <p> {{ __("The date of application") }} <span>{{ $order->created_at->format('Y-m-d') }}</span>
                                                     </p>
-                                                    <p>التاريخ المتوقع لوصول الطلب<span>5/5/2024</span> </p>
+                                                    <p>{{ __("Expected date of arrival of the order") }} <span> {{ $order->created_at->addDays($app->expected_order_delivered) }}</span> </p>
                                                 </div>
 
                                                 <hr>
@@ -56,7 +56,7 @@
                                                     <ul class="list-unstyled">
                                                         <li>
                                                             <i class="fas fas fas fa-map-marker-alt"></i>
-                                                            <span>عنوان توصيل الطلب</span>
+                                                            <span>{{ __("Order delivery address") }}</span>
                                                         </li>
                                                         <li>
                                                             <span>
@@ -70,7 +70,7 @@
                                                     @if (in_array($order->order_status_id, [1, 2, 3]))
                                                         <a href="#" class="cancle-order-btn" data-bs-toggle="modal"
                                                             data-bs-target="#modaAddAdress" data-id="{{ $order->id }}">
-                                                            الغاء الطلب
+                                                            {{ __("Cancelling order") }}
                                                         </a>
                                                     @endif
                                                     <div class="price">{{ $order->total }} ر.س</div>

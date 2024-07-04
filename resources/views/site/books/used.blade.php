@@ -40,7 +40,7 @@
             </div>
             <div class="container-fluid pd-50">
                 <div class="breadcrumb_content">
-                    <h5>جامعة الملك عبد العزيز</h5>
+                    <h5>{{ __("Used Books") }}</h5>
                     <p class="col-lg-6 mx-auto">
                         {{ $app->short_description }}
                     </p>

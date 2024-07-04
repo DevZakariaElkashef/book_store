@@ -23,10 +23,8 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="">الرئيسية</a></li>
-                <li><a href="">الجامعات</a></li>
-                <li><a href="">جامعة الملك عبد العزيز</a></li>
-                <li><a href="">كلية الهندسة</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __('Home') }}</a></li>
+                <li><a href="#">{{ __('Checkout') }}</a></li>
             </ul>
         </div>
     </div>
@@ -38,8 +36,8 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <div class="cart_page_info">
-                        <h5>الدفع الالكتروني</h5>
-                        <p>من فضلك اختر طريقة الدفع</p>
+                        <h5>{{ __("Electronic payment") }}</h5>
+                        <p>{{ __("Please choose a payment method") }}</p>
 
                         <form action="{{ route('site.orders.store') }}" class="mt-5" method="POST"
                             enctype="multipart/form-data">
@@ -60,7 +58,7 @@
                                                         <img src="{{ asset('site/assets/images/bank-1.png') }}"
                                                             alt="">
                                                     </div>
-                                                    <h5>بطاقة ائتمانية</h5>
+                                                    <h5>{{ __("credit card") }}</h5>
                                                 </div>
                                             </label>
                                         </div>
@@ -73,7 +71,7 @@
                                                         <img src="{{ asset('site/assets/images/bank-2.png') }}"
                                                             alt="">
                                                     </div>
-                                                    <h5>حوالة بنكية</h5>
+                                                    <h5>{{ __("Bank transfer") }}</h5>
                                                 </div>
                                             </label>
                                         </div>
@@ -82,25 +80,25 @@
                             </div>
 
                             <div class="my-2">
-                                <label for="name">Name</label>
+                                <label for="name">{{ __("Name") }}</label>
                                 <input type="text" disabled name="name" class="form-control"
                                     value="{{ auth()->user()->name }}">
                             </div>
 
                             <div class="my-2">
-                                <label for="phone">Phone</label>
+                                <label for="phone">{{ __("Phone") }}</label>
                                 <input type="text" disabled name="phone" class="form-control"
                                     value="{{ auth()->user()->phone }}">
                             </div>
 
                             <div class="my-2">
-                                <label for="email">Email</label>
+                                <label for="email">{{ __("Email") }}</label>
                                 <input type="email" disabled name="email" class="form-control"
                                     value="{{ auth()->user()->email }}">
                             </div>
 
                             <div class="my-2">
-                                <label for="city_id">City</label>
+                                <label for="city_id">{{ __("City") }}</label>
                                 <select name="city_id" id="city_id" class="form-control">
                                     @foreach ($cities as $city)
                                         <option value="{{ $city->id }}"
@@ -112,7 +110,7 @@
 
 
                             <div class="my-2">
-                                <label for="address">Address</label>
+                                <label for="address">{{ __("Address") }}</label>
                                 <textarea type="text" required name="address" class="form-control">{{ auth()->user()->address }}</textarea>
                             </div>
 
@@ -120,7 +118,7 @@
 
 
                             <div class="my-2">
-                                <label for="note">Note</label>
+                                <label for="note">{{ __("Note") }}</label>
                                 <textarea type="text" name="note" class="form-control">{{ old('note') }}</textarea>
                             </div>
 
@@ -135,7 +133,7 @@
 
 
                             <div class="mt-3">
-                                <button type="submit" class="btn btn-primary">Order</button>
+                                <button type="submit" class="btn btn-primary">{{ __("Order") }}</button>
                             </div>
 
                         </form>
@@ -145,13 +143,13 @@
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <div class="buy_basket">
                         <div class="card_header">
-                            <h5>سلة المشتريات</h5>
+                            <h5>{{ __("shopping basket") }}</h5>
                         </div>
                         <div class="card_info">
                             <ul class="list-unstyled">
 
                                 <li>
-                                    <span> عدد المنتجات</span>
+                                    <span> {{ __("Number of products") }}</span>
                                     <div class="price d-flex align-items-center">
                                         <span>
                                             @if (auth()->user() && auth()->user()->cart && auth()->user()->cart->items->count())
@@ -164,7 +162,7 @@
                                 </li>
 
                                 <li>
-                                    <span> تكلفة المنتجات</span>
+                                    <span> {{ __("Cost of products") }}</span>
                                     <div class="price d-flex align-items-center">
                                         <span>{{ $totalCart }}
 
@@ -174,7 +172,7 @@
 
                                 @if ($taxCost)
                                     <li class="tax">
-                                        <span> الضريبة</span>
+                                        <span> {{ __("Tax") }}</span>
                                         <div class="price d-flex align-items-center">
                                             <span>
                                                 {{ $taxCost }} ر.س
@@ -185,7 +183,7 @@
 
 
                                 <li class="shippingDiv d-none">
-                                    <span> الشحن </span>
+                                    <span> {{ __("Delivery Cost") }} </span>
                                     <div class="price d-flex align-items-center">
                                         <span id="shippingVal"></span>
                                         <span>ر.س</span>
@@ -195,7 +193,7 @@
 
                                 @if ($cart->coupon)
                                     <li class="discount">
-                                        <span> الخصم</span>
+                                        <span> {{ __("Discount") }}</span>
                                         <div class="price d-flex align-items-center">
                                             <span>
                                                 {{ ($totalCart + $taxCost) * ($cart->coupon->discount / 100) }} ر.س
@@ -205,7 +203,7 @@
                                 @endif
 
                                 <li>
-                                    <span> التكلفة الاجمالية</span>
+                                    <span> {{ __("Total") }}</span>
                                     <div class="price d-flex align-items-center">
                                         <span>
                                             @if ($cart->coupon)

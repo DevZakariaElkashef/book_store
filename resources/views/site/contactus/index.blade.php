@@ -4,8 +4,8 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="">الرئيسية</a></li>
-                <li><a href="">تواصل معنا</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
+                <li><a href="{{ route('site.contacts.index') }}">{{ __("Connect with us") }}</a></li>
             </ul>
         </div>
     </div>
@@ -15,7 +15,7 @@
             <div class="row align-items-center">
                 <div class="col-sm-12 col-md-12 col-lg-7">
                     <div class="contact_us_conent">
-                        <h5 class="head">اتصل بنا</h5>
+                        <h5 class="head">{{ __("Connect with us") }}</h5>
                         <p class="col-lg-6">{{ $app->slogan }}</p>
                         <div class="contact_icons">
                             <ul class="list-unstyled d-flex">
@@ -43,7 +43,7 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
-                                            <label for="name">أسم المستخدم</label>
+                                            <label for="name">{{ __("user name") }}</label>
                                             <input type="text" class="form-control" name="name" id="name"
                                                 placeholder="مروان ابراهيم">
                                             @error('name')
@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label for="email">{{ __('Email') }}</label>
                                             <input type="text" name="email" id="email" class="form-control"
-                                                placeholder="966 055 356757">
+                                                placeholder="test@mail.com">
                                             @error('email')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -66,7 +66,7 @@
 
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
-                                            <label for="contact_type_id">الموضوع</label>
+                                            <label for="contact_type_id">{{ __("Subject") }}</label>
                                             <select name="contact_type_id" id="contact_type_id" class="form-control">
                                                 @foreach ($contactTypes as $type)
                                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
@@ -86,7 +86,7 @@
 
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="btn_submit">
-                                            <button class="btn" type="submit">ارسال</button>
+                                            <button class="btn" type="submit">{{ __("Send") }}</button>
                                         </div>
                                     </div>
                                 </div>

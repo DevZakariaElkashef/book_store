@@ -4,7 +4,7 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
                 <li><a href="{{ route('site.profile.index') }}">{{ __('Profile') }}</a></li>
             </ul>
         </div>
@@ -28,7 +28,7 @@
                                     <div class="profile-left-data">
                                         <div class="profile-user-data">
                                             <div class="head text-center">
-                                                <h5>حسابي</h5>
+                                                <h5>{{ __('Personal profile') }}</h5>
                                             </div>
                                             <form action="{{ route('site.password.update') }}" method="POST"
                                                 enctype="multipart/form-data">
@@ -75,7 +75,8 @@
                                                     <div class="col-sm-12 col-lg-12">
                                                         <div class="btn-options">
                                                             <div class="btn-more">
-                                                                <button type="submit" class="btn-style">حفظ</button>
+                                                                <button type="submit"
+                                                                    class="btn-style">{{ __('Save') }}</button>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -40,19 +40,19 @@
     <nav id="menu">
         <ul>
             <li>
-                <a class="mobile-menu-item" @click="closeMenu" href="./index.html">الرئيسية</a>
+                <a class="mobile-menu-item" @click="closeMenu" href="{{ route("site.home") }}">{{ __("Home") }}</a>
             </li>
             <li>
-                <a class="mobile-menu-item" @click="closeMenu" href="./index.html">المتاجر</a>
+                <a class="mobile-menu-item" @click="closeMenu" href="{{ route("site.aboutus.index") }}">{{ __("About Us") }}</a>
             </li>
             <li>
-                <a class="mobile-menu-item" @click="closeMenu" href="./index.html">المتاجر</a>
+                <a class="mobile-menu-item" @click="closeMenu" href="{{ route('site.universites.index') }}">{{ __("Universities") }}</a>
             </li>
             <li>
-                <a class="mobile-menu-item" @click="closeMenu" href="./index.html">العروض</a>
+                <a class="mobile-menu-item" @click="closeMenu" href="{{ route('site.usedbooks.index') }}">{{ __("Used Books") }}</a>
             </li>
             <li>
-                <a class="mobile-menu-item" @click="closeMenu" href="./index.html">اتصل بنا</a>
+                <a class="mobile-menu-item" @click="closeMenu" href="{{ route('site.contacts.index') }}">{{ __("Connect with us") }}</a>
             </li>
         </ul>
     </nav>
@@ -90,12 +90,12 @@
                 </div>
                 <div class="col col-md-4 col-lg-2">
                     <div class="footer_links">
-                        <h5>لينكات سريعة</h5>
+                        <h5>{{ __("Quick links") }}</h5>
                         <ul class="list-unstyled mb-0">
-                            <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
-                            <li><a href="{{ route('site.aboutus.index') }}">من نحن </a></li>
-                            <li><a href="{{ route('site.universites.index') }}">الجامعات</a></li>
-                            <li><a href="{{ route('site.usedbooks.index') }}">الكتب المستعملة </a></li>
+                            <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
+                            <li><a href="{{ route('site.aboutus.index') }}">{{ __("About Us") }} </a></li>
+                            <li><a href="{{ route('site.universites.index') }}">{{ __('Universities') }}</a></li>
+                            <li><a href="{{ route('site.usedbooks.index') }}">{{ __("Used Books") }} </a></li>
                         </ul>
                     </div>
                 </div>
@@ -103,14 +103,14 @@
                     <div class="footer_links">
                         <h5>الدعم</h5>
                         <ul class="list-unstyled mb-0">
-                            <li><a href="{{ route('site.terms.index') }}">الشروط و الاحكام</a></li>
-                            <li><a href="{{ route('site.contacts.index') }}">اتصل بنا </a></li>
+                            <li><a href="{{ route('site.terms.index') }}">{{ __("Terms and Conditions") }}</a></li>
+                            <li><a href="{{ route('site.contacts.index') }}">{{ __("call us") }} </a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <div class="footer_follow">
-                        <h5 class="text-center">تابعنا عبر وسائل التواصل الاجتماعي</h5>
+                        <h5 class="text-center">{{ __("Follow us on social media") }}</h5>
                         <ul class="list-unstyled d-flex align-items-center text-center justify-content-center">
                             @if ($app && $app->facebook)
                                 <li>

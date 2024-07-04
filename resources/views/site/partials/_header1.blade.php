@@ -61,12 +61,12 @@
                         </a>
                         <div class="links">
                             <ul class="list-unstyled d-flex align-items-center">
-                                <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
-                                <li><a href="{{ route('site.aboutus.index') }}">من نحن </a></li>
-                                <li><a href="{{ route('site.universites.index') }}">الجامعات</a></li>
-                                <li><a href="{{ route('site.usedbooks.index') }}">الكتب المستعملة </a></li>
-                                <li><a href="{{ route('site.books.offers') }}">العروض والخصومات</a></li>
-                                <li><a href="{{ route('site.contacts.index') }}">اتصل بنا</a></li>
+                                <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
+                                <li><a href="{{ route('site.aboutus.index') }}">{{ __("About Us") }} </a></li>
+                                <li><a href="{{ route('site.universites.index') }}">{{ __("Universities") }}</a></li>
+                                <li><a href="{{ route('site.usedbooks.index') }}">{{ __("Used Books") }} </a></li>
+                                <li><a href="{{ route('site.books.offers') }}">{{ __("Offers and discounts") }}</a></li>
+                                <li><a href="{{ route('site.contacts.index') }}">{{ __("Connect with us") }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -86,18 +86,15 @@
                                         @auth
                                             <li><a class="dropdown-item" href="{{ route('site.profile.index') }}">حسابي</a></li>
                                             <li><a class="dropdown-item" href="#"
-                                                    onclick="$('#logoutForm').submit()">تسجيل الخروج</a></li>
+                                                    onclick="$('#logoutForm').submit()">{{ __("sign out") }}</a></li>
                                             <form id="logoutForm" class="d-none" action="{{ route('site.logout') }}"
                                                 method="post">
                                                 @csrf
 
                                             </form>
                                         @else
-                                            <li><a class="dropdown-item" href="{{ route('site.login_page') }}">تسجيل
-                                                    الدخول</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('site.register_page') }}">انشاء
-                                                    حساب
-                                                    جديد</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('site.login_page') }}">{{ __("Login") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('site.register_page') }}"> {{ __("Register") }} </a></li>
                                         @endauth
                                     </ul>
                                 </div>
@@ -109,7 +106,7 @@
                                             {{ auth()->user()->cart->items->count() }}
                                         </span>
                                     @endif
-                                    <img src="site/assets/images/cart.svg" alt="">
+                                    <img src="{{ asset('site/assets/images/cart.svg') }}" alt="">
                                 </a>
                             </li>
                         </ul>

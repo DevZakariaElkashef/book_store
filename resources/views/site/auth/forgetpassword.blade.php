@@ -16,8 +16,8 @@
                 <div class="col-sm-12 col-lg-6 p-0">
                     <div class="login-form">
                         <div class="login-form-head text-center">
-                            <h4>استعادة الرقم السري</h4>
-                            <p>ادخل بياناتك حتي تتمكن من الدخول</p>
+                            <h4>{{ __('Recover the password') }}</h4>
+                            <p>{{ __('Enter your data to be able to log in') }}</p>
                         </div>
                         <div class="form_img_1">
                             <img src="{{ asset('site/assets/images/login-1.png') }}" alt="">
@@ -31,13 +31,13 @@
                                         <div class="form-group w-100 mb-5">
                                             <i class="fas fa-envelope"></i>
                                             <input type="email" name="email" id="email" class="form-control"
-                                                placeholder="البريد الالكترويي">
+                                                placeholder="{{ __('Email') }}">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12">
                                         <div class="btn-more mt-5">
-                                            <button type="submit" class="btn-style text-white">تسجيل الدخول</button>
+                                            <button type="submit" class="btn-style text-white">{{ __('Login') }}</button>
                                         </div>
                                     </div>
 

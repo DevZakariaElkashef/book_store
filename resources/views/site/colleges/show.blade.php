@@ -8,24 +8,15 @@
             </div>
             <div class="container-fluid pd-50">
                 <div class="breadcrumb_content">
-                    <h5>جامعة الملك عبد العزيز</h5>
+                    <h5>{{ __("colleges") }}</h5>
                     <p class="col-lg-6 mx-auto">
-                        “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+                        {{ $app->short_description }}
                     </p>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <!-- <div class="custom_preadcrumb">
-                        <div class="container-fluid pd-50">
-                          <ul class="mt-5 list-unstyled d-flex align-items-center">
-                            <li><a href="">الرئيسية</a></li>
-                            <li><a href="">من نحن</a></li>
-                          </ul>
-                        </div>
-                      </div> -->
 
 
     <div class="subject_details">
@@ -34,10 +25,10 @@
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <div class="filter">
                         <div class="filter_header">
-                            <h5>فلترة</h5>
+                            <h5>{{ __("Filter") }}</h5>
                         </div>
                         <div class="filter_body">
-                            <h4 class="mt-3 ms-3">المواد</h4>
+                            <h4 class="mt-3 ms-3">{{ __("Subjects") }}</h4>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 @foreach ($colleges as $item)
                                     <div class="accordion-item">
@@ -77,15 +68,15 @@
                             <input type="text" class="form-control search-input" placeholder="مبادئ الهندسة المدنية">
                             <button>
                                 <i class="fas fa-search"></i>
-                                <span>بحث</span>
+                                <span>{{ __("Search") }}</span>
                             </button>
                         </form>
                     </div>
 
                     <div class="custom_preadcrumb">
                         <ul class="mt-5 list-unstyled d-flex align-items-center">
-                            <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
-                            <li><a href="{{ route('site.universites.index') }}">الجامعات</a></li>
+                            <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
+                            <li><a href="{{ route('site.universites.index') }}">{{ __("Universities") }}</a></li>
                             <li><a
                                     href="{{ route('site.universites.show', $college->university->id) }}">{{ $college->university->name }}</a>
                             </li>

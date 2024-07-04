@@ -20,7 +20,7 @@
                                 <input type="hidden" name="book_id" value="{{ $book->id }}">
                             </form>
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <span>إضافة للسلة</span>
+                            <span>{{ __("Add to cart") }}</span>
                         </a>
 
                         <a href="{{ route('site.favourite.toggle', ['book_id' => $book->id]) }}">

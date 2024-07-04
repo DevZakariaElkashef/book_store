@@ -8,9 +8,7 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="">الرئيسية</a></li>
-                <li><a href="">الجامعات</a></li>
-                <li><a href="">جامعة الملك عبد العزيز</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __('Home') }}</a></li>
             </ul>
         </div>
     </div>
@@ -22,8 +20,8 @@
                 <div class="col-sm-12 col-lg-6 p-0">
                     <div class="login-form">
                         <div class="login-form-head text-center">
-                            <h4>إنشاء حساب جديد</h4>
-                            <p>اخبرنا بياناتك لانشاء حساب لك</p>
+                            <h4>{{ __('Create new account') }}</h4>
+                            <p>{{ __('Tell us your data to create an account for you') }}</p>
                         </div>
                         <div class="form_img_1">
                             <img src="{{ asset('site/assets/images/login-1.png') }}" alt="">
@@ -58,7 +56,7 @@
                                         <div class="form-group w-100">
                                             <i class="fas fa-user"></i>
                                             <input type="text" name="name" id="name" class="form-control"
-                                                placeholder="أسم المستخدم">
+                                                placeholder="{{ __('user name') }}">
                                             @error('name')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -69,7 +67,7 @@
                                         <div class="form-group w-100">
                                             <i class="fas fa-envelope"></i>
                                             <input type="email" name="email" id="email" class="form-control"
-                                                placeholder="البريد الالكتروني">
+                                                placeholder="{{ __('E-mail') }}">
                                             @error('email')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -79,7 +77,7 @@
                                         <div class="form-group w-100">
                                             <i class="fas fa-lock"></i>
                                             <input type="password" name="password" id="password" class="form-control"
-                                                placeholder="الرقم السري">
+                                                placeholder="{{ __('Password') }}">
                                             @error('password')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -91,7 +89,7 @@
                                                 placeholder="***114">
                                             <label for="approvecondition" class="text-black">
                                                 <a href="{{ route('site.terms.index') }}">
-                                                    قبول الشروط و الاحاكم
+                                                    {{ __('Acceptance of terms and conditions') }}
                                                 </a>
                                             </label>
                                         </div>
@@ -101,13 +99,14 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="btn-more">
-                                            <button type="submit" class="btn-style text-white">تسجيل الدخول</button>
+                                            <button type="submit"
+                                                class="btn-style text-white">{{ __('Login') }}</button>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="dont-hava-account">
-                                            <a href="{{ route('site.login_page') }}"><span>بالفعل لدي حساب</span>تسجيل
-                                                الدخول</a>
+                                            <a
+                                                href="{{ route('site.login_page') }}"><span>{{ __('I already have an account') }}</span>{{ __('Login') }}</a>
                                         </div>
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@
             </div>
             <div class="container-fluid pd-50">
                 <div class="breadcrumb_content">
-                    <h5>الجامعات</h5>
+                    <h5>{{ __("Universities") }}</h5>
                     <p class="col-lg-6 mx-auto">
                         {{ $app->short_description }}
                     </p>
@@ -21,8 +21,8 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="">الرئيسية</a></li>
-                <li><a href="">الجامعات</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
+                <li><a href="{{ route("site.universites.index") }}">{{ __("Universities") }}</a></li>
             </ul>
         </div>
     </div>

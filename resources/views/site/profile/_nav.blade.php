@@ -15,7 +15,7 @@
             <li>
                 <a class="{{ isActiveRoute('site.profile.index') }}" href="{{ route('site.profile.index') }}">
                     <i class="fas fa-user-circle"></i>
-                    <span>البروفايل الشخصي</span>
+                    <span>{{ __("Personal profile") }}</span>
                 </a>
             </li>
             <li><a class="{{ isActiveRoute('site.favourite.index') }}" href="{{ route('site.favourite.index') }}"><i
@@ -23,7 +23,7 @@
             <li><a class="{{ isActiveRoute('site.orders.index') }}" href="{{ route('site.orders.index') }}"><i
                         class="fas fas fa-shopping-cart"></i><span>{{ __('Orders') }}</span></a></li>
             <li><a class="{{ isActiveRoute('site.settings.index') }}" href="{{ route('site.settings.index') }}"><i
-                        class="fas fas fa-cog"></i><span>الاعدادات</span></a>
+                        class="fas fas fa-cog"></i><span>{{ __("Settings") }}</span></a>
             </li>
         </ul>
     </div>

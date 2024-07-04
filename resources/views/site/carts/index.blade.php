@@ -9,7 +9,7 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
                 <li><a href="{{ route('carts.index') }}">{{ __('Cart') }}</a></li>
             </ul>
         </div>
@@ -41,7 +41,7 @@
                                 <div class="card_body">
                                     <h5>{{ $item->book->name }}</h5>
                                     @if (in_array($item->book_id, \App\Models\Book::offers()->pluck('id')->toArray()))
-                                        <span class="price">100 ر.س</span> <span class="discount">120 ر.س</span>
+                                        <span class="price">{{ $item->book->offer }} ر.س</span> <span class="discount">{{ $item->book->price }} ر.س</span>
                                     @else
                                         <span class="price">{{ $item->book->price }} ر.س</span>
                                     @endif
@@ -71,7 +71,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <div class="buy_basket">
                         <div class="card_header">
-                            <h5>سلة المشتريات</h5>
+                            <h5>{{ __("shopping basket") }}</h5>
                         </div>
                         <form action="{{ route('coupons.check') }}" method="post">
                             @csrf
@@ -80,7 +80,7 @@
                                     <input type="text" class="coupon form-control ms-2" name="code" value="{{ $cart->coupon->code ?? '' }}">
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary">Add Coupon</button>
+                                    <button type="submit" class="btn btn-primary">{{ __("Add Coupon") }}</button>
                                 </div>
                             </div>
                         </form>
@@ -88,7 +88,7 @@
                             <ul class="list-unstyled">
 
                                 <li>
-                                    <span> عدد المنتجات</span>
+                                    <span> {{ __("Number of products") }}</span>
                                     <div class="price d-flex align-items-center">
                                         <span>
                                             @if (auth()->user() && auth()->user()->cart && auth()->user()->cart->items->count())
@@ -101,7 +101,7 @@
                                 </li>
 
                                 <li>
-                                    <span> تكلفة المنتجات</span>
+                                    <span> {{ __("Cost of products") }}</span>
                                     <div class="price d-flex align-items-center">
                                         <span>{{ $totalCart }}
 
@@ -111,7 +111,7 @@
 
                                 @if ($taxCost)
                                     <li class="tax">
-                                        <span> الضريبة</span>
+                                        <span> {{ __("Tax") }}</span>
                                         <div class="price d-flex align-items-center">
                                             <span>
                                                 {{ $taxCost }} ر.س
@@ -123,7 +123,7 @@
 
                                 @if ($cart->coupon)
                                     <li class="discount">
-                                        <span> الخصم</span>
+                                        <span> {{ __("Discount") }}</span>
                                         <div class="price d-flex align-items-center">
                                             <span>
                                                 {{ ($totalCart + $taxCost) * ($cart->coupon->discount / 100) }} ر.س
@@ -137,7 +137,7 @@
 
 
                                 <li>
-                                    <span> التكلفة الاجمالية</span>
+                                    <span> {{ __("Total") }}</span>
                                     <div class="price d-flex align-items-center">
                                         <span>
                                             @if ($cart->coupon)
@@ -154,7 +154,7 @@
 
                             @if ($cart->items->count())
                                 <div class="byu_btn">
-                                    <a href="{{ route('orders.checkout') }}">إتمام الطلب</a>
+                                    <a href="{{ route('orders.checkout') }}">{{ __("Complete the order") }}</a>
                                 </div>
                             @endif
                         </div>

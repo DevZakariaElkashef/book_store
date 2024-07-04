@@ -3,13 +3,13 @@
     <div class="bredcrumb_inner_page">
         <div class="card-img">
             <div class="img-parent">
-                <img src="./assets/images/bredcrumb.png" alt="">
+                <img src="{{ asset($heroImg) }}" alt="">
             </div>
             <div class="container-fluid pd-50">
                 <div class="breadcrumb_content">
-                    <h5>جامعة الملك عبد العزيز</h5>
+                    <h5>{{ $university->name }}</h5>
                     <p class="col-lg-6 mx-auto">
-                        “لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+                        {{ $app->short_description }}
                     </p>
                 </div>
             </div>
@@ -20,8 +20,8 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="{{ route("site.home") }}">الرئيسية</a></li>
-                <li><a href="{{ route("site.universites.index") }}">الجامعات</a></li>
+                <li><a href="{{ route("site.home") }}">{{ __("Home") }}</a></li>
+                <li><a href="{{ route("site.universites.index") }}">{{ __("Universities") }}</a></li>
                 <li><a href="{{ route("site.universites.show", $university->id) }}">{{ $university->name }}</a></li>
             </ul>
         </div>

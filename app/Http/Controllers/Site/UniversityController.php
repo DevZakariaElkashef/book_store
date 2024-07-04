@@ -25,6 +25,8 @@ class UniversityController extends Controller
         $university = University::findOrFail($id);
         $colleges = College::where('university_id', $id)->get();
 
-        return view("site.universites.show", compact('university', 'colleges'));
+        $heroImg = Slider::where("key", 'universities-section')->first()->image;
+
+        return view("site.universites.show", compact('university', 'colleges', 'heroImg'));
     }
 }
