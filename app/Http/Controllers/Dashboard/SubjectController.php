@@ -14,6 +14,8 @@ class SubjectController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('subjects.read');
+
         $subjectsQuery = Subject::query();
         $subjectsQuery->latest();
 
@@ -66,6 +68,8 @@ class SubjectController extends Controller
 
     public function getSubjectsByCollegeId(Request $request)
     {
+        $this->authorize('subjects.read');
+
         $subjects = Subject::where('is_active', 1)->where('college_id', $request->collegeId)->get();
         $oldSubject = $request->collegeId;
 
@@ -76,6 +80,8 @@ class SubjectController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('subjects.read');
+
         $query = Subject::query();
 
         if ($request->has('val')) {
@@ -102,6 +108,8 @@ class SubjectController extends Controller
 
     public function export()
     {
+        $this->authorize('subjects.read');
+
         return Excel::download(new SubjectsExport, 'subjects.xlsx');
     }
 
@@ -110,6 +118,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
+        $this->authorize('subjects.create');
+
         $universities = University::all();
         return view('dashboard.pages.subjects.create', compact('universities'));
     }
@@ -119,6 +129,8 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
+        $this->authorize('subjects.create');
+
         Subject::create($request->all());
 
         // retun with toaster message
@@ -143,6 +155,8 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('subjects.update');
+
         $subject = Subject::findOrFail($id);
         $universities = University::all();
 
@@ -154,6 +168,8 @@ class SubjectController extends Controller
      */
     public function update(StoreSubjectRequest $request, string $id)
     {
+        $this->authorize('subjects.update');
+
         $subject = Subject::findOrFail($id);
 
 
@@ -173,6 +189,8 @@ class SubjectController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('subjects.delete');
+
         Subject::where('id', $id)->delete();
 
         // retun with toaster message
@@ -186,6 +204,8 @@ class SubjectController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('subjects.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,

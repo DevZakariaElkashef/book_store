@@ -9,13 +9,10 @@ use Illuminate\Http\Request;
 
 class AboutusController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(AboutUs::class, 'about_us');
-    }
-
     public function index()
     {
+        $this->authorize('settings.read');
+
         $aboutus = AboutUs::paginate(10);
 
         return view("dashboard.pages.settings.aboutus.index", compact("aboutus"));
@@ -24,6 +21,8 @@ class AboutusController extends Controller
 
     public function store(StoreAboutusRequest $request)
     {
+        $this->authorize('settings.create');
+
         $data = $request->except('image');
         $data['image'] = uploadeImage($request->image, "Aboutus");
 
@@ -41,6 +40,8 @@ class AboutusController extends Controller
 
     public function update(StoreAboutusRequest $request, $id)
     {
+        $this->authorize('settings.update');
+
         $aboutus = AboutUs::findOrFail($id);
 
         $data = $request->except('image');
@@ -62,6 +63,8 @@ class AboutusController extends Controller
 
     public function destroy(string $id)
     {
+        $this->authorize('settings.delete');
+
         AboutUs::where('id', $id)->delete();
 
         // retun with toaster message

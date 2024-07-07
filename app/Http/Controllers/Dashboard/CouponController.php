@@ -13,6 +13,8 @@ class CouponController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('coupons.read');
+
         $couponsQuery = Coupon::query();
         $couponsQuery->latest();
 
@@ -49,6 +51,8 @@ class CouponController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('coupons.read');
+
         $query = Coupon::query();
 
         if ($request->has('val')) {
@@ -70,6 +74,8 @@ class CouponController extends Controller
 
     public function export()
     {
+        $this->authorize('coupons.read');
+
         return Excel::download(new CouponsExport, 'coupons.xlsx');
     }
 
@@ -78,6 +84,8 @@ class CouponController extends Controller
      */
     public function create()
     {
+        $this->authorize('coupons.create');
+
         return view('dashboard.pages.coupons.create');
     }
 
@@ -86,6 +94,8 @@ class CouponController extends Controller
      */
     public function store(StoreCouponRequest $request)
     {
+
+        $this->authorize('coupons.create');
 
         Coupon::create($request->all());
 
@@ -111,6 +121,8 @@ class CouponController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('coupons.update');
+
         $coupon = Coupon::findOrFail($id);
 
         return view('dashboard.pages.coupons.edit', compact('coupon'));
@@ -121,6 +133,8 @@ class CouponController extends Controller
      */
     public function update(StoreCouponRequest $request, string $id)
     {
+        $this->authorize('coupons.update');
+
         $coupon = Coupon::findOrFail($id);
 
         $data = $request->all();
@@ -141,6 +155,8 @@ class CouponController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('coupons.delete');
+
         Coupon::where('id', $id)->delete();
 
         // retun with toaster message
@@ -155,6 +171,8 @@ class CouponController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('coupons.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,

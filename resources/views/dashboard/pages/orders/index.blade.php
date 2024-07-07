@@ -67,12 +67,6 @@
                                 <span class="d-none d-sm-inline-block">{{ __('Filter') }}</span>
                             </a>
                             {{-- add order btn --}}
-                            <a class="dt-button add-new btn btn-primary" href="{{ route('orders.create') }}">
-                                <span>
-                                    <i class="mdi mdi-plus me-0 me-sm-1"></i>
-                                    <span class="d-none d-sm-inline-block">{{ __('Create') }}</span>
-                                </span>
-                            </a>
                         </div>
 
                         <div class="dropdown">

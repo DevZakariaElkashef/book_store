@@ -13,6 +13,8 @@ class UniversityController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('universities.read');
+
         $universitiesQuery = University::query();
         $universitiesQuery->latest();
 
@@ -49,6 +51,8 @@ class UniversityController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('universities.read');
+
         $query = University::query();
 
         if ($request->has('val')) {
@@ -69,6 +73,8 @@ class UniversityController extends Controller
 
     public function export()
     {
+        $this->authorize('universities.read');
+
         return Excel::download(new UniversitiesExport, 'universities.xlsx');
     }
 
@@ -77,6 +83,8 @@ class UniversityController extends Controller
      */
     public function create()
     {
+        $this->authorize('universities.create');
+
         return view('dashboard.pages.universities.create');
     }
 
@@ -85,6 +93,8 @@ class UniversityController extends Controller
      */
     public function store(StoreUniversityRequest $request)
     {
+        $this->authorize('universities.create');
+
         $data = $request->except('image');
 
         if ($request->has('image')) {
@@ -116,6 +126,8 @@ class UniversityController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('universities.update');
+
         $university = University::findOrFail($id);
 
         return view('dashboard.pages.universities.edit', compact('university'));
@@ -126,6 +138,9 @@ class UniversityController extends Controller
      */
     public function update(StoreUniversityRequest $request, string $id)
     {
+
+        $this->authorize('universities.update');
+
         $university = University::findOrFail($id);
 
         $data = $request->except('image');
@@ -151,6 +166,8 @@ class UniversityController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('universities.delete');
+
         University::where('id', $id)->delete();
 
         // retun with toaster message
@@ -164,6 +181,8 @@ class UniversityController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('universities.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,

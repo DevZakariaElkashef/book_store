@@ -11,13 +11,11 @@ use App\Http\Requests\Dashboard\UpdateContactRequest;
 
 class ContactController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Contact::class, 'Contact');
-    }
-
     public function index(Request $request)
     {
+
+        $this->authorize('contacts.read');
+
         $contactsQuery = Contact::query();
         $contactsQuery->latest();
 
@@ -54,6 +52,8 @@ class ContactController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('contacts.read');
+
         $query = Contact::query();
 
         if ($request->has('val')) {
@@ -73,6 +73,8 @@ class ContactController extends Controller
 
     public function export()
     {
+        $this->authorize('contacts.read');
+
         return Excel::download(new ContactsExport, 'contacts.xlsx');
     }
 
@@ -105,6 +107,8 @@ class ContactController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('contacts.update');
+
         $contact = Contact::findOrFail($id);
         return view('dashboard.pages.contacts.edit', compact('contact'));
     }
@@ -114,6 +118,8 @@ class ContactController extends Controller
      */
     public function update(UpdateContactRequest $request, string $id)
     {
+        $this->authorize('contacts.update');
+
         $contact = Contact::findOrFail($id);
 
         $contact->update($request->all());
@@ -132,6 +138,9 @@ class ContactController extends Controller
      */
     public function destroy(string $id)
     {
+
+        $this->authorize('contacts.delete');
+
         Contact::where('id', $id)->delete();
 
         // retun with toaster message
@@ -145,6 +154,8 @@ class ContactController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('contacts.delete');
+        
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,

@@ -20,6 +20,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->authorize('roles.read');
+
         $roles = Role::with(['users', 'permissions'])->get();
         $permissions = DB::table('permissions')
             ->select(DB::raw("SUBSTRING_INDEX(name, '.', 1) as prefix"), 'id', DB::raw("SUBSTRING_INDEX(name, '.', -1) as name"))
@@ -35,7 +37,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -43,6 +45,8 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
+        $this->authorize('roles.create');
+
         // find the role if not exist create it and attac the permissions to that role
         Role::firstOrCreate(['name' => Str::lower($request->name)])->syncPermissions(Permission::find($request->permissions));
 
@@ -60,7 +64,7 @@ class RoleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -68,7 +72,7 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -76,6 +80,8 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleReqeust $request, string $id)
     {
+        $this->authorize('roles.update');
+
         $role = Role::findOrFail($id);
         $role->syncPermissions(Permission::find($request->permissions));
 
@@ -93,6 +99,8 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('roles.update');
+
         $role = Role::findOrFail($id);
         $role->delete();
 

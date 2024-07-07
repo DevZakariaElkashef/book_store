@@ -11,12 +11,16 @@ class ShippingController extends Controller
 {
     public function index()
     {
+        $this->authorize('settings.read');
+        
         $setting = Setting::first();
         return view("dashboard.pages.settings.shippings", compact('setting'));
     }
 
     public function update(Request $request)
     {
+        $this->authorize('settings.create');
+
         $setting = Setting::first();
         $data = $request->all();
 

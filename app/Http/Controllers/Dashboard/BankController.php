@@ -10,6 +10,8 @@ class BankController extends Controller
 {
     public function index()
     {
+        $this->authorize('settings.read');
+
         $bank = Bank::first();
 
         return view('dashboard.pages.settings.bank', compact('bank'));
@@ -17,6 +19,8 @@ class BankController extends Controller
 
     public function update(Request $request, Bank $bank)
     {
+        $this->authorize('settings.update');
+
         $bank->update($request->all());
 
         $message = [

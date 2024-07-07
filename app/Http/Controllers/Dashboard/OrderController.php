@@ -25,6 +25,8 @@ class OrderController extends Controller
     }
     public function index(Request $request)
     {
+        $this->authorize('orders.read');
+
         $ordersQuery = Order::query();
         $ordersQuery->latest();
 
@@ -69,6 +71,8 @@ class OrderController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('orders.read');
+
         $query = Order::query();
 
         if ($request->has('val')) {
@@ -95,6 +99,8 @@ class OrderController extends Controller
 
     public function export()
     {
+        $this->authorize('orders.read');
+
         return Excel::download(new OrderExport, 'orders.xlsx');
     }
 
@@ -103,6 +109,7 @@ class OrderController extends Controller
      */
     public function create()
     {
+        abort(404);
         $users = User::active()->get();
         $cities = City::active()->get();
         $bank = Bank::first();
@@ -116,7 +123,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-
+        abort(404);
         Order::create($request->all());
 
         // retun with toaster message
@@ -133,6 +140,8 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
+        $this->authorize('orders.read');
+
         $order = Order::findOrFail($id);
         $orderStatuses = OrderStatus::all();
         $users = User::active()->get();
@@ -146,6 +155,8 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('orders.update');
+
         return to_route('orders.show', $id);
     }
 
@@ -154,6 +165,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('orders.update');
+
         $order = Order::findOrFail($id);
         $data = $request->all();
 
@@ -174,6 +187,9 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
+
+        $this->authorize('orders.delete');
+
         Order::where('id', $id)->delete();
 
         // retun with toaster message
@@ -188,6 +204,8 @@ class OrderController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('orders.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,

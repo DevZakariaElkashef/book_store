@@ -13,6 +13,8 @@ class CityController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('cities.read');
+
         $citiesQuery = City::query();
         $citiesQuery->latest();
 
@@ -49,6 +51,8 @@ class CityController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('cities.read');
+
         $query = City::query();
 
         if ($request->has('val')) {
@@ -67,6 +71,8 @@ class CityController extends Controller
 
     public function export()
     {
+        $this->authorize('cities.read');
+
         return Excel::download(new CitiesExport, 'cities.xlsx');
     }
 
@@ -75,6 +81,8 @@ class CityController extends Controller
      */
     public function create()
     {
+        $this->authorize('cities.read');
+
         return view('dashboard.pages.cities.create');
     }
 
@@ -83,6 +91,7 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
+        $this->authorize('cities.create');
 
         City::create($request->all());
 
@@ -108,6 +117,8 @@ class CityController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('cities.create');
+
         $city = City::findOrFail($id);
 
         return view('dashboard.pages.cities.edit', compact('city'));
@@ -118,6 +129,8 @@ class CityController extends Controller
      */
     public function update(StoreCityRequest $request, string $id)
     {
+        $this->authorize('cities.update');
+
         $city = City::findOrFail($id);
 
         $data = $request->all();
@@ -138,6 +151,8 @@ class CityController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('cities.delete');
+
         City::where('id', $id)->delete();
 
         // retun with toaster message
@@ -152,6 +167,8 @@ class CityController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('cities.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,

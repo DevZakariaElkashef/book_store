@@ -11,6 +11,7 @@ class SliderController extends Controller
 {
     public function index()
     {
+        $this->authorize('settings.read');
         $sliders = Slider::paginate(10);
 
         return view("dashboard.pages.settings.sliders.index", compact("sliders"));
@@ -21,6 +22,8 @@ class SliderController extends Controller
 
     public function update(StoreSliderRequest $request, $id)
     {
+        $this->authorize('settings.update');
+
         $slider = Slider::findOrFail($id);
 
         $data = $request->except('image');

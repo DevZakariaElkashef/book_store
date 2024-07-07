@@ -11,12 +11,14 @@ class SettingController extends Controller
 {
     public function index()
     {
+        $this->authorize('settings.read');
         $setting = Setting::first();
         return view("dashboard.pages.settings.index", compact('setting'));
     }
 
     public function update(UpdateSettingRequest $request)
     {
+        $this->authorize('settings.update');
         $setting = Setting::first();
         $data = $request->except('logo');
 

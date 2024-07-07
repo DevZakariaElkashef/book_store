@@ -14,6 +14,8 @@ class CollegeController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('colleges.read');
+
         $collegesQuery = College::query();
         $collegesQuery->latest();
 
@@ -56,6 +58,8 @@ class CollegeController extends Controller
 
     public function getCollegesByUniversityId(Request $request)
     {
+        $this->authorize('colleges.read');
+
 
         $colleges = College::where('is_active', 1)->where('university_id', $request->univirsityId)->get();
         $oldCollege = $request->collegeId ?? null;
@@ -66,6 +70,8 @@ class CollegeController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('colleges.read');
+
         $query = College::query();
 
         if ($request->has('val')) {
@@ -86,6 +92,8 @@ class CollegeController extends Controller
 
     public function export()
     {
+        $this->authorize('colleges.read');
+
         return Excel::download(new CollegesExport, 'colleges.xlsx');
     }
 
@@ -94,6 +102,8 @@ class CollegeController extends Controller
      */
     public function create()
     {
+        $this->authorize('colleges.create');
+
         $universities = University::all();
         return view('dashboard.pages.colleges.create', compact('universities'));
     }
@@ -103,6 +113,8 @@ class CollegeController extends Controller
      */
     public function store(StoreCollegeRequest $request)
     {
+        $this->authorize('colleges.create');
+
         $data = $request->except('image');
 
         if ($request->has('image')) {
@@ -134,6 +146,8 @@ class CollegeController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('colleges.update');
+
         $college = College::findOrFail($id);
         $universities = University::all();
 
@@ -145,6 +159,8 @@ class CollegeController extends Controller
      */
     public function update(StoreCollegeRequest $request, string $id)
     {
+        $this->authorize('colleges.update');
+
         $college = College::findOrFail($id);
 
         $data = $request->except('image');
@@ -170,6 +186,8 @@ class CollegeController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('colleges.delete');
+
         College::where('id', $id)->delete();
 
         // retun with toaster message
@@ -183,6 +201,8 @@ class CollegeController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('colleges.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,

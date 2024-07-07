@@ -15,6 +15,8 @@ class BookController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('books.read');
+
         $booksQuery = Book::query();
         $booksQuery->latest();
 
@@ -72,6 +74,8 @@ class BookController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('books.read');
+
         $query = Book::query();
 
         if ($request->has('val')) {
@@ -94,6 +98,8 @@ class BookController extends Controller
 
     public function export()
     {
+        $this->authorize('books.read');
+
         return Excel::download(new BooksExport, 'books.xlsx');
     }
 
@@ -102,6 +108,8 @@ class BookController extends Controller
      */
     public function create()
     {
+        $this->authorize('books.create');
+
         $universities = University::all();
         return view('dashboard.pages.books.create', compact('universities'));
     }
@@ -111,6 +119,8 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
+        $this->authorize('books.create');
+
         $data = $request->except('image');
 
         if ($request->has('image')) {
@@ -148,6 +158,8 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('books.update');
+
         $book = Book::findOrFail($id);
         $universities = University::all();
 
@@ -159,6 +171,8 @@ class BookController extends Controller
      */
     public function update(StoreBookRequest $request, string $id)
     {
+        $this->authorize('books.update');
+
         $book = Book::findOrFail($id);
 
         $data = $request->except('image');
@@ -184,6 +198,8 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('books.delete');
+
         Book::where('id', $id)->delete();
 
         // retun with toaster message
@@ -197,6 +213,8 @@ class BookController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('books.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,
@@ -221,6 +239,8 @@ class BookController extends Controller
 
     public function getPrice(Request $request)
     {
+
+        $this->authorize('books.read');
 
         $book = Book::where('id', $request->book_id)->first();
 

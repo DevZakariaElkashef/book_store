@@ -14,6 +14,8 @@ class ReviewController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('book_reviews.read');
+
         $reviewsQuery = BookReview::query();
         $reviewsQuery->latest();
 
@@ -46,6 +48,8 @@ class ReviewController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('book_reviews.read');
+
         $query = BookReview::query();
 
         if ($request->has('val')) {
@@ -78,6 +82,8 @@ class ReviewController extends Controller
 
     public function export()
     {
+        $this->authorize('book_reviews.read');
+
         return Excel::download(new BookReviewExport, 'reviews.xlsx');
     }
 
@@ -110,6 +116,8 @@ class ReviewController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('book_reviews.update');
+
         $review = BookReview::findOrFail($id);
         return view('dashboard.pages.reviews.edit', compact('review'));
     }
@@ -119,6 +127,8 @@ class ReviewController extends Controller
      */
     public function update(UpdateReviewRequest $request, string $id)
     {
+        $this->authorize('book_reviews.update');
+
         $review = BookReview::findOrFail($id);
 
         $review->update($request->all());
@@ -137,6 +147,8 @@ class ReviewController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('book_reviews.delete');
+
         BookReview::where('id', $id)->delete();
 
         // retun with toaster message
@@ -150,6 +162,8 @@ class ReviewController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('book_reviews.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,
