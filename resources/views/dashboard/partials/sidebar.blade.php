@@ -82,13 +82,14 @@
         <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">{{ __('Apps') }} &amp; {{ __('Pages') }}</span>
         </li>
-        <li class="menu-item">
+        <li
+            class="menu-item {{ isActiveRoute(['contact_types.index', 'contact_types.create', 'contact_types.edit']) }}">
             <a href="{{ route('contact_types.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
                 <div data-i18n="{{ __('Contact Types') }}">{{ __('Contact Types') }}</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ isActiveRoute(['contacts.index']) }}">
             <a href="{{ route('contacts.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
                 <div data-i18n="{{ __('Contacts') }}">{{ __('Contacts') }}</div>
@@ -105,7 +106,7 @@
             <span class="menu-header-text">{{ __('User Management') }}</span>
         </li>
 
-        <li class="menu-item {{ isActiveRoute('users.index') }}">
+        <li class="menu-item {{ isActiveRoute(['users.index', 'users.create', 'users.edit']) }}">
             <a href="{{ route('users.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
                 <div data-i18n="{{ __('Clients') }}">{{ __('Clients') }}</div>
@@ -128,7 +129,7 @@
         </li>
 
 
-        <li class="menu-item {{ isActiveRoute('universities.index') }}">
+        <li class="menu-item {{ isActiveRoute(['universities.index', 'universities.create', 'universities.edit']) }}">
             <a href="{{ route('universities.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-town-hall"></i>
                 <div data-i18n="{{ __('Universities') }}">{{ __('Universities') }}</div>
@@ -136,7 +137,7 @@
         </li>
 
 
-        <li class="menu-item {{ isActiveRoute('colleges.index') }}">
+        <li class="menu-item {{ isActiveRoute(['colleges.index', 'colleges.create', 'colleges.edit']) }}">
             <a href="{{ route('colleges.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-school"></i>
                 <div data-i18n="{{ __('collages') }}">{{ __('collages') }}</div>
@@ -144,28 +145,28 @@
         </li>
 
 
-        <li class="menu-item {{ isActiveRoute('subjects.index') }}">
+        <li class="menu-item {{ isActiveRoute(['subjects.index', 'subjects.create', 'subjects.edit']) }}">
             <a href="{{ route('subjects.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-book"></i>
                 <div data-i18n="{{ __('Subjects') }}">{{ __('Subjects') }}</div>
             </a>
         </li>
 
-        <li class="menu-item {{ isActiveRoute('books.index') }}">
+        <li class="menu-item {{ isActiveRoute(['books.index', 'books.create', 'books.edit']) }}">
             <a href="{{ route('books.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-bookshelf"></i>
                 <div data-i18n="{{ __('Books') }}">{{ __('Books') }}</div>
             </a>
         </li>
 
-        <li class="menu-item {{ isActiveRoute('coupons.index') }}">
+        <li class="menu-item {{ isActiveRoute(['coupons.index', 'coupons.create', 'coupons.edit']) }}">
             <a href="{{ route('coupons.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-sale"></i>
                 <div data-i18n="{{ __('Coupons') }}">{{ __('Coupons') }}</div>
             </a>
         </li>
 
-        <li class="menu-item {{ isActiveRoute('cities.index') }}">
+        <li class="menu-item {{ isActiveRoute(['cities.index', 'cities.create', 'cities.edit']) }}">
             <a href="{{ route('cities.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-city"></i>
                 <div data-i18n="{{ __('Cities') }}">{{ __('Cities') }}</div>
@@ -180,7 +181,7 @@
 
 
         <li
-            class="menu-item {{ isActiveRoute('orders.index', ['status' => 'pending-cancle']) ? '' : isActiveRoute('orders.index') }}">
+            class="menu-item {{ isActiveRoute('orders.index', ['status' => 'pending-cancle']) ? '' : isActiveRoute(['orders.index', 'orders.show']) }}">
             <a href="{{ route('orders.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-cart-arrow-right"></i>
                 <div data-i18n="{{ __('Orders') }}">{{ __('Orders') }}</div>
@@ -223,7 +224,7 @@
 
         <!-- Settings -->
         <li
-            class="menu-item {{ isActiveRoute(['settings.index', 'sliders.index', 'pages.index']) }} {{ isActiveRoute(['settings.index', 'sliders.index', 'pages.index']) ? 'open' : '' }}">
+            class="menu-item {{ isActiveRoute(['settings.index', 'sliders.index', 'aboutus.index',  'shippings.index', 'banks.index', 'pages.index']) }} {{ isActiveRoute(['settings.index', 'aboutus.index',  'shippings.index',  'sliders.index', 'banks.index', 'pages.index']) ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
                 <div data-i18n="{{ __('Settings') }}">{{ __('Settings') }}</div>
