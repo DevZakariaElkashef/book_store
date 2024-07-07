@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class AboutusController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(AboutUs::class, 'about_us');
+    }
+
     public function index()
     {
         $aboutus = AboutUs::paginate(10);

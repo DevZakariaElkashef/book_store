@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Log;
 use App\Models\ContactType;
 use Illuminate\Http\Request;
 use App\Exports\ContactTypesExport;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\StoreContactTypeRequest;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\Dashboard\StoreContactTypeRequest;
 
 class ContactTypeController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->authorizeResource(ContactType::class, 'contact_type');
+    }
+
     public function index(Request $request)
     {
+        $this->authorize('contact_types.read');
+
         $contacttypesQuery = ContactType::query();
         $contacttypesQuery->latest();
 
@@ -49,6 +58,8 @@ class ContactTypeController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('contact_types.read');
+
         $query = ContactType::query();
 
         if ($request->has('val')) {
@@ -67,6 +78,8 @@ class ContactTypeController extends Controller
 
     public function export()
     {
+        $this->authorize('contact_types.read');
+
         return Excel::download(new ContactTypesExport, 'contacttypes.xlsx');
     }
 
@@ -75,6 +88,7 @@ class ContactTypeController extends Controller
      */
     public function create()
     {
+        $this->authorize('contact_types.create');
         return view('dashboard.pages.contacttypes.create');
     }
 
@@ -83,6 +97,8 @@ class ContactTypeController extends Controller
      */
     public function store(StoreContactTypeRequest $request)
     {
+        $this->authorize('contact_types.create');
+
         ContactType::create($request->all());
 
         $message = [
@@ -91,7 +107,6 @@ class ContactTypeController extends Controller
         ];
 
         return to_route('contact_types.index')->with('message', $message);
-
     }
 
     /**
@@ -99,14 +114,17 @@ class ContactTypeController extends Controller
      */
     public function show(string $id)
     {
+        $this->authorize('contact_types.read');
+
         return to_route('contact_types.edit', $id);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
+        $this->authorize('contact_types.update');
         $contacttype = ContactType::findOrFail($id);
         return view('dashboard.pages.contacttypes.edit', compact('contacttype'));
     }
@@ -116,6 +134,8 @@ class ContactTypeController extends Controller
      */
     public function update(StoreContactTypeRequest $request, string $id)
     {
+        $this->authorize('contact_types.update');
+
         $contacttype = ContactType::findOrFail($id);
 
         $contacttype->update($request->all());
@@ -134,6 +154,8 @@ class ContactTypeController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('contact_types.delete');
+
         ContactType::where('id', $id)->delete();
 
         // retun with toaster message
@@ -147,6 +169,8 @@ class ContactTypeController extends Controller
 
     public function delete(Request $request)
     {
+        $this->authorize('contact_types.delete');
+
         if (!$request->filled('ids')) {
             $message = [
                 'status' => false,

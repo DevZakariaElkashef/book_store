@@ -11,6 +11,11 @@ use App\Http\Requests\Dashboard\UpdateContactRequest;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Contact::class, 'Contact');
+    }
+
     public function index(Request $request)
     {
         $contactsQuery = Contact::query();
