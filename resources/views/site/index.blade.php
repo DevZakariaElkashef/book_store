@@ -167,7 +167,7 @@
                     <img src="site/assets/images/book2.svg" alt="">
                     <h5 class="ms-2 mt-1">{{ __('best seller') }}</h5>
                 </div>
-                <a href="">{{ __('see more') }}</a>
+                <a href="{{ route("site.books.index", ['sort' => 'most-saled']) }}">{{ __('see more') }}</a>
             </div>
             <div class="row">
 

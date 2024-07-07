@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Traits\ActiveScope;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Book extends Model
 {
@@ -50,6 +51,19 @@ class Book extends Model
             ->whereNotNull('offer_end_at')
             ->whereDate('offer_start_at', '<=', now())  // Changed >= to <=
             ->whereDate('offer_end_at', '>=', now());   // Changed <= to >=
+    }
+
+
+    public static function getMostSoldBooks()
+    {
+        $mostSoldBooksIDs = OrderItem::select('book_id', DB::raw('count(book_id) as book_count'))
+            ->groupBy('book_id')
+            ->orderByDesc('book_count')
+            ->distinct('book_id')
+            ->pluck('book_id')
+            ->toArray();
+
+        return self::whereIn('id', $mostSoldBooksIDs);
     }
 
 

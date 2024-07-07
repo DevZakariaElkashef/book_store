@@ -13,19 +13,22 @@ class BookController extends Controller
     {
         $books = Book::query();
 
-
         if ($request->filled('sort') && $request->sort == 'latest') {
             $books = $books->latest();
+        }
+
+        if ($request->filled('sort') && $request->sort == 'most-saled') {
+            $books = Book::getMostSoldBooks();
         }
 
         $books = $books->active()->paginate(9);
 
         $strLimit = 30;
 
-
-
         return view("site.books.index", compact("books", "strLimit"));
     }
+
+    
     public function offers(Request $request)
     {
         $books = Book::active()->offers()->latest()->paginate(9);
