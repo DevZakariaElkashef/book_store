@@ -286,5 +286,12 @@
     "collages": "كليات",
     "Cities": "مدن",
     "Sales": "مبيعات",
-    "Reviews": "مراجعات"
+    "Reviews": "مراجعات",
+    "Pending Cancle": "قيد الإلغاء المعلق",
+    "The client get the amount back?": "هل تمكن العميل من استرداد المبلغ؟",
+    "The Client Recive the refund": "العميل استلم المبلغ المسترد",
+    "Bank Name": "اسم البنك",
+    "Bank Number": "رقم البنك",
+    "Bank Iban": "الآيبان البنكي"
+
 }

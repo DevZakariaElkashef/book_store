@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\CancleOrderRequest;
 use App\Http\Requests\Site\PayOrderRequest;
 use App\Http\Requests\Site\ReviewOrderRequest;
+use App\Models\Bank;
 
 class OrderController extends Controller
 {
@@ -27,6 +28,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $cart = $request->user()->cart;
+        $bank = Bank::first();
 
         if (!$cart->items->count()) {
             session()->flash("message", [
@@ -38,7 +40,7 @@ class OrderController extends Controller
 
         $cities = City::active()->get();
 
-        return view('site.orders.index', compact('cart', 'cities'));
+        return view('site.orders.index', compact('cart', 'cities', 'bank'));
     }
 
     public function store(PayOrderRequest $request)

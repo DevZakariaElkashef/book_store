@@ -84,7 +84,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         @auth
-                                            <li><a class="dropdown-item" href="{{ route('site.profile.index') }}">حسابي</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('site.profile.index') }}">{{ __("Personal profile") }}</a></li>
                                             <li><a class="dropdown-item" href="#"
                                                     onclick="$('#logoutForm').submit()">{{ __("sign out") }}</a></li>
                                             <form id="logoutForm" class="d-none" action="{{ route('site.logout') }}"

@@ -292,7 +292,11 @@
 
     "Pending Cancle" : "Pending Cancle",
     "The client get the amount back?" : "The client get the refund back?",
-    "The Client Recive the refund" : "The Client Recive the refund"
+    "The Client Recive the refund" : "The Client Recive the refund",
+    "Bank Name" : "Bank Name",
+    "Bank Number" : "Bank Number",
+    "Bank Iban" : "Bank Iban",
+    "Please choose a payment method" : "Please choose a payment method"
 
 
 
