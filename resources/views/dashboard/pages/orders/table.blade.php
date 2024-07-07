@@ -37,7 +37,11 @@
                 @endphp
 
                 <tr class="odd">
-                    <td class="dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes form-check-input"></td>
+                    <td>
+                        <input class="form-check-input item" value="{{ $order->id }}" type="checkbox">
+                    </td>
+
+
                     <td><a href="{{ route('orders.show', $order->id) }}"><span>#{{ $order->id }}</span></a></td>
                     <td class="sorting_1"><span class="text-nowrap">{{ $order->created_at->format('Y-m-d H:i') }}</span>
                     </td>

@@ -233,11 +233,24 @@
                                 <select type="file" accept=".jpg,.png" class="form-control" name="is_new"
                                     id="typeInput" value="{{ old('avatar') }}">
                                     <option value="0" @if (old('is_new') == 0) selected @endif>
-                                        {{ __('Not Active') }}</option>
+                                        {{ __('Used Book') }}</option>
                                     <option value="1" @if (old('is_new') == 1) selected @endif>
-                                        {{ __('Active') }}</option>
+                                        {{ __('New Book') }}</option>
                                 </select>
                                 @error('avatar')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="QTYInput">{{ __('Quantity') }}</label>
+                                <input type="number" class="form-control" name="qty" id="QTYInput"
+                                    value="{{ old('qty') }}">
+                                @error('qty')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

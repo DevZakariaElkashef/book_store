@@ -246,6 +246,22 @@
                         </div>
 
 
+
+
+
+                        <div class="col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="QTYInput">{{ __('Quantity') }}</label>
+                                <input type="number" class="form-control" name="qty" id="QTYInput"
+                                    value="{{ old('qty') ?? $book->qty }}">
+                                @error('qty')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
                         <div class="col-md-12 mb-2">
                             <div class="form-group">
                                 <label for="avatarInput">{{ __('Status') }}</label>
@@ -261,6 +277,8 @@
                                 @enderror
                             </div>
                         </div>
+
+
 
 
 

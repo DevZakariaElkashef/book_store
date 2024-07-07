@@ -179,11 +179,14 @@
         </li>
 
 
-        <li class="menu-item {{ isActiveRoute('orders.index', ['status' => 'pending-cancle']) ? '' : isActiveRoute('orders.index') }}">
+        <li
+            class="menu-item {{ isActiveRoute('orders.index', ['status' => 'pending-cancle']) ? '' : isActiveRoute('orders.index') }}">
             <a href="{{ route('orders.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-cart-arrow-right"></i>
                 <div data-i18n="{{ __('Orders') }}">{{ __('Orders') }}</div>
-                <div class="badge bg-danger rounded-pill ms-auto">{{ \App\Models\Order::new()->count() }}</div>
+                @if (\App\Models\Order::new()->count())
+                    <div class="badge bg-danger rounded-pill ms-auto">{{ \App\Models\Order::new()->count() }}</div>
+                @endif
             </a>
         </li>
 

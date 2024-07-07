@@ -296,7 +296,10 @@
     "Bank Name" : "Bank Name",
     "Bank Number" : "Bank Number",
     "Bank Iban" : "Bank Iban",
-    "Please choose a payment method" : "Please choose a payment method"
+    "Please choose a payment method" : "Please choose a payment method",
+
+    "New Book" : "New Book",
+    "Used Book" : "Used Book"
 
 
 

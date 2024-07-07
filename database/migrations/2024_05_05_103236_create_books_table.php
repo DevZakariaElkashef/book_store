@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('offer_end_at')->nullable();
             $table->boolean('is_new')->default(1);
             $table->string('image')->nullable();
+            $table->integer('qty')->nullable();
             $table->timestamps();
             $table->boolean('is_active')->default(1);
             $table->softDeletes();

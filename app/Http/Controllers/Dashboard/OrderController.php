@@ -40,9 +40,28 @@ class OrderController extends Controller
             $ordersQuery->pendingCancellation();
         }
 
+
+        if ($request->filled('type')) {
+            $ordersQuery->where("order_status_id", $request->type);
+        }
+
+
+
+        $pendingCancleOrdersIds = Order::pendingCancellation()->pluck('id')->toArray();
+        $clone = $ordersQuery->clone();
+
+        foreach ($clone->whereNotIn('id', $pendingCancleOrdersIds)->where('is_new', 1)->get() as $order) {
+            $order->update(['is_new' => 0]);
+        }
+
         $orders = $ordersQuery->paginate(10);
 
+
+
+
         $orderStatus = OrderStatus::all();
+
+
 
         return view('dashboard.pages.orders.index', compact('orders', 'orderStatus'));
     }
@@ -59,6 +78,7 @@ class OrderController extends Controller
                     ->orWhere("phone", "like", "%{$request->val}%");
             })->orWhere('sub_total', 'like', "%{$request->val}%")
                 ->orWhere("total", "like", "%{$request->val}%")
+                ->orWhere("id", "like", "%{$request->val}%")
                 ->orWhere("transaction_id", "like", "%{$request->val}%")
                 ->orWhere("address", "like", "%{$request->val}%")
                 ->orWhere("note", "like", "%{$request->val}%")

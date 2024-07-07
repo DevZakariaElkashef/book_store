@@ -34,6 +34,14 @@ class OrderUpdateService
             }
         }
 
+        if (isset($data['client_received_refund']) &&  !$order->admin_approve_to_cancle) {
+            $order->update([
+                'client_received_refund' => 1
+            ]);
+
+            $user->update(['wallet' => $user->wallet + $order->total]);
+        }
+
         $refundCondition = $order->payment_status != 'Refunded' && $order->payment_status != 5;
         $revertRefundCondition = $order->payment_status == 'Refunded' && $order->order_status_id == 5;
 
@@ -68,13 +76,7 @@ class OrderUpdateService
         }
 
 
-        if (isset($data['client_received_refund'])) {
-            $order->update([
-                'client_received_refund' => 1
-            ]);
 
-            $user->update(['wallet' => $user->wallet + $order->total]);
-        }
 
         return $order;
     }
