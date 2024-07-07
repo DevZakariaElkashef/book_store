@@ -196,7 +196,7 @@ class CollegeController extends Controller
         $ids = explode(',', $request->ids);
         College::whereIn('id', $ids)->delete();
         $message = [
-           'status' => true,
+            'status' => true,
             'content' => __('deleted successfully')
         ];
         return back()->with('message', $message);

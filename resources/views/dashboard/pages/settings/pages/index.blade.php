@@ -16,11 +16,11 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="">
-                                <h4>Pages</h4>
+                                <h4>{{ __("Pages") }}</h4>
                             </div>
                             <div class="d-flex align-items-center">
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#createModal">Create</a>
+                                    data-bs-target="#createModal">{{ __("Create") }}</a>
                             </div>
                         </div>
                         <div id="searchTable">
@@ -52,7 +52,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="edit_value_ar">Value(AR)</label>
+                                    <label for="edit_value_ar">{{ __("Value") }}(AR)</label>
                                     <textarea id="edit_value_ar" class="form-control"name="value_ar"></textarea>
                                     @error('value_ar')
                                         <div class="text-danger">{{ $message }}</div>
@@ -62,7 +62,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="edit_value_en">Value(EN)</label>
+                                    <label for="edit_value_en">{{ __("Value") }}(EN)</label>
                                     <textarea id="edit_value_en" class="form-control"name="value_en"></textarea>
                                     @error('value_en')
                                         <div class="text-danger">{{ $message }}</div>

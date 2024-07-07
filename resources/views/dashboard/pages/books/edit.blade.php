@@ -279,7 +279,7 @@
                         <div class="preview-images" id="previewImages">
                             @foreach ($book->images as $image)
                                 <img src="{{ asset($image->path) }}" alt="">
-                                <a href="#" class="text-danger" onclick="">Delete</a>
+                                <a href="#" class="text-danger" onclick="">{{ __("Delete") }}</a>
                             @endforeach
                         </div>
 

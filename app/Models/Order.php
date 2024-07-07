@@ -51,6 +51,18 @@ class Order extends Model
         return $query->where('payment_status', '!=', '2');
     }
 
+    public function scopeNew($query)
+    {
+        return $query->where('is_new', 1);
+    }
+
+    public function scopePendingCancellation($query)
+    {
+        return $query->where('client_want_to_cancle', 1)
+            ->where('admin_approve_to_cancle', 0)
+            ->where('is_new', 1);
+    }
+
     public function getPaymentMethodAttribute(): string
     {
         switch ($this->attributes['payment_method']) {

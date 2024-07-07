@@ -14,10 +14,9 @@
 @section('content')
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="mb-1">Roles List</h4>
+        <h4 class="mb-1">{{ __("Roles List") }}</h4>
         <p class="mb-4">
-            A role provided access to predefined menus and features so that depending on assigned role an
-            administrator can have access to what user needs.
+            {{ __("A role provided access to predefined menus and features so that depending on assigned role an administrator can have access to what user needs.") }}
         </p>
         <!-- Role cards -->
         <div class="row g-4">
@@ -27,7 +26,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-2">
-                                <p>Total {{ $role->users->count() }} users</p>
+                                <p>{{ __("Total") }} {{ $role->users->count() }} {{ __("users") }}</p>
                                 <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
                                     @foreach ($role->users as $key => $user)
                                         @continue($key >= 3)
@@ -56,7 +55,7 @@
                                         data-role-permissions="{{ $role->permissions->pluck('id') }}"
                                         class="edit-role-btn">
 
-                                        <span>Edit Role</span>
+                                        <span>{{ __("Edit") }}</span>
                                     </a>
                                 </div>
                                 @if ($role->id != 1)
@@ -86,9 +85,9 @@
                             <div class="card-body text-sm-end text-center ps-sm-0">
                                 <button data-bs-target="#addRoleModal" data-bs-toggle="modal"
                                     class="btn btn-primary mb-3 text-nowrap add-new-role">
-                                    Add Role
+                                    {{ __("Add Role") }}
                                 </button>
-                                <p class="mb-0">Add role, if it does not exist</p>
+                                <p class="mb-0">{{ __("Add role, if it does not exist") }}</p>
                             </div>
                         </div>
                     </div>
@@ -104,8 +103,8 @@
                     <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body p-md-0">
                         <div class="text-center mb-4">
-                            <h3 class="role-title mb-2 pb-0">Add New Role</h3>
-                            <p>Set role permissions</p>
+                            <h3 class="role-title mb-2 pb-0">{{ __("Add New Role") }}</h3>
+                            <p>{{ __("Set role permissions") }}</p>
                         </div>
                         <!-- Add role form -->
                         <form id="addRoleForm" class="row g-3" action="{{ route('roles.store') }}" method="post">
@@ -114,18 +113,18 @@
                                 <div class="form-floating form-floating-outline">
                                     <input type="text" id="modalRoleName" name="name" class="form-control"
                                         placeholder="Enter a role name" tabindex="-1" />
-                                    <label for="modalRoleName">Role Name</label>
+                                    <label for="modalRoleName">{{ __("Role Name") }}</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <h5>Role Permissions</h5>
+                                <h5>{{ __("Role Permissions") }}</h5>
                                 <!-- Permission table -->
                                 <div class="table-responsive">
                                     <table class="table table-flush-spacing">
                                         <tbody>
                                             <tr>
                                                 <td class="text-nowrap fw-medium">
-                                                    Administrator Access
+                                                    {{ __("Administrator Access") }}
                                                     <i class="mdi mdi-information-outline" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
                                                         title="Allows a full access to the system"></i>
@@ -133,7 +132,7 @@
                                                 <td>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="selectAll" />
-                                                        <label class="form-check-label" for="selectAll"> Select All
+                                                        <label class="form-check-label" for="selectAll"> {{ __("Select All") }}
                                                         </label>
                                                     </div>
                                                 </td>
@@ -165,10 +164,10 @@
                                 <!-- Permission table -->
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
+                                <button type="submit" class="btn btn-primary me-sm-3 me-1">{{ __("Submit") }}</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                    Cancel
+                                    {{ __("Cancel") }}
                                 </button>
                             </div>
                         </form>
@@ -187,8 +186,8 @@
                         aria-label="Close"></button>
                     <div class="modal-body p-md-0">
                         <div class="text-center mb-4">
-                            <h3 class="role-title mb-2 pb-0">Edit Role</h3>
-                            <p>Update role permissions</p>
+                            <h3 class="role-title mb-2 pb-0">{{ __("Edit Role") }}</h3>
+                            <p>{{ __("Update role permissions") }}</p>
                         </div>
                         <!-- Add role form -->
                         <form id="editRoleForm" class="row g-3" method="post">
@@ -199,18 +198,18 @@
                                 <div class="form-floating form-floating-outline">
                                     <input type="text" id="editRoleName" name="name" class="form-control"
                                         placeholder="Enter a role name" tabindex="-1" />
-                                    <label for="editRoleName">Role Name</label>
+                                    <label for="editRoleName">{{ __("Role Name") }}</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <h5>Role Permissions</h5>
+                                <h5>{{ __("Role Permissions") }}</h5>
                                 <!-- Permission table -->
                                 <div class="table-responsive">
                                     <table class="table table-flush-spacing">
                                         <tbody>
                                             <tr>
                                                 <td class="text-nowrap fw-medium">
-                                                    Administrator Access
+                                                    {{ __("Administrator Access") }}
                                                     <i class="mdi mdi-information-outline" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
                                                         title="Allows a full access to the system"></i>
@@ -218,7 +217,7 @@
                                                 <td>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="selectAll" />
-                                                        <label class="form-check-label" for="selectAll"> Select All
+                                                        <label class="form-check-label" for="selectAll"> {{ __("Select All") }}
                                                         </label>
                                                     </div>
                                                 </td>
@@ -250,10 +249,10 @@
                                 <!-- Permission table -->
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
+                                <button type="submit" class="btn btn-primary me-sm-3 me-1">{{ __("Submit") }}</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                    Cancel
+                                    {{ __("Cancel") }}
                                 </button>
                             </div>
                         </form>
@@ -272,8 +271,8 @@
                         aria-label="Close"></button>
                     <div class="modal-body p-md-0">
                         <div class="text-center mb-4">
-                            <h3 class="role-title mb-2 pb-0">Delete Role</h3>
-                            <p>Delete role permissions</p>
+                            <h3 class="role-title mb-2 pb-0">{{ __("Delete Role") }}</h3>
+                            <p>{{ __("Delete role permissions") }}</p>
                         </div>
                         <!-- Add role form -->
                         <form id="deleteRoleForm" class="row g-3" method="post">
@@ -282,12 +281,12 @@
                             <div class="col-12 text-center">
                                 {{ __('Are you sure!') }}
                             </div>
-                           
+
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-danger me-sm-3 me-1">Submit</button>
+                                <button type="submit" class="btn btn-danger me-sm-3 me-1">{{ __("Submit") }}</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                    Cancel
+                                    {{ __("Cancel") }}
                                 </button>
                             </div>
                         </form>
@@ -349,7 +348,7 @@
         // delete role
         $(document).on('click', '.deleteRoleBtn', function(){
             let url = $(this).data('url');
-            
+
             $('#deleteRoleForm').attr('action', url);
         })
     </script>

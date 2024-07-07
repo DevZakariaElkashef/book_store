@@ -49,7 +49,7 @@ class RoleController extends Controller
         // retun with toaster message
         $message = [
             'status' => true,
-            'content' => __('Role created successfully')
+            'content' => __('created successfully')
         ];
 
         return back()->with('message', $message);
@@ -82,7 +82,7 @@ class RoleController extends Controller
         // retun with toaster messate
         $message = [
             'status' => true,
-            'content' => __('Role updated successfully')
+            'content' => __('updated successfully')
         ];
 
         return back()->with('message', $message);
@@ -98,7 +98,7 @@ class RoleController extends Controller
 
         $message = [
             'status' => true,
-            'content' => __('Role deleted successfully')
+            'content' => __('deleted successfully')
         ];
 
         return back()->with('message', $message);

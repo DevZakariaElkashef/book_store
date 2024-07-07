@@ -40,17 +40,17 @@ class OrderUpdateService
         if (isset($data['payment_status']) && $data['payment_status'] == 3 && $refundCondition) {
             $order->update([
                 'payment_status' => 3,
-                'order_status_id' => 5
+                'order_status_id' => 5,
+                'admin_approve_to_cancle' => 1
             ]);
-            $user->update(['wallet' => $user->wallet + $order->total]);
         }
 
         if (isset($data['order_status_id']) && $data['order_status_id'] == 5 && $refundCondition) {
             $order->update([
                 'payment_status' => 3,
-                'order_status_id' => 5
+                'order_status_id' => 5,
+                'admin_approve_to_cancle' => 1
             ]);
-            $user->update(['wallet' => $user->wallet + $order->total]);
         }
 
         if (isset($data['payment_status']) && $data['payment_status'] == 1 && $revertRefundCondition) {
@@ -58,7 +58,6 @@ class OrderUpdateService
                 'payment_status' => 1,
                 'order_status_id' => 4
             ]);
-            $user->update(['wallet' => $user->wallet - $order->total]);
         }
 
         if (isset($data['order_status_id']) && $data['order_status_id'] == 4 && $revertRefundCondition) {
@@ -66,7 +65,15 @@ class OrderUpdateService
                 'payment_status' => 1,
                 'order_status_id' => 4
             ]);
-            $user->update(['wallet' => $user->wallet - $order->total]);
+        }
+
+
+        if (isset($data['client_received_refund'])) {
+            $order->update([
+                'client_received_refund' => 1
+            ]);
+
+            $user->update(['wallet' => $user->wallet + $order->total]);
         }
 
         return $order;

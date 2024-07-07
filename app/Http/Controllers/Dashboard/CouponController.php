@@ -168,7 +168,7 @@ class CouponController extends Controller
         $ids = explode(',', $request->ids);
         Coupon::whereIn('id', $ids)->delete();
         $message = [
-           'status' => true,
+            'status' => true,
             'content' => __('deleted successfully')
         ];
         return back()->with('message', $message);

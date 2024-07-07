@@ -21,12 +21,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Total Cities</p>
+                                <p class="text-heading mb-2">{{ __("Total Cities") }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalCitiesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">Last month analytics</p>
+                                <p class="mb-0">{{ __("Last month analytics") }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-primary rounded">
@@ -42,12 +42,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Active Cities</p>
+                                <p class="text-heading mb-2">{{ __("Active Cities") }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalActiveCitiesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">Last week analytics</p>
+                                <p class="mb-0">{{ __("Last week analytics") }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-danger rounded">
@@ -63,12 +63,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Pending Cities</p>
+                                <p class="text-heading mb-2">{{ __("Pending Cities") }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveCitiesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisNotActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">Last month analytics</p>
+                                <p class="mb-0">{{ __("Last month analytics") }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-warning rounded">
@@ -176,7 +176,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="from">From</label>
+                                <label for="from">{{ __("From") }}</label>
                                 <input type="date" class="form-control" name="from" id="from"
                                     value="{{ request()->has('from') ? request()->from : '' }}">
                                 @error('from')
@@ -188,7 +188,7 @@
 
 
                             <div class="form-group">
-                                <label for="to">To</label>
+                                <label for="to">{{ __("To") }}</label>
                                 <input type="date" class="form-control" name="to" id="to"
                                     value="{{ request()->has('to') ? request()->to : '' }}">
                                 @error('to')

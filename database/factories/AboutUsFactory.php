@@ -19,7 +19,7 @@ class AboutUsFactory extends Factory
         return [
             'content_ar' => fake()->sentence(),
             'content_en' => fake()->sentence(),
-            'image' => str_replace('public', '', fake()->image('public/uploads/Aboutus')),
+            'image' => str_replace('public', '', fake()->image('public/uploads/Aboutus', 640, 480, 'art4muslim')),
         ];
     }
 }

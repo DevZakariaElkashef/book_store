@@ -11,8 +11,7 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route('cities.update', $city->id) }}" method="post"
-                    enctype="multipart/form-data">
+                <form action="{{ route('cities.update', $city->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $city->id }}">
@@ -44,7 +43,7 @@
                         </div>
 
 
-                       
+
                         <div class="col-md-6 mb-2">
                             <div class="form-group">
                                 <label for="avatarInput">{{ __('Status') }}</label>

@@ -97,7 +97,7 @@ class UniversityController extends Controller
         // retun with toaster message
         $message = [
             'status' => true,
-            'content' => __('University created successfully')
+            'content' => __('created successfully')
         ];
 
         return to_route('universities.index')->with('message', $message);
@@ -177,7 +177,7 @@ class UniversityController extends Controller
         $ids = explode(',', $request->ids);
         University::whereIn('id', $ids)->delete();
         $message = [
-           'status' => true,
+            'status' => true,
             'content' => __('deleted successfully')
         ];
         return back()->with('message', $message);

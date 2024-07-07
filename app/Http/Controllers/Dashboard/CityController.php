@@ -165,7 +165,7 @@ class CityController extends Controller
         $ids = explode(',', $request->ids);
         City::whereIn('id', $ids)->delete();
         $message = [
-           'status' => true,
+            'status' => true,
             'content' => __('deleted successfully')
         ];
         return back()->with('message', $message);

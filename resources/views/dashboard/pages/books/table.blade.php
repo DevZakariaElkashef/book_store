@@ -31,7 +31,8 @@
                     <td>
                         @if ($book->image)
                             <a href="{{ asset($book->image) }}" download="">
-                                <img class="w-px-40 h-auto rounded-circle" src="{{ asset($book->image) }}" alt="">
+                                <img class="w-px-40 h-auto rounded-circle" src="{{ asset($book->image) }}"
+                                    alt="">
                             </a>
                         @endif
                         {{ $book->name }}

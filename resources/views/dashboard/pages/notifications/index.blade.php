@@ -103,7 +103,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="from">From</label>
+                                <label for="from">{{ __("From") }}</label>
                                 <input type="date" class="form-control" name="from" id="from"
                                     value="{{ request()->has('from') ? request()->from : '' }}">
                                 @error('from')
@@ -115,7 +115,7 @@
 
 
                             <div class="form-group">
-                                <label for="to">To</label>
+                                <label for="to">{{ __("To") }}</label>
                                 <input type="date" class="form-control" name="to" id="to"
                                     value="{{ request()->has('to') ? request()->to : '' }}">
                                 @error('to')

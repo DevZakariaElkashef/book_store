@@ -6,7 +6,7 @@
                 <th>
                     <input class="form-check-input select-all" type="checkbox">
                 </th>
-                <th>ID</th>
+                <th>{{ __("ID") }}</th>
                 <th>{{ __('Name') }}</th>
                 <th>{{ __('Status') }}</th>
                 <th>{{ __('Date') }}</th>

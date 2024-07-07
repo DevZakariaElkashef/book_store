@@ -4,7 +4,7 @@
         <div class="toast-header">
             <i class="mdi mdi-home me-2 {{ session('message')['status'] == true ? 'text-primary' : 'text-danger' }}"></i>
             <div class="me-auto fw-medium">{{ session('message')['status'] == true ? 'Success' : 'Error' }}</div>
-            <small class="text-muted">11 mins ago</small>
+            <small class="text-muted">{{ now() }}</small>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">{{ session('message')['content'] }}</div>

@@ -88,7 +88,7 @@ class CartController extends Controller
             } else {
                 $shippingCost = 0;
                 $status = false;
-                $message = 'We are not work there yet';
+                $message = __('We are not work there yet');
             }
 
             return response()->json([
@@ -101,7 +101,7 @@ class CartController extends Controller
         return response()->json([
             'status' => false,
             'shipping' => 0,
-            'message' => 'Latitude and longitude are required.'
+            'message' => __("Latitude and longitude are required.")
         ], 400);
     }
 }

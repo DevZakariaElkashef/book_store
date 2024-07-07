@@ -36,6 +36,10 @@ class OrderController extends Controller
             $ordersQuery->whereDate('created_at', '<', $request->to);
         }
 
+        if ($request->filled('status') && $request->status == 'pending-cancle') {
+            $ordersQuery->pendingCancellation();
+        }
+
         $orders = $ordersQuery->paginate(10);
 
         $orderStatus = OrderStatus::all();

@@ -14,16 +14,15 @@
                                 <span class="text-primary display-5 fw-normal">4.89</span>
                                 <span class="mdi mdi-star mdi-24px ms-1 text-primary"></span>
                             </div>
-                            <h6>Total {{ $totalCount }} reviews</h6>
-                            <p>All reviews are from genuine customers</p>
-                            <span class="badge bg-label-primary rounded-pill p-2 mb-3 mb-sm-0">+{{ $totalThisWeek }} This
-                                week</span>
+                            <h6>{{ __("Total") }} {{ $totalCount }} {{ __("reviews") }}</h6>
+                            <p>{{ __("All reviews are from genuine customers") }}</p>
+                            <span class="badge bg-label-primary rounded-pill p-2 mb-3 mb-sm-0">+{{ $totalThisWeek }} {{ __("This week") }}</span>
                             <hr class="d-sm-none" />
                         </div>
 
                         <div class="col-sm-7 g-2 text-nowrap d-flex flex-column justify-content-between px-4 gap-3">
                             <div class="d-flex align-items-center gap-3">
-                                <small>5 Star</small>
+                                <small>5 {{ __("Star") }}</small>
                                 <div class="progress w-100 rounded" style="height: 10px">
                                     <div class="progress-bar bg-primary" role="progressbar"
                                         style="width: {{ $totalCount ? ($total5Starts * 100) / $totalCount : 0 }}%"
@@ -32,7 +31,7 @@
                                 <small class="w-px-20 text-end">{{ $total5Starts }}</small>
                             </div>
                             <div class="d-flex align-items-center gap-3">
-                                <small>4 Star</small>
+                                <small>4 {{ __("Star") }}</small>
                                 <div class="progress w-100 rounded" style="height: 10px">
                                     <div class="progress-bar bg-primary" role="progressbar"
                                         style="width: {{ $totalCount ? ($total4Starts * 100) / $totalCount : 0 }}%"
@@ -41,7 +40,7 @@
                                 <small class="w-px-20 text-end">{{ $total4Starts }}</small>
                             </div>
                             <div class="d-flex align-items-center gap-3">
-                                <small>3 Star</small>
+                                <small>3 {{ __("Star") }}</small>
                                 <div class="progress w-100 rounded" style="height: 10px">
                                     <div class="progress-bar bg-primary" role="progressbar"
                                         style="width: {{ $totalCount ? ($total3Starts * 100) / $totalCount : 0 }}%"
@@ -50,7 +49,7 @@
                                 <small class="w-px-20 text-end">{{ $total3Starts }}</small>
                             </div>
                             <div class="d-flex align-items-center gap-3">
-                                <small>2 Star</small>
+                                <small>2 {{ __("Star") }}</small>
                                 <div class="progress w-100 rounded" style="height: 10px">
                                     <div class="progress-bar bg-primary" role="progressbar"
                                         style="width: {{ $totalCount ? ($total2Starts * 100) / $totalCount : 0 }}%"
@@ -59,7 +58,7 @@
                                 <small class="w-px-20 text-end">{{ $total2Starts }}</small>
                             </div>
                             <div class="d-flex align-items-center gap-3">
-                                <small>1 Star</small>
+                                <small>1 {{ __("Star") }}</small>
                                 <div class="progress w-100 rounded" style="height: 10px">
                                     <div class="progress-bar bg-primary" role="progressbar"
                                         style="width: {{ $totalCount ? ($total1Starts * 100) / $totalCount : 0 }}%"
@@ -177,7 +176,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="from">From</label>
+                                <label for="from">{{ __("From") }}</label>
                                 <input type="date" class="form-control" name="from" id="from"
                                     value="{{ request()->has('from') ? request()->from : '' }}">
                                 @error('from')
@@ -189,7 +188,7 @@
 
 
                             <div class="form-group">
-                                <label for="to">To</label>
+                                <label for="to">{{ __("To") }}</label>
                                 <input type="date" class="form-control" name="to" id="to"
                                     value="{{ request()->has('to') ? request()->to : '' }}">
                                 @error('to')
@@ -225,7 +224,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="starInput">Star</label>
+                                <label for="starInput">{{ __("Star") }}</label>
                                 <input type="number" class="form-control" name="star" id="starInput">
                                 @error('star')
                                     <div class="text-danger">
@@ -236,7 +235,7 @@
 
 
                             <div class="form-group">
-                                <label for="CommentInput">Comment</label>
+                                <label for="CommentInput">{{ __("Comment") }}</label>
                                 <textarea class="form-control" name="comment" id="CommentInput"></textarea>
                                 @error('comment')
                                     <div class="text-danger">

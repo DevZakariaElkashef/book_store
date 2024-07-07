@@ -35,7 +35,7 @@ class UserFactory extends Factory
             'is_active' => rand(0, 1),
             'address' => fake()->address(),
             'city_id' => City::factory(),
-            'avatar' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Users'))
+            'avatar' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Users', 640, 480, 'art4muslim'))
         ];
     }
 

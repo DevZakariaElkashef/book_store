@@ -7,7 +7,7 @@
                     <input class="form-check-input select-all" type="checkbox">
                 </th>
                 <th>{{ __('Book') }}</th>
-                <th>{{ __('User') }}</th>
+                <th>{{ __('Customer') }}</th>
                 <th>{{ __('Review') }}</th>
                 <th>{{ __('Date') }}</th>
                 <th>{{ __('Status') }}</th>

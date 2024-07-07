@@ -107,7 +107,7 @@ class UserController extends Controller
         // retun with toaster message
         $message = [
             'status' => true,
-            'content' => __('User created successfully')
+            'content' => __('created successfully')
         ];
 
         return to_route('users.index')->with('message', $message);
@@ -193,7 +193,7 @@ class UserController extends Controller
         $ids = explode(',', $request->ids);
         User::whereIn('id', $ids)->delete();
         $message = [
-           'status' => true,
+            'status' => true,
             'content' => __('deleted successfully')
         ];
         return back()->with('message', $message);

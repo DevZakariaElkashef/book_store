@@ -32,7 +32,7 @@
                                                     <i class="ri-close-line"></i>
                                                 </span>
                                             </span>
-                                            <span class="switch-label">Do you use delivery costs</span>
+                                            <span class="switch-label">{{ __('Do you use delivery costs') }}</span>
                                         </label>
                                     </div>
                                 </div>

@@ -14,16 +14,16 @@ if (!function_exists('isActiveRoute')) {
      * @param  string  $class
      * @return string
      */
-    function isActiveRoute($route, $class = 'active')
+    function isActiveRoute($route, $params = [], $class = 'active')
     {
         if (is_array($route)) {
             foreach ($route as $r) {
-                if (Route::is($r)) {
+                if (Route::is($r) && empty(array_diff_assoc($params, request()->query()))) {
                     return $class;
                 }
             }
         } else {
-            if (Route::is($route)) {
+            if (Route::is($route) && empty(array_diff_assoc($params, request()->query()))) {
                 return $class;
             }
         }

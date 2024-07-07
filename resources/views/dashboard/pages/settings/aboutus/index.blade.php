@@ -16,11 +16,11 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="">
-                                <h4>Aboutus</h4>
+                                <h4>{{ __("Aboutus") }}</h4>
                             </div>
                             <div class="d-flex align-items-center">
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#createModal">Create</a>
+                                    data-bs-target="#createModal">{{ __("Create") }}</a>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
                                             aria-expanded="false">

@@ -8,46 +8,24 @@
     </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        <!-- Search -->
-        <div class="navbar-nav align-items-center">
-            <div class="nav-item navbar-search-wrapper mb-0">
-                <a class="nav-item nav-link search-toggler fw-normal px-0" href="javascript:void(0);">
-                    <i class="mdi mdi-magnify mdi-24px scaleX-n1-rtl"></i>
-                    <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
-                </a>
-            </div>
-        </div>
-        <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Language -->
-            <li class="nav-item dropdown-language dropdown me-1 me-xl-0">
-                <a class="nav-link btn btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
-                    href="javascript:void(0);" data-bs-toggle="dropdown">
+            <li class=" me-1 me-xl-0">
+                <a onclick="$('#changeLangForm').submit()"
+                    class="nav-link btn btn-text-secondary rounded-pill btn-icon hide-arrow" href="javascript:void(0);">
                     <i class="mdi mdi-translate mdi-24px"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-language="en">
-                            <span class="align-middle">English</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-language="fr">
-                            <span class="align-middle">French</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-language="de">
-                            <span class="align-middle">German</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-language="pt">
-                            <span class="align-middle">Portuguese</span>
-                        </a>
-                    </li>
-                </ul>
+
+                <form method="POST" action="{{ route('site.lang.update') }}" class="d-none" id="changeLangForm">
+                    @csrf
+                    @if (app()->getLocale() == 'ar')
+                        <input type="hidden" name="lang" value="en">
+                    @else
+                        <input type="hidden" name="lang" value="ar">
+                    @endif
+                </form>
+
             </li>
             <!--/ Language -->
 
@@ -60,17 +38,17 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
                     <li>
                         <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
-                            <span class="align-middle"><i class="mdi mdi-weather-sunny me-2"></i>Light</span>
+                            <span class="align-middle"><i class="mdi mdi-weather-sunny me-2"></i>{{ __('Light') }}</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
-                            <span class="align-middle"><i class="mdi mdi-weather-night me-2"></i>Dark</span>
+                            <span class="align-middle"><i class="mdi mdi-weather-night me-2"></i>{{ __('Dark') }}</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                            <span class="align-middle"><i class="mdi mdi-monitor me-2"></i>System</span>
+                            <span class="align-middle"><i class="mdi mdi-monitor me-2"></i>{{ __("System") }}</span>
                         </a>
                     </li>
                 </ul>
@@ -102,7 +80,7 @@
                 <ul class="dropdown-menu dropdown-menu-end py-0">
                     <li class="dropdown-menu-header border-bottom">
                         <div class="dropdown-header d-flex align-items-center py-3">
-                            <h6 class="mb-0 me-auto">Notification</h6>
+                            <h6 class="mb-0 me-auto">{{ __('Notifications') }}</h6>
                             <div class="notification-counter">
 
                                 @include('dashboard.partials.__notifications_counter')
@@ -137,8 +115,9 @@
                         </ul>
                     </li>
                     <li class="dropdown-menu-footer border-top p-2">
-                        <a href="{{ route('notifications.index') }}" class="btn btn-primary d-flex justify-content-center">
-                            View all notifications
+                        <a href="{{ route('notifications.index') }}"
+                            class="btn btn-primary d-flex justify-content-center">
+                            {{ __('View all notifications') }}
                         </a>
                     </li>
                 </ul>
@@ -149,8 +128,8 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('dashboard/assets/img/avatars/1.png') }}" alt
-                            class="w-px-40 h-auto rounded-circle" />
+                        <img src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('dashboard/assets/img/avatars/1.png') }}"
+                            alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -159,13 +138,13 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('dashboard/assets/img/avatars/1.png') }}" alt
-                                            class="w-px-40 h-auto rounded-circle" />
+                                        <img src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('dashboard/assets/img/avatars/1.png') }}"
+                                            alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-medium d-block">{{ auth()->user()->name }}</span>
-                                    <small class="text-muted">Admin</small>
+                                    <small class="text-muted">{{ auth()->user()->roles->first()->name }}</small>
                                 </div>
                             </div>
                         </a>
@@ -176,7 +155,7 @@
                     <li>
                         <a class="dropdown-item" href="{{ route('settings.index') }}">
                             <i class="mdi mdi-cog-outline me-2"></i>
-                            <span class="align-middle">Settings</span>
+                            <span class="align-middle">{{ __("Settings") }}</span>
                         </a>
                     </li>
 
@@ -186,7 +165,7 @@
                     <li>
                         <a class="dropdown-item" href="javascript:void(0);" onclick="$('#logoutForm').submit()">
                             <i class="mdi mdi-logout me-2"></i>
-                            <span class="align-middle">Log Out</span>
+                            <span class="align-middle">{{ __("Log Out") }}</span>
                         </a>
 
                         <form id="logoutForm" class="d-none" action="{{ route('dashboard.logout') }}"
@@ -196,13 +175,6 @@
             </li>
             <!--/ User -->
         </ul>
-    </div>
-
-    <!-- Search Small Screens -->
-    <div class="navbar-search-wrapper search-input-wrapper d-none">
-        <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..."
-            aria-label="Search..." />
-        <i class="mdi mdi-close search-toggler cursor-pointer"></i>
     </div>
 </nav>
 <!-- / Navbar -->

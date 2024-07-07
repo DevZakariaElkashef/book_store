@@ -30,7 +30,7 @@ class SettingFactory extends Factory
             'google' => fake()->url(),
             'slogan_ar' => fake()->sentence(),
             'slogan_en' => fake()->sentence(),
-            'logo' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Setting')),
+            'logo' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Setting', 640, 480, 'art4muslim')),
             'tax' => 15,
             'lat' => fake()->latitude(),
             'lng' => fake()->longitude(),

@@ -26,4 +26,9 @@ class Contact extends Model
     {
         return $this->belongsTo(ContactType::class);
     }
+
+    public function scopeDidNotReplied($query)
+    {
+        return $query->where('status', 0);
+    }
 }

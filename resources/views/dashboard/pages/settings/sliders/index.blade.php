@@ -16,9 +16,9 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="">
-                                <h4>Sliders</h4>
+                                <h4>{{ __("Sliders") }}</h4>
                             </div>
-                            
+
                         </div>
                         <div id="searchTable">
                             @include('dashboard.pages.settings.sliders.table')
@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <div class="form-group">
-                                    <label for="image">Image</label>
+                                    <label for="image">{{ __("Image") }}</label>
                                     <input id="image" class="form-control" type="file" accept=".jpg,.png,.jpeg"
                                         name="image">
                                     <img id="edit_image" alt="" style="max-width: 100px;">

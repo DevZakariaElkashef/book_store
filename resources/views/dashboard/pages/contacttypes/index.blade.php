@@ -21,12 +21,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Total ContactTypes</p>
+                                <p class="text-heading mb-2">{{ __("Total ContactTypes") }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalContactTypesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">Last month analytics</p>
+                                <p class="mb-0">{{ __("Last month analytics") }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-primary rounded">
@@ -42,12 +42,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Active ContactTypes</p>
+                                <p class="text-heading mb-2">{{ __("Active ContactTypes") }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalActiveContactTypesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">Last week analytics</p>
+                                <p class="mb-0">{{ __("Last week analytics") }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-danger rounded">
@@ -63,12 +63,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">Pending ContactTypes</p>
+                                <p class="text-heading mb-2">{{ __("Pending ContactTypes") }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveContactTypesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisNotActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">Last month analytics</p>
+                                <p class="mb-0">{{ __("Last month analytics") }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-warning rounded">

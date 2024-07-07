@@ -17,7 +17,7 @@ class SliderFactory extends Factory
     public function definition(): array
     {
         return [
-            'image' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Sliders'))
+            'image' => str_replace(['public', '\\'], ['', '/'], fake()->image('public/uploads/Sliders', 640, 480, 'art4muslim'))
         ];
     }
 }

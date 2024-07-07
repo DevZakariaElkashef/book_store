@@ -97,15 +97,13 @@ class OrderController extends Controller
 
 
         $order->update([
-            'order_status_id' => 5,
-            'payment_status' => 3
+            'client_want_to_cancle' => 1,
         ]);
 
-        $user->update(['wallet' => $user->wallet + $order->total]);
 
         session()->flash("message", [
             'status' => true,
-            'content' => __('order cancled success')
+            'content' => __('admin will proccess the cancle')
         ]);
 
         return redirect()->back();

@@ -31,6 +31,10 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
+            $table->boolean('client_received_refund')->default(0);
+            $table->boolean('client_want_to_cancle')->default(0);
+            $table->boolean('admin_approve_to_cancle')->default(0);
+            $table->boolean('is_new')->default(1);
             $table->boolean('is_active')->default(1);
             $table->softDeletes();
         });
