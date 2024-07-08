@@ -293,22 +293,28 @@
     "Bank Name": "اسم البنك",
     "Bank Number": "رقم البنك",
     "Bank Iban": "الآيبان البنكي",
-    "Please choose a payment method" : "يرجى اختيار طريقة الدفع",
+    "Please choose a payment method": "يرجى اختيار طريقة الدفع",
 
 
 
-    "New Book" : "كتاب جديد",
-    "Used Book" : "كتاب مستعمل",
-    "Please sign-in to your account and start the adventure" : "يرجى تسجيل الدخول إلى حسابك وبدء المغامرة",
-    "Welcome to" : "مرحباً بك في",
-    "Remember Me" : "تذكرني",
-    "Forgot Password" : "نسيت كلمة المرور",
-    "Enter your email and we'll send you instructions to reset your password" : "أدخل بريدك الإلكتروني وسنرسل لك تعليمات لإعادة تعيين كلمة المرور الخاصة بك",
-    "Send Reset Link" : "إرسال رابط إعادة التعيين",
-    "Back to login" : "العودة إلى تسجيل الدخول",
-    "Reset Password" : "إعادة تعيين كلمة المرور",
-    "Your new password must be different from previously used passwords" : "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمات المرور المستخدمة سابقاً",
-    "New Password" : "كلمة مرور جديدة",
-    "Set new password" : "تعيين كلمة مرور جديدة"
+    "New Book": "كتاب جديد",
+    "Used Book": "كتاب مستعمل",
+    "Please sign-in to your account and start the adventure": "يرجى تسجيل الدخول إلى حسابك وبدء المغامرة",
+    "Welcome to": "مرحباً بك في",
+    "Remember Me": "تذكرني",
+    "Forgot Password": "نسيت كلمة المرور",
+    "Enter your email and we'll send you instructions to reset your password": "أدخل بريدك الإلكتروني وسنرسل لك تعليمات لإعادة تعيين كلمة المرور الخاصة بك",
+    "Send Reset Link": "إرسال رابط إعادة التعيين",
+    "Back to login": "العودة إلى تسجيل الدخول",
+    "Reset Password": "إعادة تعيين كلمة المرور",
+    "Your new password must be different from previously used passwords": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمات المرور المستخدمة سابقاً",
+    "New Password": "كلمة مرور جديدة",
+    "Set new password": "تعيين كلمة مرور جديدة",
+
+
+    "Total Employees": "إجمالي الموظفين",
+    "Active Employees": "الموظفين النشطين",
+    "Pending Employees": "الموظفين المعلقين",
+    "Employees": "الموظفين"
 
 }

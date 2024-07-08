@@ -216,7 +216,7 @@
     </div>
 
     @if ($offerBooks->count())
-        <div class="section_for_books home_offers">
+        <div class="section_for_books" style="background-image: url('{{ asset($offerImg) }}')">
             <div class="container-fluid pd-50">
                 <div class="section_header d-flex align-items-center justify-content-between">
                     <div class="wrap d-flex align-items-center">
@@ -255,8 +255,6 @@
                             </div>
                         </div>
                     @endforeach
-
-
                 </div>
             </div>
         </div>

@@ -24,7 +24,8 @@ class HomeController extends Controller
 
         $heroImg = Slider::where("key", 'home-hero')->first()->image;
         $contactUsImg = Slider::where("key", 'contact_us-section')->first()->image;
+        $offerImg = Slider::where("key", 'offer-section')->first()->image;
 
-        return view("site.index", compact("contactTypes", "latestBooks", "mostSaledBooks", "offerBooks", "strLimit", 'heroImg', 'contactUsImg'));
+        return view("site.index", compact("contactTypes", "latestBooks", "mostSaledBooks", "offerBooks", "strLimit", 'heroImg', 'contactUsImg', 'offerImg'));
     }
 }
