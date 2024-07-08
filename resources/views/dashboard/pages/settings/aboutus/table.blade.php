@@ -27,7 +27,7 @@
 
                         @if ($item->image)
                             <a href="{{ asset($item->image) }}" download>
-                                <img class="w-px-40 h-auto rounded-circle" src="{{ asset($item->image) }}"
+                                <img style="width: 50px; height: 50px;" class="rounded-circle" src="{{ asset($item->image) }}"
                                     alt="">
                             </a>
                         @endif
