@@ -299,7 +299,18 @@
     "Please choose a payment method" : "Please choose a payment method",
 
     "New Book" : "New Book",
-    "Used Book" : "Used Book"
+    "Used Book" : "Used Book",
+    "Please sign-in to your account and start the adventure" : "Please sign-in to your account and start the adventure",
+    "Welcome to" : "Welcome to",
+    "Remember Me" : "Remember Me",
+    "Forgot Password" : "Forgot Password",
+    "Enter your email and we'll send you instructions to reset your password" : "Enter your email and we'll send you instructions to reset your password",
+    "Send Reset Link" : "Send Reset Link",
+    "Back to login" : "Back to login",
+    "Reset Password" : "Reset Password",
+    "Your new password must be different from previously used passwords" : "Your new password must be different from previously used passwords",
+    "New Password" : "New Password",
+    "Set new password" : "Set new password"
 
 
 

@@ -2,59 +2,62 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\City;
-use App\Models\User;
-use App\Exports\UsersExport;
+use App\Exports\EmployeeExport;
+use App\Models\Employee;
+use App\Exports\EmployeesExport;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Requests\Dashboard\StoreUserRequest;
-use App\Http\Requests\Dashboard\UpdateUserReqeust;
+use App\Http\Requests\Dashboard\StoreEmployeeRequest;
+use App\Http\Requests\Dashboard\UpdateEmployeeReqeust;
+use App\Models\City;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $usersQuery = User::query();
-        $usersQuery->latest()->where('id', '!=', auth()->user()->id);
+        $employeesQuery = User::query();
+
+        $employeesQuery->latest()->where('id', '!=', auth()->user()->id);
 
         // Clone the query to calculate counts without date range filtering
-        $countQuery = clone $usersQuery;
+        $countQuery = clone $employeesQuery;
 
         if ($request->filled('from')) {
-            $usersQuery->whereDate('created_at', '>', $request->from);
+            $employeesQuery->whereDate('created_at', '>', $request->from);
         }
 
         if ($request->filled('to')) {
-            $usersQuery->whereDate('created_at', '<', $request->to);
+            $employeesQuery->whereDate('created_at', '<', $request->to);
         }
 
-        $usersQuery->whereHas('roles', function ($query) {
+        // Join with roles table to exclude users with the 'client' role
+        $employeesQuery->whereDoesntHave('roles', function ($query) {
             $query->where('name', 'client');
         });
 
-
-        $users = $usersQuery->paginate(10);
+        $employees = $employeesQuery->paginate(10);
 
         // Get counts without date range filtering
-        $totalUsersCount = $countQuery->count();
+        $totalEmployeesCount = $countQuery->count();
         $totalThisMonth = $countQuery->whereMonth('created_at', '=', date('m'))->count();
-        $thisMonthPercentage = $totalUsersCount ? ceil(($totalThisMonth / $totalUsersCount) * 100) : 0;
+        $thisMonthPercentage = $totalEmployeesCount ? ceil(($totalThisMonth / $totalEmployeesCount) * 100) : 0;
 
         // Get counts with date range filtering
-        $totalActiveUsersCount = $usersQuery->where('is_active', 1)->count();
-        $totalActiveThisMonth = $usersQuery->where('is_active', 1)->whereMonth('created_at', '=', date('m'))->count();
-        $thisActiveMonthPercentage = $totalActiveUsersCount ? ceil(($totalActiveThisMonth / $totalActiveUsersCount) * 100) : 0;
+        $totalActiveEmployeesCount = $employeesQuery->where('is_active', 1)->count();
+        $totalActiveThisMonth = $employeesQuery->where('is_active', 1)->whereMonth('created_at', '=', date('m'))->count();
+        $thisActiveMonthPercentage = $totalActiveEmployeesCount ? ceil(($totalActiveThisMonth / $totalActiveEmployeesCount) * 100) : 0;
 
-        $totalNotActiveUsersCount = $totalUsersCount - $totalActiveUsersCount;
+        $totalNotActiveEmployeesCount = $totalEmployeesCount - $totalActiveEmployeesCount;
         $totalNotActiveThisMonth = $totalThisMonth - $totalActiveThisMonth;
-        $thisNotActiveMonthPercentage = $totalNotActiveUsersCount ? ceil(($totalNotActiveThisMonth / $totalNotActiveUsersCount) * 100) : 0;
+        $thisNotActiveMonthPercentage = $totalNotActiveEmployeesCount ? ceil(($totalNotActiveThisMonth / $totalNotActiveEmployeesCount) * 100) : 0;
 
-        return view('dashboard.pages.users.index', compact('users', 'totalUsersCount', 'thisMonthPercentage', 'totalActiveUsersCount', 'thisActiveMonthPercentage', 'totalNotActiveUsersCount', 'thisNotActiveMonthPercentage'));
+        return view('dashboard.pages.employees.index', compact('employees', 'totalEmployeesCount', 'thisMonthPercentage', 'totalActiveEmployeesCount', 'thisActiveMonthPercentage', 'totalNotActiveEmployeesCount', 'thisNotActiveMonthPercentage'));
     }
 
 
@@ -70,21 +73,21 @@ class UserController extends Controller
                 $q->where('name', 'like', '%' . $request->val . '%')
                     ->orWhere('email', 'like', '%' . $request->val . '%')
                     ->orWhere('phone', 'like', '%' . $request->val . '%');
-            })->whereHas('roles', function ($query) {
+            })->whereDoesntHave('roles', function ($query) {
                 $query->where('name', 'client');
             });
         }
 
-        $users = $query->where('id', '!=', auth()->user()->id)->paginate(10);
+        $employees = $query->where('id', '!=', auth()->user()->id)->paginate(10);
 
-        return view('dashboard.pages.users.table', compact('users'))->render();
+        return view('dashboard.pages.employees.table', compact('employees'))->render();
     }
 
 
 
     public function export()
     {
-        return Excel::download(new UsersExport, 'users.xlsx');
+        return Excel::download(new EmployeeExport, 'employees.xlsx');
     }
 
     /**
@@ -93,24 +96,25 @@ class UserController extends Controller
     public function create()
     {
         $cities = City::active()->get();
-        return view('dashboard.pages.users.create', compact('cities'));
+        $roles = Role::where("name", '!=', 'client')->get();
+
+        return view('dashboard.pages.employees.create', compact('cities', 'roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreEmployeeRequest $request)
     {
         $data = $request->except('avatar');
 
         if ($request->has('avatar')) {
 
-            $data['avatar'] = uploadeImage($request->avatar, "Users");
+            $data['avatar'] = uploadeImage($request->avatar, "Employees");
         }
 
         $user = User::create($data);
-        $role = Role::firstOrCreate(['name' => 'client']);
-        $user->assignRole($role);
+        $user->syncRoles(Role::find($request->role_id)->first());
 
         // retun with toaster message
         $message = [
@@ -118,7 +122,7 @@ class UserController extends Controller
             'content' => __('created successfully')
         ];
 
-        return to_route('users.index')->with('message', $message);
+        return to_route('employees.index')->with('message', $message);
     }
 
     /**
@@ -126,7 +130,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return to_route('users.edit', $id);
+        return to_route('employees.edit', $id);
     }
 
     /**
@@ -134,29 +138,30 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::findOrFail($id);
+        $employee = User::findOrFail($id);
         $cities = City::active()->get();
+        $roles = Role::where("name", '!=', 'client')->get();
 
         abort_if(auth()->user()->id == $id, 404);
 
-        return view('dashboard.pages.users.edit', compact('user', 'cities'));
+        return view('dashboard.pages.employees.edit', compact('employee', 'cities', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserReqeust $request, string $id)
+    public function update(StoreEmployeeRequest $request, string $id)
     {
-        $user = User::findOrFail($id);
+        $employee = User::findOrFail($id);
 
         $data = $request->except('avatar');
 
         if ($request->has('avatar')) {
 
-            $data['avatar'] = uploadeImage($request->avatar, "Users");
+            $data['avatar'] = uploadeImage($request->avatar, "Employees");
         }
 
-        $user->update($data);
+        $employee->update($data);
 
         // retun with toaster message
         $message = [
@@ -164,7 +169,7 @@ class UserController extends Controller
             'content' => __('updated successfully')
         ];
 
-        return to_route('users.index')->with('message', $message);
+        return to_route('employees.index')->with('message', $message);
     }
 
     /**
@@ -180,7 +185,7 @@ class UserController extends Controller
             'content' => __('deleted successfully')
         ];
 
-        return to_route('users.index')->with('message', $message);
+        return to_route('employees.index')->with('message', $message);
     }
 
     public function delete(Request $request)

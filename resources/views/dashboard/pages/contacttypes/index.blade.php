@@ -21,12 +21,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __("Total ContactTypes") }}</p>
+                                <p class="text-heading mb-2">{{ __('Total ContactTypes') }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalContactTypesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __("Last month analytics") }}</p>
+                                <p class="mb-0">{{ __('Last month analytics') }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-primary rounded">
@@ -42,12 +42,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __("Active ContactTypes") }}</p>
+                                <p class="text-heading mb-2">{{ __('Active ContactTypes') }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalActiveContactTypesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __("Last week analytics") }}</p>
+                                <p class="mb-0">{{ __('Last week analytics') }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-danger rounded">
@@ -63,12 +63,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __("Pending ContactTypes") }}</p>
+                                <p class="text-heading mb-2">{{ __('Pending ContactTypes') }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveContactTypesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisNotActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __("Last month analytics") }}</p>
+                                <p class="mb-0">{{ __('Last month analytics') }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-warning rounded">
@@ -84,7 +84,7 @@
         <!-- ContactTypes List Table -->
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">{{ __("ContactTypes") }}</h5>
+                <h5 class="card-title">{{ __('ContactTypes') }}</h5>
 
                 <div class="row align-items-end">
                     <div class="col-sm-12 col-md-6">
@@ -94,24 +94,27 @@
                         <div id="DataTables_Table_1_filter" class="dataTables_filter">
                             <label>
                                 <input type="search" class="form-control search-in-db"
-                                    data-url="{{ route('contact_types.search') }}" placeholder="{{ __('search...') }}" aria-controls="DataTables_Table_1">
+                                    data-url="{{ route('contact_types.search') }}" placeholder="{{ __('search...') }}"
+                                    aria-controls="DataTables_Table_1">
                             </label>
                             {{-- export --}}
                             <a class="dt-button add-new btn bg-label-primary" href="{{ route('contact_types.export') }}">
-                                <span class="d-none d-sm-inline-block">{{ __("Export") }}</span>
+                                <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
                             </a>
                             {{-- filter --}}
                             <a class="dt-button add-new btn bg-label-primary" href="javascript:void(0);"
                                 data-bs-toggle="modal" data-bs-target="#filterModal">
-                                <span class="d-none d-sm-inline-block">{{ __("Filter") }}</span>
+                                <span class="d-none d-sm-inline-block">{{ __('Filter') }}</span>
                             </a>
-                            {{-- add contacttype btn --}}
-                            <a class="dt-button add-new btn btn-primary" href="{{ route('contact_types.create') }}">
-                                <span>
-                                    <i class="mdi mdi-plus me-0 me-sm-1"></i>
-                                    <span class="d-none d-sm-inline-block">{{ __("Create") }}</span>
-                                </span>
-                            </a>
+                            @can('contact_types.create')
+                                {{-- add contacttype btn --}}
+                                <a class="dt-button add-new btn btn-primary" href="{{ route('contact_types.create') }}">
+                                    <span>
+                                        <i class="mdi mdi-plus me-0 me-sm-1"></i>
+                                        <span class="d-none d-sm-inline-block">{{ __('Create') }}</span>
+                                    </span>
+                                </a>
+                            @endcan
                         </div>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
@@ -119,7 +122,8 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect delete-selection" data-url="{{ route('contact_types.delete') }}" href="javascript:void(0);"
+                                <a class="dropdown-item waves-effect delete-selection"
+                                    data-url="{{ route('contact_types.delete') }}" href="javascript:void(0);"
                                     data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                         class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
                             </div>

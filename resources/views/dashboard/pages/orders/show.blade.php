@@ -37,9 +37,6 @@
                 <p class="mb-0">{{ $order->created_at->format('Y-m-d') }}, <span
                         id="orderYear"></span>{{ $order->created_at->format('H:i') }}</p>
             </div>
-            <div class="d-flex align-content-center flex-wrap gap-2">
-                <button class="btn btn-outline-danger delete-order">{{ __('Delete Order') }}</button>
-            </div>
         </div>
 
         <!-- Order Details Table -->

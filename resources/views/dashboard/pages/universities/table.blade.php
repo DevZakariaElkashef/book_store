@@ -7,11 +7,11 @@
                     <input class="form-check-input select-all" type="checkbox">
                 </th>
                 <th>ID</th>
-                <th>{{ __("Name") }}</th>
-                <th>{{ __("Description") }}</th>
-                <th>{{ __("Status") }}</th>
-                <th>{{ __("Date") }}</th>
-                <th>{{ __("Actions") }}</th>
+                <th>{{ __('Name') }}</th>
+                <th>{{ __('Description') }}</th>
+                <th>{{ __('Status') }}</th>
+                <th>{{ __('Date') }}</th>
+                <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -23,18 +23,19 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         @if ($university->image)
-                        <a href="{{ asset($university->image) }}" download>
-                            <img class="w-px-40 h-auto rounded-circle" src="{{ asset($university->image) }}" alt="">
-                        </a>
+                            <a href="{{ asset($university->image) }}" download>
+                                <img class="w-px-40 h-auto rounded-circle" src="{{ asset($university->image) }}"
+                                    alt="">
+                            </a>
                         @endif
                         {{ $university->name }}
                     </td>
                     <td>{{ Str::limit($university->description, 50) }}</td>
                     <td>
-                        @if($university->is_active)
-                        <span class="badge bg-label-primary">{{ __("Active") }}</span>
+                        @if ($university->is_active)
+                            <span class="badge bg-label-primary">{{ __('Active') }}</span>
                         @else
-                        <span class="badge bg-label-dark">{{ __("Not Active") }}</span>
+                            <span class="badge bg-label-dark">{{ __('Not Active') }}</span>
                         @endif
                     </td>
                     <td>{{ $university->created_at }}</td>
@@ -45,10 +46,18 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect" href="{{ route('universities.edit', $university->id) }}"><i
-                                        class="mdi mdi-pencil-outline me-1"></i> {{ __("Edit") }}</a>
-                                <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);" data-url="{{ route('universities.destroy', $university->id) }}" data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                        class="mdi mdi-trash-can-outline me-1"></i> {{ __("Delete") }}</a>
+                                @can('universities.update')
+                                    <a class="dropdown-item waves-effect"
+                                        href="{{ route('universities.edit', $university->id) }}"><i
+                                            class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
+                                @endcan
+
+                                @can('universities.delete')
+                                    <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
+                                        data-url="{{ route('universities.destroy', $university->id) }}"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                            class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
+                                @endcan
                             </div>
                         </div>
                     </td>
@@ -60,6 +69,3 @@
         {{ $universities->links() }}
     </div>
 </div>
-
-
-

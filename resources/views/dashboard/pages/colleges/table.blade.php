@@ -6,7 +6,7 @@
                 <th>
                     <input class="form-check-input select-all" type="checkbox">
                 </th>
-                <th>{{ __("ID") }}</th>
+                <th>{{ __('ID') }}</th>
                 <th>{{ __('University') }}</th>
                 <th>{{ __('Name') }}</th>
                 <th>{{ __('Description') }}</th>
@@ -48,13 +48,18 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect"
-                                    href="{{ route('colleges.edit', $college->id) }}"><i
-                                        class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
-                                <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
-                                    data-url="{{ route('colleges.destroy', $college->id) }}" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
-                                    {{ __('Delete') }}</a>
+                                @can('colleges.update')
+                                    <a class="dropdown-item waves-effect"
+                                        href="{{ route('colleges.edit', $college->id) }}"><i
+                                            class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
+                                @endcan
+
+                                @can('colleges.delete')
+                                    <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
+                                        data-url="{{ route('colleges.destroy', $college->id) }}" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
+                                        {{ __('Delete') }}</a>
+                                @endcan
                             </div>
                         </div>
                     </td>

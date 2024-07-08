@@ -75,10 +75,12 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect delete-selection"
-                                    data-url="{{ route('orders.delete') }}" href="javascript:void(0);"
-                                    data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                        class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
+                                @can('orders.delete')
+                                    <a class="dropdown-item waves-effect delete-selection"
+                                        data-url="{{ route('orders.delete') }}" href="javascript:void(0);"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                            class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
+                                @endcan
                             </div>
                         </div>
 

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default"
-    data-assets-path="/dashboard/assets/" data-template="vertical-menu-template">
+<html lang="{{ app()->getLocale() }}" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+    dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}" data-theme="theme-default" data-assets-path="/dashboard/assets/"
+    data-template="vertical-menu-template">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login</title>
+    <title>{{ __('Login') }}</title>
 
     <meta name="description" content="" />
 
@@ -37,7 +38,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
     <!-- Vendor -->
     <link rel="stylesheet"
@@ -93,8 +95,10 @@
     <div class="authentication-wrapper authentication-cover">
         <!-- Logo -->
         <a href="index.html" class="auth-cover-brand d-flex align-items-center gap-2">
-            <span class="app-brand-logo demo">
-                <span style="color: var(--bs-primary)">
+            @if ($app->logo)
+                <img src="{{ asset($app->logo) }}" style="width:40px;">
+            @else
+                <span style="">
                     <svg width="268" height="150" viewBox="0 0 38 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -129,8 +133,8 @@
                         </defs>
                     </svg>
                 </span>
-            </span>
-            <span class="app-brand-text demo text-heading fw-bold">Materialize</span>
+            @endif
+            <span class="app-brand-text demo text-heading fw-bold">{{ $app->name }}</span>
         </a>
         <!-- /Logo -->
         <div class="authentication-inner row m-0">
@@ -151,16 +155,16 @@
             <div
                 class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg position-relative py-sm-5 px-4 py-4">
                 <div class="w-px-400 mx-auto pt-5 pt-lg-0">
-                    <h4 class="mb-2">Welcome to Materialize! 👋</h4>
-                    <p class="mb-4">Please sign-in to your account and start the adventure</p>
+                    <h4 class="mb-2">{{ __('Welcome to') }} {{ $app->name }}! 👋</h4>
+                    <p class="mb-4">{{ __('Please sign-in to your account and start the adventure') }}</p>
 
                     <form id="formAuthentication" class="mb-3" action="{{ route('dashboard.login') }}"
                         method="POST">
                         @csrf
                         <div class="form-floating form-floating-outline mb-3">
                             <input type="text" class="form-control" id="email" name="email"
-                                placeholder="Enter your email or username" autofocus />
-                            <label for="email">Email or Username</label>
+                                placeholder="{{ __('Email') }}" autofocus />
+                            <label for="email">{{ __('Email') }}</label>
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -172,7 +176,7 @@
                                         <input type="password" id="password" class="form-control" name="password"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             aria-describedby="password" />
-                                        <label for="password">Password</label>
+                                        <label for="password">{{ __('Password') }}</label>
                                         @error('password')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -185,13 +189,13 @@
                         <div class="mb-3 d-flex justify-content-between">
                             <div class="form-check">
                                 <input class="form-check-input" name="remember" type="checkbox" id="remember-me" />
-                                <label class="form-check-label" for="remember-me"> Remember Me </label>
+                                <label class="form-check-label" for="remember-me"> {{ __('Remember Me') }} </label>
                             </div>
                             <a href="{{ route('dashboard.forget_password') }}" class="float-end mb-1">
-                                <span>Forgot Password?</span>
+                                <span>{{ __('Forgot Password') }}?</span>
                             </a>
                         </div>
-                        <button class="btn btn-primary d-grid w-100">Sign in</button>
+                        <button class="btn btn-primary d-grid w-100">{{ __('Login') }}</button>
                     </form>
                 </div>
             </div>

@@ -6,12 +6,12 @@
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title">{{ __('Create') }}</h5>
 
-                <a href="{{ route('users.index') }}" class="btn btn-primary">{{ __('Back') }}</a>
+                <a href="{{ route('employees.index') }}" class="btn btn-primary">{{ __('Back') }}</a>
 
             </div>
 
             <div class="card-body">
-                <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('employees.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-2">
@@ -85,12 +85,28 @@
                             </div>
                         </div>
 
+                        <div class="col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="role_idInput">{{ __('Role') }}</label>
+                                <select type="file" class="form-control" name="role_id" id="role_idInput"
+                                    value="{{ old('role_id') }}">
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}"
+                                            @if (old('role_id') == $role->id) selected @endif>
+                                            {{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('role_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                        <div class="col-md-12 mb-2">
+                        <div class="col-md-6 mb-2">
                             <div class="form-group">
                                 <label for="avatarInput">{{ __('Status') }}</label>
-                                <select type="file" class="form-control" name="is_active" id="avatarInput"
-                                    value="{{ old('avatar') }}">
+                                <select type="file" accept=".jpg,.png" class="form-control" name="is_active"
+                                    id="avatarInput" value="{{ old('avatar') }}">
                                     <option value="0" @if (old('is_active') == 0) selected @endif>
                                         {{ __('Not Active') }}</option>
                                     <option value="1" @if (old('is_active') == 1) selected @endif>

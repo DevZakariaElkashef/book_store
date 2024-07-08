@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default"
-    data-assets-path="/dashboard/assets/" data-template="vertical-menu-template">
+<html lang="{{ app()->getLocale() }}" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+    dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}" data-theme="theme-default" data-assets-path="/dashboard/assets/"
+    data-template="vertical-menu-template">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Reset Password</title>
+    <title>{{ __('Reset Password') }}</title>
 
     <meta name="description" content="" />
 
@@ -30,15 +31,19 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/libs/node-waves/node-waves.css') }}" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/css/rtl/core.css') }}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/css/rtl/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/css/rtl/core.css') }}"
+        class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/css/rtl/theme-default.css') }}"
+        class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
     <!-- Vendor -->
-    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/libs/@form-validation/umd/styles/index.min.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('dashboard/assets/vendor/libs/@form-validation/umd/styles/index.min.css') }}" />
 
     <!-- Page CSS -->
     <!-- Page -->
@@ -60,8 +65,10 @@
         <div class="authentication-wrapper authentication-cover">
             <!-- Logo -->
             <a href="index.html" class="auth-cover-brand d-flex align-items-center gap-2">
-                <span class="app-brand-logo demo">
-                    <span style="color: var(--bs-primary)">
+                @if ($app->logo)
+                    <img src="{{ asset($app->logo) }}" style="width:40px;">
+                @else
+                    <span style="">
                         <svg width="268" height="150" viewBox="0 0 38 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -96,8 +103,8 @@
                             </defs>
                         </svg>
                     </span>
-                </span>
-                <span class="app-brand-text demo text-heading fw-bold">Materialize</span>
+                @endif
+                <span class="app-brand-text demo text-heading fw-bold">{{ $app->name }}</span>
             </a>
             <!-- /Logo -->
             <div class="authentication-inner row m-0">
@@ -118,18 +125,19 @@
                 <div
                     class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg position-relative py-sm-5 px-4 py-4">
                     <div class="w-px-400 mx-auto pt-5 pt-lg-0">
-                        <h4 class="mb-2">Reset Password 🔒</h4>
-                        <p class="mb-4">Your new password must be different from previously used passwords</p>
-                        <form id="formAuthentication" class="mb-3" action="{{ route('dashboard.reset_password') }}" method="POST">
-                          @csrf
-                          <input type="hidden" name="token" value="{{ $token }}">
+                        <h4 class="mb-2">{{ __("Reset Password") }} 🔒</h4>
+                        <p class="mb-4">{{ __("Your new password must be different from previously used passwords") }}</p>
+                        <form id="formAuthentication" class="mb-3"
+                            action="{{ route('dashboard.reset_password') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="token" value="{{ $token }}">
                             <div class="mb-3 form-password-toggle">
                                 <div class="input-group input-group-merge">
                                     <div class="form-floating form-floating-outline">
                                         <input type="password" id="password" class="form-control" name="password"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             aria-describedby="password" />
-                                        <label for="password">New Password</label>
+                                        <label for="password">{{ __("New Password") }}</label>
                                     </div>
                                     <span class="input-group-text cursor-pointer"><i
                                             class="mdi mdi-eye-off-outline"></i></span>
@@ -142,18 +150,18 @@
                                             name="confirm-password"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             aria-describedby="password" />
-                                        <label for="confirm-password">Confirm Password</label>
+                                        <label for="confirm-password">{{ __("Confirm Password") }}</label>
                                     </div>
                                     <span class="input-group-text cursor-pointer"><i
                                             class="mdi mdi-eye-off-outline"></i></span>
                                 </div>
                             </div>
-                            <button class="btn btn-primary d-grid w-100 mb-3">Set new password</button>
+                            <button class="btn btn-primary d-grid w-100 mb-3">{{ __('Set new password') }}</button>
                             <div class="text-center">
                                 <a href="{{ route('dashboard.login_page') }}"
                                     class="d-flex align-items-center justify-content-center">
                                     <i class="mdi mdi-chevron-left scaleX-n1-rtl mdi-24px"></i>
-                                    Back to login
+                                    {{ __("Back to login") }}
                                 </a>
                             </div>
                         </form>

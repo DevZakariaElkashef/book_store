@@ -37,12 +37,17 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect" href="{{ route('cities.edit', $city->id) }}"><i
-                                        class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
-                                <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
-                                    data-url="{{ route('cities.destroy', $city->id) }}" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
-                                    {{ __('Delete') }}</a>
+                                @can('cities.update')
+                                    <a class="dropdown-item waves-effect" href="{{ route('cities.edit', $city->id) }}"><i
+                                            class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
+                                @endcan
+
+                                @can('cities.delete')
+                                    <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
+                                        data-url="{{ route('cities.destroy', $city->id) }}" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
+                                        {{ __('Delete') }}</a>
+                                @endcan
                             </div>
                         </div>
                     </td>

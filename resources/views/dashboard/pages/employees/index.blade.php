@@ -21,12 +21,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __('Total Subjects') }}</p>
+                                <p class="text-heading mb-2">Total Employees</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">{{ $totalSubjectsCount }}</h4>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalEmployeesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __('Last month analytics') }}</p>
+                                <p class="mb-0">Last month analytics</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-primary rounded">
@@ -42,12 +42,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __('Active Subjects') }}</p>
+                                <p class="text-heading mb-2">Active Employees</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">{{ $totalActiveSubjectsCount }}</h4>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalActiveEmployeesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __('Last week analytics') }}</p>
+                                <p class="mb-0">Last week analytics</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-danger rounded">
@@ -63,12 +63,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __('Pending Subjects') }}</p>
+                                <p class="text-heading mb-2">Pending Employees</p>
                                 <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveSubjectsCount }}</h4>
+                                    <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveEmployeesCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisNotActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __('Last month analytics') }}</p>
+                                <p class="mb-0">Last month analytics</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-warning rounded">
@@ -81,24 +81,22 @@
             </div>
         </div>
 
-        <!-- Subjects List Table -->
+        <!-- Employees List Table -->
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">{{ __('Subjects') }}</h5>
+                <h5 class="card-title">{{ __('Employees') }}</h5>
 
-                <div class="row align-items-end">
-                    <div class="col-sm-12 col-md-6">
+                <div class="row align-items-center">
 
-                    </div>
-                    <div class="col-sm-12 d-flex justify-content-center justify-content-md-end">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-end">
                         <div id="DataTables_Table_1_filter" class="dataTables_filter">
                             <label>
                                 <input type="search" class="form-control search-in-db"
-                                    data-url="{{ route('subjects.search') }}" placeholder="{{ __('search...') }}"
+                                    data-url="{{ route('employees.search') }}" placeholder="{{ __('search...') }}"
                                     aria-controls="DataTables_Table_1">
                             </label>
                             {{-- export --}}
-                            <a class="dt-button add-new btn bg-label-primary" href="{{ route('subjects.export') }}">
+                            <a class="dt-button add-new btn bg-label-primary" href="{{ route('employees.export') }}">
                                 <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
                             </a>
                             {{-- filter --}}
@@ -107,15 +105,16 @@
                                 <span class="d-none d-sm-inline-block">{{ __('Filter') }}</span>
                             </a>
 
-                            {{-- add subject btn --}}
-                            @can('subjects.create')
-                                <a class="dt-button add-new btn btn-primary" href="{{ route('subjects.create') }}">
+                            @can('employees.create')
+                                {{-- add employee btn --}}
+                                <a class="dt-button add-new btn btn-primary" href="{{ route('employees.create') }}">
                                     <span>
                                         <i class="mdi mdi-plus me-0 me-sm-1"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Create') }}</span>
                                     </span>
                                 </a>
                             @endcan
+
                         </div>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
@@ -124,7 +123,7 @@
                             </button>
                             <div class="dropdown-menu" style="">
                                 <a class="dropdown-item waves-effect delete-selection"
-                                    data-url="{{ route('subjects.delete') }}" href="javascript:void(0);"
+                                    data-url="{{ route('employees.delete') }}" href="javascript:void(0);"
                                     data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                         class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
                             </div>
@@ -135,7 +134,7 @@
             </div>
 
             <div id="searchTable">
-                @include('dashboard.pages.subjects.table')
+                @include('dashboard.pages.employees.table')
             </div>
         </div>
 
@@ -153,7 +152,6 @@
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="ids" id="ids">
-
                         <div class="modal-body">
                             {{ __('Are You Sure!!') }}
                         </div>
@@ -177,37 +175,11 @@
                         <h1 class="modal-title fs-5" id="filterModalLabel">{{ __('Filter') }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="get" action="{{ route('subjects.index') }}">
+                    <form method="get" action="{{ route('employees.index') }}">
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="university_id">{{ __('University') }}</label>
-                                <select class="form-control univirsitySelect" name="university_id" id="university_id">
-                                    @foreach ($universities as $university)
-                                        <option value="{{ $university->id }}"
-                                            @if (request()->has('university_id') && request()->university_id == $university->id) selected @endif>{{ $university->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('university_id')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="collegeSelect">{{ __('College') }}</label>
-                                <select type="text" class="form-control" name="college_id" id="collegeSelect">
-                                    <option disabled selected>{{ __('Select University First') }}</option>
-                                </select>
-                                @error('college_id')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="from">{{ __('From') }}</label>
+                                <label for="from">From</label>
                                 <input type="date" class="form-control" name="from" id="from"
                                     value="{{ request()->has('from') ? request()->from : '' }}">
                                 @error('from')
@@ -219,7 +191,7 @@
 
 
                             <div class="form-group">
-                                <label for="to">{{ __('To') }}</label>
+                                <label for="to">To</label>
                                 <input type="date" class="form-control" name="to" id="to"
                                     value="{{ request()->has('to') ? request()->to : '' }}">
                                 @error('to')
@@ -252,29 +224,11 @@
     <script src="{{ asset('dashboard/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendor/libs/cleavejs/cleave.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/js/app-subject-list.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/js/app-employee-list.js') }}"></script>
 
     <script>
         $(document).on('click', '.delete-btn', function() {
             $('#deleteForm').attr('action', $(this).data('url'));
-        });
-    </script>
-
-
-    <script>
-        $(document).on('change', '.univirsitySelect', function() {
-            var univirsityId = $(this).val();
-
-            $.ajax({
-                url: "{{ route('colleges.getColleges') }}",
-                type: "GET",
-                data: {
-                    univirsityId: univirsityId
-                },
-                success: function(data) {
-                    $('#collegeSelect').html(data);
-                }
-            });
         });
     </script>
 @endsection

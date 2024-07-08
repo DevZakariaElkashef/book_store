@@ -78,198 +78,250 @@
         </li>
 
 
-        <!-- Apps & Pages -->
-        <li class="menu-header fw-medium mt-4">
-            <span class="menu-header-text">{{ __('Apps') }} &amp; {{ __('Pages') }}</span>
-        </li>
-        <li
-            class="menu-item {{ isActiveRoute(['contact_types.index', 'contact_types.create', 'contact_types.edit']) }}">
-            <a href="{{ route('contact_types.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
-                <div data-i18n="{{ __('Contact Types') }}">{{ __('Contact Types') }}</div>
-            </a>
-        </li>
-        <li class="menu-item {{ isActiveRoute(['contacts.index']) }}">
-            <a href="{{ route('contacts.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
-                <div data-i18n="{{ __('Contacts') }}">{{ __('Contacts') }}</div>
-                @if (\App\Models\Contact::didNotReplied()->count())
-                    <div class="badge bg-danger rounded-pill ms-auto">
-                        {{ \App\Models\Contact::didNotReplied()->count() }}
-                    </div>
-                @endif
-            </a>
-        </li>
+        @canany(['contact_types.read', 'contact_types.create', 'contact_types.update', 'contact_types.delete',
+            'contacts.read', 'contacts.create', 'contacts.update', 'contacts.delete'])
+            <!-- Apps & Pages -->
+            <li class="menu-header fw-medium mt-4">
+                <span class="menu-header-text">{{ __('Apps') }} &amp; {{ __('Pages') }}</span>
+            </li>
+        @endcanany
 
-        <!-- resources -->
-        <li class="menu-header fw-medium mt-4">
-            <span class="menu-header-text">{{ __('User Management') }}</span>
-        </li>
 
-        <li class="menu-item {{ isActiveRoute(['users.index', 'users.create', 'users.edit']) }}">
-            <a href="{{ route('users.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
-                <div data-i18n="{{ __('Clients') }}">{{ __('Clients') }}</div>
-            </a>
-        </li>
+        @canany(['contact_types.read', 'contact_types.create', 'contact_types.update', 'contact_types.delete'])
+            <li
+                class="menu-item {{ isActiveRoute(['contact_types.index', 'contact_types.create', 'contact_types.edit']) }}">
+                <a href="{{ route('contact_types.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
+                    <div data-i18n="{{ __('Contact Types') }}">{{ __('Contact Types') }}</div>
+                </a>
+            </li>
+        @endcanany
 
 
 
-        <li class="menu-item {{ isActiveRoute('roles.index') }}">
-            <a href="{{ route('roles.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-shield-outline"></i>
-                <div data-i18n="{{ __('Roles & Permissions') }}">{{ __('Roles & Permissions') }}</div>
-            </a>
-        </li>
-
-
-        <!-- resources -->
-        <li class="menu-header fw-medium mt-4">
-            <span class="menu-header-text">{{ __('Resources') }}</span>
-        </li>
-
-
-        <li class="menu-item {{ isActiveRoute(['universities.index', 'universities.create', 'universities.edit']) }}">
-            <a href="{{ route('universities.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-town-hall"></i>
-                <div data-i18n="{{ __('Universities') }}">{{ __('Universities') }}</div>
-            </a>
-        </li>
-
-
-        <li class="menu-item {{ isActiveRoute(['colleges.index', 'colleges.create', 'colleges.edit']) }}">
-            <a href="{{ route('colleges.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-school"></i>
-                <div data-i18n="{{ __('collages') }}">{{ __('collages') }}</div>
-            </a>
-        </li>
-
-
-        <li class="menu-item {{ isActiveRoute(['subjects.index', 'subjects.create', 'subjects.edit']) }}">
-            <a href="{{ route('subjects.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-book"></i>
-                <div data-i18n="{{ __('Subjects') }}">{{ __('Subjects') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ isActiveRoute(['books.index', 'books.create', 'books.edit']) }}">
-            <a href="{{ route('books.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-bookshelf"></i>
-                <div data-i18n="{{ __('Books') }}">{{ __('Books') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ isActiveRoute(['coupons.index', 'coupons.create', 'coupons.edit']) }}">
-            <a href="{{ route('coupons.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-sale"></i>
-                <div data-i18n="{{ __('Coupons') }}">{{ __('Coupons') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ isActiveRoute(['cities.index', 'cities.create', 'cities.edit']) }}">
-            <a href="{{ route('cities.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-city"></i>
-                <div data-i18n="{{ __('Cities') }}">{{ __('Cities') }}</div>
-            </a>
-        </li>
-
-
-        <!-- Apps & Pages -->
-        <li class="menu-header fw-medium mt-4">
-            <span class="menu-header-text">{{ __('Sales') }}</span>
-        </li>
-
-
-        <li
-            class="menu-item {{ isActiveRoute('orders.index', ['status' => 'pending-cancle']) ? '' : isActiveRoute(['orders.index', 'orders.show']) }}">
-            <a href="{{ route('orders.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-cart-arrow-right"></i>
-                <div data-i18n="{{ __('Orders') }}">{{ __('Orders') }}</div>
-                @if (\App\Models\Order::new()->count())
-                    <div class="badge bg-danger rounded-pill ms-auto">{{ \App\Models\Order::new()->count() }}</div>
-                @endif
-            </a>
-        </li>
+        @canany(['contacts.read', 'contacts.create', 'contacts.update', 'contacts.delete'])
+            <li class="menu-item {{ isActiveRoute(['contacts.index']) }}">
+                <a href="{{ route('contacts.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
+                    <div data-i18n="{{ __('Contacts') }}">{{ __('Contacts') }}</div>
+                    @if (\App\Models\Contact::didNotReplied()->count())
+                        <div class="badge bg-danger rounded-pill ms-auto">
+                            {{ \App\Models\Contact::didNotReplied()->count() }}
+                        </div>
+                    @endif
+                </a>
+            </li>
+        @endcanany
 
 
 
-        <li class="menu-item {{ isActiveRoute('orders.index', ['status' => 'pending-cancle']) }}">
-            <a href="{{ route('orders.index', ['status' => 'pending-cancle']) }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-cart-arrow-right"></i>
-                <div data-i18n="{{ __('Pending Cancle') }}">{{ __('Pending Cancle') }}</div>
-                @if (\App\Models\Order::pendingCancellation()->count())
-                    <div class="badge bg-danger rounded-pill ms-auto">
-                        {{ \App\Models\Order::pendingCancellation()->count() }}</div>
-                @endif
-            </a>
-        </li>
+        @canany(['users.read', 'users.create', 'users.update', 'users.delete', 'roles.read', 'roles.create',
+            'roles.update', 'roles.delete'])
+            <!-- resources -->
+            <li class="menu-header fw-medium mt-4">
+                <span class="menu-header-text">{{ __('User Management') }}</span>
+            </li>
+        @endcanany
+
+        @canany(['users.read', 'users.create', 'users.update', 'users.delete'])
+            <li class="menu-item {{ isActiveRoute(['users.index', 'users.create', 'users.edit']) }}">
+                <a href="{{ route('users.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
+                    <div data-i18n="{{ __('Clients') }}">{{ __('Clients') }}</div>
+                </a>
+            </li>
+        @endcanany
+
+        @canany(['employees.read', 'employees.create', 'employees.update', 'employees.delete'])
+            <li class="menu-item {{ isActiveRoute(['employees.index', 'employees.create', 'employees.edit']) }}">
+                <a href="{{ route('employees.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
+                    <div data-i18n="{{ __('Employees') }}">{{ __('Employees') }}</div>
+                </a>
+            </li>
+        @endcanany
 
 
 
-        <li class="menu-item {{ isActiveRoute('reviews.index') }}">
-            <a href="{{ route('reviews.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-star-box"></i>
-                <div data-i18n="{{ __('Reviews') }}">{{ __('Reviews') }}</div>
-            </a>
-        </li>
+        @canany(['roles.read', 'roles.create', 'roles.update', 'roles.delete'])
+            <li class="menu-item {{ isActiveRoute('roles.index') }}">
+                <a href="{{ route('roles.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-shield-outline"></i>
+                    <div data-i18n="{{ __('Roles & Permissions') }}">{{ __('Roles & Permissions') }}</div>
+                </a>
+            </li>
+        @endcanany
 
 
 
         <!-- resources -->
-        <li class="menu-header fw-medium mt-4">
-            <span class="menu-header-text">{{ __('Settings') }}</span>
-        </li>
+        @canany(['universities.read', 'universities.create', 'universities.update', 'universities.delete',
+            'colleges.read', 'colleges.create', 'colleges.update', 'colleges.delete', 'subjects.read', 'subjects.create',
+            'subjects.update', 'subjects.delete', 'books.read', 'books.create', 'books.update', 'books.delete'])
+            <li class="menu-header fw-medium mt-4">
+                <span class="menu-header-text">{{ __('Resources') }}</span>
+            </li>
+        @endcanany
+
+
+        @canany(['universities.read', 'universities.create', 'universities.update', 'universities.delete'])
+            <li class="menu-item {{ isActiveRoute(['universities.index', 'universities.create', 'universities.edit']) }}">
+                <a href="{{ route('universities.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-town-hall"></i>
+                    <div data-i18n="{{ __('Universities') }}">{{ __('Universities') }}</div>
+                </a>
+            </li>
+        @endcanany
+
+
+        @canany(['colleges.read', 'colleges.create', 'colleges.update', 'colleges.delete'])
+            <li class="menu-item {{ isActiveRoute(['colleges.index', 'colleges.create', 'colleges.edit']) }}">
+                <a href="{{ route('colleges.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-school"></i>
+                    <div data-i18n="{{ __('collages') }}">{{ __('collages') }}</div>
+                </a>
+            </li>
+        @endcanany
+
+
+        @canany(['subjects.read', 'subjects.create', 'subjects.update', 'subjects.delete'])
+            <li class="menu-item {{ isActiveRoute(['subjects.index', 'subjects.create', 'subjects.edit']) }}">
+                <a href="{{ route('subjects.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-book"></i>
+                    <div data-i18n="{{ __('Subjects') }}">{{ __('Subjects') }}</div>
+                </a>
+            </li>
+        @endcanany
+
+        @canany(['books.read', 'books.create', 'books.update', 'books.delete'])
+            <li class="menu-item {{ isActiveRoute(['books.index', 'books.create', 'books.edit']) }}">
+                <a href="{{ route('books.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-bookshelf"></i>
+                    <div data-i18n="{{ __('Books') }}">{{ __('Books') }}</div>
+                </a>
+            </li>
+        @endcanany
+
+        @canany(['coupons.read', 'coupons.create', 'coupons.update', 'coupons.delete'])
+            <li class="menu-item {{ isActiveRoute(['coupons.index', 'coupons.create', 'coupons.edit']) }}">
+                <a href="{{ route('coupons.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-sale"></i>
+                    <div data-i18n="{{ __('Coupons') }}">{{ __('Coupons') }}</div>
+                </a>
+            </li>
+        @endcanany
+
+        @canany(['cities.read', 'cities.create', 'cities.update', 'cities.delete'])
+            <li class="menu-item {{ isActiveRoute(['cities.index', 'cities.create', 'cities.edit']) }}">
+                <a href="{{ route('cities.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-city"></i>
+                    <div data-i18n="{{ __('Cities') }}">{{ __('Cities') }}</div>
+                </a>
+            </li>
+        @endcanany
+
+
+        @canany(['orders.read', 'orders.create', 'orders.update', 'orders.delete', 'reviews.read', 'reviews.create',
+            'reviews.update', 'reviews.delete'])
+            <!-- Apps & Pages -->
+            <li class="menu-header fw-medium mt-4">
+                <span class="menu-header-text">{{ __('Sales') }}</span>
+            </li>
+        @endcanany
+
+
+        @canany(['orders.read', 'orders.create', 'orders.update', 'orders.delete'])
+            <li
+                class="menu-item {{ isActiveRoute('orders.index', ['status' => 'pending-cancle']) ? '' : isActiveRoute(['orders.index', 'orders.show']) }}">
+                <a href="{{ route('orders.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-cart-arrow-right"></i>
+                    <div data-i18n="{{ __('Orders') }}">{{ __('Orders') }}</div>
+                    @if (\App\Models\Order::new()->count())
+                        <div class="badge bg-danger rounded-pill ms-auto">{{ \App\Models\Order::new()->count() }}</div>
+                    @endif
+                </a>
+            </li>
+        @endcanany
+
+
+        @canany(['orders.read', 'orders.create', 'orders.update', 'orders.delete'])
+            <li class="menu-item {{ isActiveRoute('orders.index', ['status' => 'pending-cancle']) }}">
+                <a href="{{ route('orders.index', ['status' => 'pending-cancle']) }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-cart-arrow-right"></i>
+                    <div data-i18n="{{ __('Pending Cancle') }}">{{ __('Pending Cancle') }}</div>
+                    @if (\App\Models\Order::pendingCancellation()->count())
+                        <div class="badge bg-danger rounded-pill ms-auto">
+                            {{ \App\Models\Order::pendingCancellation()->count() }}</div>
+                    @endif
+                </a>
+            </li>
+        @endcanany
+
+
+        @canany(['reviews.read', 'reviews.create', 'reviews.update', 'reviews.delete'])
+            <li class="menu-item {{ isActiveRoute('reviews.index') }}">
+                <a href="{{ route('reviews.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-star-box"></i>
+                    <div data-i18n="{{ __('Reviews') }}">{{ __('Reviews') }}</div>
+                </a>
+            </li>
+        @endcanany
 
 
 
-        <!-- Settings -->
-        <li
-            class="menu-item {{ isActiveRoute(['settings.index', 'sliders.index', 'aboutus.index',  'shippings.index', 'banks.index', 'pages.index']) }} {{ isActiveRoute(['settings.index', 'aboutus.index',  'shippings.index',  'sliders.index', 'banks.index', 'pages.index']) ? 'open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
-                <div data-i18n="{{ __('Settings') }}">{{ __('Settings') }}</div>
+        @canany(['settings.read', 'settings.create', 'settings.update', 'settings.delete'])
+            <!-- resources -->
+            <li class="menu-header fw-medium mt-4">
+                <span class="menu-header-text">{{ __('Settings') }}</span>
+            </li>
 
-            </a>
-            <ul class="menu-sub">
+            <!-- Settings -->
+            <li
+                class="menu-item {{ isActiveRoute(['settings.index', 'sliders.index', 'aboutus.index', 'shippings.index', 'banks.index', 'pages.index']) }} {{ isActiveRoute(['settings.index', 'aboutus.index', 'shippings.index', 'sliders.index', 'banks.index', 'pages.index']) ? 'open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
+                    <div data-i18n="{{ __('Settings') }}">{{ __('Settings') }}</div>
 
-                <li class="menu-item {{ isActiveRoute('settings.index') }}">
-                    <a href="{{ route('settings.index') }}" class="menu-link">
-                        <div data-i18n="{{ __('General') }}">{{ __('General') }}</div>
-                    </a>
-                </li>
+                </a>
+                <ul class="menu-sub">
 
-                <li class="menu-item {{ isActiveRoute('banks.index') }}">
-                    <a href="{{ route('banks.index') }}" class="menu-link">
-                        <div data-i18n="{{ __('Bank Settings') }}">{{ __('Bank Settings') }}</div>
-                    </a>
-                </li>
+                    <li class="menu-item {{ isActiveRoute('settings.index') }}">
+                        <a href="{{ route('settings.index') }}" class="menu-link">
+                            <div data-i18n="{{ __('General') }}">{{ __('General') }}</div>
+                        </a>
+                    </li>
 
-                <li class="menu-item {{ isActiveRoute('shippings.index') }}">
-                    <a href="{{ route('shippings.index') }}" class="menu-link">
-                        <div data-i18n="{{ __('Delivery Settings') }}">{{ __('Delivery Settings') }}</div>
-                    </a>
-                </li>
+                    <li class="menu-item {{ isActiveRoute('banks.index') }}">
+                        <a href="{{ route('banks.index') }}" class="menu-link">
+                            <div data-i18n="{{ __('Bank Settings') }}">{{ __('Bank Settings') }}</div>
+                        </a>
+                    </li>
 
-                <li class="menu-item {{ isActiveRoute('sliders.index') }}">
-                    <a href="{{ route('sliders.index') }}" class="menu-link">
-                        <div data-i18n="{{ __('Header Images') }}">{{ __('Header Images') }}</div>
-                    </a>
-                </li>
+                    <li class="menu-item {{ isActiveRoute('shippings.index') }}">
+                        <a href="{{ route('shippings.index') }}" class="menu-link">
+                            <div data-i18n="{{ __('Delivery Settings') }}">{{ __('Delivery Settings') }}</div>
+                        </a>
+                    </li>
 
-                <li class="menu-item {{ isActiveRoute('pages.index') }}">
-                    <a href="{{ route('pages.index') }}" class="menu-link">
-                        <div data-i18n="{{ __('Pages') }}">{{ __('Pages') }}</div>
-                    </a>
-                </li>
-                <li class="nav-item {{ isActiveRoute('aboutus.index') }}">
-                    <a href="{{ route('aboutus.index') }}" class="menu-link">
-                        <div data-i18n="{{ __('About US') }}">{{ __('About US') }}</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+                    <li class="menu-item {{ isActiveRoute('sliders.index') }}">
+                        <a href="{{ route('sliders.index') }}" class="menu-link">
+                            <div data-i18n="{{ __('Header Images') }}">{{ __('Header Images') }}</div>
+                        </a>
+                    </li>
 
-
+                    <li class="menu-item {{ isActiveRoute('pages.index') }}">
+                        <a href="{{ route('pages.index') }}" class="menu-link">
+                            <div data-i18n="{{ __('Pages') }}">{{ __('Pages') }}</div>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ isActiveRoute('aboutus.index') }}">
+                        <a href="{{ route('aboutus.index') }}" class="menu-link">
+                            <div data-i18n="{{ __('About US') }}">{{ __('About US') }}</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endcanany
     </ul>
 </aside>
 <!-- / Menu -->

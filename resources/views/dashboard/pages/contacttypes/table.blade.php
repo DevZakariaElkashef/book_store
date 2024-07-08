@@ -7,10 +7,10 @@
                     <input class="form-check-input select-all" type="checkbox">
                 </th>
                 <th>ID</th>
-                <th>{{ __("Name") }}</th>
-                <th>{{ __("Status") }}</th>
-                <th>{{ __("Date") }}</th>
-                <th>{{ __("Actions") }}</th>
+                <th>{{ __('Name') }}</th>
+                <th>{{ __('Status') }}</th>
+                <th>{{ __('Date') }}</th>
+                <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +24,10 @@
                         {{ $contacttype->name }}
                     </td>
                     <td>
-                        @if($contacttype->is_active)
-                        <span class="badge bg-label-primary">{{ __("Active") }}</span>
+                        @if ($contacttype->is_active)
+                            <span class="badge bg-label-primary">{{ __('Active') }}</span>
                         @else
-                        <span class="badge bg-label-dark">{{ __("Not Active") }}</span>
+                            <span class="badge bg-label-dark">{{ __('Not Active') }}</span>
                         @endif
                     </td>
                     <td>{{ $contacttype->created_at }}</td>
@@ -38,10 +38,18 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect" href="{{ route('contact_types.edit', $contacttype->id) }}"><i
-                                        class="mdi mdi-pencil-outline me-1"></i> {{ __("Edit") }}</a>
-                                <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);" data-url="{{ route('contact_types.destroy', $contacttype->id) }}" data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                        class="mdi mdi-trash-can-outline me-1"></i> {{ __("Delete") }}</a>
+                                @can('contact_types.update')
+                                    <a class="dropdown-item waves-effect"
+                                        href="{{ route('contact_types.edit', $contacttype->id) }}"><i
+                                            class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
+                                @endcan
+                                
+                                @can('contact_types.delete')
+                                    <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
+                                        data-url="{{ route('contact_types.destroy', $contacttype->id) }}"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                            class="mdi mdi-trash-can-outline me-1"></i> {{ __('Delete') }}</a>
+                                @endcan
                             </div>
                         </div>
                     </td>
@@ -53,6 +61,3 @@
         {{ $contacttypes->links() }}
     </div>
 </div>
-
-
-

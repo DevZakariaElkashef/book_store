@@ -21,12 +21,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __("Total Books") }}</p>
+                                <p class="text-heading mb-2">{{ __('Total Books') }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalBooksCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __("Last month analytics") }}</p>
+                                <p class="mb-0">{{ __('Last month analytics') }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-primary rounded">
@@ -42,12 +42,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __("Active Books") }}</p>
+                                <p class="text-heading mb-2">{{ __('Active Books') }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalActiveBooksCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __("Last week analytics") }}</p>
+                                <p class="mb-0">{{ __('Last week analytics') }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-danger rounded">
@@ -63,12 +63,12 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
-                                <p class="text-heading mb-2">{{ __("Pending Books") }}</p>
+                                <p class="text-heading mb-2">{{ __('Pending Books') }}</p>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-2 me-1 display-6">{{ $totalNotActiveBooksCount }}</h4>
                                     <p class="text-success mb-2">(+{{ $thisNotActiveMonthPercentage }}%)</p>
                                 </div>
-                                <p class="mb-0">{{ __("Last month analytics") }}</p>
+                                <p class="mb-0">{{ __('Last month analytics') }}</p>
                             </div>
                             <div class="avatar">
                                 <div class="avatar-initial bg-label-warning rounded">
@@ -106,13 +106,15 @@
                                 data-bs-toggle="modal" data-bs-target="#filterModal">
                                 <span class="d-none d-sm-inline-block">{{ __('Filter') }}</span>
                             </a>
-                            {{-- add book btn --}}
-                            <a class="dt-button add-new btn btn-primary" href="{{ route('books.create') }}">
-                                <span>
-                                    <i class="mdi mdi-plus me-0 me-sm-1"></i>
-                                    <span class="d-none d-sm-inline-block">{{ __('Create') }}</span>
-                                </span>
-                            </a>
+                            @can('books.create')
+                                {{-- add book btn --}}
+                                <a class="dt-button add-new btn btn-primary" href="{{ route('books.create') }}">
+                                    <span>
+                                        <i class="mdi mdi-plus me-0 me-sm-1"></i>
+                                        <span class="d-none d-sm-inline-block">{{ __('Create') }}</span>
+                                    </span>
+                                </a>
+                            @endcan
                         </div>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
@@ -217,7 +219,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="from">{{ __("From") }}</label>
+                                <label for="from">{{ __('From') }}</label>
                                 <input type="date" class="form-control" name="from" id="from"
                                     value="{{ request()->has('from') ? request()->from : '' }}">
                                 @error('from')
@@ -229,7 +231,7 @@
 
 
                             <div class="form-group">
-                                <label for="to">{{ __("To") }}</label>
+                                <label for="to">{{ __('To') }}</label>
                                 <input type="date" class="form-control" name="to" id="to"
                                     value="{{ request()->has('to') ? request()->to : '' }}">
                                 @error('to')

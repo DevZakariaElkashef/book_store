@@ -95,15 +95,20 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item waves-effect edit-btn" href="#" data-bs-toggle="modal"
-                                    data-url="{{ route('reviews.update', $review->id) }}"
-                                    data-star="{{ $review->star }}" data-comment="{{ $review->comment }}"
-                                    data-bs-target="#editModal"><i class="mdi mdi-pencil-outline me-1"></i>
-                                    {{ __('Edit') }}</a>
-                                <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
-                                    data-url="{{ route('reviews.destroy', $review->id) }}" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
-                                    {{ __('Delete') }}</a>
+                                @can('reviews.update')
+                                    <a class="dropdown-item waves-effect edit-btn" href="#" data-bs-toggle="modal"
+                                        data-url="{{ route('reviews.update', $review->id) }}"
+                                        data-star="{{ $review->star }}" data-comment="{{ $review->comment }}"
+                                        data-bs-target="#editModal"><i class="mdi mdi-pencil-outline me-1"></i>
+                                        {{ __('Edit') }}</a>
+                                @endcan
+
+                                @can('reviews.delete')
+                                    <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
+                                        data-url="{{ route('reviews.destroy', $review->id) }}" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
+                                        {{ __('Delete') }}</a>
+                                @endcan
                             </div>
                         </div>
                     </td>

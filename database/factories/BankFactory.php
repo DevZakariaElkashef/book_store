@@ -18,8 +18,8 @@ class BankFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'number' => fake()->numberBetween(1111111111111111111111, 9999999999999999999999),
-            'iban' => fake()->numberBetween(1111111111111111111111111111, 9999999999999999999999999999)
+            'number' => fake()->numberBetween(111111111111111111, 999999999999999999),
+            'iban' => fake()->numberBetween(1111111111111111111, 999999999999999999)
         ];
     }
 }

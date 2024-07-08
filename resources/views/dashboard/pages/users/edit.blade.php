@@ -64,8 +64,9 @@
                                 <label for="avatarInput">{{ __('Avatar') }}</label>
                                 <input type="file" accept=".jpg,.png" class="form-control" name="avatar"
                                     id="avatarInput">
-                                    @if($user && $user->avatar)
-                                <img src="{{ asset($user->avatar) }}" alt="" style="max-width: 200px;" class="mt-3">
+                                @if ($user && $user->avatar)
+                                    <img src="{{ asset($user->avatar) }}" alt="" style="max-width: 200px;"
+                                        class="mt-3">
                                 @endif
                                 @error('avatar')
                                     <div class="text-danger">{{ $message }}</div>
@@ -74,6 +75,25 @@
                         </div>
 
                         <div class="col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="city_idInput">{{ __('City') }}</label>
+                                <select type="file" class="form-control" name="city_id" id="city_idInput"
+                                    value="{{ old('city_id') }}">
+                                    @foreach ($cities as $city)
+                                        <option value="{{ $city->id }}"
+                                            @if (old('city_id') == $city->id || $user->city_id == $city->id) selected @endif>
+                                            {{ $city->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('city_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-12 mb-2">
                             <div class="form-group">
                                 <label for="avatarInput">{{ __('Status') }}</label>
                                 <select type="file" accept=".jpg,.png" class="form-control" name="is_active"

@@ -11,18 +11,19 @@ use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\CouponController;
+use App\Http\Controllers\Dashboard\ReviewController;
 use App\Http\Controllers\Dashboard\SliderController;
 use App\Http\Controllers\Dashboard\AboutusController;
 use App\Http\Controllers\Dashboard\CollegeController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\SubjectController;
+use App\Http\Controllers\Dashboard\EmployeeController;
+use App\Http\Controllers\Dashboard\ShippingController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\ContactTypeController;
 use App\Http\Controllers\Dashboard\HeaderImageController;
 use App\Http\Controllers\Dashboard\NotificationController;
-use App\Http\Controllers\Dashboard\ReviewController;
-use App\Http\Controllers\Dashboard\ShippingController;
 
 
 
@@ -50,6 +51,17 @@ Route::middleware('lang')->group(function () {
 
         // rules
         Route::resource('roles', RoleController::class);
+
+        // employees
+        Route::get('/employees/pagination', [EmployeeController::class, 'pagination'])->name('employees.pagination');
+        Route::get('employees-search', [EmployeeController::class, 'search'])->name('employees.search');
+        Route::get('employees-export', [EmployeeController::class, 'export'])->name('employees.export');
+        Route::delete('employees-delete', [EmployeeController::class, 'delete'])->name('employees.delete');
+        Route::resource('employees', EmployeeController::class);
+
+
+
+
 
         // users
         Route::get('/users/pagination', [UserController::class, 'pagination'])->name('users.pagination');

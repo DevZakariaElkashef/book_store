@@ -4,7 +4,7 @@ namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class StoreEmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,12 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|min:2',
-            'email' => 'required|email|max:255|unique:users,email',
-            'phone' => 'nullable|string|max:255|unique:users,phone',
-            'password' => 'required|min:8|max:255|string',
-            'is_active' => 'required|boolean',
+            'email' => 'required|email|max:255|unique:users,email,' . $this->id,
+            'phone' => 'nullable|string|max:255|unique:users,phone,' . $this->id,
+            'password' => 'nullable|min:8|max:255|string',
             'city_id' => 'required|exists:cities,id',
+            'role_id' => 'required|exists:roles,id',
+            'is_active' => 'required|boolean',
             'avatar' => 'nullable|mimes:png,jpg|max:10000'
         ];
     }

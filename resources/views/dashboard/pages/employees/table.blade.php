@@ -1,32 +1,37 @@
-<div class="card-datatable table-responsive" id="subject-list">
+<div class="card-datatable table-responsive" id="employee-list">
 
-    <table class="table">
+    <table class="table borded">
         <thead class="table-light">
             <tr>
                 <th>
                     <input class="form-check-input select-all" type="checkbox">
                 </th>
                 <th>ID</th>
-                <th>{{ __('University') }}</th>
-                <th>{{ __('College') }}</th>
                 <th>{{ __('Name') }}</th>
+                <th>{{ __('Email') }}</th>
                 <th>{{ __('Status') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($subjects as $subject)
+            @foreach ($employees as $employee)
                 <tr>
                     <td>
-                        <input class="form-check-input item" value="{{ $subject->id }}" type="checkbox">
+                        <input class="form-check-input item" value="{{ $employee->id }}" type="checkbox">
                     </td>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $subject->college->university->name ?? 'N/A' }}</td>
-                    <td>{{ $subject->college->name ?? 'N/A' }}</td>
-
-                    <td>{{ $subject->name }}</td>
                     <td>
-                        @if ($subject->is_active)
+                        @if ($employee->avatar)
+                            <a href="{{ asset($employee->avatar) }}" download>
+                                <img class="w-px-40 h-auto rounded-circle" src="{{ asset($employee->avatar) }}"
+                                    alt="">
+                            </a>
+                        @endif
+                        {{ $employee->name }}
+                    </td>
+                    <td>{{ $employee->email }}</td>
+                    <td>
+                        @if ($employee->is_active)
                             <span class="badge bg-label-primary">{{ __('Active') }}</span>
                         @else
                             <span class="badge bg-label-dark">{{ __('Not Active') }}</span>
@@ -39,15 +44,14 @@
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                @can('subjects.update')
+                                @can('employees.update')
                                     <a class="dropdown-item waves-effect"
-                                        href="{{ route('subjects.edit', $subject->id) }}"><i
+                                        href="{{ route('employees.edit', $employee->id) }}"><i
                                             class="mdi mdi-pencil-outline me-1"></i> {{ __('Edit') }}</a>
                                 @endcan
-
-                                @can('subjects.delete')
+                                @can('employees.delete')
                                     <a class="dropdown-item waves-effect delete-btn" href="javascript:void(0);"
-                                        data-url="{{ route('subjects.destroy', $subject->id) }}" data-bs-toggle="modal"
+                                        data-url="{{ route('employees.destroy', $employee->id) }}" data-bs-toggle="modal"
                                         data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline me-1"></i>
                                         {{ __('Delete') }}</a>
                                 @endcan
@@ -59,6 +63,6 @@
         </tbody>
     </table>
     <div class="mt-3 px-3">
-        {{ $subjects->links() }}
+        {{ $employees->links() }}
     </div>
 </div>

@@ -105,13 +105,16 @@
                                 data-bs-toggle="modal" data-bs-target="#filterModal">
                                 <span class="d-none d-sm-inline-block">{{ __("Filter") }}</span>
                             </a>
-                            {{-- add college btn --}}
-                            <a class="dt-button add-new btn btn-primary" href="{{ route('colleges.create') }}">
-                                <span>
-                                    <i class="mdi mdi-plus me-0 me-sm-1"></i>
-                                    <span class="d-none d-sm-inline-block">{{ __("Create") }}</span>
-                                </span>
-                            </a>
+
+                            @can('colleges.create')
+                                {{-- add college btn --}}
+                                <a class="dt-button add-new btn btn-primary" href="{{ route('colleges.create') }}">
+                                    <span>
+                                        <i class="mdi mdi-plus me-0 me-sm-1"></i>
+                                        <span class="d-none d-sm-inline-block">{{ __("Create") }}</span>
+                                    </span>
+                                </a>
+                            @endcan
                         </div>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"

@@ -20,6 +20,7 @@ class PermissionSeeder extends Seeder
 
         $permissions = [
             'users',
+            'employees',
             'roles',
             'permissions',
             'contact_types',

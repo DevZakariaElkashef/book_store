@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default"
-    data-assets-path="/dashboard/assets/" data-template="vertical-menu-template">
+<html lang="{{ app()->getLocale() }}" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+    dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}" data-theme="theme-default" data-assets-path="/dashboard/assets/"
+    data-template="vertical-menu-template">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Forgot Password</title>
+    <title>{{ __("Forgot Password") }}</title>
 
     <meta name="description" content="" />
 
@@ -95,9 +96,11 @@
 
     <div class="authentication-wrapper authentication-cover">
         <!-- Logo -->
-        <a href="{{ route('dashboard.login_page') }}" class="auth-cover-brand d-flex align-items-center gap-2">
-            <span class="app-brand-logo demo">
-                <span style="color: var(--bs-primary)">
+        <a href="index.html" class="auth-cover-brand d-flex align-items-center gap-2">
+            @if ($app->logo)
+                <img src="{{ asset($app->logo) }}" style="width:40px;">
+            @else
+                <span style="">
                     <svg width="268" height="150" viewBox="0 0 38 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -132,8 +135,8 @@
                         </defs>
                     </svg>
                 </span>
-            </span>
-            <span class="app-brand-text demo text-heading fw-bold">Materialize</span>
+            @endif
+            <span class="app-brand-text demo text-heading fw-bold">{{ $app->name }}</span>
         </a>
         <!-- /Logo -->
         <div class="authentication-inner row m-0">
@@ -153,26 +156,26 @@
             <!-- Forgot Password -->
             <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4">
                 <div class="w-px-400 mx-auto">
-                    <h4 class="mb-2">Forgot Password? 🔒</h4>
-                    <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
+                    <h4 class="mb-2">{{ __("Forgot Password") }}? 🔒</h4>
+                    <p class="mb-4">{{ __("Enter your email and we'll send you instructions to reset your password") }}</p>
                     <form id="formAuthentication" class="mb-3"
                         action="{{ route('dashboard.send_email_password') }}" method="POST">
                         @csrf
                         <div class="form-floating form-floating-outline mb-3">
                             <input type="text" class="form-control" id="email" name="email"
                                 placeholder="Enter your email" autofocus />
-                            <label for="email">Email</label>
+                            <label for="email">{{ __("Email") }}</label>
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary d-grid w-100">Send Reset Link</button>
+                        <button type="submit" class="btn btn-primary d-grid w-100">{{ __("Send Reset Link") }}</button>
                     </form>
                     <div class="text-center">
                         <a href="{{ route('dashboard.login_page') }}"
                             class="d-flex align-items-center justify-content-center">
                             <i class="mdi mdi-chevron-left scaleX-n1-rtl mdi-24px"></i>
-                            Back to login
+                            {{ __("Back to login") }}
                         </a>
                     </div>
                 </div>
