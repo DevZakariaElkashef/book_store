@@ -24,8 +24,7 @@ use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\ContactTypeController;
 use App\Http\Controllers\Dashboard\HeaderImageController;
 use App\Http\Controllers\Dashboard\NotificationController;
-
-
+use App\Http\Controllers\Dashboard\ProfileController;
 
 Route::middleware('lang')->group(function () {
 
@@ -44,6 +43,8 @@ Route::middleware('lang')->group(function () {
         // logout
         Route::post('logout', [AuthController::class, 'logout'])->name('dashboard.logout');
 
+        Route::get('profile', [ProfileController::class, 'index'])->name('dashboard.profile');
+        Route::put('update-profile', [ProfileController::class, 'update'])->name('dashboard.profile.update');
 
         // home
         Route::get('home', [HomeController::class, 'index'])->name('dashboard.home');

@@ -160,6 +160,13 @@
                     </li>
 
                     <li>
+                        <a class="dropdown-item" href="{{ route('dashboard.profile') }}">
+                            <i class="mdi mdi-account-outline me-2"></i>
+                            <span class="align-middle">{{ __("Profile") }}</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
