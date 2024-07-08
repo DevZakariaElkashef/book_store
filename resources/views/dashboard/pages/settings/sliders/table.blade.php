@@ -3,7 +3,7 @@
     <table class="table">
         <thead class="table-light">
             <tr>
-                
+
                 <th>ID</th>
                 <th>{{ __('Key') }}</th>
                 <th>{{ __('Image') }}</th>
@@ -13,7 +13,7 @@
         <tbody>
             @foreach ($sliders as $slider)
                 <tr>
-                    
+
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         {{ $slider->key }}
@@ -21,7 +21,7 @@
                     <td>
                         @if ($slider->image)
                             <a href="{{ asset($slider->image) }}" download>
-                                <img class="w-px-40 h-auto rounded-circle" src="{{ asset($slider->image) }}"
+                                <img width="50" height="50" class="w-px-40 h-auto rounded-circle" src="{{ asset($slider->image) }}"
                                     alt="">
                             </a>
                         @endif
