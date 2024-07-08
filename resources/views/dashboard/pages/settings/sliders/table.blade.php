@@ -21,7 +21,7 @@
                     <td>
                         @if ($slider->image)
                             <a href="{{ asset($slider->image) }}" download>
-                                <img width="50" height="50" class="w-px-40 h-auto rounded-circle" src="{{ asset($slider->image) }}"
+                                <img style="width: 50px; height: 50px;" class="w-px-40 h-auto rounded-circle" src="{{ asset($slider->image) }}"
                                     alt="">
                             </a>
                         @endif
