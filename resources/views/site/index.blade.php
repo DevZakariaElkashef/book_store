@@ -105,7 +105,7 @@
                             <img src="site/assets/images/type-2.svg" alt="">
                         </div>
                         <div class="card-body">
-                            <h5>{{ __('used books') }}</h5>
+                            <h5>{{ __('Used Books') }}</h5>
                             <p>
                                 {{ $app->short_description }}
                             </p>
