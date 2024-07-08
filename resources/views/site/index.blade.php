@@ -418,8 +418,8 @@
 
                                     <div class="options mt-5">
                                         <button type="submit"
-                                            class="btn btn-primary confirm-add-to-cart">{{ __('confirm') }}</button>
-                                        <button type="button" class="btn btn-secondary">{{ __('Cancle') }}</a>
+                                            class="mx-3 btn btn-primary confirm-add-to-cart">{{ __('confirm') }}</button>
+                                        <button type="button" class=" mx-3 btn btn-secondary">{{ __('Cancle') }}</a>
                                     </div>
                                 </form>
                             </div>
