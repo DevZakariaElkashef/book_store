@@ -82,7 +82,7 @@ class CartController extends Controller
                 $status = true;
                 $message = '';
             } elseif ($distance <= $dontWorkThere) {
-                $shippingCost = 100;
+                $shippingCost = $costPerKilo * $distance;
                 $status = true;
                 $message = '';
             } else {
