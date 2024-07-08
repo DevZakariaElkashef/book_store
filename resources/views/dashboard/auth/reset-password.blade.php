@@ -110,14 +110,7 @@
             <div class="authentication-inner row m-0">
                 <!-- /Left Section -->
                 <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center justify-content-center p-5 pb-2">
-                    <img src="{{ asset('dashboard/assets/img/illustrations/auth-reset-password-illustration-light.png') }}"
-                        class="auth-cover-illustration w-100" alt="auth-illustration"
-                        data-app-light-img="illustrations/auth-reset-password-illustration-light.png"
-                        data-app-dark-img="illustrations/auth-reset-password-illustration-dark.png" />
-                    <img src="{{ asset('dashboard/assets/img/illustrations/auth-cover-reset-password-mask-light.png') }}"
-                        class="authentication-image" alt="mask"
-                        data-app-light-img="illustrations/auth-cover-reset-password-mask-light.png"
-                        data-app-dark-img="illustrations/auth-cover-reset-password-mask-dark.png" />
+                    <img src="{{ asset($img) }}" class="authentication-image" />
                 </div>
                 <!-- /Left Section -->
 
@@ -125,10 +118,11 @@
                 <div
                     class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg position-relative py-sm-5 px-4 py-4">
                     <div class="w-px-400 mx-auto pt-5 pt-lg-0">
-                        <h4 class="mb-2">{{ __("Reset Password") }} 🔒</h4>
-                        <p class="mb-4">{{ __("Your new password must be different from previously used passwords") }}</p>
-                        <form id="formAuthentication" class="mb-3"
-                            action="{{ route('dashboard.reset_password') }}" method="POST">
+                        <h4 class="mb-2">{{ __('Reset Password') }} 🔒</h4>
+                        <p class="mb-4">
+                            {{ __('Your new password must be different from previously used passwords') }}</p>
+                        <form id="formAuthentication" class="mb-3" action="{{ route('dashboard.reset_password') }}"
+                            method="POST">
                             @csrf
                             <input type="hidden" name="token" value="{{ $token }}">
                             <div class="mb-3 form-password-toggle">
@@ -137,7 +131,7 @@
                                         <input type="password" id="password" class="form-control" name="password"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             aria-describedby="password" />
-                                        <label for="password">{{ __("New Password") }}</label>
+                                        <label for="password">{{ __('New Password') }}</label>
                                     </div>
                                     <span class="input-group-text cursor-pointer"><i
                                             class="mdi mdi-eye-off-outline"></i></span>
@@ -150,7 +144,7 @@
                                             name="confirm-password"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             aria-describedby="password" />
-                                        <label for="confirm-password">{{ __("Confirm Password") }}</label>
+                                        <label for="confirm-password">{{ __('Confirm Password') }}</label>
                                     </div>
                                     <span class="input-group-text cursor-pointer"><i
                                             class="mdi mdi-eye-off-outline"></i></span>
@@ -161,7 +155,7 @@
                                 <a href="{{ route('dashboard.login_page') }}"
                                     class="d-flex align-items-center justify-content-center">
                                     <i class="mdi mdi-chevron-left scaleX-n1-rtl mdi-24px"></i>
-                                    {{ __("Back to login") }}
+                                    {{ __('Back to login') }}
                                 </a>
                             </div>
                         </form>

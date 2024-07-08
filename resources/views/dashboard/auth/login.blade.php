@@ -140,14 +140,8 @@
         <div class="authentication-inner row m-0">
             <!-- /Left Section -->
             <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center justify-content-center p-5 pb-2">
-                <img src="{{ asset('dashboard/assets/img/illustrations/auth-login-illustration-light.png') }}"
-                    class="auth-cover-illustration w-100" alt="auth-illustration"
-                    data-app-light-img="illustrations/auth-login-illustration-light.png"
-                    data-app-dark-img="illustrations/auth-login-illustration-dark.png" />
-                <img src="{{ asset('dashboard/assets/img/illustrations/auth-cover-login-mask-light.png') }}"
-                    class="authentication-image" alt="mask"
-                    data-app-light-img="illustrations/auth-cover-login-mask-light.png"
-                    data-app-dark-img="illustrations/auth-cover-login-mask-dark.png" />
+
+                <img src="{{ asset($img) }}" class="authentication-image"/>
             </div>
             <!-- /Left Section -->
 

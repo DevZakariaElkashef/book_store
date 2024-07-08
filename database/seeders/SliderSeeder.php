@@ -14,6 +14,18 @@ class SliderSeeder extends Seeder
     public function run(): void
     {
         Slider::factory()->create([
+            'key' => 'admin-login'
+        ]);
+
+        Slider::factory()->create([
+            'key' => 'admin-forget'
+        ]);
+
+        Slider::factory()->create([
+            'key' => 'admin-reset'
+        ]);
+
+        Slider::factory()->create([
             'key' => 'home-hero',
         ]);
 

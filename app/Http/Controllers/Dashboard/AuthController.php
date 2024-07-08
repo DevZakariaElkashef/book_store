@@ -13,31 +13,35 @@ use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendAdminRestPasswordJob;
 use Illuminate\Support\Facades\Password;
 use App\Http\Requests\SendPasswordEmailRequest;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function loginPage()
     {
-        return view('dashboard.auth.login');
+        $img = Slider::where("key", 'admin-login')->first()->image;
+        return view('dashboard.auth.login', compact('img'));
     }
 
     public function forgetPassword()
     {
-        return view('dashboard.auth.forget-password');
+        $img = Slider::where("key", 'admin-forget')->first()->image;
+        return view('dashboard.auth.forget-password', compact('img'));
     }
 
     public function resetPasswordPage($token)
     {
         $token = DB::table('password_reset_tokens')->where('token', $token)->first();
+        $img = Slider::where("key", 'admin-forget')->first()->image;
 
-        if(!$token) {
+        if (!$token) {
             return to_route('dashboard.login')->with('message', __('Token Expire'));
         }
 
-        return view('dashboard.auth.reset-password', compact('token'));
+        return view('dashboard.auth.reset-password', compact('token', 'img'));
     }
-    
+
     public function login(loginRequest $request)
     {
         $credentials  = $request->validated();
@@ -60,7 +64,7 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if(!$user) {
+        if (!$user) {
             return back()->withErrors(['email' => __("Email Not Found!")]);
         }
         // Generate a unique token for the password reset link
@@ -91,6 +95,5 @@ class AuthController extends Controller
         DB::table('password_reset_tokens')->where('token', $request->token)->delete();
 
         return to_route('dashboard.login_page')->with('message', __("Password Reset Successfuly!"));
-
     }
 }
