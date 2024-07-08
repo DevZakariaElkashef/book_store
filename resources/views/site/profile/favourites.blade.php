@@ -4,7 +4,7 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __('Home') }}</a></li>
                 <li><a href="{{ route('site.profile.index') }}">{{ __('Personal profile') }}</a></li>
             </ul>
         </div>
@@ -50,8 +50,14 @@
                                                         <div class="card-body ms-3">
                                                             <h5>{{ $item->book->name }}</h5>
                                                             <p>{{ Str::limit($item->book->description, $strLimit) }}</p>
-                                                            <span class="price">{{ $item->book->price }} <span>
-                                                                    {{ __('sar') }}</span></span>
+                                                            @if (hasOffer($item->book->id))
+                                                                <span class="price"> {{ $item->book->offer }} <span
+                                                                        class="text-decoration-line-through">{{ $item->book->price }}</span><span>
+                                                                        {{ __('sar') }}</span></span>
+                                                            @else
+                                                                <span class="price"> {{ $item->book->price }} <span>
+                                                                        {{ __('sar') }}</span></span>
+                                                            @endif
                                                             <div class="options">
                                                                 <a href="#"
                                                                     onclick="$('#addToCartForm{{ $item->book->id }}').submit()"
@@ -64,7 +70,7 @@
                                                                             value="{{ $item->book->id }}">
                                                                     </form>
                                                                     <i class="fa-solid fa-cart-shopping"></i>
-                                                                    <span>{{ __("Add to cart") }}</span>
+                                                                    <span>{{ __('Add to cart') }}</span>
                                                                 </a>
                                                                 <a href="#">
                                                                     <i class="far fa-eye"> </i>

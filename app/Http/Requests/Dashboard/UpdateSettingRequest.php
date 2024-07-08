@@ -27,6 +27,8 @@ class UpdateSettingRequest extends FormRequest
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
+            'lat' => 'required|string|max:255',
+            'lng' => 'required|string|max:255',
             'slogan_ar' => 'required|string|max:255',
             'slogan_en' => 'required|string|max:255',
             'facebook' => 'nullable|string|max:255',

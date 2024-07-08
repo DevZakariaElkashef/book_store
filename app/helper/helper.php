@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -112,4 +113,10 @@ function distance($lat1, $lng1, $lat2, $lng2, $earthRadius = 6371)
     $distance = $earthRadius * $c;
 
     return $distance;
+}
+
+
+function hasOffer($bookId)
+{
+    return Book::offers()->where('id', $bookId)->exists();
 }

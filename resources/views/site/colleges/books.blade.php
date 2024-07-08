@@ -10,7 +10,13 @@
                 <div class="card-body ms-3">
                     <h5>{{ $book->name }}</h5>
                     <p> {{ Str::limit($book->description, $strLimit) }} </p>
-                    <span class="price">{{ $book->price }} <span> ر.س</span></span>
+                    @if (hasOffer($book->id))
+                        <span class="price"> {{ $book->offer }} <span
+                                class="text-decoration-line-through">{{ $book->price }}</span><span>
+                                {{ __('sar') }}</span></span>
+                    @else
+                        <span class="price"> {{ $book->price }} <span> {{ __('sar') }}</span></span>
+                    @endif
                     <div class="options">
                         <a href="#" onclick="$('#addToCartForm{{ $book->id }}').submit()"
                             class="d-inline-flex align-items-center">
@@ -20,7 +26,7 @@
                                 <input type="hidden" name="book_id" value="{{ $book->id }}">
                             </form>
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <span>{{ __("Add to cart") }}</span>
+                            <span>{{ __('Add to cart') }}</span>
                         </a>
 
                         <a href="{{ route('site.favourite.toggle', ['book_id' => $book->id]) }}">

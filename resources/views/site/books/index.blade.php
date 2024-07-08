@@ -5,7 +5,7 @@
     <div class="custom_preadcrumb">
         <div class="container-fluid pd-50">
             <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="{{ route('site.home') }}">{{ __("Home") }}</a></li>
+                <li><a href="{{ route('site.home') }}">{{ __('Home') }}</a></li>
                 <li><a href="{{ route('site.books.index') }}">{{ __('Books') }}</a></li>
             </ul>
         </div>
@@ -34,12 +34,18 @@
                                 <div class="card-body ms-3">
                                     <h5>{{ $book->name }}</h5>
                                     <p> {{ Str::limit($book->description, $strLimit) }} </p>
-                                    <span class="price">{{ $book->price }} <span> {{ __("sar") }}</span></span>
+                                    @if (hasOffer($book->id))
+                                        <span class="price"> {{ $book->offer }} <span
+                                                class="text-decoration-line-through">{{ $book->price }}</span><span>
+                                                {{ __('sar') }}</span></span>
+                                    @else
+                                        <span class="price"> {{ $book->price }} <span> {{ __('sar') }}</span></span>
+                                    @endif
                                     <div class="options">
                                         <a href="#" onclick="$('#addToCartForm{{ $book->id }}').submit()"
                                             class="d-inline-flex align-items-center">
                                             <i class="fa-solid fa-cart-shopping"></i>
-                                            <span>{{ __("Add to cart") }}</span>
+                                            <span>{{ __('Add to cart') }}</span>
                                         </a>
                                         <form id="addToCartForm{{ $book->id }}" class="d-none"
                                             action="{{ route('carts.store') }}" method="post">
@@ -48,10 +54,10 @@
                                         </form>
                                         <a href="{{ route('site.favourite.toggle', ['book_id' => $book->id]) }}">
                                             @if (hasFavourite(auth()->user(), $book->id))
-                                            <i class="fa-solid fa-heart"></i>
-                                        @else
-                                            <i class="fa-regular fa-heart"></i>
-                                        @endif
+                                                <i class="fa-solid fa-heart"></i>
+                                            @else
+                                                <i class="fa-regular fa-heart"></i>
+                                            @endif
                                         </a>
 
                                     </div>

@@ -64,6 +64,28 @@
 
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
+                                        <label for="lat">{{ __('Lat') }}</label>
+                                        <input id="lat" class="form-control" type="lat" name="lat"
+                                            value="{{ $setting->lat }}">
+                                        @error('lat')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="lng">{{ __('Lng') }}</label>
+                                        <input id="lng" class="form-control" type="lng" name="lng"
+                                            value="{{ $setting->lng }}">
+                                        @error('lng')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
                                         <label for="phone">{{ __('Phone') }}</label>
                                         <input id="phone" class="form-control" type="text" name="phone"
                                             value="{{ $setting->phone }}">

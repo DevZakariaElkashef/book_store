@@ -34,7 +34,8 @@
                                             <div class="card_header">
                                                 <h5>{{ __('order number') }} <span>#{{ $order->id }}</span> </h5>
                                                 <p> {{ __('order date') }}
-                                                    <span>{{ $order->created_at->format('Y-m-d') }}</span> </p>
+                                                    <span>{{ $order->created_at->format('Y-m-d') }}</span>
+                                                </p>
                                                 <p>{{ __('Expected date of arrival of the order') }} <span>
                                                         {{ $order->created_at->addDays($app->expected_order_delivered) }}
                                                     </span> </p>
@@ -87,11 +88,13 @@
                                                 </div>
                                                 <div class="card_body ms-3 mt-2">
                                                     <h5>{{ $item->book->name }}</h5>
-                                                    @if (in_array($item->book_id, \App\Models\Book::offers()->pluck('id')->toArray()))
-                                                        <p>{{ $item->book->offer }} ر.س <span>{{ $item->book->price }}
-                                                                ر.س</span></p>
+                                                    @if (hasOffer($item->book->id))
+                                                        <span class="price"> {{ $item->book->offer }} <span
+                                                                class="text-decoration-line-through">{{ $item->book->price }}</span><span>
+                                                                {{ __('sar') }}</span></span>
                                                     @else
-                                                        <p>{{ $item->book->price }} ر.س</p>
+                                                        <span class="price"> {{ $item->book->price }} <span>
+                                                                {{ __('sar') }}</span></span>
                                                     @endif
                                                     <a href="#" class="btn btn-primary review-btn"
                                                         data-id="{{ $item->id }}"

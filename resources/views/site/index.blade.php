@@ -152,7 +152,13 @@
                                 <div class="card-body ms-3">
                                     <h5>{{ $book->name }}</h5>
                                     <p>{{ Str::limit($book->description, $strLimit) }}</p>
-                                    <span class="price">{{ $book->price }} <span> {{ __('sar') }}</span></span>
+                                    @if (hasOffer($book->id))
+                                        <span class="price"> {{ $book->offer }} <span
+                                                class="text-decoration-line-through">{{ $book->price }}</span><span>
+                                                {{ __('sar') }}</span></span>
+                                    @else
+                                        <span class="price"> {{ $book->price }} <span> {{ __('sar') }}</span></span>
+                                    @endif
                                     <div class="options">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modaAddAdress"
                                             data-id="{{ $book->id }}" data-count="{{ bookCartCount($book->id) }}"
@@ -209,7 +215,13 @@
                             <div class="card-body ms-3">
                                 <h5>{{ $book->name }}</h5>
                                 <p>{{ Str::limit($book->description, $strLimit) }}</p>
-                                <span class="price">{{ $book->price }} <span> {{ __('SAR') }}</span></span>
+                                @if (hasOffer($book->id))
+                                    <span class="price"> {{ $book->offer }} <span
+                                            class="text-decoration-line-through">{{ $book->price }}</span><span>
+                                            {{ __('sar') }}</span></span>
+                                @else
+                                    <span class="price"> {{ $book->price }} <span> {{ __('sar') }}</span></span>
+                                @endif
                                 <div class="options">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modaAddAdress"
                                         data-id="{{ $book->id }}" data-count="{{ bookCartCount($book->id) }}"
@@ -258,7 +270,14 @@
                                 <div class="card-body ms-3">
                                     <h5>{{ $book->name }}</h5>
                                     <p> {{ Str::limit($book->description, $strLimit) }} </p>
-                                    <span class="price">{{ $book->price }} <span> {{ __('SAR') }}</span></span>
+                                    @if (hasOffer($book->id))
+                                        <span class="price"> {{ $book->offer }} <span
+                                                class="text-decoration-line-through">{{ $book->price }}</span><span>
+                                                {{ __('sar') }}</span></span>
+                                    @else
+                                        <span class="price"> {{ $book->price }} <span>
+                                                {{ __('sar') }}</span></span>
+                                    @endif
                                     <div class="options">
                                         <a href="" class="d-inline-flex align-items-center">
                                             <i class="fa-solid fa-cart-shopping"></i>

@@ -46,7 +46,10 @@ class Cart extends Model
         if ($cart) {
             // Loop through the items in the cart and calculate the sum
             foreach ($cart->items as $item) {
-                $sum += $item->book->price * $item->qty;
+
+                $price = hasOffer($item->book_id) ? $item->book->offer : $item->book->price;
+
+                $sum += $price * $item->qty;
             }
         }
 
