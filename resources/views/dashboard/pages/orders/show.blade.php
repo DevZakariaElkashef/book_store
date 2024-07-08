@@ -82,7 +82,7 @@
                         </table>
                         <div class="px-3 mt-2">
                             @if ($order->admin_approve_to_cancle && $order->client_want_to_cancle && $order->client_received_refund)
-                                <b class="text-danger">{{ __("The Client Recive the refund") }}</b>
+                                <b class="text-danger">{{ __('The Client Recive the refund') }}</b>
                             @endif
                         </div>
                         <div class="d-flex justify-content-end align-items-center m-4 p-1 mb-0 pb-0">
@@ -523,16 +523,22 @@
             function updateTotals() {
                 let subtotal = 0;
                 $('.total-input').each(function() {
-                    subtotal += parseFloat($(this).val());
+                    let value = parseFloat($(this).val());
+                    if (!isNaN(value)) {
+                        subtotal += value;
+                    }
                 });
 
-                $('#subtotal').val(subtotal);
+                $('#subtotal').val(subtotal.toFixed(2)); // Ensure subtotal is formatted to two decimal places
+
                 const tax = parseFloat($('#tax').val());
                 const discount = parseFloat($('#discount').val());
                 const shipping = parseFloat($('#shipping').val());
-                const total = subtotal + tax + shipping - discount;
 
-                $('#total').val(total);
+                // Ensure tax, discount, shipping are parsed as floats and default to 0 if NaN
+                const total = (subtotal + tax + shipping - discount) || 0;
+
+                $('#total').val(total.toFixed(2)); // Ensure total is formatted to two decimal places
             }
 
             function fetchBookPrice(bookId, callback) {
@@ -544,7 +550,7 @@
                     },
                     success: function(response) {
                         if (response.success) {
-                            callback(response.price);
+                            callback(parseFloat(response.price));
                         } else {
                             alert('{{ __('Failed to fetch book price.') }}');
                         }
@@ -557,33 +563,33 @@
 
             function addBookRow() {
                 const bookRow = `
-                <div class="row justify-content-center align-items-end book mb-2">
-                    <div class="col-md-2">
-                        <label for="books">Books</label>
-                        <select class="form-control book-select" name="book[]">
-                            <option disabled selected>Select Book</option>
-                            @foreach ($books as $book)
-                                <option value="{{ $book->id }}">{{ $book->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="price">Price</label>
-                        <input type="number" class="form-control price-input" name="price[]" placeholder="Price" readonly>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="count">Count</label>
-                        <input type="number" class="form-control count-input" name="count[]" placeholder="Count" min="1">
-                    </div>
-                    <div class="col-md-2">
-                        <label for="total">Total</label>
-                        <input type="number" class="form-control total-input" name="total[]" placeholder="Total" readonly>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-danger removeBookButton">Delete</button>
-                    </div>
+            <div class="row justify-content-center align-items-end book mb-2">
+                <div class="col-md-2">
+                    <label for="books">Books</label>
+                    <select class="form-control book-select" name="book[]">
+                        <option disabled selected>Select Book</option>
+                        @foreach ($books as $book)
+                            <option value="{{ $book->id }}">{{ $book->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            `;
+                <div class="col-md-2">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control price-input" name="price[]" placeholder="Price" readonly>
+                </div>
+                <div class="col-md-2">
+                    <label for="count">Count</label>
+                    <input type="number" class="form-control count-input" name="count[]" placeholder="Count" min="1">
+                </div>
+                <div class="col-md-2">
+                    <label for="total">Total</label>
+                    <input type="number" class="form-control total-input" name="total[]" placeholder="Total" readonly>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger removeBookButton">Delete</button>
+                </div>
+            </div>
+        `;
                 $('.books').append(bookRow);
             }
 
@@ -605,9 +611,11 @@
 
                 if (bookId) {
                     fetchBookPrice(bookId, function(price) {
-                        $priceInput.val(price);
+                        $priceInput.val(parseFloat(price).toFixed(
+                        2)); // Ensure price is formatted to two decimal places
                         const count = $countInput.val() || 0;
-                        $totalInput.val(count * price);
+                        $totalInput.val((count * price).toFixed(
+                        2)); // Ensure total is formatted to two decimal places
                         updateTotals();
                     });
                 } else {
@@ -620,11 +628,12 @@
             $('.books').on('input', '.count-input', function() {
                 const $row = $(this).closest('.row.book');
                 const count = $(this).val();
-                const price = $row.find('.price-input').val();
+                const price = parseFloat($row.find('.price-input').val());
                 const $totalInput = $row.find('.total-input');
 
-                if (price) {
-                    $totalInput.val(count * price);
+                if (!isNaN(price)) {
+                    $totalInput.val((count * price).toFixed(
+                    2)); // Ensure total is formatted to two decimal places
                     updateTotals();
                 }
             });
