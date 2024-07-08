@@ -54,7 +54,7 @@ class OrderService
                 'book_id' => $item->book_id,
                 'user_id' => $user->id,
                 'qty' => $item->qty,
-                'price' => \App\Models\Book::find($item->book_id)->price,
+                'price' =>  hasOffer($item->book_id) ? \App\Models\Book::find($item->book_id)->offer : \App\Models\Book::find($item->book_id)->price,
             ]);
         }
 
