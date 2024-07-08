@@ -417,8 +417,9 @@
 
 
                                     <div class="options mt-5">
-                                        <button type="submit" class="confirm-add-to-cart">{{ __('confirm') }}</button>
-                                        <a href="">{{ __('Cancle') }}</a>
+                                        <button type="submit"
+                                            class="btn btn-primary confirm-add-to-cart">{{ __('confirm') }}</button>
+                                        <button type="button" class="btn btn-secondary">{{ __('Cancle') }}</a>
                                     </div>
                                 </form>
                             </div>
@@ -446,7 +447,7 @@
     <script>
         $(document).on('change', '#universitySelect', function() {
             let universityId = $(this).val();
-            let url = '{{ route("colleges.getColleges") }}';
+            let url = '{{ route('colleges.getColleges') }}';
 
 
             $.ajax({
@@ -464,7 +465,7 @@
 
         $(document).on('change', '#collegeSelect', function() {
             let collegeId = $(this).val();
-            let url = '{{ route("subjects.getSubjects") }}';
+            let url = '{{ route('subjects.getSubjects') }}';
 
 
             $.ajax({
