@@ -3,7 +3,7 @@
 @php
     // Assuming $subjects is an instance of Subject model or query builder
     $query = \App\Models\College::query(); // Initialize the query builder for College model
-    $books = \App\Models\Book::query();    // Initialize the query builder for Book model
+    $books = \App\Models\Book::query(); // Initialize the query builder for Book model
 
     if (request()->filled('university_id')) {
         $universityIds = explode(',', request('university_id'));
@@ -40,7 +40,7 @@
             </div>
             <div class="container-fluid pd-50">
                 <div class="breadcrumb_content">
-                    <h5>{{ __("Used Books") }}</h5>
+                    <h5>{{ __('Used Books') }}</h5>
                     <p class="col-lg-6 mx-auto">
                         {{ $app->short_description }}
                     </p>
@@ -51,13 +51,13 @@
     </div>
 
     <!-- <div class="custom_preadcrumb">
-            <div class="container-fluid pd-50">
-                <ul class="mt-5 list-unstyled d-flex align-items-center">
-                <li><a href="">الرئيسية</a></li>
-                <li><a href="">من نحن</a></li>
-                </ul>
-            </div>
-        </div> -->
+                <div class="container-fluid pd-50">
+                    <ul class="mt-5 list-unstyled d-flex align-items-center">
+                    <li><a href="">الرئيسية</a></li>
+                    <li><a href="">من نحن</a></li>
+                    </ul>
+                </div>
+            </div> -->
 
 
     <div class="subject_details">
@@ -132,8 +132,9 @@
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-9">
                     <div class="subject_details_search">
-                        <form action="" class="d-flex align-items-center">
-                            <input type="text" class="form-control search-input" placeholder="مبادئ الهندسة المدنية">
+                        <form action="{{ route('site.books.index') }}" class="d-flex align-items-center">
+                            <input name="name" type="text" class="form-control search-input"
+                                placeholder="مبادئ الهندسة المدنية">
                             <button>
                                 <i class="fas fa-search"></i>
                                 <span>بحث</span>

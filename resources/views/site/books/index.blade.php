@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="my-3">
-                    {{ $books->links() }}
+                    {{-- {{ $books->links() }} --}}
                 </div>
             </div>
 

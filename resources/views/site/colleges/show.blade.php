@@ -64,8 +64,8 @@
                         @if ($subject)
                             <h5>{{ $subject->name }}</h5>
                         @endif
-                        <form action="" class="d-flex align-items-center">
-                            <input type="text" class="form-control search-input" placeholder="مبادئ الهندسة المدنية">
+                        <form action="{{ route('site.books.index') }}" class="d-flex align-items-center">
+                            <input type="text" name="name" class="form-control search-input" placeholder="مبادئ الهندسة المدنية">
                             <button>
                                 <i class="fas fa-search"></i>
                                 <span>{{ __("Search") }}</span>

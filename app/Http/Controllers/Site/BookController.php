@@ -13,22 +13,50 @@ class BookController extends Controller
     {
         $books = Book::query();
 
-        if ($request->filled('sort') && $request->sort == 'latest') {
-            $books = $books->latest();
+        if ($request->filled('sort')) {
+            if ($request->sort == 'latest') {
+                $books->latest();
+            } elseif ($request->sort == 'most-saled') {
+                $books = Book::getMostSoldBooks();
+            }
         }
 
-        if ($request->filled('sort') && $request->sort == 'most-saled') {
-            $books = Book::getMostSoldBooks();
+        if ($request->filled('name')) {
+            $books->where(function ($query) use ($request) {
+                $query->where('name_ar', 'like', '%' . $request->name . '%')
+                    ->orWhere('name_en', 'like', '%' . $request->name . '%')
+                    ->orWhere('description_ar', 'like', '%' . $request->name . '%')
+                    ->orWhere('description_en', 'like', '%' . $request->name . '%');
+            });
+        }
+
+        if ($request->filled('university_id')) {
+            $books->whereHas('subject', function ($subject) use ($request) {
+                $subject->whereHas('college', function ($college) use ($request) {
+                    $college->where('university_id', $request->university_id);
+                });
+            });
+        }
+
+        if ($request->filled('college_id')) {
+            $books->whereHas('subject', function ($subject) use ($request) {
+                $subject->where('college_id', $request->college_id);
+            });
+        }
+
+        if ($request->filled('subject_id')) {
+            $books->where('subject_id', $request->subject_id);
         }
 
         $books = $books->active()->paginate(9);
+
 
         $strLimit = 30;
 
         return view("site.books.index", compact("books", "strLimit"));
     }
 
-    
+
     public function offers(Request $request)
     {
         $books = Book::active()->offers()->latest()->paginate(9);

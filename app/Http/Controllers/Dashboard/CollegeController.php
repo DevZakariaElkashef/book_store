@@ -61,7 +61,7 @@ class CollegeController extends Controller
         $this->authorize('colleges.read');
 
 
-        $colleges = College::where('is_active', 1)->where('university_id', $request->univirsityId)->get();
+        $colleges = College::where('university_id', $request->univirsityId)->get();
         $oldCollege = $request->collegeId ?? null;
 
         return view('dashboard.partials.__college_options', compact('colleges', 'oldCollege'))->render();

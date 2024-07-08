@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\Book;
 use App\Models\ContactType;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\College;
 use App\Models\Slider;
+use App\Models\Subject;
+use App\Models\University;
 
 class HomeController extends Controller
 {
@@ -26,6 +28,12 @@ class HomeController extends Controller
         $contactUsImg = Slider::where("key", 'contact_us-section')->first()->image;
         $offerImg = Slider::where("key", 'offer-section')->first()->image;
 
-        return view("site.index", compact("contactTypes", "latestBooks", "mostSaledBooks", "offerBooks", "strLimit", 'heroImg', 'contactUsImg', 'offerImg'));
+
+        $universites = University::active()->get();
+        $colleges = College::active()->get();
+        $subjects = Subject::active()->get();
+
+
+        return view("site.index", compact("contactTypes", "universites", "subjects", "colleges", "latestBooks", "mostSaledBooks", "offerBooks", "strLimit", 'heroImg', 'contactUsImg', 'offerImg'));
     }
 }

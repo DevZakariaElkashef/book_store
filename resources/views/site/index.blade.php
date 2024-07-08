@@ -18,34 +18,51 @@
                     </p>
                 </div>
                 <div class="search_wrapper">
-                    <form action="">
+                    <form action="{{ route('site.books.index') }}" method="GET">
                         <div class="row align-items-end">
                             <div class="col-sm-12 col-md-6 col-lg-3">
                                 <div class="form-group">
                                     <label for="">{{ __('Book name') }}</label>
-                                    <input type="text" class="form-control" placeholder="العلم و الايمان">
+                                    <input name="name" type="text" class="form-control" placeholder="العلم و الايمان">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-2">
                                 <div class="form-group">
-                                    <label for="">{{ __('Subject') }}</label>
-                                    <input type="text" class="form-control" placeholder="العلوم الاسلامية">
+                                    <label for="universitySelect">{{ __('University') }}</label>
+                                    <select name="university_id" class="form-control" id="universitySelect">
+                                        <option selected disabled>{{ __('select One') }}</option>
+                                        @foreach ($universites as $university)
+                                            <option value="{{ $university->id }}">{{ $university->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 col-lg-2">
+                                <div class="form-group">
+                                    <label for="collegeSelect">{{ __('College') }}</label>
+                                    <select name="college_id" class="form-control" id="collegeSelect">
+                                        <option selected disabled>{{ __('select One') }}</option>
+                                        @foreach ($colleges as $college)
+                                            <option value="{{ $college->id }}">{{ $college->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-2">
                                 <div class="form-group">
-                                    <label for="">{{ __('Author') }}</label>
-                                    <input type="text" class="form-control" placeholder="مصطفي محمود">
+                                    <label for="subjectSelect">{{ __('Subject') }}</label>
+                                    <select name="subject_id" class="form-control" id="subjectSelect">
+                                        <option selected disabled>{{ __('select One') }}</option>
+                                        @foreach ($subjects as $subject)
+                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-2">
-                                <div class="form-group">
-                                    <label for="">{{ __('University') }}</label>
-                                    <input type="text" class="form-control" placeholder=" جامعة الملك فهد">
-                                </div>
-                            </div>
+
                             <div class="col-sm-12 col-md-12 col-lg-2">
-                                <button>
+                                <button type="submit">
                                     <i class="fa fa-search"></i>
                                     <span>{{ __('Search') }}</span>
                                 </button>
@@ -167,7 +184,7 @@
                     <img src="site/assets/images/book2.svg" alt="">
                     <h5 class="ms-2 mt-1">{{ __('best seller') }}</h5>
                 </div>
-                <a href="{{ route("site.books.index", ['sort' => 'most-saled']) }}">{{ __('see more') }}</a>
+                <a href="{{ route('site.books.index', ['sort' => 'most-saled']) }}">{{ __('see more') }}</a>
             </div>
             <div class="row">
 
@@ -422,6 +439,44 @@
             $('.image-cart-modal').attr('src', $(this).data('image'));
             $('.numinput').val($(this).data('count'));
             $('.inputId').val($(this).data('id'));
+        });
+    </script>
+
+    {{-- universitySelect - collegeSelect - subjectSelect --}}
+    <script>
+        $(document).on('change', '#universitySelect', function() {
+            let universityId = $(this).val();
+            let url = '{{ route("colleges.getColleges") }}';
+
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    univirsityId: universityId
+                },
+                success: function(response) {
+                    $('#collegeSelect').html(response);
+                }
+            });
+        });
+
+
+        $(document).on('change', '#collegeSelect', function() {
+            let collegeId = $(this).val();
+            let url = '{{ route("subjects.getSubjects") }}';
+
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    collegeId: collegeId
+                },
+                success: function(response) {
+                    $('#subjectSelect').html(response);
+                }
+            });
         });
     </script>
 @endsection
