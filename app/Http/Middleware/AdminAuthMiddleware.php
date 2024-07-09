@@ -16,7 +16,12 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
+
+            if (in_array('client', auth()->user()->roles->pluck('name')->toArray())) {
+                abort(403);
+            }
+
             return $next($request);
         } else {
             return redirect()->route('dashboard.login_page');
