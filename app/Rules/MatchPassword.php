@@ -28,6 +28,6 @@ class MatchPassword implements Rule
 
     public function message()
     {
-        return 'The password is incorrect for the provided email.';
+        return __('The password is incorrect for the provided email.');
     }
 }

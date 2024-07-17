@@ -506,7 +506,8 @@
     "free_distance.required_if": "حقل المسافة المجانية مطلوب عند استخدام الشحن.",
     "cost_per_km.required_if": "حقل تكلفة الكيلومتر مطلوب عند استخدام الشحن.",
     "non_operational_distance.required_if": "حقل المسافة الغير تشغيلية مطلوب عند استخدام الشحن.",
-    "expected_order_delivered.required": "حقل المتوقع تسليم الطلب مطلوب."
+    "expected_order_delivered.required": "حقل المتوقع تسليم الطلب مطلوب.",
+    "The password is incorrect for the provided email." : "كلمة المرور غير صحيحة للبريد الإلكتروني المقدم."
 
 
 
