@@ -33,18 +33,18 @@ class StoreSubjectRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'college_id.required' => __('validation.college_id.required'),
-            'college_id.exists' => __('validation.college_id.exists'),
-            'university_id.required' => __('validation.university_id.required'),
-            'university_id.exists' => __('validation.university_id.exists'),
-            'name_ar.required' => __('validation.name_ar.required'),
-            'name_ar.string' => __('validation.name_ar.string'),
-            'name_ar.max' => __('validation.name_ar.max'),
-            'name_en.required' => __('validation.name_en.required'),
-            'name_en.string' => __('validation.name_en.string'),
-            'name_en.max' => __('validation.name_en.max'),
-            'is_active.required' => __('validation.is_active.required'),
-            'is_active.in' => __('validation.is_active.in')
+            'college_id.required' => __('college_id.required'),
+            'college_id.exists' => __('college_id.exists'),
+            'university_id.required' => __('university_id.required'),
+            'university_id.exists' => __('university_id.exists'),
+            'name_ar.required' => __('name_ar.required'),
+            'name_ar.string' => __('name_ar.string'),
+            'name_ar.max' => __('name_ar.max'),
+            'name_en.required' => __('name_en.required'),
+            'name_en.string' => __('name_en.string'),
+            'name_en.max' => __('name_en.max'),
+            'is_active.required' => __('is_active.required'),
+            'is_active.in' => __('is_active.in')
         ];
     }
 }

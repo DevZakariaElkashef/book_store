@@ -32,9 +32,9 @@ class CheckCoupon extends FormRequest
     public function messages(): array
     {
         return [
-            'code.required' => __('validation.code.required'),
-            'code.string' => __('validation.code.string'),
-            'code.exists' => __('validation.code.exists')
+            'code.required' => __('code.required'),
+            'code.string' => __('code.string'),
+            'code.exists' => __('code.exists')
         ];
     }
 

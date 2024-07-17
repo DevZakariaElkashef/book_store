@@ -34,20 +34,20 @@ class UpdateUniversityRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name_ar.required' => __('validation.name_ar.required'),
-            'name_ar.string' => __('validation.name_ar.string'),
-            'name_ar.max' => __('validation.name_ar.max'),
-            'name_en.required' => __('validation.name_en.required'),
-            'name_en.string' => __('validation.name_en.string'),
-            'name_en.max' => __('validation.name_en.max'),
-            'description_ar.string' => __('validation.description_ar.string'),
-            'description_ar.max' => __('validation.description_ar.max'),
-            'description_en.string' => __('validation.description_en.string'),
-            'description_en.max' => __('validation.description_en.max'),
-            'image.nullable' => __('validation.image.nullable'),
-            'image.file' => __('validation.image.file'),
-            'image.mimes' => __('validation.image.mimes'),
-            'image.max' => __('validation.image.max')
+            'name_ar.required' => __('name_ar.required'),
+            'name_ar.string' => __('name_ar.string'),
+            'name_ar.max' => __('name_ar.max'),
+            'name_en.required' => __('name_en.required'),
+            'name_en.string' => __('name_en.string'),
+            'name_en.max' => __('name_en.max'),
+            'description_ar.string' => __('description_ar.string'),
+            'description_ar.max' => __('description_ar.max'),
+            'description_en.string' => __('description_en.string'),
+            'description_en.max' => __('description_en.max'),
+            'image.nullable' => __('image.nullable'),
+            'image.file' => __('image.file'),
+            'image.mimes' => __('image.mimes'),
+            'image.max' => __('image.max')
         ];
     }
 }

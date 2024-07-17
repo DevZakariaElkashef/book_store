@@ -33,11 +33,11 @@ class StoreCartRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'id.required' => __('validation.id.required'),
-            'id.exists' => __('validation.id.exists'),
-            'count.required' => __('validation.count.required'),
-            'count.integer' => __('validation.count.integer'),
-            'count.gt' => __('validation.count.gt')
+            'id.required' => __('id.required'),
+            'id.exists' => __('id.exists'),
+            'count.required' => __('count.required'),
+            'count.integer' => __('count.integer'),
+            'count.gt' => __('count.gt')
         ];
     }
 

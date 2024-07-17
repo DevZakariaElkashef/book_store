@@ -29,8 +29,8 @@ class CancleOrderRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'order_id.required' => __('validation.order_id.required'),
-            'order_id.exists' => __('validation.order_id.exists')
+            'order_id.required' => __('order_id.required'),
+            'order_id.exists' => __('order_id.exists')
         ];
     }
 }

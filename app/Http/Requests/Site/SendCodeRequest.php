@@ -30,8 +30,8 @@ class SendCodeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => __('validation.email.required'),
-            'email.exists' => __('validation.email.exists')
+            'email.required' => __('email.required'),
+            'email.exists' => __('email.exists')
         ];
     }
 }

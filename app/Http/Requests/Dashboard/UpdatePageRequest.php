@@ -31,10 +31,10 @@ class UpdatePageRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'value_ar.required' => __('validation.value_ar.required'),
-            'value_ar.string' => __('validation.value_ar.string'),
-            'value_en.required' => __('validation.value_en.required'),
-            'value_en.string' => __('validation.value_en.string'),
+            'value_ar.required' => __('value_ar.required'),
+            'value_ar.string' => __('value_ar.string'),
+            'value_en.required' => __('value_en.required'),
+            'value_en.string' => __('value_en.string'),
         ];
     }
 }

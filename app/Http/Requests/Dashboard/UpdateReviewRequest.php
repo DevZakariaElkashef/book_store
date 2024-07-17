@@ -30,12 +30,12 @@ class UpdateReviewRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'star.required' => __('validation.star.required'),
-            'star.integer' => __('validation.star.integer'),
-            'star.lt' => __('validation.star.lt'),
-            'star.gt' => __('validation.star.gt'),
-            'comment.required' => __('validation.comment.required'),
-            'comment.string' => __('validation.comment.string'),
+            'star.required' => __('star.required'),
+            'star.integer' => __('star.integer'),
+            'star.lt' => __('star.lt'),
+            'star.gt' => __('star.gt'),
+            'comment.required' => __('comment.required'),
+            'comment.string' => __('comment.string'),
         ];
     }
 

@@ -34,13 +34,13 @@ class ConfirmCodeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => __('validation.email.required'),
-            'email.exists' => __('validation.email.exists'),
-            'otp.required' => __('validation.otp.required'),
-            'otp.array' => __('validation.otp.array'),
-            'otp.size' => __('validation.otp.size'),
-            'otp.*.required' => __('validation.otp.*.required'),
-            'otp.*.numeric' => __('validation.otp.*.numeric')
+            'email.required' => __('email.required'),
+            'email.exists' => __('email.exists'),
+            'otp.required' => __('otp.required'),
+            'otp.array' => __('otp.array'),
+            'otp.size' => __('otp.size'),
+            'otp.*.required' => __('otp.*.required'),
+            'otp.*.numeric' => __('otp.*.numeric')
         ];
     }
 

@@ -30,11 +30,11 @@ class StoreRoleRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => __('validation.name.required'),
-            'name.string' => __('validation.name.string'),
-            'name.max' => __('validation.name.max'),
-            'permissions.required' => __('validation.permissions.required'),
-            'permissions.array' => __('validation.permissions.array'),
+            'name.required' => __('name.required'),
+            'name.string' => __('name.string'),
+            'name.max' => __('name.max'),
+            'permissions.required' => __('permissions.required'),
+            'permissions.array' => __('permissions.array'),
         ];
     }
 }

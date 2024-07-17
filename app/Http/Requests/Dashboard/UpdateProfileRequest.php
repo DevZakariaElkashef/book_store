@@ -34,21 +34,21 @@ class UpdateProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => __('validation.name.required'),
-            'name.string' => __('validation.name.string'),
-            'name.max' => __('validation.name.max'),
-            'name.min' => __('validation.name.min'),
-            'email.required' => __('validation.email.required'),
-            'email.email' => __('validation.email.email'),
-            'email.max' => __('validation.email.max'),
-            'email.unique' => __('validation.email.unique'),
-            'phone.string' => __('validation.phone.string'),
-            'phone.max' => __('validation.phone.max'),
-            'phone.unique' => __('validation.phone.unique'),
-            'password.min' => __('validation.password.min'),
-            'password.max' => __('validation.password.max'),
-            'avatar.mimes' => __('validation.avatar.mimes'),
-            'avatar.max' => __('validation.avatar.max'),
+            'name.required' => __('name.required'),
+            'name.string' => __('name.string'),
+            'name.max' => __('name.max'),
+            'name.min' => __('name.min'),
+            'email.required' => __('email.required'),
+            'email.email' => __('email.email'),
+            'email.max' => __('email.max'),
+            'email.unique' => __('email.unique'),
+            'phone.string' => __('phone.string'),
+            'phone.max' => __('phone.max'),
+            'phone.unique' => __('phone.unique'),
+            'password.min' => __('password.min'),
+            'password.max' => __('password.max'),
+            'avatar.mimes' => __('avatar.mimes'),
+            'avatar.max' => __('avatar.max'),
         ];
     }
 }

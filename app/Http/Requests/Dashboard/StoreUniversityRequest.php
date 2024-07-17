@@ -35,22 +35,22 @@ class StoreUniversityRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name_ar.required' => __('validation.name_ar.required'),
-            'name_ar.string' => __('validation.name_ar.string'),
-            'name_ar.max' => __('validation.name_ar.max'),
-            'name_en.required' => __('validation.name_en.required'),
-            'name_en.string' => __('validation.name_en.string'),
-            'name_en.max' => __('validation.name_en.max'),
-            'description_ar.required' => __('validation.description_ar.required'),
-            'description_ar.string' => __('validation.description_ar.string'),
-            'description_ar.max' => __('validation.description_ar.max'),
-            'description_en.required' => __('validation.description_en.required'),
-            'description_en.string' => __('validation.description_en.string'),
-            'description_en.max' => __('validation.description_en.max'),
-            'is_active.required' => __('validation.is_active.required'),
-            'is_active.boolean' => __('validation.is_active.boolean'),
-            'image.mimes' => __('validation.image.mimes'),
-            'image.max' => __('validation.image.max'),
+            'name_ar.required' => __('name_ar.required'),
+            'name_ar.string' => __('name_ar.string'),
+            'name_ar.max' => __('name_ar.max'),
+            'name_en.required' => __('name_en.required'),
+            'name_en.string' => __('name_en.string'),
+            'name_en.max' => __('name_en.max'),
+            'description_ar.required' => __('description_ar.required'),
+            'description_ar.string' => __('description_ar.string'),
+            'description_ar.max' => __('description_ar.max'),
+            'description_en.required' => __('description_en.required'),
+            'description_en.string' => __('description_en.string'),
+            'description_en.max' => __('description_en.max'),
+            'is_active.required' => __('is_active.required'),
+            'is_active.boolean' => __('is_active.boolean'),
+            'image.mimes' => __('image.mimes'),
+            'image.max' => __('image.max'),
         ];
     }
 }

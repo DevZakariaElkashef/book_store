@@ -33,16 +33,16 @@ class ContactRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => __('validation.name.required'),
-            'name.string' => __('validation.name.string'),
-            'name.max' => __('validation.name.max'),
-            'email.required' => __('validation.email.required'),
-            'email.string' => __('validation.email.string'),
-            'email.email' => __('validation.email.email'),
-            'message.required' => __('validation.message.required'),
-            'message.string' => __('validation.message.string'),
-            'contact_type_id.required' => __('validation.contact_type_id.required'),
-            'contact_type_id.exists' => __('validation.contact_type_id.exists')
+            'name.required' => __('name.required'),
+            'name.string' => __('name.string'),
+            'name.max' => __('name.max'),
+            'email.required' => __('email.required'),
+            'email.string' => __('email.string'),
+            'email.email' => __('email.email'),
+            'message.required' => __('message.required'),
+            'message.string' => __('message.string'),
+            'contact_type_id.required' => __('contact_type_id.required'),
+            'contact_type_id.exists' => __('contact_type_id.exists')
         ];
     }
 }

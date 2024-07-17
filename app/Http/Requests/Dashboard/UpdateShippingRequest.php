@@ -33,10 +33,10 @@ class UpdateShippingRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'free_distance.required_if' => __('validation.free_distance.required_if'),
-            'cost_per_km.required_if' => __('validation.cost_per_km.required_if'),
-            'non_operational_distance.required_if' => __('validation.non_operational_distance.required_if'),
-            'expected_order_delivered.required' => __('validation.expected_order_delivered.required'),
+            'free_distance.required_if' => __('free_distance.required_if'),
+            'cost_per_km.required_if' => __('cost_per_km.required_if'),
+            'non_operational_distance.required_if' => __('non_operational_distance.required_if'),
+            'expected_order_delivered.required' => __('expected_order_delivered.required'),
         ];
     }
 }

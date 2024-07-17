@@ -29,8 +29,8 @@ class UpdateLangRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'lang.required' => __('validation.lang.required'),
-            'lang.in' => __('validation.lang.in')
+            'lang.required' => __('lang.required'),
+            'lang.in' => __('lang.in')
         ];
     }
 }

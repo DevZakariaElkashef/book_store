@@ -36,14 +36,14 @@ class PayOrderRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'note.string' => __('validation.note.string'),
-            'banktype.required' => __('validation.banktype.required'),
-            'banktype.in' => __('validation.banktype.in'),
-            'address.required' => __('validation.address.required'),
-            'address.string' => __('validation.address.string'),
-            'lat.required' => __('validation.lat.required'),
-            'lng.required' => __('validation.lng.required'),
-            'transfer_image.required_if' => __('validation.transfer_image.required_if')
+            'note.string' => __('note.string'),
+            'banktype.required' => __('banktype.required'),
+            'banktype.in' => __('banktype.in'),
+            'address.required' => __('address.required'),
+            'address.string' => __('address.string'),
+            'lat.required' => __('lat.required'),
+            'lng.required' => __('lng.required'),
+            'transfer_image.required_if' => __('transfer_image.required_if')
         ];
     }
 
