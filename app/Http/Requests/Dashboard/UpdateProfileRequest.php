@@ -29,4 +29,26 @@ class UpdateProfileRequest extends FormRequest
             'avatar' => 'nullable|mimes:png,jpg|max:10000'
         ];
     }
+
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => __('validation.name.required'),
+            'name.string' => __('validation.name.string'),
+            'name.max' => __('validation.name.max'),
+            'name.min' => __('validation.name.min'),
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.email'),
+            'email.max' => __('validation.email.max'),
+            'email.unique' => __('validation.email.unique'),
+            'phone.string' => __('validation.phone.string'),
+            'phone.max' => __('validation.phone.max'),
+            'phone.unique' => __('validation.phone.unique'),
+            'password.min' => __('validation.password.min'),
+            'password.max' => __('validation.password.max'),
+            'avatar.mimes' => __('validation.avatar.mimes'),
+            'avatar.max' => __('validation.avatar.max'),
+        ];
+    }
 }

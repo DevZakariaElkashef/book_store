@@ -29,4 +29,22 @@ class RegisterRequest extends FormRequest
             'avatar' => 'nullable|mimes:png,jpg,jpeg|max:10000'
         ];
     }
+
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => __('validation.name.required'),
+            'name.string' => __('validation.name.string'),
+            'name.max' => __('validation.name.max'),
+            'email.required' => __('validation.email.required'),
+            'email.unique' => __('validation.email.unique'),
+            'password.required' => __('validation.password.required'),
+            'password.string' => __('validation.password.string'),
+            'password.min' => __('validation.password.min'),
+            'term.required' => __('validation.term.required'),
+            'avatar.mimes' => __('validation.avatar.mimes'),
+            'avatar.max' => __('validation.avatar.max')
+        ];
+    }
 }

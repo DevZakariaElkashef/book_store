@@ -25,4 +25,12 @@ class UpdateLangRequest extends FormRequest
             'lang' => 'required|in:ar,en',
         ]);
     }
+
+    public function messages(): array
+    {
+        return [
+            'lang.required' => __('validation.lang.required'),
+            'lang.in' => __('validation.lang.in')
+        ];
+    }
 }

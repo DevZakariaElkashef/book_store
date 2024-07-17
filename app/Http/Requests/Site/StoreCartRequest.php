@@ -30,6 +30,18 @@ class StoreCartRequest extends FormRequest
     }
 
 
+    public function messages(): array
+    {
+        return [
+            'id.required' => __('validation.id.required'),
+            'id.exists' => __('validation.id.exists'),
+            'count.required' => __('validation.count.required'),
+            'count.integer' => __('validation.count.integer'),
+            'count.gt' => __('validation.count.gt')
+        ];
+    }
+
+
     protected function failedValidation(Validator $validator)
     {
         $firstError = $validator->errors()->first();

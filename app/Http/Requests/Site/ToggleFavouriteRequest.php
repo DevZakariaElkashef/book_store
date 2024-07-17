@@ -29,6 +29,15 @@ class ToggleFavouriteRequest extends FormRequest
         ];
     }
 
+
+    public function messages(): array
+    {
+        return [
+            'book_id.required' => __('validation.book_id.required'),
+            'book_id.exists' => __('validation.book_id.exists')
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         $firstError = $validator->errors()->first();

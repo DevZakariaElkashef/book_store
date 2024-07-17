@@ -28,4 +28,21 @@ class ContactRequest extends FormRequest
             'contact_type_id' => 'required|exists:contact_types,id'
         ];
     }
+
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => __('validation.name.required'),
+            'name.string' => __('validation.name.string'),
+            'name.max' => __('validation.name.max'),
+            'email.required' => __('validation.email.required'),
+            'email.string' => __('validation.email.string'),
+            'email.email' => __('validation.email.email'),
+            'message.required' => __('validation.message.required'),
+            'message.string' => __('validation.message.string'),
+            'contact_type_id.required' => __('validation.contact_type_id.required'),
+            'contact_type_id.exists' => __('validation.contact_type_id.exists')
+        ];
+    }
 }

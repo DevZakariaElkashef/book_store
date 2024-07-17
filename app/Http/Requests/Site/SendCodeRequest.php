@@ -25,4 +25,13 @@ class SendCodeRequest extends FormRequest
             'email' => 'required|exists:users,email'
         ];
     }
+
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => __('validation.email.required'),
+            'email.exists' => __('validation.email.exists')
+        ];
+    }
 }

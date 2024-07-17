@@ -30,4 +30,27 @@ class StoreUniversityRequest extends FormRequest
             'image' =>'nullable|image|mimes:jpeg,png,jpg|max:20480',
         ];
     }
+
+
+    public function messages(): array
+    {
+        return [
+            'name_ar.required' => __('validation.name_ar.required'),
+            'name_ar.string' => __('validation.name_ar.string'),
+            'name_ar.max' => __('validation.name_ar.max'),
+            'name_en.required' => __('validation.name_en.required'),
+            'name_en.string' => __('validation.name_en.string'),
+            'name_en.max' => __('validation.name_en.max'),
+            'description_ar.required' => __('validation.description_ar.required'),
+            'description_ar.string' => __('validation.description_ar.string'),
+            'description_ar.max' => __('validation.description_ar.max'),
+            'description_en.required' => __('validation.description_en.required'),
+            'description_en.string' => __('validation.description_en.string'),
+            'description_en.max' => __('validation.description_en.max'),
+            'is_active.required' => __('validation.is_active.required'),
+            'is_active.boolean' => __('validation.is_active.boolean'),
+            'image.mimes' => __('validation.image.mimes'),
+            'image.max' => __('validation.image.max'),
+        ];
+    }
 }

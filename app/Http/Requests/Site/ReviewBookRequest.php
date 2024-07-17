@@ -31,6 +31,21 @@ class ReviewBookRequest extends FormRequest
     }
 
 
+    public function messages(): array
+    {
+        return [
+            'order_item_id.required' => __('validation.order_item_id.required'),
+            'order_item_id.exists' => __('validation.order_item_id.exists'),
+            'star.required' => __('validation.star.required'),
+            'star.integer' => __('validation.star.integer'),
+            'star.lt' => __('validation.star.lt'),
+            'star.gt' => __('validation.star.gt'),
+            'comment.required' => __('validation.comment.required'),
+            'comment.string' => __('validation.comment.string')
+        ];
+    }
+
+
     protected function failedValidation(Validator $validator)
     {
         $firstError = $validator->errors()->first();

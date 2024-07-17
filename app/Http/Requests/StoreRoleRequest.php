@@ -26,4 +26,15 @@ class StoreRoleRequest extends FormRequest
             'permissions' => 'required|array',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => __('validation.name.required'),
+            'name.string' => __('validation.name.string'),
+            'name.max' => __('validation.name.max'),
+            'permissions.required' => __('validation.permissions.required'),
+            'permissions.array' => __('validation.permissions.array'),
+        ];
+    }
 }

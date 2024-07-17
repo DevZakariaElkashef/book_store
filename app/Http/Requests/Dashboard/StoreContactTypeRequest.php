@@ -27,4 +27,18 @@ class StoreContactTypeRequest extends FormRequest
             'is_active'  => 'required|in:0,1'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name_ar.required' => __('validation.name_ar.required'),
+            'name_ar.string' => __('validation.name_ar.string'),
+            'name_ar.max' => __('validation.name_ar.max'),
+            'name_en.required' => __('validation.name_en.required'),
+            'name_en.string' => __('validation.name_en.string'),
+            'name_en.max' => __('validation.name_en.max'),
+            'is_active.required' => __('validation.is_active.required'),
+            'is_active.in' => __('validation.is_active.in'),
+        ];
+    }
 }

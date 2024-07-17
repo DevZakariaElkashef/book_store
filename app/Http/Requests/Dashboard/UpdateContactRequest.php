@@ -25,4 +25,13 @@ class UpdateContactRequest extends FormRequest
             'status' => 'required|in:0,1'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'status.required' => __('validation.status.required'),
+            'status.in' => __('validation.status.in'),
+        ];
+    }
+
 }

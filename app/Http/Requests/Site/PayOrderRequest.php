@@ -33,6 +33,20 @@ class PayOrderRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'note.string' => __('validation.note.string'),
+            'banktype.required' => __('validation.banktype.required'),
+            'banktype.in' => __('validation.banktype.in'),
+            'address.required' => __('validation.address.required'),
+            'address.string' => __('validation.address.string'),
+            'lat.required' => __('validation.lat.required'),
+            'lng.required' => __('validation.lng.required'),
+            'transfer_image.required_if' => __('validation.transfer_image.required_if')
+        ];
+    }
+
 
 
     protected function failedValidation(Validator $validator)
@@ -49,6 +63,4 @@ class PayOrderRequest extends FormRequest
 
         throw new HttpResponseException($response);
     }
-
-
 }

@@ -26,4 +26,19 @@ class UpdateReviewRequest extends FormRequest
             'comment' => 'required|string'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'star.required' => __('validation.star.required'),
+            'star.integer' => __('validation.star.integer'),
+            'star.lt' => __('validation.star.lt'),
+            'star.gt' => __('validation.star.gt'),
+            'comment.required' => __('validation.comment.required'),
+            'comment.string' => __('validation.comment.string'),
+        ];
+    }
+
+
+
 }

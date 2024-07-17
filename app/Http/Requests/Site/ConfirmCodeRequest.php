@@ -31,6 +31,20 @@ class ConfirmCodeRequest extends FormRequest
     }
 
 
+    public function messages(): array
+    {
+        return [
+            'email.required' => __('validation.email.required'),
+            'email.exists' => __('validation.email.exists'),
+            'otp.required' => __('validation.otp.required'),
+            'otp.array' => __('validation.otp.array'),
+            'otp.size' => __('validation.otp.size'),
+            'otp.*.required' => __('validation.otp.*.required'),
+            'otp.*.numeric' => __('validation.otp.*.numeric')
+        ];
+    }
+
+
     protected function failedValidation(Validator $validator)
     {
         $firstError = $validator->errors()->first();

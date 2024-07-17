@@ -28,4 +28,21 @@ class StoreAboutusRequest extends FormRequest
             'image' => 'required|mimes:png,jpg,jpeg'
         ];
     }
+
+
+    public function messages(): array
+    {
+        return [
+            'content_ar.required' => __('validation.content_ar.required'),
+            'content_ar.string' => __('validation.content_ar.string'),
+            'content_ar.max' => __('validation.content_ar.max'),
+            'content_en.required' => __('validation.content_en.required'),
+            'content_en.string' => __('validation.content_en.string'),
+            'content_en.max' => __('validation.content_en.max'),
+            'is_active.required' => __('validation.is_active.required'),
+            'is_active.in' => __('validation.is_active.in'),
+            'image.required' => __('validation.image.required'),
+            'image.mimes' => __('validation.image.mimes')
+        ];
+    }
 }
