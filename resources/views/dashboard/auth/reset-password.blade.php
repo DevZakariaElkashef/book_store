@@ -124,7 +124,7 @@
                         <form id="formAuthentication" class="mb-3" action="{{ route('dashboard.reset_password') }}"
                             method="POST">
                             @csrf
-                            <input type="hidden" name="token" value="{{ $token }}">
+                            <input type="hidden" name="token" value="{{ is_string($token) ? htmlspecialchars($token) : '' }}">
                             <div class="mb-3 form-password-toggle">
                                 <div class="input-group input-group-merge">
                                     <div class="form-floating form-floating-outline">
