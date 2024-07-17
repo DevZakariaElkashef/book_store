@@ -144,9 +144,9 @@
                                     <input type="hidden" name="order_id" id="OrderIdInput">
                                     <div class="options mt-5">
                                         <button type="submit"
-                                            class="mx-1 btn btn-primary confirm-add-to-cart">تأكيد</button>
+                                            class="mx-1 btn btn-primary confirm-add-to-cart">{{ __("confirm") }}</button>
                                         <button data-bs-dismiss="modal" class="btn btn-secondary mx-1"
-                                            href="">الغاء</button>
+                                            href="">{{ __("Cancle") }}</button>
                                     </div>
                                 </form>
                             </div>
@@ -178,21 +178,21 @@
                                     @csrf
                                     <input type="hidden" name="order_item_id" id="ItemIdInput">
                                     <div class="form-group">
-                                        <label for="starInput">Stars</label>
+                                        <label for="starInput">{{ __("Stars") }}</label>
                                         <input type="number" min="0" max="5" name="star"
                                             placeholder="3.5" id="starInput" class="form-control">
                                     </div>
 
                                     <div class="form-group my-3">
-                                        <label for="commentInput">Comment</label>
-                                        <textarea name="comment" placeholder="you opinion" id="commentInput" class="form-control">{{ old('comment') }}</textarea>
+                                        <label for="commentInput">{{ __("Comment") }}</label>
+                                        <textarea name="comment" placeholder="{{ __("you opinion") }}" id="commentInput" class="form-control">{{ old('comment') }}</textarea>
                                     </div>
 
                                     <div class="options mt-5">
                                         <button type="submit"
-                                            class="mx-1 btn btn-primary confirm-add-to-cart">تأكيد</button>
+                                            class="mx-1 btn btn-primary confirm-add-to-cart">{{ __("confirm") }}</button>
                                         <button data-bs-dismiss="modal" class="btn btn-secondary mx-1"
-                                            href="">الغاء</button>
+                                            href="">{{ __("Cancle") }}</button>
                                     </div>
                                 </form>
                             </div>

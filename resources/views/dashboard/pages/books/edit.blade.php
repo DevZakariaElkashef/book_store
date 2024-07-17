@@ -235,9 +235,9 @@
                                 <select type="file" accept=".jpg,.png" class="form-control" name="is_new"
                                     id="typeInput" value="{{ old('avatar') }}">
                                     <option value="0" @if (old('is_new') == 0 || $book->is_new == 0) selected @endif>
-                                        {{ __('Not Active') }}</option>
+                                        {{ __('Used Book') }}</option>
                                     <option value="1" @if (old('is_new') == 1 || $book->is_new == 1) selected @endif>
-                                        {{ __('Active') }}</option>
+                                        {{ __('New Book') }}</option>
                                 </select>
                                 @error('avatar')
                                     <div class="text-danger">{{ $message }}</div>
@@ -297,13 +297,15 @@
                         <div class="preview-images" id="previewImages">
                             @foreach ($book->images as $image)
                                 <img src="{{ asset($image->path) }}" alt="">
-                                <a href="#" class="text-danger" onclick="">{{ __("Delete") }}</a>
+                                <a href="#" class="text-danger"
+                                    onclick="$('#deleteImageForm{{ $image->id }}').submit()">{{ __('Delete') }}</a>
+                                <form method="POST" class="d-none" action="{{ route('images.destroy', $image->id) }}"
+                                    id="deleteImageForm{{ $image->id }}">
+                                    @csrf
+                                    @method('delete')
+                                </form>
                             @endforeach
                         </div>
-
-
-
-
 
 
                         <div class="col-md-12 mt-2 text-end">

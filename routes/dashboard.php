@@ -23,6 +23,7 @@ use App\Http\Controllers\Dashboard\ShippingController;
 use App\Http\Controllers\Dashboard\UniversityController;
 use App\Http\Controllers\Dashboard\ContactTypeController;
 use App\Http\Controllers\Dashboard\HeaderImageController;
+use App\Http\Controllers\Dashboard\ImageController;
 use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\ProfileController;
 
@@ -109,6 +110,11 @@ Route::middleware('lang')->group(function () {
         Route::get('books-export', [BookController::class, 'export'])->name('books.export');
         Route::delete('books-delete', [BookController::class, 'delete'])->name('books.delete');
         Route::resource('books', BookController::class);
+
+
+
+
+        Route::resource('images', ImageController::class);
 
 
 

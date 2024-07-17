@@ -320,7 +320,11 @@
     "Employees": "Employees",
 
 
-    "select One" : "select One",
-    "Product ratings and reviews" : "Product ratings and reviews",
-    "Similar Products" : "Similar Products"
+    "select One": "select One",
+    "Product ratings and reviews": "Product ratings and reviews",
+    "Similar Products": "Similar Products",
+    "Review Order": "Review Order",
+    "Stars": "Stars",
+    "you opinion": "you opinion",
+    "Cancle Order" : "Cancle Order"
 }

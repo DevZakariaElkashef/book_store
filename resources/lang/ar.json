@@ -315,6 +315,17 @@
     "Total Employees": "إجمالي الموظفين",
     "Active Employees": "الموظفين النشطين",
     "Pending Employees": "الموظفين المعلقين",
-    "Employees": "الموظفين"
+    "Employees": "الموظفين",
+
+
+
+    "select One": "قم بالتحديد",
+    "Product ratings and reviews": "تقييمات ومراجعات المنتج",
+    "Similar Products": "منتجات مشابهة",
+    "Review Order": "مراجعة الطلب",
+    "Stars": "نجوم",
+    "you opinion": "رأيك",
+    "Cancle Order": "إلغاء الطلب",
+    "Write Book Name" : "اكتب اسم الكتاب"
 
 }

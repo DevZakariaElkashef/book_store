@@ -23,7 +23,7 @@
                             <div class="col-sm-12 col-md-6 col-lg-3">
                                 <div class="form-group">
                                     <label for="">{{ __('Book name') }}</label>
-                                    <input name="name" type="text" class="form-control" placeholder="العلم و الايمان">
+                                    <input name="name" type="text" class="form-control" placeholder="{{ __("Write Book Name") }}">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-2">
