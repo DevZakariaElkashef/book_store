@@ -29,6 +29,11 @@ use App\Http\Controllers\Dashboard\ProfileController;
 
 Route::middleware('lang')->group(function () {
 
+
+    Route::get('/', function() {
+        return to_route('dashboard.home');
+    });
+
     // auth
     Route::get('login', [AuthController::class, 'loginPage'])->name('dashboard.login_page');
     Route::post('login', [AuthController::class, 'login'])->name('dashboard.login');
