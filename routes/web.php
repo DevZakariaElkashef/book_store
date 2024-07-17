@@ -83,6 +83,7 @@ Route::middleware('lang')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('site.home');
     Route::get('about-us', [AboutController::class, 'index'])->name('site.aboutus.index');
     Route::get('books', [BookController::class, 'index'])->name('site.books.index');
+    Route::get('books/{id}', [BookController::class, 'show'])->name('site.books.show');
     Route::get("used-books", [UsedBookController::class, 'index'])->name('site.usedbooks.index');
     Route::get('offers', [BookController::class, 'offers'])->name('site.books.offers');
     Route::get('universities', [UniversityController::class, 'index'])->name('site.universites.index');

@@ -182,6 +182,13 @@ class BookController extends Controller
             $data['image'] = uploadeImage($request->image, "Books", $book->image);
         }
 
+
+        if ($request->has('images')) {
+            foreach ($request->images as $image) {
+                $book->images()->create(['path' => uploadeImage($image, "Books")]);
+            }
+        }
+
         $book->update($data);
 
         // retun with toaster message

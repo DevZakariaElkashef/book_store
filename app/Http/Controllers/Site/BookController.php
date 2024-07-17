@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BookReview;
 
 class BookController extends Controller
 {
@@ -54,6 +55,17 @@ class BookController extends Controller
         $strLimit = 30;
 
         return view("site.books.index", compact("books", "strLimit"));
+    }
+
+
+    public function show(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        $reviews = BookReview::whereHas('orderItem', function($item) use($id) {
+            $item->where('book_id', $id);
+        })->get();
+
+        return view('site.books.show', compact('book', 'reviews'));
     }
 
 

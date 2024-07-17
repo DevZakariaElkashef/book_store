@@ -3,20 +3,24 @@
         <div class="col-6 col-md-6 col-lg-6 col-xl-4">
             <div class="product_card d-flex align-items-start">
                 <div class="card-img">
-                    <div class="img-parent">
-                        <img src="{{ asset($book->image) }}" alt="">
-                    </div>
+                    <a href="{{ route('site.books.show', $book->id) }}">
+                        <div class="img-parent">
+                            <img src="{{ asset($book->image) }}" alt="">
+                        </div>
+                    </a>
                 </div>
                 <div class="card-body ms-3">
-                    <h5>{{ $book->name }}</h5>
-                    <p> {{ Str::limit($book->description, $strLimit) }} </p>
-                    @if (hasOffer($book->id))
-                        <span class="price"> {{ $book->offer }} <span
-                                class="text-decoration-line-through">{{ $book->price }}</span><span>
-                                {{ __('sar') }}</span></span>
-                    @else
-                        <span class="price"> {{ $book->price }} <span> {{ __('sar') }}</span></span>
-                    @endif
+                    <a class="text-dark" href="{{ route('site.books.show', $book->id) }}">
+                        <h5>{{ $book->name }}</h5>
+                        <p> {{ Str::limit($book->description, $strLimit) }} </p>
+                        @if (hasOffer($book->id))
+                            <span class="price"> {{ $book->offer }} <span
+                                    class="text-decoration-line-through">{{ $book->price }}</span><span>
+                                    {{ __('sar') }}</span></span>
+                        @else
+                            <span class="price"> {{ $book->price }} <span> {{ __('sar') }}</span></span>
+                        @endif
+                    </a>
                     <div class="options">
                         <a href="#" onclick="$('#addToCartForm{{ $book->id }}').submit()"
                             class="d-inline-flex align-items-center">

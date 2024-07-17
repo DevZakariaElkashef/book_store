@@ -168,7 +168,7 @@
                                             <i class="fa-solid fa-cart-shopping"></i>
                                             <span>{{ __('Add to cart') }}</span>
                                         </a>
-                                        <a href="#">
+                                        <a href="{{ route('site.books.show', $book->id) }}">
                                             <i class="far fa-eye"> </i>
                                         </a>
                                     </div>
@@ -231,7 +231,7 @@
                                         <i class="fa-solid fa-cart-shopping"></i>
                                         <span>{{ __('Add to cart') }}</span>
                                     </a>
-                                    <a href="#">
+                                    <a href="{{ route('site.books.show', $book->id) }}">
                                         <i class="far fa-eye"> </i>
                                     </a>
                                 </div>
@@ -279,11 +279,17 @@
                                                 {{ __('sar') }}</span></span>
                                     @endif
                                     <div class="options">
-                                        <a href="" class="d-inline-flex align-items-center">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modaAddAdress"
+                                            data-id="{{ $book->id }}" data-count="{{ bookCartCount($book->id) }}"
+                                            data-image="{{ asset($book->image) }}"
+                                            class="d-inline-flex align-items-center add-to-cart-btn">
+
                                             <i class="fa-solid fa-cart-shopping"></i>
                                             <span>{{ __('Add to cart') }}</span>
                                         </a>
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#modaAddAdress">
+
+                                        <a href="{{ route('site.books.show', $book->id) }}" data-bs-toggle="modal"
+                                            data-bs-target="#modaAddAdress">
                                             <i class="far fa-eye"> </i>
                                         </a>
                                     </div>
