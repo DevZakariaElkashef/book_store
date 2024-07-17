@@ -507,7 +507,25 @@
     "cost_per_km.required_if": "حقل تكلفة الكيلومتر مطلوب عند استخدام الشحن.",
     "non_operational_distance.required_if": "حقل المسافة الغير تشغيلية مطلوب عند استخدام الشحن.",
     "expected_order_delivered.required": "حقل المتوقع تسليم الطلب مطلوب.",
-    "The password is incorrect for the provided email." : "كلمة المرور غير صحيحة للبريد الإلكتروني المقدم."
+    "The password is incorrect for the provided email.": "كلمة المرور غير صحيحة للبريد الإلكتروني المقدم.",
+    "Congratulations": "تهانينا",
+    "You have done": "لقد قمت بـ",
+    "more sales today": "مبيعات أكثر اليوم",
+    "Check your new badge in your profile": "تحقق من شارتك الجديدة في ملفك الشخصي",
+    "View Orders": "عرض الطلبيات",
+    "Total Orders": "إجمالي الطلبيات",
+    "Total Users": "إجمالي المستخدمين",
+    "Total Clients": "إجمالي العملاء",
+    "Most Saled Books": "الكتب الأكثر مبيعًا",
+    "Cost": "التكلفة",
+    "Sales Country": "المدن الأكثر مبيعاً",
+    "Products with less stock": "المنتجات ذات المخزون الأقل",
+    "Stock": "المخزون",
+    "Most Saled Users": "المستخدمون الأكثر مبيعاً",
+
+
+    "Order was placed (Order ID: #": "تم تقديم الطلب (رقم الطلب: #",
+    "Order Status Change to": "تغيير حالة الطلب إلى"
 
 
 

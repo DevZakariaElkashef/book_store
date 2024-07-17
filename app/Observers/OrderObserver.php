@@ -13,7 +13,7 @@ class OrderObserver
     {
         $order->timelines()->create([
             'order_status_id' => $order->order_status_id,
-            'note' => 'Order was placed (Order ID: #' . $order->status->id . '32543)'
+            'note' => __('Order was placed (Order ID: #') . $order->status->id . '32543)'
         ]);
 
         // send notifications
@@ -29,7 +29,7 @@ class OrderObserver
         if ($timelines->order_status_id != $order->order_status_id) {
             $order->timelines()->create([
                 'order_status_id' => $order->order_status_id,
-                'note' => 'Order Status Change to ' . $order->status->name
+                'note' => __('Order Status Change to') . $order->status->name
             ]);
         }
     }

@@ -326,5 +326,24 @@
     "Review Order": "Review Order",
     "Stars": "Stars",
     "you opinion": "you opinion",
-    "Cancle Order" : "Cancle Order"
+    "Cancle Order": "Cancle Order",
+
+    "Congratulations": "Congratulations",
+    "You have done": "You have done",
+    "more sales today": "more sales today",
+    "Check your new badge in your profile": "Check your new badge in your profile",
+    "View Orders": "View Orders",
+    "Total Orders": "Total Orders",
+    "Total Users": "Total Users",
+    "Total Clients": "Total Clients",
+    "Most Saled Books": "Most Saled Books",
+    "Cost": "Cost",
+    "Sales Country": "Sales Country",
+    "Products with less stock": "Products with less stock",
+    "Stock": "Stock",
+
+
+    "Order was placed (Order ID: #": "Order was placed (Order ID: #",
+    "Order Status Change to": "Order Status Change to"
+
 }

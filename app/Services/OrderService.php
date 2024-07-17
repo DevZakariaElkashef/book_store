@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Models\Book;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Setting;
@@ -56,6 +57,9 @@ class OrderService
                 'qty' => $item->qty,
                 'price' =>  hasOffer($item->book_id) ? \App\Models\Book::find($item->book_id)->offer : \App\Models\Book::find($item->book_id)->price,
             ]);
+
+            $book = Book::find($item->book_id);
+            $book->update(['qty' => $book->qty - $item->qty]);
         }
 
         return ['order' => $order, 'total' => $total];

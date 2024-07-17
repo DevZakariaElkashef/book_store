@@ -13,6 +13,7 @@
                 <th>{{ __('Name') }}</th>
                 <th>{{ __('Author') }}</th>
                 <th>{{ __('Description') }}</th>
+                <th>{{ __('Stock') }}</th>
                 <th>{{ __('Status') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
@@ -39,6 +40,7 @@
                     </td>
                     <td>{{ $book->author }}</td>
                     <td>{{ Str::limit($book->description, 50) }}</td>
+                    <td>{{ $book->qty }}</td>
                     <td>
                         @if ($book->is_active)
                             <span class="badge bg-label-primary">{{ __('Active') }}</span>

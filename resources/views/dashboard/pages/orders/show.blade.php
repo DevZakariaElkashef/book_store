@@ -234,7 +234,7 @@
                             <div class="col-12 text-center d-flex flex-wrap justify-content-center gap-4 row-gap-4">
                                 <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                    aria-label="Close">{{ __('Cancel') }}</button>
+                                    aria-label="Close">{{ __('Cancle') }}</button>
                             </div>
                         </form>
                     </div>
@@ -273,7 +273,7 @@
                             <div class="col-12 text-center d-flex flex-wrap justify-content-center gap-4 row-gap-4">
                                 <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                    aria-label="Close">{{ __('Cancel') }}</button>
+                                    aria-label="Close">{{ __('Cancle') }}</button>
                             </div>
                         </form>
                     </div>
@@ -305,7 +305,7 @@
                             <div class="col-12 mt-6 d-flex flex-wrap justify-content-center gap-4 row-gap-4">
                                 <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                    aria-label="Close">{{ __('Cancel') }}</button>
+                                    aria-label="Close">{{ __('Cancle') }}</button>
                             </div>
                         </form>
                     </div>
@@ -405,7 +405,7 @@
                             <div class="col-12 mt-6 d-flex flex-wrap justify-content-center gap-4 row-gap-4">
                                 <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                    aria-label="Close">{{ __('Cancel') }}</button>
+                                    aria-label="Close">{{ __('Cancle') }}</button>
                             </div>
                         </form>
                     </div>
@@ -505,7 +505,7 @@
 
                                 <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                                 <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                    aria-label="Close">{{ __('Cancel') }}</button>
+                                    aria-label="Close">{{ __('Cancle') }}</button>
                             </div>
                         </form>
                     </div>
@@ -612,10 +612,10 @@
                 if (bookId) {
                     fetchBookPrice(bookId, function(price) {
                         $priceInput.val(parseFloat(price).toFixed(
-                        2)); // Ensure price is formatted to two decimal places
+                            2)); // Ensure price is formatted to two decimal places
                         const count = $countInput.val() || 0;
                         $totalInput.val((count * price).toFixed(
-                        2)); // Ensure total is formatted to two decimal places
+                            2)); // Ensure total is formatted to two decimal places
                         updateTotals();
                     });
                 } else {
@@ -633,7 +633,7 @@
 
                 if (!isNaN(price)) {
                     $totalInput.val((count * price).toFixed(
-                    2)); // Ensure total is formatted to two decimal places
+                        2)); // Ensure total is formatted to two decimal places
                     updateTotals();
                 }
             });

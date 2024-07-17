@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Book;
+
 class OrderUpdateService
 {
     public function updateOrder($order, $data)
@@ -42,8 +44,8 @@ class OrderUpdateService
             $user->update(['wallet' => $user->wallet + $order->total]);
         }
 
-        $refundCondition = $order->payment_status != 'Refunded' && $order->payment_status != 5;
-        $revertRefundCondition = $order->payment_status == 'Refunded' && $order->order_status_id == 5;
+        $refundCondition = $order->payment_status != __('Refunded') && $order->payment_status != 5;
+        $revertRefundCondition = $order->payment_status == __('Refunded') && $order->order_status_id == 5;
 
         if (isset($data['payment_status']) && $data['payment_status'] == 3 && $refundCondition) {
             $order->update([
@@ -51,6 +53,11 @@ class OrderUpdateService
                 'order_status_id' => 5,
                 'admin_approve_to_cancle' => 1
             ]);
+
+            foreach ($order->items as $item) {
+                $book = Book::find($item->book_id);
+                $book->update(['qty' => $book->qty + $item->qty]);
+            }
         }
 
         if (isset($data['order_status_id']) && $data['order_status_id'] == 5 && $refundCondition) {
@@ -59,6 +66,11 @@ class OrderUpdateService
                 'order_status_id' => 5,
                 'admin_approve_to_cancle' => 1
             ]);
+
+            foreach ($order->items as $item) {
+                $book = Book::find($item->book_id);
+                $book->update(['qty' => $book->qty + $item->qty]);
+            }
         }
 
         if (isset($data['payment_status']) && $data['payment_status'] == 1 && $revertRefundCondition) {
@@ -66,6 +78,11 @@ class OrderUpdateService
                 'payment_status' => 1,
                 'order_status_id' => 4
             ]);
+
+            foreach ($order->items as $item) {
+                $book = Book::find($item->book_id);
+                $book->update(['qty' => $book->qty - $item->qty]);
+            }
         }
 
         if (isset($data['order_status_id']) && $data['order_status_id'] == 4 && $revertRefundCondition) {
@@ -73,6 +90,11 @@ class OrderUpdateService
                 'payment_status' => 1,
                 'order_status_id' => 4
             ]);
+
+            foreach ($order->items as $item) {
+                $book = Book::find($item->book_id);
+                $book->update(['qty' => $book->qty - $item->qty]);
+            }
         }
 
 
