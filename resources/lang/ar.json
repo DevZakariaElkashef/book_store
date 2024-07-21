@@ -525,7 +525,8 @@
 
 
     "Order was placed (Order ID: #": "تم تقديم الطلب (رقم الطلب: #",
-    "Order Status Change to": "تغيير حالة الطلب إلى"
+    "Order Status Change to": "تغيير حالة الطلب إلى",
+    "Invalid credentials provided" : "تم تقديم بيانات اعتماد غير صالحة"
 
 
 

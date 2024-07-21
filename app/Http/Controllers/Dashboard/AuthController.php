@@ -44,13 +44,17 @@ class AuthController extends Controller
 
     public function login(loginRequest $request)
     {
-        $credentials  = $request->validated();
+        $credentials = $request->validated();
         $remember = $request->has('remember');
 
         if (Auth::attempt($credentials, $remember)) {
             return to_route('dashboard.home');
+        } else {
+            // Redirect back with an error message
+            return redirect()->back()->with('message', __('Invalid credentials provided'));
         }
     }
+
 
     public function logout(Request $request)
     {

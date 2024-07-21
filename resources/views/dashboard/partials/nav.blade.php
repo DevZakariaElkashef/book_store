@@ -162,7 +162,7 @@
                     <li>
                         <a class="dropdown-item" href="{{ route('dashboard.profile') }}">
                             <i class="mdi mdi-account-outline me-2"></i>
-                            <span class="align-middle">{{ __("Profile") }}</span>
+                            <span class="align-middle">{{ __("Personal profile") }}</span>
                         </a>
                     </li>
 
