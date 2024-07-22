@@ -67,7 +67,7 @@
                     <div class="filter">
 
                         <div class="filter_header">
-                            <h5>فلترة</h5>
+                            <h5>{{ __("Filter") }}</h5>
                         </div>
                         <div class="filter_body">
                             <h4 class="mt-3 ms-3">{{ __('Universities') }}</h4>
