@@ -41,7 +41,7 @@ class UsedBookController extends Controller
             });
         }
 
-        dd($request->university_id);
+        dd(explode(',', $request->university_id));
 
         if ($request->filled('college_id')) {
             $usedBooks->whereHas('subject', function ($subject) use ($request) {
