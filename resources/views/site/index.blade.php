@@ -288,8 +288,7 @@
                                             <span>{{ __('Add to cart') }}</span>
                                         </a>
 
-                                        <a href="{{ route('site.books.show', $book->id) }}" data-bs-toggle="modal"
-                                            data-bs-target="#modaAddAdress">
+                                        <a href="{{ route('site.books.show', $book->id) }}">
                                             <i class="far fa-eye"> </i>
                                         </a>
                                     </div>
