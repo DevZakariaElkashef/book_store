@@ -97,7 +97,7 @@ class OrderUpdateService
             }
         }
 
-        $order->udpate($data);
+        $order->update($data);
 
 
         return $order;
