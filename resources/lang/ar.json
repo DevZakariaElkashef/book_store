@@ -526,7 +526,10 @@
 
     "Order was placed (Order ID: #": "تم تقديم الطلب (رقم الطلب: #",
     "Order Status Change to": "تغيير حالة الطلب إلى",
-    "Invalid credentials provided" : "تم تقديم بيانات اعتماد غير صالحة"
+    "Invalid credentials provided" : "تم تقديم بيانات اعتماد غير صالحة",
+    "admin will proccess the cancle" : "سيقوم المشرف بمعالجة الإلغاء",
+    "you can't cancle the order now" : "لا يمكنك إلغاء الطلب الآن",
+    "add some items first" : "أضف بعض العناصر أولاً"
 
 
 

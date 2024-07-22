@@ -14,7 +14,7 @@ class UsedBookController extends Controller
 {
     public function index()
     {
-        $books = Book::active()->used()->get();
+        $usedBooks = Book::active()->used()->get();
 
 
         $universities = University::active()->get();
@@ -26,6 +26,6 @@ class UsedBookController extends Controller
         $strLimit = 30;
 
 
-        return view('site.books.used', compact('books', 'universities', 'strLimit', 'colleges', 'subjects', 'heroImg'));
+        return view('site.books.used', compact('usedBooks', 'universities', 'strLimit', 'colleges', 'subjects', 'heroImg'));
     }
 }

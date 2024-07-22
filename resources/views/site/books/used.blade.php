@@ -51,13 +51,13 @@
     </div>
 
     <!-- <div class="custom_preadcrumb">
-                <div class="container-fluid pd-50">
-                    <ul class="mt-5 list-unstyled d-flex align-items-center">
-                    <li><a href="">الرئيسية</a></li>
-                    <li><a href="">من نحن</a></li>
-                    </ul>
-                </div>
-            </div> -->
+                    <div class="container-fluid pd-50">
+                        <ul class="mt-5 list-unstyled d-flex align-items-center">
+                        <li><a href="">الرئيسية</a></li>
+                        <li><a href="">من نحن</a></li>
+                        </ul>
+                    </div>
+                </div> -->
 
 
     <div class="subject_details">
@@ -67,7 +67,7 @@
                     <div class="filter">
 
                         <div class="filter_header">
-                            <h5>{{ __("Filter") }}</h5>
+                            <h5>{{ __('Filter') }}</h5>
                         </div>
                         <div class="filter_body">
                             <h4 class="mt-3 ms-3">{{ __('Universities') }}</h4>
@@ -100,7 +100,7 @@
                         </div>
                         <hr>
                         <div class="filter_body">
-                            <h4 class="mt-3 ms-3">{{ __("Subjects") }}</h4>
+                            <h4 class="mt-3 ms-3">{{ __('Subjects') }}</h4>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
 
                                 @foreach ($colleges as $item)
@@ -137,22 +137,22 @@
                                 placeholder="مبادئ الهندسة المدنية">
                             <button>
                                 <i class="fas fa-search"></i>
-                                <span>بحث</span>
+                                <span>{{ __('Search') }}</span>
                             </button>
                         </form>
                     </div>
 
                     <div class="custom_preadcrumb">
                         <ul class="mt-5 list-unstyled d-flex align-items-center">
-                            <li><a href="{{ route('site.home') }}">الرئيسية</a></li>
-                            <li><a href="{{ route('site.universites.index') }}">الجامعات</a></li>
+                            <li><a href="{{ route('site.home') }}">{{ __('Home') }}</a></li>
+                            <li><a href="{{ route('site.usedbooks.index') }}">{{ __('Used Books') }}</a></li>
                         </ul>
                     </div>
 
                     <div class="subject_cards mt-5">
                         <hr>
 
-                        @include('site.colleges.books')
+                        @include('site.colleges.books', ['books' => $usedBooks])
                     </div>
 
                 </div>
