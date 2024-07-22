@@ -16,6 +16,7 @@ class UsedBookController extends Controller
     {
         $books = Book::active()->used()->get();
 
+
         $universities = University::active()->get();
         $colleges = College::active()->get();
         $subjects = Subject::active()->latest()->get();

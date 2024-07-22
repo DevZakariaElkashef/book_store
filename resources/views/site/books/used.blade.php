@@ -85,7 +85,7 @@
                         </div>
                         <hr>
                         <div class="filter_body">
-                            <h4 class="mt-3 ms-3">{{ __('Colleges') }}</h4>
+                            <h4 class="mt-3 ms-3">{{ __('colleges') }}</h4>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 @foreach ($colleges as $item)
                                     <ul class="list-unstyled">
@@ -100,7 +100,7 @@
                         </div>
                         <hr>
                         <div class="filter_body">
-                            <h4 class="mt-3 ms-3">المواد</h4>
+                            <h4 class="mt-3 ms-3">{{ __("Subjects") }}</h4>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
 
                                 @foreach ($colleges as $item)
